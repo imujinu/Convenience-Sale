@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyPAGE</title>
+
+    <!-- Normalize CSS CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- fontawsome CDN -->
+    <script
+      src="https://kit.fontawesome.com/a2bddeb8f2.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/static/css/common.css" />
+    <link rel="stylesheet" href="/static/css/mypage.css" />
+  </head>
+  <body>
+    <header
+      style="
+        height: 120px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #ff3636;
+        width: 100%;
+      "
+    ></header>
+    <div class="container">
+      <div class="profile">
+        <img
+          id="profile-image"
+          src="/static/image/default-profile.jpg"
+          alt="사용자 프로필 이미지"
+        />
+      </div>
+      <ul class="info-box">
+        <li><span>아이디</span> <span>yena1111</span></li>
+        <li><span>이메일</span> <span>yena@test.com</span></li>
+        <li><span>닉네임</span> <span>이나</span></li>
+      </ul>
+      <h3 class="welcome"><span>이나</span>님, 오늘 당신의 픽은??😎</h3>
+      <ul class="reviews-box">
+        <!-- <a href="li"> -->
+        <li>
+          <span class="tit">게시글</span>
+          <span class="len"><span>5</span>개</span>
+          <i class="fa-solid fa-chevron-right"></i>
+        </li>
+        <!-- </a> -->
+        <!-- <a href="li"> -->
+        <li>
+          <span class="tit">리뷰</span>
+          <span class="len"><span>5</span>개</span>
+          <i class="fa-solid fa-chevron-right"></i>
+        </li>
+        <!-- </a> -->
+        <!-- <a href="li"> -->
+        <li>
+          <span class="tit">좋아요</span>
+          <span class="len"><span>5</span>개</span>
+          <i class="fa-solid fa-chevron-right"></i>
+        </li>
+        <!-- </a> -->
+      </ul>
+      <div class="button-box">
+        <button class="update-btn">회원정보 수정</button>
+        <button class="delete-btn">회원 탈퇴</button>
+      </div>
+    </div>
+  </body>
+</html>
