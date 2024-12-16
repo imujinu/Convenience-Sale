@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입</title>
+    <link rel="stylesheet" href="register.css" />
+  </head>
+  <body>
+    <h2>회원가입</h2>
+    <form id="register">
+      <label for="userid">
+        아이디:
+        <input
+          type="text"
+          name="userid"
+          id="userid"
+          required
+          placeholder="3~15자 영문, 숫자"
+          pattern="^([a-z0-9]){3,15}$"
+        />
+        <button
+          type="button"
+          id="checkDuplicationBtn"
+          name="checkDuplication"
+          onclick="checkDuplication()"
+        >
+          중복확인</button
+        ><br />
+      </label>
+      <label for="userpw">
+        비밀번호:
+        <input
+          type="password"
+          name="userpw"
+          id="userpw"
+          placeholder="6~14자 영문, 숫자, 특수문자"
+          pattern="^([a-z0-9A-Z._@!]{6,14}$)"
+          title="소, 대 문자, 숫자, 특수문자 사용"
+        />
+        <br />
+      </label>
+      <label for="email"
+        >이메일: <input type="email" name="email" id="email" /><br />
+      </label>
+      <label for="nickname">
+        닉네임: <input type="text" name="nickname" id="nickname" /><br />
+      </label>
+      <button
+        type="button"
+        id="registerBtn"
+        name="register"
+        onclick="register()"
+      >
+        회원가입
+      </button>
+    </form>
+    <p>이미 계정이 있나요? <a href="#">로그인</a></p>
+    <script>
+      function register() {}
+      function checkDuplication() {}
+    </script>
+  </body>
+</html>
