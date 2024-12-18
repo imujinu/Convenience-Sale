@@ -5,6 +5,8 @@ const controller = require("../controller/Cvisitor.js");
 router.get("/", controller.home);
 router.get("/login", controller.get_login);
 router.get("/register", controller.get_register);
+router.get("/mypage", controller.mypage);
+
 
 //회원가입
 router.post("/register", controller.postRegister);

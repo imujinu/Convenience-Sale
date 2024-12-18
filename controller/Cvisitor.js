@@ -2,9 +2,11 @@ const models = require("../models");
 exports.home = (req, res) => {
   res.render("home");
 };
+
 exports.get_login = (req, res) => {
   res.render("login");
 };
+
 exports.get_register = (req, res) => {
   res.render("register");
 };
@@ -42,4 +44,8 @@ exports.postLogin = (req, res) => {
     console.log("err", err);
     res.status(500).send("Server error");
   }
+
+
+exports.mypage = (req, res) => {
+  res.render("mypage");
 };
