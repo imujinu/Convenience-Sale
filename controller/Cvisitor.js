@@ -44,8 +44,7 @@ exports.postLogin = (req, res) => {
     console.log("err", err);
     res.status(500).send("Server error");
   }
-
-
+};
 exports.mypage = (req, res) => {
   res.render("mypage");
 };
