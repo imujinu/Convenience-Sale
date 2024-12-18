@@ -4,30 +4,45 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>로그인</title>
-    <link rel="stylesheet" href="login.css" />
+    <link rel="stylesheet" href="static/css/login.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <h2>로그인</h2>
-    <form id="login">
-      <label for="userid">
-        아이디: <input type="text" name="userid" id="userid" required /><br />
+    <form id="loginForm">
+      <label for="userId">
+        아이디: <input type="text" name="userId" id="userId" required /><br />
       </label>
-      <label for="userpw">
-        비밀번호: <input type="password" name="userpw" id="userpw" /><br />
+      <label for="userPw">
+        비밀번호:
+        <input type="password" name="userPw" id="userPw" required /><br />
       </label>
-      <button type="button" onclick="login()">로그인</button>
+      <button type="button" onclick="loginBtn();">로그인</button>
     </form>
-    <p>계정이 없나요? <a href="#">회원가입</a></p>
+    <p>계정이 없나요? <a href="./register">회원가입</a></p>
     <script>
-      function login() {
-        const form = document.forms["login"];
+      function loginBtn() {
+        const loginForm = document.forms["loginForm"];
+        if (!loginForm.checkValidity()) {
+          loginForm.reportValidity();
+          return;
+        }
         axios({
-          method: "post",
-          url: "",
+          method: "POST",
+          url: "/login",
           data: {
-            userid: form.userid.value,
-            userpw: form.userpw.value,
+            userId: loginForm.userId.value,
+            userPw: loginForm.userPw.value,
           },
+        }).then((res) => {
+          console.log(res);
+          if (res) {
+            alert("로그인 성공");
+            // document.location.href = "/myPage";
+          } else {
+            alert("로그인 실패");
+            loginForm.reset();
+          }
         });
       }
     </script>

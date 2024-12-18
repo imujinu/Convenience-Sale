@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const db = require("./models");
 const PORT = 8080;
 
 app.set("view engine", "ejs");
@@ -14,6 +15,10 @@ app.use("/", indexRouter);
 
 app.get("*", (req, res) => {
   res.render("404");
+});
+
+db.sequelize.sync({ force: false }).then(() => {
+  console.log("DB 연결 성공");
 });
 
 app.listen(PORT, () => {
