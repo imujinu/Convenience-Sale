@@ -1,1 +1,9 @@
 /* 글 작성 CSS */
+form {
+  margin: 20px auto;
+  width: 50%;
+}
+label {
+  display: block;
+  margin: 10px 0;
+}
