@@ -1,0 +1,30 @@
+<!-- 글 작성 화면 -->
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>글 작성</title>
+    <link rel="stylesheet" href="/static/css/write.css" />
+  </head>
+  <body>
+    <form action="/board/write" method="post" enctype="multipart/form-data">
+      <label>제목: <input type="text" name="title" required /></label><br />
+      <label
+        >분류:
+        <select name="category">
+          <option>전체</option>
+          <option>CU</option>
+          <option>GS25</option>
+          <option>세븐일레븐</option>
+          <option>웹</option>
+        </select> </label
+      ><br />
+      <label
+        >내용:<br />
+        <textarea name="content" rows="10" required></textarea></label
+      ><br />
+      <label>첨부 파일: <input type="file" name="file" /></label><br />
+      <button type="submit">등록</button>
+    </form>
+  </body>
+</html>
