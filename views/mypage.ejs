@@ -21,9 +21,10 @@
     ></script>
     <link rel="stylesheet" href="/static/css/common.css" />
     <link rel="stylesheet" href="/static/css/mypage.css" />
+    <script defer src="/static/js/mypage.js"></script>
   </head>
   <body>
-    <header
+    <!-- <header
       style="
         height: 120px;
         position: fixed;
@@ -32,7 +33,7 @@
         background-color: #ff3636;
         width: 100%;
       "
-    ></header>
+    ></header> -->
     <div class="container">
       <div class="profile">
         <img
@@ -41,38 +42,153 @@
           alt="사용자 프로필 이미지"
         />
       </div>
-      <ul class="info-box">
+      <ul class="infoBox">
         <li><span>아이디</span> <span>yena1111</span></li>
-        <li><span>이메일</span> <span>yena@test.com</span></li>
         <li><span>닉네임</span> <span>이나</span></li>
       </ul>
       <h3 class="welcome"><span>이나</span>님, 오늘 당신의 픽은??😎</h3>
-      <ul class="reviews-box">
+      <ul class="reviewsBox">
         <!-- <a href="li"> -->
         <li>
           <span class="tit">게시글</span>
           <span class="len"><span>5</span>개</span>
-          <i class="fa-solid fa-chevron-right"></i>
+          <button
+            class="fa-solid fa-chevron-right arrow"
+            onclick="showList(this)"
+          ></button>
         </li>
+        <div class="content-container hide">
+          <ul class="list">
+            <li class="list-head">
+              <span>순번</span>
+              <span>제목</span>
+              <span>작성자</span>
+              <span>날짜</span>
+            </li>
+            <%for(let i=1;i<=5;i++){%>
+            <a href="#">
+              <li>
+                <span><%= i %></span>
+                <span>편의점 꿀맛 조합 아시는 분 추천좀여!!!</span>
+                <span>편죽이이</span>
+                <span>2024-12-18</span>
+              </li>
+            </a>
+            <%}%>
+          </ul>
+          <div class="pagination">
+            <span class="selected">1</span>
+            <span>2</span>
+            <span>3</span>
+          </div>
+        </div>
+
         <!-- </a> -->
         <!-- <a href="li"> -->
         <li>
-          <span class="tit">리뷰</span>
+          <span class="tit">상품 리뷰</span>
           <span class="len"><span>5</span>개</span>
-          <i class="fa-solid fa-chevron-right"></i>
+          <button
+            class="fa-solid fa-chevron-right arrow"
+            onclick="showList(this)"
+          ></button>
         </li>
-        <!-- </a> -->
-        <!-- <a href="li"> -->
+        <div class="content-container hide">
+          <ul class="list">
+            <li class="list-head">
+              <span>순번</span>
+              <span>제목</span>
+              <span>작성자</span>
+              <span>날짜</span>
+            </li>
+            <%for(let i=1;i<=5;i++){%>
+            <a href="#">
+              <li>
+                <span><%= i %></span>
+                <span>편의점 꿀맛 조합 아시는 분 추천좀여!!!</span>
+                <span>편죽이이</span>
+                <span>2024-12-18</span>
+              </li>
+            </a>
+            <%}%>
+          </ul>
+          <div class="pagination">
+            <span class="selected">1</span>
+            <span>2</span>
+            <span>3</span>
+          </div>
+        </div>
+        <li>
+          <span class="tit">게시글 리뷰</span>
+          <span class="len"><span>5</span>개</span>
+          <button
+            class="fa-solid fa-chevron-right arrow"
+            onclick="showList(this)"
+          ></button>
+        </li>
+        <div class="content-container hide">
+          <ul class="list">
+            <li class="list-head">
+              <span>순번</span>
+              <span>제목</span>
+              <span>작성자</span>
+              <span>날짜</span>
+            </li>
+            <%for(let i=1;i<=5;i++){%>
+            <a href="#">
+              <li>
+                <span><%= i %></span>
+                <span>편의점 꿀맛 조합 아시는 분 추천좀여!!!</span>
+                <span>편죽이이</span>
+                <span>2024-12-18</span>
+              </li>
+            </a>
+            <%}%>
+          </ul>
+          <div class="pagination">
+            <span class="selected">1</span>
+            <span>2</span>
+            <span>3</span>
+          </div>
+        </div>
+
         <li>
           <span class="tit">좋아요</span>
           <span class="len"><span>5</span>개</span>
-          <i class="fa-solid fa-chevron-right"></i>
+          <button
+            onclick="showList(this)"
+            class="fa-solid fa-chevron-right arrow"
+          ></button>
         </li>
-        <!-- </a> -->
+        <div class="content-container hide">
+          <ul class="list">
+            <li class="list-head">
+              <span>순번</span>
+              <span>제목</span>
+              <span>작성자</span>
+              <span>날짜</span>
+            </li>
+            <%for(let i=1;i<=5;i++){%>
+            <a href="#">
+              <li>
+                <span><%= i %></span>
+                <span>편의점 꿀맛 조합 아시는 분 추천좀여!!!</span>
+                <span>편죽이이</span>
+                <span>2024-12-18</span>
+              </li>
+            </a>
+            <%}%>
+          </ul>
+          <div class="pagination">
+            <span class="selected">1</span>
+            <span>2</span>
+            <span>3</span>
+          </div>
+        </div>
       </ul>
-      <div class="button-box">
-        <button class="update-btn">회원정보 수정</button>
-        <button class="delete-btn">회원 탈퇴</button>
+      <div class="buttonBox">
+        <button class="updateBtn">회원정보 수정</button>
+        <button class="deleteBtn">회원 탈퇴</button>
       </div>
     </div>
   </body>
