@@ -1,8 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const controller = require("../controller/Cvisitor.js");
+const main = require("../controller/Cmain.js");
+const product = require("../controller/Cproduct.js");
+const user = require("../controller/Cuser.js");
 
-router.get("/", controller.home);
-router.get("/mypage", controller.mypage);
+router.get("/", main.home);
+router.get("/login", main.get_login);
+router.get("/register", main.get_register);
+//마이페이지
+router.get("/mypage", main.mypage);
+//회원정보수정
+router.get("/userview", main.userview);
+
+//회원가입
+router.post("/register", user.postRegister);
+//Login 페이지
+router.post("/login", user.postLogin);
+
+//사진 업로드
+router.post("/upload", user.upload);
 
 module.exports = router;

@@ -4,61 +4,85 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>회원가입</title>
-    <link rel="stylesheet" href="register.css" />
+    <link rel="stylesheet" href="static/css/register.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
-    <h2>회원가입</h2>
-    <form id="register">
-      <label for="userid">
-        아이디:
-        <input
-          type="text"
-          name="userid"
-          id="userid"
-          required
-          placeholder="3~15자 영문, 숫자"
-          pattern="^([a-z0-9]){3,15}$"
-        />
-        <button
-          type="button"
-          id="checkDuplicationBtn"
-          name="checkDuplication"
-          onclick="checkDuplication()"
-        >
-          중복확인</button
-        ><br />
-      </label>
-      <label for="userpw">
-        비밀번호:
-        <input
-          type="password"
-          name="userpw"
-          id="userpw"
-          placeholder="6~14자 영문, 숫자, 특수문자"
-          pattern="^([a-z0-9A-Z._@!]{6,14}$)"
-          title="소, 대 문자, 숫자, 특수문자 사용"
-        />
+    <div class="formContainer">
+      <h2>회원가입</h2>
+      <form id="registerForm">
+        <label for="userId">
+          아이디:
+          <input
+            type="text"
+            name="userId"
+            id="userId"
+            required
+            placeholder="3~15자 영문, 숫자"
+            pattern="^([a-z0-9]){3,15}$"
+            title="3~15자 영문, 숫자 입력"
+          />
+          <button
+            type="button"
+            name="checkDuplication"
+            onclick="checkDuplication();"
+          >
+            중복확인
+          </button>
+          <input type="hidden" name="idDuplication" value="idUnCheck" />
+          <br />
+        </label>
+        <label for="userPw">
+          비밀번호:
+          <input
+            type="password"
+            name="userPw"
+            id="userPw"
+            placeholder="6~14자 영문, 숫자, 특수문자"
+            pattern="^([a-z0-9A-Z._@!]{6,14}$)"
+            title="소, 대 문자, 숫자, 특수문자 사용"
+          />
+          <br />
+        </label>
+        <label for="nickname">
+          닉네임: <input type="text" name="nickname" id="nickname" /><br />
+        </label>
+        <label for="profilePic">
+          프로필 사진:
+          <input type="file" name="profilePic" id="profilePic" />
+        </label>
         <br />
-      </label>
-      <label for="email"
-        >이메일: <input type="email" name="email" id="email" /><br />
-      </label>
-      <label for="nickname">
-        닉네임: <input type="text" name="nickname" id="nickname" /><br />
-      </label>
-      <button
-        type="button"
-        id="registerBtn"
-        name="register"
-        onclick="register()"
-      >
-        회원가입
-      </button>
-    </form>
-    <p>이미 계정이 있나요? <a href="#">로그인</a></p>
+        <div id="registerBtn">
+          <button type="submit" onclick="registerBtn();">회원가입</button>
+        </div>
+      </form>
+      <p>이미 계정이 있나요? <a href="./login">로그인</a></p>
+    </div>
+
     <script>
-      function register() {}
-      function checkDuplication() {}
+      function registerBtn() {
+        const registerForm = document.forms["registerForm"];
+        if (!registerForm.checkValidity()) {
+          registerForm.reportValidity();
+          return;
+        }
+        axios({
+          url: "/register",
+          method: "POST",
+          data: {
+            userId: registerForm.userId.value,
+            userPw: registerForm.userPw.value,
+            nickname: registerForm.nickname.value,
+            profilePic: registerForm.profilePic.value,
+          },
+        }).then((res) => {
+          alert("회원가입 성공");
+          document.location.href = "/login";
+        });
+      }
+      function checkDuplication() {
+        const userId = document.forms["registerForm"].userId;
+      }
     </script>
   </body>
 </html>

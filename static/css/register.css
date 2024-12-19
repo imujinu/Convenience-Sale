@@ -5,19 +5,33 @@ h2 {
   margin-top: 10px;
   color: #34495e;
 }
-#register {
+#registerForm {
   position: relative;
   margin: 0 auto;
-  background: #ecf0f1;
+  background: white;
   width: 350px;
   border-radius: 5px;
   box-shadow: 3px 3px 10px #333;
   padding: 15px;
 }
+::placeholder {
+  color: #c0c7db;
+  font-size: larger;
+  letter-spacing: 1.2px;
+}
+button[type="submit"] {
+  padding: 16px 75px;
+  background-color: #ed4b5e;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+button[type="submit"]:hover {
+  background-color: #ff6678;
+}
 input[type="text"],
-input[type="password"],
-input[type="email"],
-#registerBtn {
+input[type="password"] {
   width: 80%;
   margin-left: 10%;
   margin-bottom: 25px;
@@ -29,6 +43,6 @@ input[type="email"],
 }
 p {
   text-align: center;
-  font-size: 10px;
+  font-size: 17px;
   color: #3498db;
 }
