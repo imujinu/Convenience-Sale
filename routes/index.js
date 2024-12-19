@@ -16,4 +16,8 @@ router.get("/userview", main.userview);
 router.post("/register", user.postRegister);
 //Login 페이지
 router.post("/login", user.postLogin);
+
+//사진 업로드
+router.post("/upload", user.upload);
+
 module.exports = router;

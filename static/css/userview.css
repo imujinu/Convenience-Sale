@@ -9,6 +9,7 @@
 
 .container > .profile {
   width: 180px;
+  height: 200px;
   margin: 0 auto;
   border-radius: 999px;
   border: 1px solid salmon;
@@ -17,4 +18,6 @@
 .container > .profile > img {
   border-radius: 999px;
   width: 100%;
+  height: 100%;
+  object-fit: contain;
 }

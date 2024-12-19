@@ -1,19 +1,16 @@
-<!DOCTYPE html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>회원정보수정</title>
-    <%- include('./include/include.ejs') %>  
-    
+    <%- include('./include/include.ejs') %>
     <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
-    integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
- 
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <script
       src="https://kit.fontawesome.com/a2bddeb8f2.js"
       crossorigin="anonymous"
@@ -22,28 +19,52 @@
     <link rel="stylesheet" href="/static/css/userview.css" />
     <script defer src="/static/js/mypage.js"></script>
   </head>
-
   <body>
     <div class="container">
       <div class="profile">
         <img
           id="profile-image"
-          src="/static/image/default-profile.jpg"
+          src="/uploads/default-profile1734600077533.jpg"
           alt="사용자 프로필 이미지"
         />
         <form action="/upload"></form>
-        </div>
+      </div>
       <ul class="infoBox">
         <li><span>아이디</span> <span>yena1111</span></li>
         <li><span>닉네임</span> <span>이나</span></li>
         <a> <button class="namechaBtn">닉네임 수정</button> </a>
         <button
-            type="button"
-            name="checkDuplication"
-            onclick="checkDuplication();"
-          > 중복확인
+          type="button"
+          name="checkDuplication"
+          onclick="checkDuplication();"
+        >
+          중복확인
+        </button>
         <li><span>기존 비밀번호</span> <span>새 비밀번호</span></li>
       </ul>
     </div>
+    <input type="file" name="user" id="user" />
+    <button onclick="upload()">사진 업로드</button>
+
+    <script>
+      async function upload() {
+        const file = document.querySelector("#user");
+        const formData = new FormData();
+        formData.append("user", file.files[0]);
+
+        const uploadResult = await axios({
+          url: "/upload",
+          method: "post",
+          data: formData,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        const path = uploadResult.data.path;
+        const realPath = await path.replace(/\\/g, "/");
+        const img = document.querySelector("#profile-image");
+        img.src = `../${realPath}`;
+      }
+    </script>
   </body>
 </html>
