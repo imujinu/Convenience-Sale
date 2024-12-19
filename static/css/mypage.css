@@ -130,14 +130,14 @@
 .container > .buttonBox {
   margin-top: 100px;
 }
-.container > .buttonBox > button {
+.container > .buttonBox button {
   color: #fff;
   padding: 8px;
   border-radius: 8px;
 }
-.container > .buttonBox > .updateBtn {
+.container > .buttonBox .updateBtn {
   background-color: #ff6b73;
 }
-.container > .buttonBox > .deleteBtn {
+.container > .buttonBox .deleteBtn {
   background-color: #bbb;
 }
