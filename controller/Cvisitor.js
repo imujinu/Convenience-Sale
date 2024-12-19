@@ -1,3 +1,4 @@
+// 앤 뭐지?
 exports.home = (req, res) => {
   res.render("home");
 };

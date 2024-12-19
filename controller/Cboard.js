@@ -1,3 +1,4 @@
+// 게시판 컨트롤러
 const posts = [];
 const comments = {};
 
