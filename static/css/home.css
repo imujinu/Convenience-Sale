@@ -154,7 +154,7 @@ img {
 .section2 > .part2 {
   width: 70%;
   height: 100%;
-  background: url(../image/bg1.png) center/cover no-repeat;
+  background: url(./static/image/bg1.png) center/cover no-repeat;
   opacity: 0;
   animation: ani3 2s forwards;
 }
@@ -310,38 +310,73 @@ img {
 .section5 {
   width: 100%;
   height: 400px;
+  display: flex;
+  justify-content: center;
 }
 
 .section5 > .container {
-  width: 100%;
-  height: 70%;
-  margin: 0 8px;
+  width: 1200px;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+.section5 > .container > .product,
+.section5 > .container > .clone {
   display: flex;
 }
 
-.section5 > .container > .product {
-  margin-right: 3%;
-  width: 15%;
-  height: 100%;
-  border: 1px solid gainsboro;
-  border-radius: 20px;
-  transition: 0.1s;
+.section5 > .container > .product > .menu,
+.section5 > .container > .clone > .menu {
+  width: 250px;
+  height: 50%;
+  align-items: center;
+  flex-shrink: 0;
 }
-.section5 > .container > .product:hover {
-  border: 2px solid #ff3636;
-  transition: 0.1s;
-}
-
-.section5 > .container > .product > .menu {
-  width: 100%;
-  height: 90%;
-}
-.section5 > .container > .product > img {
+.section5 > .container > .product > .menu > img {
   width: 100%;
   height: 100%;
 }
 
 .section5 > .container > .product > .text1 {
   width: 100%;
+  height: auto;
   text-align: center;
+}
+
+@keyframes rolling1 {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-100%);
+  }
+  50.01% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes rolling2 {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-200%);
+  }
+}
+
+.rolling1 {
+  animation: rolling1 30s linear infinite;
+}
+
+.rolling2 {
+  animation: rolling2 30s linear infinite;
+}
+
+.section8 {
+  width: 100%;
+  height: 300px;
+  background: ivory;
 }
