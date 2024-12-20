@@ -6,6 +6,7 @@ const UserFavs = function (sequelize, DataTypes) {
       favIndex: {
         type: DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
       },
     },
     {

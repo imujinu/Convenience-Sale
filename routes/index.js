@@ -13,4 +13,5 @@ router.get("/mypage", main.mypage);
 router.post("/register", user.postRegister);
 //Login 페이지
 router.post("/login", user.postLogin);
+router.post("/checkDuplication", user.postCheck);
 module.exports = router;
