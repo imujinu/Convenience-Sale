@@ -10,7 +10,7 @@
   <body>
     <div class="formContainer">
       <h2>회원가입</h2>
-      <form id="registerForm">
+      <form id="registerForm" enctype="multipart/form-data">
         <label for="userId">
           아이디:
           <input
@@ -22,14 +22,13 @@
             pattern="^([a-z0-9]){3,15}$"
             title="3~15자 영문, 숫자 입력"
           />
-          <button
-            type="button"
-            name="checkDuplication"
-            onclick="checkDuplication();"
-          >
-            중복확인
-          </button>
-          <input type="hidden" name="idDuplication" value="idUnCheck" />
+          <button type="button" onclick="checkDuplication();">중복확인</button>
+          <input
+            type="hidden"
+            id="idDuplication"
+            name="idDuplication"
+            value="idUnCheck"
+          />
           <br />
         </label>
         <label for="userPw">
@@ -38,51 +37,27 @@
             type="password"
             name="userPw"
             id="userPw"
-            placeholder="6~14자 영문, 숫자, 특수문자"
-            pattern="^([a-z0-9A-Z._@!]{6,14}$)"
-            title="소, 대 문자, 숫자, 특수문자 사용"
+            placeholder="6~14자 영문, 숫자, 특수문자(._@!)"
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[._@!])[A-Za-z\d._@!]{6,14}$"
+            title="소, 대 문자, 숫자, 특수문자(._@!) 사용"
+            required
           />
           <br />
         </label>
         <label for="nickname">
-          닉네임: <input type="text" name="nickname" id="nickname" /><br />
+          닉네임:
+          <input type="text" name="nickname" id="nickname" required /><br />
         </label>
-        <label for="profilePic">
-          프로필 사진:
-          <input type="file" name="profilePic" id="profilePic" />
-        </label>
+
         <br />
         <div id="registerBtn">
-          <button type="submit" onclick="registerBtn();">회원가입</button>
+          <button type="submit" id="registerSubmit" onclick="registerBtn();">
+            회원가입
+          </button>
         </div>
       </form>
       <p>이미 계정이 있나요? <a href="./login">로그인</a></p>
     </div>
-
-    <script>
-      function registerBtn() {
-        const registerForm = document.forms["registerForm"];
-        if (!registerForm.checkValidity()) {
-          registerForm.reportValidity();
-          return;
-        }
-        axios({
-          url: "/register",
-          method: "POST",
-          data: {
-            userId: registerForm.userId.value,
-            userPw: registerForm.userPw.value,
-            nickname: registerForm.nickname.value,
-            profilePic: registerForm.profilePic.value,
-          },
-        }).then((res) => {
-          alert("회원가입 성공");
-          document.location.href = "/login";
-        });
-      }
-      function checkDuplication() {
-        const userId = document.forms["registerForm"].userId;
-      }
-    </script>
+    <script defer src="/static/js/register.js"></script>
   </body>
 </html>

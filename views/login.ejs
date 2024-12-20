@@ -20,31 +20,6 @@
       <button type="button" onclick="loginBtn();">로그인</button>
     </form>
     <p>계정이 없나요? <a href="./register">회원가입</a></p>
-    <script>
-      function loginBtn() {
-        const loginForm = document.forms["loginForm"];
-        if (!loginForm.checkValidity()) {
-          loginForm.reportValidity();
-          return;
-        }
-        axios({
-          method: "POST",
-          url: "/login",
-          data: {
-            userId: loginForm.userId.value,
-            userPw: loginForm.userPw.value,
-          },
-        }).then((res) => {
-          console.log(res);
-          if (res) {
-            alert("로그인 성공");
-            // document.location.href = "/myPage";
-          } else {
-            alert("로그인 실패");
-            loginForm.reset();
-          }
-        });
-      }
-    </script>
+    <script defer src="/static/js/login.js"></script>
   </body>
 </html>

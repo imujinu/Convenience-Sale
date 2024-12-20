@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const db = require("./models");
+const session = require("express-session");
 const PORT = 8080;
 
 app.set("view engine", "ejs");
@@ -10,6 +11,17 @@ app.use("/static", express.static(__dirname + "/static"));
 app.use("/uploads", express.static("uploads"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(
+  session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      maxAge: 30 * 60 * 1000,
+    },
+  }),
+);
 
 const indexRouter = require("./routes");
 app.use("/", indexRouter);
@@ -25,3 +37,4 @@ db.sequelize.sync({ force: false }).then(() => {
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);
 });
+

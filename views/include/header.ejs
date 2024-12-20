@@ -1,0 +1,64 @@
+<div class="section1">
+  <div class="container">
+    <div class="title">
+      <a href="/"></a>
+      <img src="./static/image/logo1.png" alt="" />
+    </div>
+    <div class="part1">
+      <ul>
+        <%if (isLogin) { %>
+        <li>
+          <a href="/logout">Logout</a>
+        </li>
+        <% } else { %>
+        <li>
+          <a href="/login">Login</a>
+        </li>
+        <% } %>
+
+        <li><a href="/register">회원가입</a></li>
+        <li><a href="/mypage">마이페이지</a></li>
+      </ul>
+    </div>
+    <div class="part2">
+      <ul class="navbar">
+        <div class="store1 store">
+          <li><a href="">Home</a></li>
+        </div>
+        <div class="store2 store">
+          <li><a href="">Cu</a></li>
+          <ul class="menu2 menu">
+            <li>전체상품</li>
+            <li>김밥</li>
+            <li>도시락</li>
+            <li>샌드위치</li>
+            <li>샐러드</li>
+          </ul>
+        </div>
+        <div class="store3 store">
+          <li><a href="">GS25</a></li>
+          <ul class="menu3 menu">
+            <li>전체상품</li>
+            <li>김밥</li>
+            <li>도시락</li>
+            <li>샌드위치</li>
+            <li>샐러드</li>
+          </ul>
+        </div>
+        <div class="store4 store">
+          <li><a href="">7ELEVEN</a></li>
+          <ul class="menu4 menu">
+            <li>전체상품</li>
+            <li>김밥</li>
+            <li>도시락</li>
+            <li>샌드위치</li>
+            <li>샐러드</li>
+          </ul>
+        </div>
+        <div class="store5 store">
+          <li><a href="/board">자유게시판</a></li>
+        </div>
+      </ul>
+    </div>
+  </div>
+</div>

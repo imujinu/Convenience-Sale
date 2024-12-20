@@ -6,6 +6,7 @@ const BComment = function (sequelize, DataTypes) {
       bcId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
       },
       //board_comment_detail LONG VARCHAR, NOT NULL
       bcDetail: {
@@ -16,7 +17,7 @@ const BComment = function (sequelize, DataTypes) {
     {
       freezeTable: true,
       timeStamps: false,
-    },
+    }
   );
 };
 module.exports = BComment;
