@@ -1,4 +1,7 @@
 const models = require("../models");
+
+
+
 const multer = require("multer");
 const path = require("path");
 
@@ -18,6 +21,7 @@ const upload = multer({
   }),
   limits: { fieldSize: 5 * 1024 * 1024 },
 });
+
 exports.postRegister = async (req, res) => {
   try {
     const newUser = await models.User.create({
@@ -73,9 +77,5 @@ exports.postCheck = async (req, res) => {
 exports.getLogout = (req, res) => {};
 
 exports.upload = (req, res) => {
-  const profileUpload = upload.single("user");
-
-  profileUpload(req, res, (err) => {
-    res.send({ ...req.body, ...req.file });
-  });
+  res.send({ ...req.body, ...req.file });
 };
