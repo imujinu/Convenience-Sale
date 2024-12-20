@@ -1,16 +1,37 @@
 const models = require("../models");
 const { Products } = require("../models");
 
+// 로그인이 안된 유저 > {isLogin:false}
+// 로그인이 된 유저 > {isLogin:true, user:유저}
 exports.home = async (req, res) => {
-  res.render("home");
+  console.log(req.session);
+  console.log(req.session.user);
+  if (req.session.user) {
+    res.render("home", {
+      user: req.session.user,
+      isLogin: true,
+    });
+  } else {
+    res.render("home", { isLogin: false });
+  }
 };
 
 exports.get_login = (req, res) => {
-  res.render("login");
+  const user = req.session.user;
+  if (user) {
+    res.redirect("/");
+  } else {
+    res.render("login");
+  }
 };
 
 exports.get_register = (req, res) => {
-  res.render("register");
+  const user = req.session.user;
+  if (user) {
+    res.redirect("/");
+  } else {
+    res.render("register");
+  }
 };
 
 exports.mypage = (req, res) => {

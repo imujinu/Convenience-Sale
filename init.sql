@@ -8,6 +8,6 @@ drop table user;
 drop table products;
 SELECT * FROM user;
 
-DELETE FROM user WHERE `userId` LIKE 'se%';
+DELETE FROM user WHERE `userId` LIKE 'a%';
 DESC products;
 
