@@ -89,10 +89,10 @@ for (let i = 1; i < 5; i++) {
   });
 }
 
-const menu = document.querySelector(".section5 > .container > .product");
+const product = document.querySelector(".section5 > .container > .product");
 const container = document.querySelector(".section5 > .container");
-const clone = menu.cloneNode(true);
-menu.classList.add("rolling1");
+const clone = product.cloneNode(true);
+product.classList.add("rolling1");
 clone.classList.add("rolling2");
 container.appendChild(clone);
 
@@ -107,10 +107,10 @@ container.appendChild(clone);
       const { name, price, imageUrl } = el;
 
       const product = document.querySelector(
-        ".section5 > .container > .product ",
+        ".section5 > .container > .product "
       );
       const menu = document.createElement("div");
-      menu.className = "name";
+      menu.className = "menu";
 
       menu.innerHTML = `
       <img src ="${imageUrl}" alt="${name}>
@@ -127,3 +127,22 @@ container.appendChild(clone);
     };
   }
 })();
+
+const menu = document.querySelectorAll(
+  ".section5 > .container > .product > .menu"
+);
+menu.forEach((el) => {
+  el.addEventListener("click", () => {
+    const img = el.querySelector("img");
+    const name = el.querySelector(".text p:nth-of-type(1)").textContent;
+    const price = el.querySelector(".text p:nth-of-type(2)").textContent;
+
+    axios({
+      url: "userReview",
+      post: "get",
+      data: {
+        name,
+      },
+    });
+  });
+});
