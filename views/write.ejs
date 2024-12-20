@@ -1,1 +1,27 @@
-<!-- 글 작성 화면 JS -->
+<!-- cys2/241219/자유게시판 -->
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>글 작성</title>
+    <link rel="stylesheet" href="/static/css/board.css" />
+    <script src="/static/js/write.js"></script>
+  </head>
+  <body>
+    <form action="/board/write" method="post">
+      <label>제목: <input type="text" name="title" required /></label><br />
+      <label
+        >분류:
+        <select name="category">
+          <option>전체</option>
+          <option>제품후기</option>
+          <option>레시피 공유</option>
+          <option>할인 정보</option>
+          <option>잡수다</option>
+        </select> </label
+      ><br />
+      <label>내용:<textarea name="content" required></textarea></label><br />
+      <button type="submit">등록</button>
+    </form>
+  </body>
+</html>
