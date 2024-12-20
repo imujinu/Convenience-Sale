@@ -3,25 +3,30 @@ const router = express.Router();
 const main = require("../controller/Cmain.js");
 const product = require("../controller/Cproduct.js");
 const user = require("../controller/Cuser.js");
+const boardController = require("../controller/Cboard");
 
+// 메인 라우트
 router.get("/", main.home);
 router.get("/login", main.get_login);
 router.get("/register", main.get_register);
-//마이페이지
+// 마이페이지
 router.get("/mypage", main.mypage);
-//회원정보수정
+// 회원정보 수정
 router.get("/userview", main.userview);
 
-//회원가입
+// 회원가입 및 로그인 관련
 router.post("/register", user.postRegister);
-//Login 페이지
 router.post("/login", user.postLogin);
-
 router.post("/checkDuplication", user.postCheck);
 
-
-//사진 업로드
+// 파일 업로드
 router.post("/upload", user.upload);
 
+// 자유게시판 관련 라우트
+router.get("/board", boardController.showBoard);
+router.get("/board/write", boardController.showWriteForm);
+router.post("/board/write", boardController.createPost);
+router.get("/board/view/:id", boardController.showPost);
+router.post("/board/view/:id/comment", boardController.createComment);
 
 module.exports = router;
