@@ -21,7 +21,3 @@ exports.mypage = (req, res) => {
 exports.userview = (req, res) => {
   res.render("userview", { title: "회원 수정 페이지" });
 };
-
-exports.menuReview = (req, res) => {
-  res.render("menuReview");
-};

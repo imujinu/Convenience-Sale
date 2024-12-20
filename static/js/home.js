@@ -104,20 +104,21 @@ container.appendChild(clone);
     });
     const result = products.data.json();
     result.forEach((el) => {
-      const { name, price, imageUrl } = el;
+      const { id, name, price, imageUrl } = el;
 
       const product = document.querySelector(
-        ".section5 > .container > .product "
+        ".section5 > .container > .product ",
       );
       const menu = document.createElement("div");
       menu.className = "menu";
 
       menu.innerHTML = `
+      <a href = "/menuReview:${id}">
       <img src ="${imageUrl}" alt="${name}>
       <div class="text">
       <p> ${name}</p>
       <p> ${price}원 </p>
-      
+      <a/>
       `;
       product.append(menu);
     });
@@ -127,22 +128,3 @@ container.appendChild(clone);
     };
   }
 })();
-
-const menu = document.querySelectorAll(
-  ".section5 > .container > .product > .menu"
-);
-menu.forEach((el) => {
-  el.addEventListener("click", () => {
-    const img = el.querySelector("img");
-    const name = el.querySelector(".text p:nth-of-type(1)").textContent;
-    const price = el.querySelector(".text p:nth-of-type(2)").textContent;
-
-    axios({
-      url: "userReview",
-      post: "get",
-      data: {
-        name,
-      },
-    });
-  });
-});
