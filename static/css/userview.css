@@ -78,16 +78,19 @@
   width: 400px;
 }
 
-.container > .buttonBox {
+/* .container > .buttonBox {
   border: 1px solid;
   padding: 20px;
   margin-top: 30px;
-}
+} */
 
-.container > .buttonBox > .modifyBtn {
-  width: 200px;
-  height: 200px;
-  margin: 0 auto;
-  border-radius: 999px;
-  border: 1px solid salmon;
+.container > .buttonBox .modifyBtn {
+  background-color: #ff6b73;
+  color: #fff;
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 30px;
 }
