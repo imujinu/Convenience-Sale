@@ -6,6 +6,7 @@ const Board = function (sequelize, DataTypes) {
       boardId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
       },
       boardTitle: {
         type: DataTypes.STRING(50),
