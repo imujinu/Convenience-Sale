@@ -1,11 +1,9 @@
-const express = require("express");
-const router = express.Router();
-const { connection } = require("./db");
+const { connection } = require("../db");
 const {
   crawlCUProducts,
   fetchDosirakData,
   fetchGS25Data,
-} = require("./crawlers");
+} = require("../crawlers");
 
 // 제품 데이터 저장할 배열
 let productsData = [];
@@ -14,8 +12,8 @@ let sentProductIds = [];
 // DB에서 가져온 제품 정보를 저장할 배열
 let dbProducts = [];
 
-// 크롤링 및 렌더링 엔드포인트
-router.get("/crawl", async (req, res) => {
+// 크롤링 및 렌더링 기능
+const crawlProducts = async (req, res) => {
   try {
     console.log("크롤링 작업 시작...");
 
@@ -25,7 +23,7 @@ router.get("/crawl", async (req, res) => {
       fetchGS25Data(),
     ]);
 
-    // DB에서 제품 정보 가져오기 (SELECT * 사용)
+    // DB에서 제품 정보 가져오기
     connection.query(`SELECT * FROM products`, (err, results) => {
       if (err) {
         console.error("DB에서 제품 정보 조회 오류:", err);
@@ -81,10 +79,10 @@ router.get("/crawl", async (req, res) => {
     console.error("크롤링 작업 중 오류 발생:", error);
     res.status(500).json({ error: "크롤링 작업 중 오류가 발생했습니다." });
   }
-});
+};
 
-// 태그 업데이트 API
-router.put("/products/:productId/tags", (req, res) => {
+// 태그 업데이트 기능
+const updateProductTags = (req, res) => {
   const productId = parseInt(req.params.productId);
   const { tags } = req.body;
 
@@ -109,10 +107,10 @@ router.put("/products/:productId/tags", (req, res) => {
     console.log("DB 태그 업데이트 성공:", results);
     res.json({ success: true });
   });
-});
+};
 
-// DB 전송 API
-router.post("/products/:productId/send-db", (req, res) => {
+// DB 전송 기능
+const sendProductToDB = (req, res) => {
   const productId = parseInt(req.params.productId);
   const product = req.body;
 
@@ -132,6 +130,7 @@ router.post("/products/:productId/send-db", (req, res) => {
     }
 
     if (findResults.length > 0) {
+      // 기존 제품 업데이트
       const updateSql =
         "UPDATE products SET name = ?, price = ?, imageUrl = ?, convini = ?, tags = ? WHERE id = ?";
       const updateValues = [
@@ -156,6 +155,7 @@ router.post("/products/:productId/send-db", (req, res) => {
         res.json({ success: true });
       });
     } else {
+      // 새로운 제품 삽입
       const insertSql =
         "INSERT INTO products (name, price, imageUrl, convini, tags) VALUES (?, ?, ?, ?, ?)";
       const insertValues = [
@@ -193,12 +193,13 @@ router.post("/products/:productId/send-db", (req, res) => {
       });
     }
   });
-});
+};
 
-// DB 삭제 API
-router.delete("/products/:productId", (req, res) => {
+// DB 삭제 기능
+const deleteProduct = (req, res) => {
   const productId = parseInt(req.params.productId);
 
+  // 로컬 productsData 배열에서 제거
   const productIndex = productsData.findIndex((p) => p.id === productId);
   if (productIndex !== -1) {
     productsData.splice(productIndex, 1);
@@ -221,6 +222,7 @@ router.delete("/products/:productId", (req, res) => {
 
     console.log("DB 삭제 성공:", results);
 
+    // sentProductIds 배열에서 제거
     const sentIdIndex = sentProductIds.indexOf(productId);
     if (sentIdIndex !== -1) {
       sentProductIds.splice(sentIdIndex, 1);
@@ -228,9 +230,10 @@ router.delete("/products/:productId", (req, res) => {
 
     res.json({ success: true });
   });
-});
-// 모든 제품 조회 API
-router.get("/products", (req, res) => {
+};
+
+// 모든 제품 조회 기능
+const getAllProducts = (req, res) => {
   const sql = "SELECT * FROM products";
   connection.query(sql, (err, results) => {
     if (err) {
@@ -240,7 +243,7 @@ router.get("/products", (req, res) => {
         .json({ success: false, error: "DB 조회 중 오류가 발생했습니다." });
     }
 
-    // tags 컬럼은 JSON.parse를 통해 파싱 후 응답
+    // tags 컬럼을 JSON으로 파싱
     const products = results.map((row) => ({
       ...row,
       tags: JSON.parse(row.tags),
@@ -248,6 +251,12 @@ router.get("/products", (req, res) => {
 
     res.json({ success: true, products });
   });
-});
+};
 
-module.exports = router;
+module.exports = {
+  crawlProducts,
+  updateProductTags,
+  sendProductToDB,
+  deleteProduct,
+  getAllProducts,
+};

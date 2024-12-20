@@ -3,7 +3,7 @@
 // 태그 토글 함수 (클라이언트 측에서만 동작)
 function toggleTag(button, productId, tag) {
   const productCard = document.querySelector(
-    `.product-card[data-product-id="${productId}"]`
+    `.product-card[data-product-id="${productId}"]`,
   );
   const productTags = JSON.parse(productCard.dataset.productTags);
 
@@ -28,7 +28,7 @@ function toggleTag(button, productId, tag) {
 // DB 전송 함수 (상품 정보와 태그 정보를 함께 전송)
 function sendToDB(productId) {
   const productCard = document.querySelector(
-    `.product-card[data-product-id="${productId}"]`
+    `.product-card[data-product-id="${productId}"]`,
   );
   const productTags = JSON.parse(productCard.dataset.productTags);
 
@@ -38,7 +38,7 @@ function sendToDB(productId) {
     price: parseInt(
       productCard
         .querySelector(".product-price")
-        .textContent.replace(/[^0-9]/g, "")
+        .textContent.replace(/[^0-9]/g, ""),
     ), // 숫자만 추출
     imageUrl: productCard.querySelector("img").src,
     convini: productCard.querySelector(".product-convini").textContent,
@@ -82,7 +82,7 @@ function sendToDB(productId) {
 
         // "태그 저장" 버튼 숨기기 (선택 사항)
         const updateTagsButton = productCard.querySelector(
-          ".update-tags-button"
+          ".update-tags-button",
         );
         updateTagsButton.style.display = "none";
       } else {
@@ -95,7 +95,7 @@ function sendToDB(productId) {
 // 태그 업데이트 함수 (선택 사항)
 function updateTags(productId) {
   const productCard = document.querySelector(
-    `.product-card[data-product-id="${productId}"]`
+    `.product-card[data-product-id="${productId}"]`,
   );
   const productTags = JSON.parse(productCard.dataset.productTags);
 
@@ -113,7 +113,7 @@ function updateTags(productId) {
 
         // "태그 저장" 버튼 숨기기
         const updateTagsButton = productCard.querySelector(
-          ".update-tags-button"
+          ".update-tags-button",
         );
         updateTagsButton.style.display = "none";
       } else {
@@ -137,7 +137,7 @@ function deleteFromDB(productId) {
       if (data.success) {
         // 제품 카드 제거
         const productCard = document.querySelector(
-          `.product-card[data-product-id="${productId}"]`
+          `.product-card[data-product-id="${productId}"]`,
         );
         productCard.remove();
       } else {
