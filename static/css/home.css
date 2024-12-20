@@ -154,7 +154,7 @@ img {
 .section2 > .part2 {
   width: 70%;
   height: 100%;
-  background: url(./static/image/bg1.png) center/cover no-repeat;
+  background: url(../image/bg1.png) center/cover no-repeat;
   opacity: 0;
   animation: ani3 2s forwards;
 }

@@ -95,3 +95,18 @@ const clone = menu.cloneNode(true);
 menu.classList.add("rolling1");
 clone.classList.add("rolling2");
 container.appendChild(clone);
+
+(async function getProducts() {
+  try {
+    const products = await axios({
+      url: "/products",
+      method: "get",
+    });
+    const result = products.data.json();
+    console.log(result);
+  } catch {
+    (err) => {
+      console.err("err!", err);
+    };
+  }
+})();

@@ -12,6 +12,7 @@ router.get("/mypage", main.mypage);
 //회원정보수정
 router.get("/userview", main.userview);
 
+router.get("/menuReview", main.menuReview);
 //회원가입
 router.post("/register", user.postRegister);
 //Login 페이지
