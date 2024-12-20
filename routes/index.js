@@ -3,6 +3,7 @@ const router = express.Router();
 const main = require("../controller/Cmain.js");
 const product = require("../controller/Cproduct.js");
 const user = require("../controller/Cuser.js");
+const upload = require("../utils/multer.js");
 
 router.get("/", main.home);
 router.get("/login", main.get_login);
@@ -18,6 +19,9 @@ router.post("/register", user.postRegister);
 router.post("/login", user.postLogin);
 
 //사진 업로드
-router.post("/upload", user.upload);
+router.post("/upload", upload.single("user"), user.upload);
+router.get("/upload", (req, res) => {
+  res.json({ message: "test" });
+});
 
 module.exports = router;

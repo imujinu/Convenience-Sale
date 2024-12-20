@@ -1,23 +1,4 @@
 const models = require("../models");
-const multer = require("multer");
-const path = require("path");
-
-const upload = multer({
-  storage: multer.diskStorage({
-    destination: (req, file, done) => {
-      done(null, "uploads/");
-    },
-    filename: (req, file, done) => {
-      const extension = path.extname(file.originalname);
-
-      done(
-        null,
-        path.basename(file.originalname, extension) + Date.now() + extension,
-      );
-    },
-  }),
-  limits: { fieldSize: 5 * 1024 * 1024 },
-});
 
 exports.postRegister = async (req, res) => {
   try {
@@ -55,9 +36,5 @@ exports.postLogin = (req, res) => {
 };
 
 exports.upload = (req, res) => {
-  const profileUpload = upload.single("user");
-
-  profileUpload(req, res, (err) => {
-    res.send({ ...req.body, ...req.file });
-  });
+  res.send({ ...req.body, ...req.file });
 };
