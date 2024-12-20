@@ -338,7 +338,7 @@ img {
   height: 100%;
 }
 
-.section5 > .container > .product > .text1 {
+.section5 > .container > .product > .text {
   width: 100%;
   height: auto;
   text-align: center;
@@ -368,11 +368,11 @@ img {
 }
 
 .rolling1 {
-  animation: rolling1 30s linear infinite;
+  animation: rolling1 100s linear infinite;
 }
 
 .rolling2 {
-  animation: rolling2 30s linear infinite;
+  animation: rolling2 100s linear infinite;
 }
 
 .section8 {
