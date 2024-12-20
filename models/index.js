@@ -20,33 +20,41 @@ const BCommentModel = require("./BComment")(sequelize, Sequelize);
 const BoardModel = require("./Board")(sequelize, Sequelize);
 //(3) 모델간 관계 설정
 //3-1: products: user through userFavs N:M
-// ProductsModel.belongsTo(UserModel, {
-//   through: UserFavsModel,
-//   foreignKey: "pId",
-// });
-// UserModel.belongsTo(ProductsModel, {
-//   through: UserFavsModel,
-//   foreignKey: "userId",
-// });
-//3-2: products: PComment 1:N
-// ProductsModel.hasMany(PCommentModel, {
-//   foreignKey: "pId",
-//   sourceKey: "pId",
-// });
-// PCommentModel.belongsTo(ProductsModel, {
-//   foreignKey: "pId",
-//   targetKey: "pId",
-// });
-//3-3: user: PComment: 1:N
-UserModel.hasMany(PCommentModel, {
+ProductsModel.belongsToMany(UserModel, {
+  through: UserFavsModel,
+  foreignKey: "pId",
+});
+UserModel.belongsToMany(ProductsModel, {
+  through: UserFavsModel,
+  foreignKey: "userId",
+});
+//3-2: products: user through pComment N:M
+ProductsModel.belongsToMany(UserModel, {
+  through: PCommentModel,
+  foreignKey: "pId",
+});
+UserModel.belongsToMany(ProductsModel, {
+  through: PCommentModel,
+  foreignKey: "userId",
+});
+//3-3: user: BComment: M:N
+UserModel.belongsToMany(BoardModel, {
+  through: BCommentModel,
+  foreignKey: "userId",
+});
+BoardModel.belongsToMany(UserModel, {
+  through: BCommentModel,
+  foreignKey: "boardId",
+});
+//3-4: user: board 1:N
+UserModel.hasMany(BoardModel, {
   foreignKey: "userId",
   sourceKey: "userId",
 });
-PCommentModel.belongsTo(UserModel, {
+BoardModel.belongsTo(UserModel, {
   foreignKey: "userId",
   targetKey: "userId",
 });
-//3-6: user: bComment through board N:M
 
 //(4) db 객체에 모델 추가
 db.User = UserModel;

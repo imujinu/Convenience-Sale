@@ -6,6 +6,7 @@ const PComment = function (sequelize, DataTypes) {
       commentId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
       },
       //product_comment_detail LONG VARCHAR, NOT NULL
       commentDetail: {

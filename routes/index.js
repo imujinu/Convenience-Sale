@@ -17,7 +17,11 @@ router.post("/register", user.postRegister);
 //Login 페이지
 router.post("/login", user.postLogin);
 
+router.post("/checkDuplication", user.postCheck);
+
+
 //사진 업로드
 router.post("/upload", user.upload);
+
 
 module.exports = router;
