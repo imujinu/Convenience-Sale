@@ -3,70 +3,148 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
     <link rel="stylesheet" href="../static/css/home.css" />
-
+    <%- include("./include/include",{title : "home"}) %>
     <!-- swiper CDN -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
     />
-    <!-- swiper CDN -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   </head>
   <body>
     <div class="section1">
-      <div class="title">
-        <a href="/">편의점마켓</a>
-      </div>
-      <div class="part1">
-        <ul>
-          <li><a href="">로그인</a></li>
-          <li><a href="">회원가입</a></li>
-          <li><a href="">마이페이지</a></li>
-        </ul>
-      </div>
-      <div class="part2">
-        <ul>
-          <li><a href="">Home</a></li>
-          <li><a href="">Cu</a></li>
-          <li><a href="">GS25</a></li>
-          <li><a href="">세븐일레븐</a></li>
-          <li><a href="">자유게시판</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="section2">
-      <div class="swiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <img src="../static/image/img1.jpg" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="../static/image/img2.jpg" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="../static/image/img3.jpg" alt="" />
-          </div>
-
-          <div class="swiper-slide">
-            <img src="../static/image/img4.jpg" alt="" />
-          </div>
-
-          <div class="swiper-paginiation"></div>
-
-          <div class="nextbtn">
-            <div class="next"></div>
-          </div>
-          <div class="prevbtn">
-            <div class="prev"></div>
-          </div>
+      <div class="container">
+        <div class="title">
+          <a href="/"></a>
+          <img src="./static/image/logo1.png" alt="" />
+        </div>
+        <div class="part1">
+          <ul>
+            <li><a href="/login">로그인</a></li>
+            <li><a href="/register">회원가입</a></li>
+            <li><a href="/mypage">마이페이지</a></li>
+          </ul>
+        </div>
+        <div class="part2">
+          <ul class="navbar">
+            <div class="store1 store">
+              <li><a href="">Home</a></li>
+            </div>
+            <div class="store2 store">
+              <li><a href="">Cu</a></li>
+              <ul class="menu2 menu">
+                <li>전체상품</li>
+                <li>김밥</li>
+                <li>도시락</li>
+                <li>샌드위치</li>
+                <li>샐러드</li>
+              </ul>
+            </div>
+            <div class="store3 store">
+              <li><a href="">GS25</a></li>
+              <ul class="menu3 menu">
+                <li>전체상품</li>
+                <li>김밥</li>
+                <li>도시락</li>
+                <li>샌드위치</li>
+                <li>샐러드</li>
+              </ul>
+            </div>
+            <div class="store4 store">
+              <li><a href="">7ELEVEN</a></li>
+              <ul class="menu4 menu">
+                <li>전체상품</li>
+                <li>김밥</li>
+                <li>도시락</li>
+                <li>샌드위치</li>
+                <li>샐러드</li>
+              </ul>
+            </div>
+            <div class="store5 store">
+              <li><a href="">자유게시판</a></li>
+            </div>
+          </ul>
         </div>
       </div>
     </div>
+    <div class="section2">
+      <div class="part1">
+        <div class="title">
+          <h1>Fun Pick</h1>
+        </div>
+        <div class="contents">
+          <p>편의점 쇼핑의 새로운 경험</p>
+
+          <p>
+            <b>CU,GS25,세븐일레븐</b>의 다양한 상품들을 <br />한 곳에서 쉽고
+            빠르게 찾아보세요
+          </p>
+        </div>
+        <div class="detail">쇼핑하기</div>
+      </div>
+      <div class="part2"></div>
+    </div>
 
     <div class="section3">
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide slide1">
+            <img src="./static/image/img1.jpg" alt="" />
+          </div>
+          <div class="swiper-slide slide2">
+            <img src="./static/image/img2.jpg" alt="" />
+          </div>
+          <div class="swiper-slide slide3">
+            <img src="./static/image/img3.jpg" alt="" />
+          </div>
+
+          <div class="swiper-slide slide4">
+            <img src="./static/image/img4.jpg" alt="" />
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="stop">
+          <img src="./static/image/stopbtn2.png" alt="" class="stopBtn" />
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+      <div class="modal modal1 hidden">
+        <div class="modalContent">
+          <img src="./static/image/modalimg1.jpg" alt="" />
+        </div>
+        <button class="modalCloseBtn modalCloseBtn1">
+          <img src="./static//image/modalbtn.png" alt="" />
+        </button>
+      </div>
+      <div class="modal modal2 hidden">
+        <div class="modalContent">
+          <img src="./static/image/modalimg2.jpg" alt="" />
+        </div>
+        <button class="modalCloseBtn modalCloseBtn2">
+          <img src="./static//image/modalbtn.png" alt="" />
+        </button>
+      </div>
+      <div class="modal modal3 hidden">
+        <div class="modalContent">
+          <img src="./static/image/modalimg3.jpg" alt="" />
+        </div>
+        <button class="modalCloseBtn modalCloseBtn3">
+          <img src="./static//image/modalbtn.png" alt="" />
+        </button>
+      </div>
+      <div class="modal modal4 hidden">
+        <div class="modalContent">
+          <img src="./static/image/modalimg4.jpg" alt="" />
+        </div>
+        <button class="modalCloseBtn modalCloseBtn4">
+          <img src="./static//image/modalbtn.png" alt="" />
+        </button>
+      </div>
+    </div>
+
+    <div class="section4">
       <div class="part1">편의점별 상품</div>
       <div class="part2">
         <ul>
@@ -77,33 +155,81 @@
         </ul>
       </div>
     </div>
-    <div class="section4">
+    <div class="section5">
       <h1>CU</h1>
-      <div class="swiper2">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <img src="../static/image/section4 img1.png" alt="" />
+      <div class="container">
+        <div class="product">
+          <div class="menu menu1">
+            <img src="./static//image/menu1.jpg" alt="" />
+            <div class="text1">
+              <p>뉴매콤한돈김치제육</p>
+              <p>4,500원</p>
+            </div>
           </div>
-          <div class="swiper-slide">
-            <img src="" alt="" />
+
+          <div class="menu menu2">
+            <img src="./static//image/menu1.jpg" alt="" />
+            <div class="text1">
+              <p>뉴매콤한돈김치제육</p>
+              <p>4,500원</p>
+            </div>
           </div>
-          <div class="swiper-slide">
-            <img src="" alt="" />
+          <div class="menu menu3">
+            <img src="./static//image/menu1.jpg" alt="" />
+            <div class="text1">
+              <p>뉴매콤한돈김치제육</p>
+              <p>4,500원</p>
+            </div>
           </div>
-          <div class="swiper-slide">
-            <img src="" alt="" />
+          <div class="menu menu4">
+            <img src="./static//image/menu1.jpg" alt="" />
+            <div class="text1">
+              <p>뉴매콤한돈김치제육</p>
+              <p>4,500원</p>
+            </div>
+          </div>
+          <div class="menu menu5">
+            <img src="./static//image/menu1.jpg" alt="" />
+            <div class="text1">
+              <p>뉴매콤한돈김치제육</p>
+              <p>4,500원</p>
+            </div>
+          </div>
+          <div class="menu menu5">
+            <img src="./static//image/menu1.jpg" alt="" />
+            <div class="text1">
+              <p>뉴매콤한돈김치제육</p>
+              <p>4,500원</p>
+            </div>
+          </div>
+          <div class="menu menu5">
+            <img src="./static//image/menu1.jpg" alt="" />
+            <div class="text1">
+              <p>뉴매콤한돈김치제육</p>
+              <p>4,500원</p>
+            </div>
+          </div>
+          <div class="menu menu5">
+            <img src="./static//image/menu1.jpg" alt="" />
+            <div class="text1">
+              <p>뉴매콤한돈김치제육</p>
+              <p>4,500원</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="section5">
+
+    <div class="section6">
       <h1>GS25</h1>
     </div>
-    <div class="section6">
-      <h1>SEVENELEVEN</h1>
+    <div class="section7">
+      <h1>7ELEVEN</h1>
     </div>
 
-    <div class="section7"></div>
+    <div class="section8">
+      <footer></footer>
+    </div>
     <script src="../static/js/home.js"></script>
   </body>
 </html>

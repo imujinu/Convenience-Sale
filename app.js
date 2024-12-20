@@ -1,19 +1,37 @@
 const express = require("express");
 const app = express();
+const db = require("./models");
+const session = require("express-session");
 const PORT = 8080;
 
 app.set("view engine", "ejs");
 app.set("views", "./views");
 app.use("/views", express.static(__dirname + "views"));
 app.use("/static", express.static(__dirname + "/static"));
+app.use("/uploads", express.static("uploads"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(
+  session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      maxAge: 30 * 60 * 1000,
+    },
+  }),
+);
 
 const indexRouter = require("./routes");
 app.use("/", indexRouter);
 
 app.get("*", (req, res) => {
   res.render("404");
+});
+
+db.sequelize.sync({ force: false }).then(() => {
+  console.log("DB 연결 성공");
 });
 
 app.listen(PORT, () => {
