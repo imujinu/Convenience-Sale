@@ -1,5 +1,3 @@
-const { authPlugins } = require("mysql2");
-
 const BComment = function (sequelize, DataTypes) {
   return sequelize.define(
     "bComment",
@@ -19,7 +17,7 @@ const BComment = function (sequelize, DataTypes) {
     {
       freezeTable: true,
       timeStamps: false,
-    },
+    }
   );
 };
 module.exports = BComment;
