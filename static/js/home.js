@@ -1,12 +1,3 @@
-// const boxCreate = document.querySelector(".section1 .part2 > .container2");
-// const hiddenBox = document.querySelector(".section1 .part3");
-// boxCreate.addEventListener("mouseover", () => {
-//   hiddenBox.style.height = "100px";
-// });
-// boxCreate.addEventListener("mouseleave", () => {
-//   hiddenBox.style.height = "0px";
-// });
-
 for (let i = 1; i < 6; i++) {
   const store = document.querySelector(`.section1 .part2 .store${i}`);
   const menu = document.querySelector(`.section1 .part2 .menu${i}`);
@@ -98,21 +89,9 @@ for (let i = 1; i < 5; i++) {
   });
 }
 
-// section4
-
-const swiper2 = new Swiper(".swiper2", {
-  //   spaceBetween: 20,
-
-  // pagination: {
-  //   el: ".swiper-pagination",
-  //   clickable: true,
-  //   bulletActiveClass: "on",
-  // },
-
-  slidesPerView: 5,
-
-  navigation: {
-    nextEl: ".next",
-    prevEl: ".prev",
-  },
-});
+const menu = document.querySelector(".section5 > .container > .product");
+const container = document.querySelector(".section5 > .container");
+const clone = menu.cloneNode(true);
+menu.classList.add("rolling1");
+clone.classList.add("rolling2");
+container.appendChild(clone);

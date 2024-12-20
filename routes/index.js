@@ -7,11 +7,21 @@ const user = require("../controller/Cuser.js");
 router.get("/", main.home);
 router.get("/login", main.get_login);
 router.get("/register", main.get_register);
+//마이페이지
 router.get("/mypage", main.mypage);
+//회원정보수정
+router.get("/userview", main.userview);
 
 //회원가입
 router.post("/register", user.postRegister);
 //Login 페이지
 router.post("/login", user.postLogin);
+
 router.post("/checkDuplication", user.postCheck);
+
+
+//사진 업로드
+router.post("/upload", user.upload);
+
+
 module.exports = router;

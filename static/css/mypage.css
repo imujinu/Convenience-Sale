@@ -8,6 +8,7 @@
 }
 .container > .profile {
   width: 180px;
+  height: 200px;
   margin: 0 auto;
   border-radius: 999px;
   border: 1px solid salmon;
@@ -16,6 +17,7 @@
 .container > .profile > img {
   border-radius: 999px;
   width: 100%;
+  height: 100%;
 }
 .container > .infoBox {
   font-size: 14px;
@@ -130,14 +132,14 @@
 .container > .buttonBox {
   margin-top: 100px;
 }
-.container > .buttonBox > button {
+.container > .buttonBox button {
   color: #fff;
   padding: 8px;
   border-radius: 8px;
 }
-.container > .buttonBox > .updateBtn {
+.container > .buttonBox .updateBtn {
   background-color: #ff6b73;
 }
-.container > .buttonBox > .deleteBtn {
+.container > .buttonBox .deleteBtn {
   background-color: #bbb;
 }
