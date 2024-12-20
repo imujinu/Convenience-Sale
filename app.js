@@ -38,6 +38,3 @@ app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);
 });
 
-// // 자유게시판
-// const boardRouter = require("./routes/board");
-// app.use("/board", boardRouter);
