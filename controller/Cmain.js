@@ -1,5 +1,7 @@
 const models = require("../models");
-exports.home = (req, res) => {
+const { Products } = require("../models");
+
+exports.home = async (req, res) => {
   res.render("home");
 };
 

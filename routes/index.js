@@ -13,8 +13,9 @@ router.get("/register", main.get_register);
 router.get("/mypage", main.mypage);
 // 회원정보 수정
 router.get("/userview", main.userview);
-
-// 회원가입 및 로그인 관련
+//제품 리뷰
+router.get("/menuReview", product.productsReview);
+//회원가입
 router.post("/register", user.postRegister);
 router.post("/login", user.postLogin);
 router.post("/checkDuplication", user.postCheck);

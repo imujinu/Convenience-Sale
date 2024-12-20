@@ -89,9 +89,42 @@ for (let i = 1; i < 5; i++) {
   });
 }
 
-const menu = document.querySelector(".section5 > .container > .product");
+const product = document.querySelector(".section5 > .container > .product");
 const container = document.querySelector(".section5 > .container");
-const clone = menu.cloneNode(true);
-menu.classList.add("rolling1");
+const clone = product.cloneNode(true);
+product.classList.add("rolling1");
 clone.classList.add("rolling2");
 container.appendChild(clone);
+
+(async function getProducts() {
+  try {
+    const products = await axios({
+      url: "/products",
+      method: "get",
+    });
+    const result = products.data.json();
+    result.forEach((el) => {
+      const { id, name, price, imageUrl } = el;
+
+      const product = document.querySelector(
+        ".section5 > .container > .product ",
+      );
+      const menu = document.createElement("div");
+      menu.className = "menu";
+
+      menu.innerHTML = `
+      <a href = "/menuReview:${id}">
+      <img src ="${imageUrl}" alt="${name}>
+      <div class="text">
+      <p> ${name}</p>
+      <p> ${price}원 </p>
+      <a/>
+      `;
+      product.append(menu);
+    });
+  } catch {
+    (err) => {
+      console.err("err!", err);
+    };
+  }
+})();
