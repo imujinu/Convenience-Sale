@@ -1,38 +1,38 @@
+// models/Products.js
 const Products = function (sequelize, DataTypes) {
   return sequelize.define(
     "products",
     {
-      //product_id INTEGER, PK
-      pId: {
-        type: DataTypes.INTEGER,
+      id: {
+        type: DataTypes.STRING, // ID를 문자열로 변경
         primaryKey: true,
+        // autoIncrement: true, // 자동 증가 제거
       },
-      //product_name VARCHAR(50), NOT NULL
-      pName: {
-        type: DataTypes.STRING(50),
+      name: {
+        type: DataTypes.STRING(255),
         allowNull: false,
       },
-      // price INTEGER NOT NULL,
       price: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      // event? VARCHAR(20) NOT NULL,
-      event: {
-        type: DataTypes.STRING(20),
+      imageUrl: {
+        type: DataTypes.STRING(1000),
+        allowNull: true,
+      },
+      convini: {
+        type: DataTypes.STRING(50),
         allowNull: false,
       },
-      //menu_name ENUM('김밥', '샐러드', '샌드위치', '도시락') NOT NULL,
-      menuName: {
-        type: DataTypes.ENUM,
-        values: ["김밥", "샐러드", "샌드위치", "도시락"],
-        allowNull: false,
+      tags: {
+        type: DataTypes.JSON,
+        allowNull: true,
+        defaultValue: [],
       },
-      //convenience_name ENUM('CU', 'GS25', '7ELEVEN') NOT NULL
-      cName: {
-        type: DataTypes.ENUM,
-        values: ["CU", "GS25", "7ELEVEN"],
+      created_at: {
+        type: DataTypes.DATE,
         allowNull: false,
+        defaultValue: DataTypes.NOW,
       },
     },
     {

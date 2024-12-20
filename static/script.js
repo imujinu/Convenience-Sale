@@ -46,13 +46,19 @@ function sendToDB(productId) {
   };
 
   fetch(`/products/${productId}/send-db`, {
+    // 수정된 부분: URL 수정
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(product),
   })
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("HTTP error " + response.status);
+      }
+      return response.json();
+    })
     .then((data) => {
       if (data.success) {
         // 제품 카드 상태 업데이트
@@ -84,7 +90,9 @@ function sendToDB(productId) {
         const updateTagsButton = productCard.querySelector(
           ".update-tags-button",
         );
-        updateTagsButton.style.display = "none";
+        if (updateTagsButton) {
+          updateTagsButton.style.display = "none";
+        }
       } else {
         console.error("DB 전송 실패:", data.error);
       }
@@ -99,7 +107,8 @@ function updateTags(productId) {
   );
   const productTags = JSON.parse(productCard.dataset.productTags);
 
-  fetch(`/products/${productId}/tags`, {
+  fetch(`/products/${productId}/update-tags`, {
+    // 수정된 부분: URL 수정
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -115,7 +124,9 @@ function updateTags(productId) {
         const updateTagsButton = productCard.querySelector(
           ".update-tags-button",
         );
-        updateTagsButton.style.display = "none";
+        if (updateTagsButton) {
+          updateTagsButton.style.display = "none";
+        }
       } else {
         console.error("태그 업데이트 실패:", data.error);
       }
@@ -139,7 +150,9 @@ function deleteFromDB(productId) {
         const productCard = document.querySelector(
           `.product-card[data-product-id="${productId}"]`,
         );
-        productCard.remove();
+        if (productCard) {
+          productCard.remove();
+        }
       } else {
         console.error("DB 삭제 실패:", data.error);
       }

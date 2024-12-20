@@ -1,43 +1,45 @@
+//models/index.js
 "use strict";
 
 const Sequelize = require("sequelize");
-// const env = process.env.NODE_ENV || "development";
 const config = require(__dirname + "/../config/config.js")["development"];
 const db = {};
-//(1) Sequelize 클래스를 통해서 sequelize 객체를 생성
+
 const sequelize = new Sequelize(
   config.database,
   config.username,
   config.password,
   config,
 );
-//(2) 모델을 불러오면서 인자로 정보 전달
+
 const UserModel = require("./User")(sequelize, Sequelize);
 const ProductsModel = require("./Products")(sequelize, Sequelize);
 const PCommentModel = require("./PComment")(sequelize, Sequelize);
 const UserFavsModel = require("./UserFavs")(sequelize, Sequelize);
-const BCommentModel = require("./BComment")(sequelize, Sequelize);
-const BoardModel = require("./Board")(sequelize, Sequelize);
-//(3) 모델간 관계 설정
-//3-1: products: user through userFavs N:M
-// ProductsModel.belongsTo(UserModel, {
-//   through: UserFavsModel,
-//   foreignKey: "pId",
-// });
-// UserModel.belongsTo(ProductsModel, {
-//   through: UserFavsModel,
-//   foreignKey: "userId",
-// });
-//3-2: products: PComment 1:N
-// ProductsModel.hasMany(PCommentModel, {
-//   foreignKey: "pId",
-//   sourceKey: "pId",
-// });
-// PCommentModel.belongsTo(ProductsModel, {
-//   foreignKey: "pId",
-//   targetKey: "pId",
-// });
-//3-3: user: PComment: 1:N
+// const BCommentModel = require("./BComment")(sequelize, Sequelize); // 주석 처리
+// const BoardModel = require("./Board")(sequelize, Sequelize); // 주석 처리
+
+// Products: User through UserFavs N:M
+ProductsModel.belongsToMany(UserModel, {
+  through: UserFavsModel,
+  foreignKey: "pId",
+});
+UserModel.belongsToMany(ProductsModel, {
+  through: UserFavsModel,
+  foreignKey: "userId",
+});
+
+// Products: PComment 1:N
+ProductsModel.hasMany(PCommentModel, {
+  foreignKey: "pId",
+  sourceKey: "id",
+});
+PCommentModel.belongsTo(ProductsModel, {
+  foreignKey: "pId",
+  targetKey: "id",
+});
+
+// User: PComment 1:N
 UserModel.hasMany(PCommentModel, {
   foreignKey: "userId",
   sourceKey: "userId",
@@ -46,15 +48,43 @@ PCommentModel.belongsTo(UserModel, {
   foreignKey: "userId",
   targetKey: "userId",
 });
-//3-6: user: bComment through board N:M
 
-//(4) db 객체에 모델 추가
+// User: Board 1:N
+// UserModel.hasMany(BoardModel, { // 주석 처리
+//   foreignKey: "userId",
+//   sourceKey: "userId",
+// });
+// BoardModel.belongsTo(UserModel, { // 주석 처리
+//   foreignKey: "userId",
+//   targetKey: "userId",
+// });
+
+// Board: BComment 1:N
+// BoardModel.hasMany(BCommentModel, { // 주석 처리
+//   foreignKey: "boardId",
+//   sourceKey: "id",
+// });
+// BCommentModel.belongsTo(BoardModel, { // 주석 처리
+//   foreignKey: "boardId",
+//   targetKey: "id",
+// });
+
+// User: BComment 1:N
+// UserModel.hasMany(BCommentModel, { // 주석 처리
+//   foreignKey: "userId",
+//   sourceKey: "userId",
+// });
+// BCommentModel.belongsTo(UserModel, { // 주석 처리
+//   foreignKey: "userId",
+//   targetKey: "userId",
+// });
+
 db.User = UserModel;
 db.Products = ProductsModel;
-db.Board = BoardModel;
+// db.Board = BoardModel; // 주석 처리
 db.PComment = PCommentModel;
 db.UserFavs = UserFavsModel;
-db.BComment = BCommentModel;
+// db.BComment = BCommentModel; // 주석 처리
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 

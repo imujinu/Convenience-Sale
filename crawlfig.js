@@ -1,12 +1,4 @@
 module.exports = {
-  // Database Configuration
-  db: {
-    host: "127.0.0.1",
-    user: "root",
-    password: "1234",
-    database: "db",
-  },
-
   // CU Crawling Configuration
   CU: {
     BASE_URL: "https://cu.bgfretail.com",
