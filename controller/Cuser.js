@@ -18,14 +18,12 @@ const upload = multer({
   }),
   limits: { fieldSize: 5 * 1024 * 1024 },
 });
-
 exports.postRegister = async (req, res) => {
   try {
     const newUser = await models.User.create({
       userId: req.body.userId,
       userPw: req.body.userPw,
       nickname: req.body.nickname,
-      profilePath: req.body.profilePath,
     });
     res.send(newUser);
   } catch (err) {
@@ -33,7 +31,6 @@ exports.postRegister = async (req, res) => {
     res.status(500).send("server error");
   }
 };
-
 exports.postLogin = (req, res) => {
   try {
     const user = models.User.findOne({
@@ -57,7 +54,6 @@ exports.postLogin = (req, res) => {
     res.status(500).send("Server error");
   }
 };
-
 
 exports.postCheck = async (req, res) => {
   try {
@@ -83,4 +79,3 @@ exports.upload = (req, res) => {
     res.send({ ...req.body, ...req.file });
   });
 };
-

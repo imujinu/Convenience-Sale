@@ -10,7 +10,7 @@
   <body>
     <div class="formContainer">
       <h2>회원가입</h2>
-      <form id="registerForm">
+      <form id="registerForm" enctype="multipart/form-data">
         <label for="userId">
           아이디:
           <input
@@ -48,10 +48,7 @@
           닉네임:
           <input type="text" name="nickname" id="nickname" required /><br />
         </label>
-        <label for="profilePic">
-          프로필 사진:
-          <input type="file" name="profilePic" id="profilePic" />
-        </label>
+
         <br />
         <div id="registerBtn">
           <button type="submit" id="registerSubmit" onclick="registerBtn();">
@@ -61,66 +58,6 @@
       </form>
       <p>이미 계정이 있나요? <a href="./login">로그인</a></p>
     </div>
-
-    <script>
-      function registerBtn() {
-        const registerForm = document.forms["registerForm"];
-        const idDuplication = document.getElementById("idDuplication").value;
-        if (!registerForm.checkValidity()) {
-          registerForm.reportValidity();
-          return;
-        }
-        if (idDuplication !== "idChecked") {
-          alert("아이디 중복확인을 진행하세요. ");
-          return;
-        }
-        const formData = new FormData(registerForm);
-        axios({
-          url: "/register",
-          method: "POST",
-          data: {
-            userId: registerForm.userId.value,
-            userPw: registerForm.userPw.value,
-            nickname: registerForm.nickname.value,
-            profilePic: registerForm.profilePic.value,
-          },
-        })
-          .then(() => {
-            alert("회원가입 성공");
-            document.location.href = "/login";
-          })
-          .catch((error) => {
-            console.error("error: ", error);
-            alert("회원가입중 오류가 발생했습니다.");
-          });
-      }
-      async function checkDuplication() {
-        const userIdInput = document.getElementById("userId");
-        const idDuplicationInput = document.getElementById("idDuplication");
-        if (!userIdInput.value) {
-          alert("아이디를 입력하세요.");
-          return;
-        }
-
-        try {
-          const response = await axios.post("/checkDuplication", {
-            userId: userIdInput.value,
-          });
-
-          if (response.data.isDuplicate) {
-            alert("이미 사용 중인 아이디입니다.");
-            idDuplicationInput.value = "idUnCheck";
-            document.getElementById("registerSubmit").disabled = true;
-          } else {
-            alert("사용 가능한 아이디입니다.");
-            idDuplicationInput.value = "idChecked";
-            document.getElementById("registerSubmit").disabled = false;
-          }
-        } catch (error) {
-          console.error("Error during duplication check:", error);
-          alert("중복확인 중 오류가 발생했습니다.");
-        }
-      }
-    </script>
+    <script defer src="/static/js/register.js"></script>
   </body>
 </html>

@@ -7,7 +7,7 @@ DESC user;
 drop table user;
 drop table products;
 SELECT * FROM user;
-SELECT * FROM products;
+
+DELETE FROM user WHERE `userId` LIKE 'se%';
 DESC products;
 
-INSERT INTO 
