@@ -389,7 +389,7 @@ img {
 .section8 > .container > .part1 > .search {
   width: 10%;
   height: 20px;
-  background: url(./static//image/search.png) no-repeat;
+  background: url(../image/search.png) no-repeat;
   background-size: contain;
   cursor: pointer;
 }

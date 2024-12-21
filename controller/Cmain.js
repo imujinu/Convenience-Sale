@@ -21,3 +21,13 @@ exports.mypage = (req, res) => {
 exports.userview = (req, res) => {
   res.render("userview", { title: "회원 수정 페이지" });
 };
+
+exports.store = (req, res) => {
+  console.log("req.query: ", req.query.query);
+  console.log(req.query);
+  res.render("store");
+};
+
+exports.search = (req, res) => {
+  res.render("search");
+};
