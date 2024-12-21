@@ -1,4 +1,7 @@
 const models = require("../models");
+
+
+
 const multer = require("multer");
 const path = require("path");
 
@@ -25,7 +28,6 @@ exports.postRegister = async (req, res) => {
       userId: req.body.userId,
       userPw: req.body.userPw,
       nickname: req.body.nickname,
-      profilePath: req.body.profilePath,
     });
     res.send(newUser);
   } catch (err) {
@@ -33,7 +35,6 @@ exports.postRegister = async (req, res) => {
     res.status(500).send("server error");
   }
 };
-
 exports.postLogin = (req, res) => {
   try {
     const user = models.User.findOne({
@@ -58,7 +59,6 @@ exports.postLogin = (req, res) => {
   }
 };
 
-
 exports.postCheck = async (req, res) => {
   try {
     const { userId } = req.body;
@@ -77,10 +77,5 @@ exports.postCheck = async (req, res) => {
 exports.getLogout = (req, res) => {};
 
 exports.upload = (req, res) => {
-  const profileUpload = upload.single("user");
-
-  profileUpload(req, res, (err) => {
-    res.send({ ...req.body, ...req.file });
-  });
+  res.send({ ...req.body, ...req.file });
 };
-

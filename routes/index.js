@@ -3,7 +3,11 @@ const router = express.Router();
 const main = require("../controller/Cmain.js");
 const product = require("../controller/Cproduct.js");
 const user = require("../controller/Cuser.js");
+
+const upload = require("../utils/multer.js");
+
 const boardController = require("../controller/Cboard");
+
 
 // 메인 라우트
 router.get("/", main.home);
@@ -22,8 +26,16 @@ router.get("/store", main.store);
 router.post("/register", user.postRegister);
 router.post("/login", user.postLogin);
 router.post("/checkDuplication", user.postCheck);
+
+//사진 업로드
+router.post("/upload", upload.single("user"), user.upload);
+router.get("/upload", (req, res) => {
+  res.json({ message: "test" });
+});
+
 // 파일 업로드
 router.post("/upload", user.upload);
+
 
 // 자유게시판 관련 라우트
 router.get("/board", boardController.showBoard);
