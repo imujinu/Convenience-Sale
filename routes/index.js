@@ -17,13 +17,15 @@ router.get("/register", main.get_register);
 router.get("/mypage", main.mypage);
 // 회원정보 수정
 router.get("/userview", main.userview);
-//제품 리뷰
-router.get("/menuReview", product.productsReview);
+//상품검색 페이지
+router.get("/search", main.search);
+// 매장찾기 페이지
+router.get("/store", main.store);
+
 //회원가입
 router.post("/register", user.postRegister);
 router.post("/login", user.postLogin);
 router.post("/checkDuplication", user.postCheck);
-
 
 //사진 업로드
 router.post("/upload", upload.single("user"), user.upload);
