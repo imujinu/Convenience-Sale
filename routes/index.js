@@ -8,7 +8,6 @@ const upload = require("../utils/multer.js");
 
 const boardController = require("../controller/Cboard");
 
-
 // 메인 라우트
 router.get("/", main.home);
 router.get("/login", main.get_login);
@@ -36,12 +35,23 @@ router.get("/upload", (req, res) => {
 // 파일 업로드
 router.post("/upload", user.upload);
 
+// 로그인 체크 미들웨어 추가
+const isAuthenticated = (req, res, next) => {
+  if (req.session.user) {
+    // 로그인 상태일 때만 다음 단계로 진행
+    next();
+  } else {
+    // 로그인 상태가 아니면 에러 처리
+    res.status(401).json({ message: "로그인이 필요합니다." });
+  }
+};
 
-// 자유게시판 관련 라우트
+// 자유게시판 라우트
 router.get("/board", boardController.showBoard);
 router.get("/board/write", boardController.showWriteForm);
 router.post("/board/write", boardController.createPost);
 router.get("/board/view/:id", boardController.showPost);
 router.post("/board/view/:id/comment", boardController.createComment);
+router.post("/board/view/:id/delete", boardController.deletePost);
 
 module.exports = router;
