@@ -80,35 +80,62 @@ product.classList.add("rolling1");
 clone.classList.add("rolling2");
 container.appendChild(clone);
 
-(async function getProducts() {
+// (async function getProducts() {
+//   try {
+//     const products = await axios({
+//       url: "/products",
+//       method: "get",
+//     });
+//     const result = products.data.json();
+//     result.forEach((el) => {
+//       const { name, price, imageUrl } = el;
+
+//       const product = document.querySelector(
+//         ".section5 > .container > .product ",
+//       );
+//       const menu = document.createElement("div");
+//       menu.className = "menu";
+
+//       menu.innerHTML = `
+//       <img src ="${imageUrl}" alt="${name}>
+//       <div class="text">
+//       <p> ${name}</p>
+//       <p> ${price}원 </p>
+//       <a/>
+//       `;
+//       product.append(menu);
+//     });
+//   } catch {
+//     (err) => {
+//       console.err("err!", err);
+//     };
+//   }
+// })();
+
+const search = document.querySelector(
+  ".section8 > .container > .part1 > .search",
+);
+const searchText = document.querySelector(
+  ".section8 > .container > .part1 > .searchText",
+);
+search.addEventListener("click", async () => {
   try {
-    const products = await axios({
-      url: "/products",
-      method: "get",
-    });
-    const result = products.data.json();
-    result.forEach((el) => {
-      const { id, name, price, imageUrl } = el;
-
-      const product = document.querySelector(
-        ".section5 > .container > .product ",
-      );
-      const menu = document.createElement("div");
-      menu.className = "menu";
-
-      menu.innerHTML = `
-      <a href = "/menuReview:${id}">
-      <img src ="${imageUrl}" alt="${name}>
-      <div class="text">
-      <p> ${name}</p>
-      <p> ${price}원 </p>
-      <a/>
-      `;
-      product.append(menu);
-    });
-  } catch {
-    (err) => {
-      console.err("err!", err);
-    };
+    if (searchText.value.trim() === "") {
+      alert("검색어를 입력해주세요!");
+    } else {
+      console.log("검색어 입력됨");
+      console.log(searchText.value);
+      const productName = searchText.value;
+      const result = await axios({
+        url: "/search",
+        method: "get",
+        params: {
+          productName,
+        },
+      });
+      document.location.href = "/search";
+    }
+  } catch (err) {
+    console.error(err);
   }
-})();
+});

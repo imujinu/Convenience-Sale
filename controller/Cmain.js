@@ -1,5 +1,5 @@
 const models = require("../models");
-const { Products } = require("../models");
+const { Products, Op } = require("../models");
 
 exports.home = async (req, res) => {
   res.render("home");
@@ -28,6 +28,18 @@ exports.store = (req, res) => {
   res.render("store");
 };
 
-exports.search = (req, res) => {
-  res.render("search");
+exports.search = async (req, res) => {
+  const result = req.query;
+  if (result) {
+    const products = await Products.findAll({
+      attributes: ["name", "price", "imageUrl", "convini"], // 필요한 속성 선택
+      where: {
+        name: {
+          [Op.like]: `%${productName}%`, // 부분 일치 검색
+        },
+      },
+    });
+  }
+
+  res.render("search", { products });
 };
