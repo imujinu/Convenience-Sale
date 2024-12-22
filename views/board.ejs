@@ -1,8 +1,8 @@
-<!-- cys2/241219/자유게시판 -->
 <!DOCTYPE html>
 <html lang="ko">
   <head>
     <link rel="stylesheet" href="/static/css/board.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <h1>자유 게시판</h1>
@@ -22,6 +22,33 @@
       </tr>
       <% }) %>
     </table>
-    <button onclick="location.href='/board/write'">글 작성</button>
+
+    <!-- 글 작성 버튼 -->
+    <button id="writeBtn">글 작성</button>
+
+    <script>
+      // 로그인 여부 체크 및 팝업 처리
+      document
+        .getElementById("writeBtn")
+        .addEventListener("click", async () => {
+          try {
+            const response = await axios.get("/board/write");
+            // 로그인 상태일 경우 글 작성 페이지로 이동
+            if (response.status === 200) {
+              window.location.href = "/board/write";
+            }
+          } catch (err) {
+            // 로그인 상태가 아닐 경우 팝업 창 처리
+            if (err.response.status === 401) {
+              const confirmLogin = confirm(
+                "로그인을 해야 글 작성이 가능합니다.",
+              );
+              if (confirmLogin) {
+                window.location.href = "/login";
+              }
+            }
+          }
+        });
+    </script>
   </body>
 </html>
