@@ -4,8 +4,6 @@ const { Products, Op } = require("../models");
 // 로그인이 안된 유저 > {isLogin:false}
 // 로그인이 된 유저 > {isLogin:true, user:유저}
 exports.home = async (req, res) => {
-  console.log(req.session);
-  console.log(req.session.user);
   if (req.session.user) {
     res.render("home", {
       user: req.session.user,
@@ -50,17 +48,17 @@ exports.store = (req, res) => {
 };
 
 exports.search = async (req, res) => {
-  const result = req.query;
-  if (result) {
-    const products = await Products.findAll({
-      attributes: ["name", "price", "imageUrl", "convini"], // 필요한 속성 선택
-      where: {
-        name: {
-          [Op.like]: `%${productName}%`, // 부분 일치 검색
-        },
-      },
-    });
-  }
+  // const result = req.query;
+  // if (result) {
+  //   const products = await Products.findAll({
+  //     attributes: ["name", "price", "imageUrl", "convini"], // 필요한 속성 선택
+  //     where: {
+  //       name: {
+  //         [Op.like]: `%${productName}%`, // 부분 일치 검색
+  //       },
+  //     },
+  //   });
+  // }
 
-  res.render("search", { products });
+  res.render("search");
 };
