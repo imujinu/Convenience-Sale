@@ -1,8 +1,8 @@
 "use strict";
 
 const Sequelize = require("sequelize");
-// const env = process.env.NODE_ENV || "development";
-const config = require(__dirname + "/../config/config.js")["development"];
+const env = process.env.NODE_ENV || "development";
+const config = require(__dirname + "/../config/config.js")[env];
 const db = {};
 //(1) Sequelize 클래스를 통해서 sequelize 객체를 생성
 const sequelize = new Sequelize(
