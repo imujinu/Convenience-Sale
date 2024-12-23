@@ -1,22 +1,45 @@
+// models/PComment.js
 const PComment = function (sequelize, DataTypes) {
   return sequelize.define(
-    "Pcomments",
+    "Pcomments", // Changed table name to match your original
     {
-      //product_comment_id INTEGER, PK
       commentId: {
+        // Changed field name to match your original
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true,
+        autoIncrement: true, // Assuming you want auto-increment
       },
-      //product_comment_detail LONG VARCHAR, NOT NULL
       commentDetail: {
+        // Changed field name to match your original
         type: DataTypes.STRING(200),
         allowNull: false,
       },
+      pId: {
+        // Foreign key for Product
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      userId: {
+        // Foreign key for User
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      createdAt: {
+        // Add createdAt timestamp
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW,
+      },
+      updatedAt: {
+        // Add updatedAt timestamp
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW,
+      },
     },
     {
-      freezeTable: true,
-      timeStamps: false,
+      freezeTableName: true, // Changed to freezeTableName (correct spelling)
+      timestamps: true, // Enable timestamps
     },
   );
 };
