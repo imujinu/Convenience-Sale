@@ -41,7 +41,18 @@
           "<%=searchValue%>" 검색결과 총 <u>'<%=product.length%>'개</u>의 상품이
           검색되었습니다.
         </div>
-
+        <%}else if(searchProducts){%>
+        <div><p>"<%=pName%>" 검색결과</p></div>
+        <div>
+          <input type="text" class="search" />
+          검색
+          <img src="../static/image/search.png" alt="" class="searchBtn" />
+        </div>
+        <br />
+        <div>
+          "<%=pName%>" 검색결과 총 <u>'<%=searchProducts.length%>'개</u>의
+          상품이 검색되었습니다.
+        </div>
         <%}%>
       </div>
     </div>
@@ -57,7 +68,17 @@
           <span><p><%= product[i].pName %></p></span>
           <span><p><%= product[i].price %></p></span>
         </div>
-        <% } %> <% } %>
+        <% } %> <% } else if(searchProducts){ for(let i =0; i<
+        searchProducts.length ; i++ ){%>
+        <div class="product">
+          <img
+            src="../static/image/product/CU/<%= searchProducts[i].imagePath %>"
+            alt="편의점상품"
+          />
+          <span><p><%= searchProducts[i].pName %></p></span>
+          <span><p><%= searchProducts[i].price %></p></span>
+        </div>
+        <%}%> <%}%>
       </div>
     </div>
     <script src="../static/js/search.js"></script>

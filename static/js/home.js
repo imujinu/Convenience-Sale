@@ -185,6 +185,29 @@ search.addEventListener("click", async () => {
     console.error(err);
   }
 });
+searchText.addEventListener("keydown", async (event) => {
+  if (event.key === "Enter") {
+    try {
+      if (searchText.value.trim() === "") {
+        alert("검색어를 입력해주세요!");
+      } else {
+        console.log("검색어 입력됨");
+        console.log(searchText.value);
+        const productName = searchText.value;
+        const result = await axios({
+          url: "/search",
+          method: "get",
+          params: {
+            productName,
+          },
+        });
+        document.location.href = `/search?productName=${productName}`;
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+});
 
 window.addEventListener("scroll", () => {
   scroll = window.scrollY;
