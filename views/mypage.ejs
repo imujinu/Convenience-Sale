@@ -34,19 +34,22 @@
         width: 100%;
       "
     ></header> -->
+
     <div class="container">
       <div class="profile">
         <img
           id="profile-image"
-          src="/static/image/default-profile.jpg"
+          src="<%=profilePath%>"
           alt="사용자 프로필 이미지"
         />
       </div>
       <ul class="infoBox">
-        <li><span>아이디</span> <span>yena1111</span></li>
-        <li><span>닉네임</span> <span>이나</span></li>
+        <li><span>아이디: </span> <span><%=userId%> </span></li>
+        <li><span>닉네임</span> <span><%=nickname%></span></li>
       </ul>
-      <h3 class="welcome"><span>이나</span>님, 오늘 당신의 픽은??😎</h3>
+      <h3 class="welcome">
+        <span><%=nickname%></span>님, 오늘 당신의 픽은??😎
+      </h3>
       <ul class="reviewsBox">
         <!-- <a href="li"> -->
         <li>
