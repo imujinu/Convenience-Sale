@@ -18,7 +18,7 @@ const PCommentModel = require("./PComment")(sequelize, Sequelize);
 const UserFavsModel = require("./UserFavs")(sequelize, Sequelize);
 const BCommentModel = require("./BComment")(sequelize, Sequelize);
 const BoardModel = require("./Board")(sequelize, Sequelize);
-const EmailModel = require("./Email")(sequelize, Sequelize);
+// const EmailModel = require("./Email")(sequelize, Sequelize);
 //(3) 모델간 관계 설정
 //3-1: products: user through userFavs N:M
 ProductsModel.belongsToMany(UserModel, {
@@ -64,7 +64,7 @@ db.Board = BoardModel;
 db.PComment = PCommentModel;
 db.UserFavs = UserFavsModel;
 db.BComment = BCommentModel;
-db.Email = EmailModel;
+// db.Email = EmailModel;
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
