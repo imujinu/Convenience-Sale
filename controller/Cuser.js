@@ -29,8 +29,8 @@ exports.postRegister = async (req, res) => {
       userPw: req.body.userPw,
       nickname: req.body.nickname,
     });
-    // res.send(newUser);
-    res.render("login", { newUser });
+    res.send(newUser);
+    // res.render("login", { newUser });
   } catch (err) {
     console.log("err", err);
     res.status(500).send("server error");

@@ -35,7 +35,7 @@ exports.get_login = (req, res) => {
 
 exports.get_register = (req, res) => {
   if (req.session.user) {
-    res.render("home", {
+    res.render("register", {
       user: req.session.user,
       isLogin: true,
     });
