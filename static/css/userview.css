@@ -1,96 +1,167 @@
+/* 기본 설정 */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  margin: 100;
+  padding: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* 컨테이너 스타일 */
 .container {
-  max-width: 1200px;
-  /* border: 1px solid brown; */
-  margin: 120px auto 0;
-  text-align: center;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  border: 1px solid gray;
-  color: rgb(36, 36, 36);
-}
-
-.container > .profile {
-  width: 200px;
-  height: 200px;
-  margin: 0 auto;
-  border-radius: 999px;
-  border: 1px solid salmon;
-}
-
-.container > .profile > img {
-  border-radius: 999px;
+  background-color: #fff;
   width: 100%;
-  height: 100%;
-}
-
-.container > .profileFile {
-  margin-top: 15px;
-}
-
-.container > .profileFile .btn1 {
-  color: #d1d0d0;
-}
-.container > .profileFile .btn2 {
-  background-color: #ff6b73;
-  color: #fff;
-  border: 1px solid;
-  border-radius: 8px;
-  padding: 8px;
-  font-weight: bold;
-  font-size: 14px;
-}
-.container > .infoBox {
-  font-size: 14px;
-  color: #8a8a8a;
-  width: 200px;
-  margin: 0 auto;
-  margin-top: 5px;
-  padding-top: 5px;
-}
-
-.container > .infoBox > li:nth-of-type(1),
-.container > .infoBox > li:nth-of-type(2) {
-  display: flex;
-  justify-content: space-between;
-  text-align: center;
-  margin-top: 2px;
-}
-
-.container > .infoBox .nickName {
-  width: 100px;
-  border-radius: 8px;
-  border: 1px solid gray;
-}
-
-.container > .infoBox .checkRedundanc {
-  background-color: #ff6b73;
-  color: #fff;
-  border: 1px solid;
-  border-radius: 8px;
-  padding: 1px;
-  font-weight: bold;
-  font-size: 13px;
-}
-
-.container > .infoBox > li:nth-of-type(3) {
-  display: flex;
-  justify-content: space-between;
-  width: 400px;
-}
-
-/* .container > .buttonBox {
-  border: 1px solid;
+  max-width: 500px;
+  margin: 20px auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  margin-top: 30px;
-} */
+}
 
-.container > .buttonBox .modifyBtn {
-  background-color: #ff6b73;
-  color: #fff;
-  border: 1px solid;
-  border-radius: 8px;
-  padding: 8px;
+/* 프로필 이미지 스타일 */
+.profile {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#profile-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.profileFile {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.profileFile .btn1 {
+  display: inline-block;
+  margin: 5px 0;
+}
+
+.profileFile .btn2 {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.profileFile .btn2:hover {
+  background-color: #0056b3;
+}
+
+/* 정보 박스 스타일 */
+.infoBox {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.infoBox li {
+  margin-bottom: 15px;
+}
+
+.infoBox span {
   font-weight: bold;
+}
+
+.infoBox input[type="text"],
+.infoBox input[type="password"] {
+  width: calc(100% - 20px);
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+/* 버튼 스타일 */
+.checkBtn,
+.modifyBtn {
+  background-color: #ed4b5e;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.checkBtn:hover,
+.modifyBtn:hover {
+  background-color: #ff6678;
+}
+
+.modifyBtn {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* 필드셋 스타일 */
+fieldset {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 10px 0;
+}
+
+legend {
   font-size: 14px;
-  margin-top: 30px;
+  font-weight: bold;
+  color: #555;
+}
+/* 새로운 닉네임 입력 필드와 버튼 정렬 */
+.nicknameBox {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* 입력 필드와 버튼 사이 간격 */
+}
+
+.nicknameBox input {
+  flex: 1; /* 입력 필드가 가로로 확장됨 */
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.nicknameBox .checkBtn {
+  background-color: #ed4b5e;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  white-space: nowrap; /* 버튼 텍스트 줄바꿈 방지 */
+}
+
+.nicknameBox .checkBtn:hover {
+  background-color: #ff6678;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 600px) {
+  .container {
+    padding: 15px;
+  }
+
+  .profileFile .btn2 {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .infoBox input {
+    width: 100%;
+  }
 }

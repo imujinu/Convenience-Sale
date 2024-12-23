@@ -8,7 +8,6 @@ const upload = require("../utils/multer.js");
 
 const boardController = require("../controller/Cboard");
 
-
 // 메인 라우트
 router.get("/", main.home);
 router.get("/login", main.get_login);
@@ -23,8 +22,9 @@ router.get("/menuReview", product.productsReview);
 router.post("/register", user.postRegister);
 router.post("/login", user.postLogin);
 router.post("/checkDuplication", user.postCheck);
-
-
+//회원정보 수정
+router.post("/checkNickname", user.postCheckNickname);
+router.post("/updateUser", user.postUpdateUser);
 //사진 업로드
 router.post("/upload", upload.single("user"), user.upload);
 router.get("/upload", (req, res) => {
@@ -33,7 +33,6 @@ router.get("/upload", (req, res) => {
 
 // 파일 업로드
 router.post("/upload", user.upload);
-
 
 // 자유게시판 관련 라우트
 router.get("/board", boardController.showBoard);
