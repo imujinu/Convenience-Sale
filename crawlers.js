@@ -1,11 +1,9 @@
-// 필요한 모듈 불러오기
-// const fetch = require("node-fetch"); // 제거
 const cheerio = require("cheerio");
 const { CookieJar } = require("tough-cookie");
 const { URLSearchParams } = require("url");
 const Ajv = require("ajv");
 const cookie = require("cookie");
-const config = require("./config"); // 설정 파일 로드 (변경 X)
+const config = require("./crawlfig"); // 설정 파일 로드 (변경 X)
 
 // 공통 유틸리티 함수
 function sleep(ms) {
@@ -25,6 +23,7 @@ async function crawlCUProducts() {
   let pageIndex = config.CU.BODY_DATA.pageIndex;
   let hasMoreProducts = true;
   const allProducts = [];
+  let productIdCounter = 1;
 
   while (hasMoreProducts) {
     try {
@@ -41,7 +40,7 @@ async function crawlCUProducts() {
           body: new URLSearchParams(config.CU.BODY_DATA).toString(),
           method: "POST",
           mode: "cors",
-        }
+        },
       );
 
       if (!response.ok) {
@@ -66,13 +65,19 @@ async function crawlCUProducts() {
             const priceText = $(product).find(".price strong").text().trim();
             const price = parsePrice(priceText);
 
-            return { convini: "cu", name, price, imageUrl: imgSrc };
+            return {
+              id: `cu-${productIdCounter++}`,
+              convini: "cu",
+              name,
+              price,
+              imageUrl: imgSrc,
+            };
           })
           .get();
 
         allProducts.push(...products);
         console.log(
-          `CU 페이지 ${pageIndex} 크롤링 완료. 총 제품 수: ${allProducts.length}`
+          `CU 페이지 ${pageIndex} 크롤링 완료. 총 제품 수: ${allProducts.length}`,
         );
         pageIndex++;
         config.CU.BODY_DATA.pageIndex = pageIndex;
@@ -101,6 +106,7 @@ async function fetchDosirakData() {
   let intPageSize = config.SEVENELEVEN.BODY_DATA.intPageSize;
   const maxRequests = 10;
   const allProducts = [];
+  let productIdCounter = 1;
 
   async function updateCookies(url, response) {
     const setCookieHeaders = response.headers.get("set-cookie");
@@ -183,6 +189,7 @@ async function fetchDosirakData() {
         if (productId && !processedProductIds.has(productId)) {
           processedProductIds.add(productId);
           const productData = {
+            id: `seven-${productIdCounter++}`,
             convini: "seven",
             name: productName,
             price: price,
@@ -193,7 +200,7 @@ async function fetchDosirakData() {
       });
 
       console.log(
-        `Request ${i + 1} 완료. 수집된 제품 수: ${allProducts.length}`
+        `Request ${i + 1} 완료. 수집된 제품 수: ${allProducts.length}`,
       );
 
       intPageSize += 4;
@@ -219,6 +226,7 @@ async function fetchGS25Data() {
   let allProducts = [];
   let currentPage = config.GS25.BODY_DATA.pageNum;
   let totalPages = 1;
+  let productIdCounter = 1;
 
   try {
     const initialResponse = await fetch(
@@ -228,18 +236,18 @@ async function fetchGS25Data() {
           ...config.GS25.HEADERS.common,
           ...config.GS25.HEADERS.initial,
         },
-      }
+      },
     );
 
     if (!initialResponse.ok) {
       throw new Error(
-        `Failed to fetch initial page: ${initialResponse.status}`
+        `Failed to fetch initial page: ${initialResponse.status}`,
       );
     }
 
     const initialText = await initialResponse.text();
     const csrfTokenMatch = initialText.match(
-      /<input type="hidden" name="CSRFToken" value="([^"]+)"\s*\/?>/
+      /<input type="hidden" name="CSRFToken" value="([^"]+)"\s*\/?>/,
     );
 
     if (!csrfTokenMatch) {
@@ -279,7 +287,7 @@ async function fetchGS25Data() {
             ...config.GS25.BODY_DATA,
             pageNum: currentPage,
           }),
-        }
+        },
       );
 
       if (!response.ok) {
@@ -306,7 +314,7 @@ async function fetchGS25Data() {
       if (!valid) {
         console.error(
           `JSON 데이터 검증 오류 (페이지 ${currentPage}):`,
-          validate.errors
+          validate.errors,
         );
       }
 
@@ -314,12 +322,12 @@ async function fetchGS25Data() {
 
       const normalizedProducts = extractProductInfo(
         parsedData,
-        config.GS25.BASE_URL
+        config.GS25.BASE_URL,
       );
       allProducts = allProducts.concat(normalizedProducts);
 
       console.log(
-        `페이지 ${currentPage} 데이터 추출 완료. 총 제품 수: ${allProducts.length}`
+        `페이지 ${currentPage} 데이터 추출 완료. 총 제품 수: ${allProducts.length}`,
       );
 
       currentPage++;
@@ -327,61 +335,62 @@ async function fetchGS25Data() {
     } while (currentPage <= totalPages);
 
     console.log(
-      `총 ${allProducts.length}개의 GS25 상품 정보가 추출되었습니다.`
+      `총 ${allProducts.length}개의 GS25 상품 정보가 추출되었습니다.`,
     );
   } catch (error) {
     console.error("Error fetching GS25 data:", error);
   }
 
   return allProducts;
-}
 
-function extractProductInfo(data, BASE_URL) {
-  const products = [];
+  function extractProductInfo(data, BASE_URL) {
+    const products = [];
 
-  if (data.SubPageListData && Array.isArray(data.SubPageListData)) {
-    data.SubPageListData.forEach((item) => {
-      const name = item.goodsNm || "이름 없음";
-      const price =
-        item.price !== undefined && item.price !== null ? item.price : 0;
+    if (data.SubPageListData && Array.isArray(data.SubPageListData)) {
+      data.SubPageListData.forEach((item) => {
+        const name = item.goodsNm || "이름 없음";
+        const price =
+          item.price !== undefined && item.price !== null ? item.price : 0;
 
-      let imageUrl = "https://image.woodongs.com/default-image.jpg";
-      if (item.attFileNm) {
-        imageUrl = item.attFileNm;
-      } else if (item.attFileNmOld) {
-        imageUrl = item.attFileNmOld;
-      } else if (item.attFileId) {
-        imageUrl = item.attFileId;
-      } else if (item.attFileIdOld) {
-        imageUrl = item.attFileIdOld;
-      }
-
-      if (
-        imageUrl !== "이미지 없음" &&
-        imageUrl !== "https://image.woodongs.com/default-image.jpg"
-      ) {
-        const woodongsMatch = imageUrl.match(
-          /(https:\/\/image\.woodongs\.com\/.*)/
-        );
-        if (woodongsMatch) {
-          imageUrl = woodongsMatch[1];
-        } else {
-          imageUrl = "https://image.woodongs.com/default-image.jpg";
+        let imageUrl = "https://image.woodongs.com/default-image.jpg";
+        if (item.attFileNm) {
+          imageUrl = item.attFileNm;
+        } else if (item.attFileNmOld) {
+          imageUrl = item.attFileNmOld;
+        } else if (item.attFileId) {
+          imageUrl = item.attFileId;
+        } else if (item.attFileIdOld) {
+          imageUrl = item.attFileIdOld;
         }
-      }
 
-      products.push({
-        name,
-        price,
-        imageUrl,
-        convini: "gs25",
+        if (
+          imageUrl !== "이미지 없음" &&
+          imageUrl !== "https://image.woodongs.com/default-image.jpg"
+        ) {
+          const woodongsMatch = imageUrl.match(
+            /(https:\/\/image\.woodongs\.com\/.*)/,
+          );
+          if (woodongsMatch) {
+            imageUrl = woodongsMatch[1];
+          } else {
+            imageUrl = "https://image.woodongs.com/default-image.jpg";
+          }
+        }
+
+        products.push({
+          id: `gs25-${productIdCounter++}`,
+          name,
+          price,
+          imageUrl,
+          convini: "gs25",
+        });
       });
-    });
-  } else {
-    console.warn("SubPageListData가 존재하지 않거나 배열이 아닙니다.");
-  }
+    } else {
+      console.warn("SubPageListData가 존재하지 않거나 배열이 아닙니다.");
+    }
 
-  return products;
+    return products;
+  }
 }
 
 function parsePrice(priceText) {

@@ -3,7 +3,8 @@ const router = express.Router();
 const main = require("../controller/Cmain.js");
 const product = require("../controller/Cproduct.js");
 const user = require("../controller/Cuser.js");
-
+const pageController = require("../controller/pageController");
+const productController = require("../controller/productController");
 const upload = require("../utils/multer.js");
 
 const boardController = require("../controller/Cboard");
@@ -46,7 +47,26 @@ const isAuthenticated = (req, res, next) => {
     res.status(401).json({ message: "로그인이 필요합니다." });
   }
 };
+// 크롤링 및 렌더링
+router.get("/products/crawl", productController.crawlProducts);
 
+// 모든 제품 조회
+router.get("/products", productController.getAllProducts);
+
+// DB 전송 API
+router.post("/products/:productId/send-db", productController.sendProductToDB);
+
+// DB 삭제 API
+router.delete("/products/:productId", productController.deleteProduct);
+
+// 태그 업데이트 API
+router.put(
+  "/products/:productId/update-tags",
+  productController.updateProductTags,
+);
+
+// 기타 페이지
+router.get("/about", pageController.renderAboutPage);
 // 자유게시판 라우트
 
 router.get("/board", boardController.showBoard);

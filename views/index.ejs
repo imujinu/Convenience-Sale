@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>편의점 상품</title>
     <!-- 외부 CSS 파일 링크 -->
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="/static/styles.css" />
   </head>
   <body>
     <h1>편의점 상품 목록</h1>
@@ -32,7 +32,7 @@
         </button>
         <% } else { %>
         <button class="send-db-button" onclick="sendToDB('<%= product.id %>')">
-          DB로 전송 (상품 정보 + 태그)
+          DB로 전송
         </button>
         <button
           class="update-tags-button"
@@ -42,7 +42,11 @@
           태그 저장
         </button>
         <% } %>
-        <img src="<%= product.imageUrl %>" alt="<%= product.name %>" />
+        <img
+          src="<%= product.imageUrl %>"
+          alt="<%= product.name %>"
+          onerror="this.onerror=null; this.src='/static/default-image.jpg';"
+        />
         <div class="product-name"><%= product.name %></div>
         <div class="product-price"><%= product.price.toLocaleString() %>원</div>
         <div class="product-convini"><%= product.convini %></div>
@@ -78,6 +82,6 @@
     </div>
 
     <!-- 외부 JavaScript 파일 링크 -->
-    <script src="script.js"></script>
+    <script src="/static/script.js"></script>
   </body>
 </html>
