@@ -1,16 +1,24 @@
 const models = require("../models");
-const { Products, Op } = require("../models");
+const { Products } = require("../models");
+const { Op } = require("sequelize");
 
 // 로그인이 안된 유저 > {isLogin:false}
 // 로그인이 된 유저 > {isLogin:true, user:유저}
 exports.home = async (req, res) => {
+  const CU = await Products.findAll({
+    where: {
+      cName: "CU",
+    },
+  });
+
   if (req.session.user) {
     res.render("home", {
       user: req.session.user,
       isLogin: true,
+      CU,
     });
   } else {
-    res.render("home", { isLogin: false });
+    res.render("home", { isLogin: false, CU });
   }
 };
 
@@ -47,18 +55,44 @@ exports.store = (req, res) => {
   res.render("store");
 };
 
+// const result = req.query;
+// if (result) {
+//   const products = await Products.findAll({
+//     attributes: ["name", "price", "imageUrl", "convini"], // 필요한 속성 선택
+//     where: {
+//       name: {
+//         [Op.like]: `%${productName}%`, // 부분 일치 검색
+//       },
+//     },
+//   });
+// }
 exports.search = async (req, res) => {
-  // const result = req.query;
-  // if (result) {
-  //   const products = await Products.findAll({
-  //     attributes: ["name", "price", "imageUrl", "convini"], // 필요한 속성 선택
-  //     where: {
-  //       name: {
-  //         [Op.like]: `%${productName}%`, // 부분 일치 검색
-  //       },
-  //     },
-  //   });
-  // }
-
-  res.render("search");
+  try {
+    console.log("req.query>>>>", req.query.productName);
+    const searchValue = req.query.productName;
+    const hasQuery = searchValue.length > 0;
+    const product = await Products.findAll({
+      where: {
+        pName: {
+          [Op.like]: `%${searchValue}%`,
+        },
+      },
+    });
+    const user = req.session.user;
+    if (hasQuery) {
+      if (user) {
+        res.render("search", { isLogin: true, user, product, searchValue });
+      } else {
+        res.render("search", { isLogin: false, product, searchValue });
+      }
+    } else {
+      if (user) {
+        res.render("search", { isLogin: true, user });
+      } else {
+        res.render("search", { isLogin: false });
+      }
+    }
+  } catch (err) {
+    console.error("err", err);
+  }
 };

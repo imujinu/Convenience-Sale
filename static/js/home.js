@@ -15,6 +15,7 @@ arrow.addEventListener("click", () => {
   });
 });
 
+//  section3
 const swiper = new Swiper(".swiper", {
   spaceBetween: 20,
   loop: true,
@@ -87,45 +88,73 @@ for (let i = 1; i < 5; i++) {
     document.body.style.removeProperty("overflow");
   });
 }
+// section4
+const allBtn = document.querySelector(".section4 > .part2 >ul > .all ");
+const oneBtn = document.querySelector(".section4 >.part2 >ul >.one ");
+const twoBtn = document.querySelector(".section4 >.part2 >ul >.two ");
 
+const menu = document.querySelectorAll(
+  ".section5 > .container > .product >.menu",
+);
+const menu2 = document.querySelectorAll(
+  ".section5 > .container > .rolling2 >.menu",
+);
+
+console.log(menu2);
+console.log(menu);
+
+allBtn.addEventListener("click", () => {
+  menu.forEach((el) => {
+    el.style.display = "block";
+  });
+  // menu2.forEach((el) => {
+  //   el.style.display = "block";
+  // });
+});
+oneBtn.addEventListener("click", () => {
+  menu.forEach((el) => {
+    const sale = el.querySelector(".event").textContent.trim();
+    if (sale == "1+1") {
+      el.style.display = "block";
+    } else {
+      el.style.display = "none";
+    }
+  });
+  // menu2.forEach((el) => {
+  //   const sale = el.querySelector(".event").textContent.trim();
+  //   if (sale == "1+1") {
+  //     el.style.display = "block";
+  //   } else {
+  //     el.style.display = "none";
+  //   }
+  // });
+});
+twoBtn.addEventListener("click", () => {
+  menu.forEach((el) => {
+    const sale = el.querySelector(".event").textContent.trim();
+    if (sale == "2+1") {
+      el.style.display = "block";
+    } else {
+      el.style.display = "none";
+    }
+  });
+  // menu2.forEach((el) => {
+  //   const sale = el.querySelector(".event").textContent.trim();
+  //   if (sale == "2+1") {
+  //     el.style.display = "block";
+  //   } else {
+  //     el.style.display = "none";
+  //   }
+  // });
+});
+
+// section5
 const product = document.querySelector(".section5 > .container > .product");
 const container = document.querySelector(".section5 > .container");
 const clone = product.cloneNode(true);
 product.classList.add("rolling1");
 clone.classList.add("rolling2");
 container.appendChild(clone);
-
-// (async function getProducts() {
-//   try {
-//     const products = await axios({
-//       url: "/products",
-//       method: "get",
-//     });
-//     const result = products.data.json();
-//     result.forEach((el) => {
-//       const { name, price, imageUrl,tags } = el;
-
-//       const product = document.querySelector(
-//         ".section5 > .container > .product ",
-//       );
-//       const menu = document.createElement("div");
-//       menu.className = "menu";
-
-//       menu.innerHTML = `
-//       <img src ="${imageUrl}" alt="${name}>
-//       <div class="text">
-//       <p> ${name}</p>
-//       <p> ${price}원 </p>
-//       <a/>
-//       `;
-//       product.append(menu);
-//     });
-//   } catch {
-//     (err) => {
-//       console.err("err!", err);
-//     };
-//   }
-// })();
 
 // section8
 
@@ -150,7 +179,7 @@ search.addEventListener("click", async () => {
           productName,
         },
       });
-      document.location.href = "/search";
+      document.location.href = `/search?productName=${productName}`;
     }
   } catch (err) {
     console.error(err);
@@ -159,7 +188,6 @@ search.addEventListener("click", async () => {
 
 window.addEventListener("scroll", () => {
   scroll = window.scrollY;
-  console.log(scroll);
   const menu1 = document.querySelector(
     ".section8 > .container > .part2 > .menu1",
   );
@@ -189,9 +217,11 @@ window.addEventListener("scroll", () => {
 async function emailVerify() {
   try {
     const email = document
-      .querySelector(".section9 > .container> .email")
+      .querySelector(".section9 > .container> .inner> .email")
       .value.trim();
-    const email2 = document.querySelector(".section9 > .container> .email");
+    const email2 = document.querySelector(
+      ".section9 > .container> .inner> .email",
+    );
 
     if (!email2.checkValidity()) {
       alert("example@naver.com 형식에 맞게 이메일을 작성해주세요");
@@ -236,9 +266,9 @@ git.forEach((el) => {
 
 window.addEventListener("scroll", () => {
   const scroll = window.scrollY;
-  const section9 = document.querySelector(".section9");
-  const emailInput = document.querySelector(".section9 > .container");
-  if (scroll > 1660) {
+  const section9 = document.querySelector(".section9 > .container ");
+
+  if (scroll > 1560) {
     section9.style.opacity = "1";
   } else {
     section9.style.opacity = "0";
@@ -248,12 +278,12 @@ window.addEventListener("scroll", () => {
 window.addEventListener("scroll", () => {
   const scroll = window.scrollY;
 
-  const emailInput = document.querySelector(".section9 > .container");
-  if (scroll > 2064) {
-    emailInput.style.bottom = "10%";
+  const emailInput = document.querySelector(".section9 > .container > .inner ");
+  if (scroll > 1764) {
+    emailInput.style.bottom = "17%";
     emailInput.style.opacity = "1";
   } else {
-    emailInput.style.bottom = "-10%";
+    emailInput.style.bottom = "0%";
     emailInput.style.opacity = "0";
   }
 });
