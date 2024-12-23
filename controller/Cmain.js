@@ -23,30 +23,59 @@ exports.home = async (req, res) => {
 };
 
 exports.get_login = (req, res) => {
-  const user = req.session.user;
-  if (user) {
-    res.redirect("/");
+  if (req.session.user) {
+    res.render("login", {
+      user: req.session.user,
+      isLogin: true,
+    });
   } else {
-    res.render("login");
+    res.render("login", { isLogin: false });
   }
 };
 
 exports.get_register = (req, res) => {
-  const user = req.session.user;
-  if (user) {
-    res.redirect("/");
+  if (req.session.user) {
+    res.render("register", {
+      user: req.session.user,
+      isLogin: true,
+    });
   } else {
-    res.render("register");
+    res.render("register", { isLogin: false });
   }
 };
 
 exports.mypage = (req, res) => {
-  // 로그인된 회원인지 아닌지 판단
-  res.render("mypage");
+  const user = req.session.user;
+  if (user) {
+    res.render("mypage", {
+      userId: user.userId,
+      nickname: user.nickname,
+      profilePath: user.profilePath,
+    });
+    console.log("userID:::", user.userId);
+  } else {
+    res.send(
+      '<script>alert("먼저 로그인 해주세요"); location.href="/login";</script>',
+    );
+  }
 };
 
 exports.userview = (req, res) => {
-  res.render("userview", { title: "회원 수정 페이지" });
+  // res.render("userview", { title: "회원 수정 페이지" });
+  const user = req.session.user;
+  if (user) {
+    res.render("userview", {
+      userId: user.userId,
+      nickname: user.nickname,
+      userPw: user.userPw,
+      profilePath: user.profilePath,
+    });
+    console.log("userID:::", user.userPw);
+  } else {
+    res.send(
+      '<script>alert("먼저 로그인 해주세요"); location.href="/login";</script>',
+    );
+  }
 };
 
 exports.store = (req, res) => {

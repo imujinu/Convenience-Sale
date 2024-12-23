@@ -12,8 +12,8 @@ function loginBtn() {
       userPw: loginForm.userPw.value,
     },
   }).then((res) => {
-    console.log(res);
-    if (res) {
+    console.log("서버 응답:", res);
+    if (res.data) {
       alert("로그인 성공");
       document.location.href = "/";
     } else {

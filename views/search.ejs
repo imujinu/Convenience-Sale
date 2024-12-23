@@ -41,10 +41,12 @@
           "<%=searchValue%>" 검색결과 총 <u>'<%=product.length%>'개</u>의 상품이
           검색되었습니다.
         </div>
+
         <%}else if(searchProducts){%>
         <div><p>"<%=pName%>" 검색결과</p></div>
         <div>
           <input type="text" class="search" />
+
           검색
           <img src="../static/image/search.png" alt="" class="searchBtn" />
         </div>
@@ -53,6 +55,7 @@
           "<%=pName%>" 검색결과 총 <u>'<%=searchProducts.length%>'개</u>의
           상품이 검색되었습니다.
         </div>
+
         <%}%>
       </div>
     </div>

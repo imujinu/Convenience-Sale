@@ -30,7 +30,7 @@ const Products = function (sequelize, DataTypes) {
         allowNull: false,
       },
       imagePath: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(200),
         allowNull: false,
       },
     },
