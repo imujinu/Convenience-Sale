@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include("./include/include",{title : "search"}) %>
+    <link rel="stylesheet" href="../static/css/search.css" />
+  </head>
+  <body>
+    <%- include("./include/header") %>
+    <div class="section2">
+      <div class="container">
+        <h1>나만의 편의점 Fun Pick!</h1>
+        <br />
+        <h1>다양한 상품들을 확인해보세요</h1>
+      </div>
+    </div>
+    <div class="section3">
+      <div class="container">
+        <ul>
+          <li>전체상품</li>
+          <li>CU</li>
+          <li>GS25</li>
+          <li>7ELEVEN</li>
+        </ul>
+      </div>
+    </div>
+    <div class="section4">
+      <div class="container">
+        <div><p>"" 검색결과</p></div>
+        <div>
+          <input type="text" />
+
+          검색
+          <img src="../static/image/search.png" alt="" />
+        </div>
+        <br />
+        <div>'' 검색결과 총 <u>''개</u>의 상품이 검색되었습니다.</div>
+      </div>
+    </div>
+
+    <div class="section5">
+      <div class="container">
+        <div class="product">
+          <img src="" alt="" />
+          <span><p>김</p></span>
+          <span><p>600원원</p></span>
+        </div>
+        <div class="product">
+          <img src="" alt="" />
+          <span><p>김</p></span>
+          <span><p>600원원</p></span>
+        </div>
+        <div class="product">
+          <img src="" alt="" />
+          <span><p>김</p></span>
+          <span><p>600원원</p></span>
+        </div>
+        <div class="product">
+          <img src="" alt="" />
+          <span><p>김</p></span>
+          <span><p>600원원</p></span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,92 @@
+.section1 {
+  width: 100%;
+  height: 120px;
+  position: fixed;
+  background: #ffcdd4;
+  z-index: 99;
+}
+
+.section1 .title {
+  width: 20%;
+  height: 200%;
+  position: absolute;
+  top: -50%;
+}
+
+.section1 .container {
+  width: 100%;
+  height: 120px;
+  position: relative;
+}
+
+.section1 .part1 {
+  width: 30%;
+  display: flex;
+  position: absolute;
+  top: 10%;
+  right: -10%;
+}
+
+.section1 .part1 ul {
+  width: 65%;
+  height: auto;
+  display: flex;
+  text-align: right;
+}
+
+.section1 .part1 li {
+  width: 100%;
+  border-right: 1px solid black;
+  padding-right: 1%;
+}
+
+.section1 .part2 {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 50%;
+}
+
+.section1 .part2 .navbar {
+  position: absolute;
+  left: 25%;
+  width: 50%;
+  height: 100%;
+  display: flex;
+}
+
+.section1 .part2 li {
+  font-size: 20px;
+}
+
+.section1 .part2 > .container2 {
+  position: absolute;
+  left: 30%;
+  width: 50%;
+  height: 100%;
+}
+
+.section1 .part2 .store {
+  text-align: center;
+  width: 20%;
+  padding: 2% 0;
+  transition: 0.5s;
+}
+
+.section1 .part2 .menu {
+  margin-top: 9%;
+  width: 100%;
+  height: 0px;
+  overflow: hidden;
+  transition: 0.5s;
+}
+
+.section1 img {
+  width: 100%;
+  height: 100%;
+}
+
+.section1 > .container > .part2 > .navbar > .store > li:nth-of-type(1) {
+  transition: 0.5s;
+}
