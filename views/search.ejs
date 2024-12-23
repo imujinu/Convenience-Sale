@@ -27,41 +27,39 @@
     </div>
     <div class="section4">
       <div class="container">
-        <div><p>"" 검색결과</p></div>
+        <%if(searchValue){%>
+
+        <div><p>"<%=searchValue%>" 검색결과</p></div>
         <div>
-          <input type="text" />
+          <input type="text" class="search" />
 
           검색
-          <img src="../static/image/search.png" alt="" />
+          <img src="../static/image/search.png" alt="" class="searchBtn" />
         </div>
         <br />
-        <div>'' 검색결과 총 <u>''개</u>의 상품이 검색되었습니다.</div>
+        <div>
+          "<%=searchValue%>" 검색결과 총 <u>'<%=product.length%>'개</u>의 상품이
+          검색되었습니다.
+        </div>
+
+        <%}%>
       </div>
     </div>
 
     <div class="section5">
       <div class="container">
+        <% if (product) { %> <% for (let i = 0; i < product.length; i++) { %>
         <div class="product">
-          <img src="" alt="" />
-          <span><p>김</p></span>
-          <span><p>600원원</p></span>
+          <img
+            src="../static/image/product/CU/<%= product[i].imagePath %>"
+            alt="편의점상품"
+          />
+          <span><p><%= product[i].pName %></p></span>
+          <span><p><%= product[i].price %></p></span>
         </div>
-        <div class="product">
-          <img src="" alt="" />
-          <span><p>김</p></span>
-          <span><p>600원원</p></span>
-        </div>
-        <div class="product">
-          <img src="" alt="" />
-          <span><p>김</p></span>
-          <span><p>600원원</p></span>
-        </div>
-        <div class="product">
-          <img src="" alt="" />
-          <span><p>김</p></span>
-          <span><p>600원원</p></span>
-        </div>
+        <% } %> <% } %>
       </div>
     </div>
+    <script src="../static/js/search.js"></script>
   </body>
 </html>

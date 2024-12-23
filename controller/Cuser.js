@@ -1,5 +1,5 @@
 const models = require("../models");
-// const { emailAuth } = require("../config/email");
+const { emailAuth } = require("../config/email");
 
 const multer = require("multer");
 const path = require("path");
@@ -123,5 +123,4 @@ exports.postUpdateUser = async (req, res) => {
 exports.upload = (req, res) => {
   res.send({ ...req.body, ...req.file });
 };
-
-// exports.emailSend = emailAuth;
+exports.emailSend = emailAuth;

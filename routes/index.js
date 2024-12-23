@@ -19,7 +19,7 @@ router.get("/userview", main.userview);
 //상품검색 페이지
 router.get("/search", main.search);
 //이메일 전송
-// router.post("/email", user.emailSend);
+router.post("/email", user.emailSend);
 //회원가입
 router.post("/register", user.postRegister);
 router.post("/login", user.postLogin);

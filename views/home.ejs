@@ -99,13 +99,12 @@
     </div>
 
     <div class="section4">
-      <div class="part1">편의점별 상품</div>
+      <div class="part1">편의점 행사사상품</div>
       <div class="part2">
         <ul>
-          <li>김밥</li>
-          <li>샌드위치</li>
-          <li>도시락</li>
-          <li>샐러드</li>
+          <li class="all">전체</li>
+          <li class="one">1+1</li>
+          <li class="two">2+1</li>
         </ul>
       </div>
     </div>
@@ -113,63 +112,17 @@
       <h1>CU</h1>
       <div class="container">
         <div class="product">
-          <div class="menu menu1">
-            <img src="./static//image/menu1.jpg" alt="" />
-            <div class="text1">
-              <p>뉴매콤한돈김치제육</p>
-              <p>4,500원</p>
-            </div>
+          <% for (let i = 0; i < CU.length; i++) { %>
+          <div class="menu">
+            <img
+              src="../static/image/product/CU/<%= CU[i].imagePath %>"
+              alt="CU상품"
+            />
+            <p><%= CU[i].pName %></p>
+            <p><%= CU[i].price %>원</p>
+            <p class="event"><%= CU[i].event %></p>
           </div>
-
-          <div class="menu menu2">
-            <img src="./static//image/menu1.jpg" alt="" />
-            <div class="text1">
-              <p>뉴매콤한돈김치제육</p>
-              <p>4,500원</p>
-            </div>
-          </div>
-          <div class="menu menu3">
-            <img src="./static//image/menu1.jpg" alt="" />
-            <div class="text1">
-              <p>뉴매콤한돈김치제육</p>
-              <p>4,500원</p>
-            </div>
-          </div>
-          <div class="menu menu4">
-            <img src="./static//image/menu1.jpg" alt="" />
-            <div class="text1">
-              <p>뉴매콤한돈김치제육</p>
-              <p>4,500원</p>
-            </div>
-          </div>
-          <div class="menu menu5">
-            <img src="./static//image/menu1.jpg" alt="" />
-            <div class="text1">
-              <p>뉴매콤한돈김치제육</p>
-              <p>4,500원</p>
-            </div>
-          </div>
-          <div class="menu menu5">
-            <img src="./static//image/menu1.jpg" alt="" />
-            <div class="text1">
-              <p>뉴매콤한돈김치제육</p>
-              <p>4,500원</p>
-            </div>
-          </div>
-          <div class="menu menu5">
-            <img src="./static//image/menu1.jpg" alt="" />
-            <div class="text1">
-              <p>뉴매콤한돈김치제육</p>
-              <p>4,500원</p>
-            </div>
-          </div>
-          <div class="menu menu5">
-            <img src="./static//image/menu1.jpg" alt="" />
-            <div class="text1">
-              <p>뉴매콤한돈김치제육</p>
-              <p>4,500원</p>
-            </div>
-          </div>
+          <% } %>
         </div>
       </div>
     </div>
@@ -216,15 +169,17 @@
     </div>
     <div class="section9">
       <div class="container">
-        <input
-          type="email"
-          placeholder="example@naver.com"
-          required
-          pattern="^[a-zA-Z0-9._%+\-]+@naver\.com$"
-          title="네이버 메일 주소 형식(example@naver.com)으로 입력해주세요."
-          class="email"
-        />
-        <button type="button" onclick="emailVerify()">등록하기</button>
+        <div class="inner">
+          <input
+            type="email"
+            placeholder="example@naver.com"
+            required
+            pattern="^[a-zA-Z0-9._%+\-]+@naver\.com$"
+            title="네이버 메일 주소 형식(example@naver.com)으로 입력해주세요."
+            class="email"
+          />
+          <button type="button" onclick="emailVerify()">등록하기</button>
+        </div>
       </div>
     </div>
     <footer class="footer">
@@ -248,7 +203,7 @@
           </li>
           <li>
             <a href="https://github.com/YENANOAH" target="_blank">
-              최예나
+              한예나
               <img src="../static/image/git.png" alt="Git" />
             </a>
           </li>
