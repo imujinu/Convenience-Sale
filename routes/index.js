@@ -18,8 +18,11 @@ router.get("/mypage", main.mypage);
 router.get("/userview", main.userview);
 //상품검색 페이지
 router.get("/search", main.search);
+// 상품검색
+router.post("/search/product", product.search);
 //이메일 전송
 router.post("/email", user.emailSend);
+
 //회원가입
 router.post("/register", user.postRegister);
 router.post("/login", user.postLogin);
@@ -33,9 +36,6 @@ router.get("/upload", (req, res) => {
 
 // 파일 업로드
 router.post("/upload", user.upload);
-
-
-
 
 // 로그인 체크 미들웨어 추가
 const isAuthenticated = (req, res, next) => {
