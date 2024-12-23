@@ -65,7 +65,7 @@ a {
 .section2 > .part2 {
   width: 70%;
   height: 100%;
-  background: url(../image/bg1.png) center/cover no-repeat;
+  background: url(/static/image/bg1.png) center/cover no-repeat;
   opacity: 0;
   animation: opacity 2s forwards;
 }
@@ -362,7 +362,7 @@ a {
 .section8 > .container > .part1 > .search {
   width: 10%;
   height: 20px;
-  background: url(../image/search.png) no-repeat;
+  background: url(/static/image/search.png) no-repeat;
   background-size: contain;
   cursor: pointer;
 }
@@ -491,7 +491,7 @@ a {
 .section9 > .container {
   width: 1200px;
   height: 100%;
-  background: url(../image/emailbg.png) center / contain no-repeat;
+  background: url(/static/image/emailbg.png) center / contain no-repeat;
   position: relative;
   display: flex;
   justify-content: center;
