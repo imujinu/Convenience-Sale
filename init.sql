@@ -4,15 +4,15 @@ show tables;
 DESC user;
 DESC email;
 
-DESC 
+INSERT INTO user VALUES("qwe", "Qwe12@www", "qwek", "static/image/logo1.png")
+ 
 drop table bcomments, board, game, pcomments, player;
 drop table products, profile, team, teamgame, user, userfavs, visitor, visitors;
 drop table user;
-drop table products;
+
 SELECT * FROM user;
 SELECT * FROM email;
 SELECT * FROM products;
-
 DELETE FROM user WHERE `userId` LIKE 'a%';
 DESC products;
 
