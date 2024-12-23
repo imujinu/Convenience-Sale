@@ -51,11 +51,13 @@ exports.mypage = (req, res) => {
       userId: user.userId,
       nickname: user.nickname,
       profilePath: user.profilePath,
+      isLogin: true,
     });
     console.log("userID:::", user.userId);
   } else {
     res.send(
-      '<script>alert("먼저 로그인 해주세요"); location.href="/login";</script>',
+      `<script>alert("먼저 로그인 해주세요"); location.href="/login";</script>`,
+      { isLogin: false },
     );
   }
 };

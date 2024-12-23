@@ -22,8 +22,10 @@
     <link rel="stylesheet" href="/static/css/common.css" />
     <link rel="stylesheet" href="/static/css/mypage.css" />
     <script defer src="/static/js/mypage.js"></script>
+    <%- include("./include/include",{title : "mypage"}) %>
   </head>
   <body>
+    <%- include("./include/header") %>
     <!-- <header
       style="
         height: 120px;
@@ -35,7 +37,7 @@
       "
     ></header> -->
 
-    <div class="container">
+    <div class="mypage-container">
       <div class="profile">
         <img
           id="profile-image"
