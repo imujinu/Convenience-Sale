@@ -99,7 +99,7 @@ exports.search = async (req, res) => {
   try {
     console.log("req.query>>>>", req.query.productName);
     const searchValue = req.query.productName;
-    const hasQuery = searchValue.length > 0;
+
     const product = await Products.findAll({
       where: {
         pName: {
@@ -108,17 +108,29 @@ exports.search = async (req, res) => {
       },
     });
     const user = req.session.user;
-    if (hasQuery) {
+
+    if (product.length > 0) {
       if (user) {
-        res.render("search", { isLogin: true, user, product, searchValue });
+        res.render("search", {
+          isLogin: true,
+          user,
+          product,
+          searchValue,
+          isSearch: true,
+        });
       } else {
-        res.render("search", { isLogin: false, product, searchValue });
+        res.render("search", {
+          isLogin: false,
+          product,
+          searchValue,
+          isSearch: true,
+        });
       }
     } else {
       if (user) {
-        res.render("search", { isLogin: true, user });
+        res.render("search", { isLogin: true, user, isSearch: false });
       } else {
-        res.render("search", { isLogin: false });
+        res.render("search", { isLogin: false, isSearch: false });
       }
     }
   } catch (err) {

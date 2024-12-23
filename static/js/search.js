@@ -8,8 +8,8 @@ searchBtn.addEventListener("click", async () => {
   const productName = search.value.trim();
   try {
     const product = await axios({
-      url: "/search/product",
-      method: "post",
+      url: "/search",
+      method: "get",
       params: {
         productName,
       },
@@ -25,8 +25,8 @@ search.addEventListener("keydown", async (event) => {
     const productName = search.value.trim();
     try {
       const product = await axios({
-        url: "/search/product",
-        method: "post",
+        url: "/search",
+        method: "get",
         params: {
           productName,
         },

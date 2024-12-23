@@ -3,11 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <%- include("./include/include",{title : "search"}) %>
-    <link rel="stylesheet" href="../static/css/search.css" />
+    <%- include("./include/include", { title: "search" }) %>
+    <link rel="stylesheet" href="/static/css/search.css" />
   </head>
   <body>
     <%- include("./include/header") %>
+
     <div class="section2">
       <div class="container">
         <h1>나만의 편의점 Fun Pick!</h1>
@@ -15,6 +16,8 @@
         <h1>다양한 상품들을 확인해보세요</h1>
       </div>
     </div>
+
+    <% if (isSearch) { %>
     <div class="section3">
       <div class="container">
         <ul>
@@ -25,65 +28,59 @@
         </ul>
       </div>
     </div>
+
     <div class="section4">
       <div class="container">
-        <%if(searchValue){%>
-
-        <div><p>"<%=searchValue%>" 검색결과</p></div>
+        <div><p>"<%= searchValue %>" 검색결과</p></div>
         <div>
           <input type="text" class="search" />
-
-          검색
-          <img src="../static/image/search.png" alt="" class="searchBtn" />
+          <img src="/static/image/search.png" alt="" class="searchBtn" />
         </div>
         <br />
         <div>
-          "<%=searchValue%>" 검색결과 총 <u>'<%=product.length%>'개</u>의 상품이
-          검색되었습니다.
-        </div>
-
-        <%}else if(searchProducts){%>
-        <div><p>"<%=pName%>" 검색결과</p></div>
-        <div>
-          <input type="text" class="search" />
-
-          검색
-          <img src="../static/image/search.png" alt="" class="searchBtn" />
-        </div>
-        <br />
-        <div>
-          "<%=pName%>" 검색결과 총 <u>'<%=searchProducts.length%>'개</u>의
+          "<%= searchValue %>" 검색결과 총 <u>'<%= product.length %>'개</u>의
           상품이 검색되었습니다.
         </div>
 
-        <%}%>
+        <div class="section5">
+          <div class="container">
+            <% for (let i = 0; i < product.length; i++) { %>
+            <div class="product">
+              <img
+                src="/static/image/product/CU/<%= product[i].imagePath %>"
+                alt="편의점상품"
+              />
+              <span><p><%= product[i].pName %></p></span>
+              <span><p><%= product[i].price %></p></span>
+            </div>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% } else { %>
+    <div class="section3">
+      <div class="container">
+        <ul>
+          <li>전체상품</li>
+          <li>CU</li>
+          <li>GS25</li>
+          <li>7ELEVEN</li>
+        </ul>
       </div>
     </div>
 
-    <div class="section5">
+    <div class="section4">
       <div class="container">
-        <% if (product) { %> <% for (let i = 0; i < product.length; i++) { %>
-        <div class="product">
-          <img
-            src="../static/image/product/CU/<%= product[i].imagePath %>"
-            alt="편의점상품"
-          />
-          <span><p><%= product[i].pName %></p></span>
-          <span><p><%= product[i].price %></p></span>
+        <div>
+          <input type="text" class="search" />
+          <img src="/static/image/search.png" alt="" class="searchBtn" />
         </div>
-        <% } %> <% } else if(searchProducts){ for(let i =0; i<
-        searchProducts.length ; i++ ){%>
-        <div class="product">
-          <img
-            src="../static/image/product/CU/<%= searchProducts[i].imagePath %>"
-            alt="편의점상품"
-          />
-          <span><p><%= searchProducts[i].pName %></p></span>
-          <span><p><%= searchProducts[i].price %></p></span>
-        </div>
-        <%}%> <%}%>
+        <div class="noSearch"></div>
       </div>
     </div>
-    <script src="../static/js/search.js"></script>
+    <% } %>
+
+    <script src="/static/js/search.js"></script>
   </body>
 </html>
