@@ -1,17 +1,15 @@
-.container {
+.View-container {
   max-width: 1200px;
-  /* border: 1px solid brown; */
-  margin: 120px auto 0;
+  margin: 0 auto;
   text-align: center;
-  padding-top: 50px;
+  padding-top: 150px;
   padding-bottom: 50px;
-  /* border: 1px solid #bebebe; */
   color: rgb(36, 36, 36);
   box-shadow: 0px 0px 5px #bebebe;
   border-radius: 10px;
 }
 
-.container > .profile {
+.View-container > .profile {
   width: 200px;
   height: 200px;
   margin: 0 auto;
@@ -19,20 +17,21 @@
   border: 1px solid salmon;
 }
 
-.container > .profile > img {
+.View-container > .profile > img {
   border-radius: 999px;
   width: 100%;
   height: 100%;
 }
 
-.container > .profileFile {
+.View-container > .profileFile {
   margin-top: 15px;
+  text-align: center;
 }
 
-.container > .profileFile .btn1 {
+.View-container > .profileFile .btn1 {
   color: #d1d0d0;
 }
-.container > .profileFile .btn2 {
+.View-container > .profileFile .btn2 {
   background-color: #ff6b73;
   color: #fff;
   border: 1px solid;
@@ -42,33 +41,36 @@
   font-size: 14px;
 }
 
-.container > .nicknameBox {
+.View-container > .nicknameBox {
   font-size: 100px;
 }
-.container > .infoBox {
-  font-size: 14px;
+
+.View-container > .infoBox {
+  font-size: 16px;
   color: #8a8a8a;
   width: 200px;
   margin: 0 auto;
   margin-top: 5px;
   padding-top: 5px;
+  text-align: center;
+  border: 1px solid;
 }
 
-.container > .infoBox > li:nth-of-type(1),
-.container > .infoBox > li:nth-of-type(2) {
+.View-container > .infoBox > li:nth-of-type(1),
+.View-container > .infoBox > li:nth-of-type(2) {
   display: flex;
   justify-content: space-between;
   text-align: center;
   margin-top: 2px;
 }
 
-.container > .infoBox .nickName {
+/* .container > .infoBox .nickName {
   width: 100px;
   border-radius: 8px;
   border: 1px solid gray;
-}
+} */
 
-.container > .infoBox .checkRedundanc {
+/* .container > .infoBox .checkRedundanc {
   background-color: #ff6b73;
   color: #fff;
   border: 1px solid;
@@ -76,7 +78,7 @@
   padding: 1px;
   font-weight: bold;
   font-size: 13px;
-}
+} */
 
 .container > .infoBox > li:nth-of-type(3) {
   display: flex;
@@ -84,11 +86,11 @@
   width: 400px;
 }
 
-/* .container > .buttonBox {
-    border: 1px solid;
-    padding: 20px;
-    margin-top: 30px;
-  } */
+.container > .buttonBox {
+  border: 1px solid;
+  padding: 20px;
+  margin-top: 30px;
+}
 
 .container > .buttonBox .modifyBtn {
   background-color: #ff6b73;
@@ -99,10 +101,11 @@
   font-weight: bold;
   font-size: 14px;
   margin-top: 30px;
+  border: 1px solid;
 }
 
 /* 반응형 디자인 */
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
   .container {
     padding: 15px;
   }
@@ -115,4 +118,4 @@
   .infoBox input {
     width: 100%;
   }
-}
+} */

@@ -3,11 +3,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <title>회원정보수정</title> -->
-    <%- include("./include/include",{title : "userview"}) %>
     <link rel="stylesheet" href="/static/css/userview2.css" />
+    <link rel="stylesheet" href="/static/css/common.css" />
+    <%- include("./include/include",{title : "userview"}) %>
   </head>
   <body>
-    <div class="container">
+    <%- include("./include/header") %>
+
+    <div class="View-container">
       <div class="profile">
         <img
           id="profile-image"
@@ -43,10 +46,9 @@
             </button>
           </div>
         </li>
-
         <li>
           <fieldset>
-            <legend>비밀번호 변경:</legend>
+            <legend>비밀번호 변경</legend>
             <span>기존 비밀번호</span>
             <input
               class="passwordNow"
