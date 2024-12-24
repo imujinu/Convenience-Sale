@@ -13,7 +13,7 @@ drop table user;
 SELECT * FROM user;
 SELECT * FROM email;
 SELECT * FROM products;
-DELETE FROM user WHERE `userId` LIKE 'a%';
+DELETE FROM user WHERE `userId= qwe`;
 DESC products;
 
 <<<<<<< HEAD

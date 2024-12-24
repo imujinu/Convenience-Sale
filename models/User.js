@@ -8,8 +8,12 @@ const User = function (sequelize, DataTypes) {
         primaryKey: true,
       },
       //user_pw VARCHAR(20), NOT NULL
-      userPw: {
-        type: DataTypes.STRING(20),
+      hashedPassword: {
+        type: DataTypes.STRING(200),
+        allowNull: false,
+      },
+      salt: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
       // nickname VARCHAR(20) NOT NULL,

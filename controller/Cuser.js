@@ -1,8 +1,9 @@
 const models = require("../models");
 const { emailAuth } = require("../config/email");
-
+const crypto = require("crypto");
 const multer = require("multer");
 const path = require("path");
+const { measureMemory } = require("vm");
 
 const upload = multer({
   storage: multer.diskStorage({
@@ -20,17 +21,41 @@ const upload = multer({
   }),
   limits: { fieldSize: 5 * 1024 * 1024 },
 });
+//userPw 암호화
+function hashPw(hashedPassword) {
+  const salt = crypto.randomBytes(16).toString("base64");
+  const iterations = 100;
+  const keylen = 64;
+  const algorithm = "sha512";
+  const hash = crypto
+    .pbkdf2Sync(hashedPassword, salt, iterations, keylen, algorithm)
+    .toString("base64");
+  return { salt: salt, hash: hash };
+}
+//userPw 비교
+function checkPw(inputPw, savedSalt, savedHash) {
+  const iterations = 100;
+  const keylen = 64;
+  const algorithm = "sha512";
+  const hash = crypto
+    .pbkdf2Sync(inputPw, savedSalt, iterations, keylen, algorithm)
+    .toString("base64");
+  console.log("", hash);
+  console.log("saved", savedHash);
+  return hash === savedHash;
+}
 
 //회원 생성
 exports.postRegister = async (req, res) => {
+  const hashedPw = hashPw(req.body.userPw);
   try {
     const newUser = await models.User.create({
       userId: req.body.userId,
-      userPw: req.body.userPw,
+      hashedPassword: hashedPw.hash,
       nickname: req.body.nickname,
+      salt: hashedPw.salt,
     });
     res.send(newUser);
-    // res.render("login", { newUser });
   } catch (err) {
     console.log("err", err);
     res.status(500).send("server error");
@@ -43,20 +68,28 @@ exports.postLogin = async (req, res) => {
     const user = await models.User.findOne({
       where: {
         userId: req.body.userId,
-        userPw: req.body.userPw,
+        // userPw: req.body.userPw,
       },
     });
     console.log("postLogin: ", user);
     if (user) {
-      req.session.user = {
-        userId: user.userId,
-        userPw: user.userPw,
-        nickname: user.nickname,
-        profilePath: user.profilePath,
-      };
-      res.send(true);
+      const { salt: savedSalt, hashedPassword: savedPw } = user;
+      console.log(checkPw(req.body.userPw, savedSalt, savedPw));
+      if (checkPw(req.body.userPw, savedSalt, savedPw)) {
+        req.session.user = {
+          userId: user.userId,
+          userPw: user.userPw,
+          nickname: user.nickname,
+          profilePath: user.profilePath,
+        };
+        console.log("비밀번호 일치");
+        res.send(true);
+      } else {
+        console.log("비밀번호 틀림");
+        res.status(401).send("비밀번호가 틀렸습니다");
+      }
     } else {
-      res.send(false);
+      res.status(401).send("아이디를 확인해주세요");
     }
   } catch (err) {
     console.log("Error during login:", err);
