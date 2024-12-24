@@ -10,12 +10,12 @@ const Products = function (sequelize, DataTypes) {
       },
       //product_name VARCHAR(50), NOT NULL
       pName: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(100),
         allowNull: false,
       },
       // price INTEGER NOT NULL,
       price: {
-        type: DataTypes.STRING(10),
+        type: DataTypes.STRING(20),
         allowNull: false,
       },
       // event? VARCHAR(20) NOT NULL,

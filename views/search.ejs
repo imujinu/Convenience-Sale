@@ -41,21 +41,21 @@
           "<%= searchValue %>" 검색결과 총 <u>'<%= product.length %>'개</u>의
           상품이 검색되었습니다.
         </div>
-
-        <div class="section5">
-          <div class="container">
-            <% for (let i = 0; i < product.length; i++) { %>
-            <div class="product">
-              <img
-                src="/static/image/product/CU/<%= product[i].imagePath %>"
-                alt="편의점상품"
-              />
-              <span><p><%= product[i].pName %></p></span>
-              <span><p><%= product[i].price %></p></span>
-            </div>
-            <% } %>
-          </div>
+      </div>
+    </div>
+    <div class="section5">
+      <div class="container">
+        <% for (let i = 0; i < product.length; i++) { %>
+        <div class="product">
+          <img
+            src="/static/image/product/<%= product[i].imagePath %>"
+            alt="편의점상품"
+          />
+          <span><p><%= product[i].pName %></p></span>
+          <span><p><%= product[i].price %></p></span>
+          <span><p><%= product[i].event %></p></span>
         </div>
+        <% } %>
       </div>
     </div>
     <% } else { %>

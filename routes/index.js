@@ -35,8 +35,13 @@ router.get("/upload", (req, res) => {
   res.json({ message: "test" });
 });
 
+// 로그아웃
+router.get("/logout", user.logout);
+
+
 //회원탈퇴
 router.post("/deleteAccount", user.deleteAccount);
+
 
 // 파일 업로드
 router.post("/upload", user.upload);

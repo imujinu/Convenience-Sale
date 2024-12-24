@@ -61,8 +61,12 @@
         <div class="stop">
           <img src="/static/image/stopbtn2.png" alt="" class="stopBtn" />
         </div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev">
+          <img src="static/image/arrowleft.png" alt="" class="prev" />
+        </div>
+        <div class="swiper-button-next">
+          <img src="static/image/arrowright.png" alt="" class="next" />
+        </div>
       </div>
       <div class="modal modal1 hidden">
         <div class="modalContent">
@@ -115,7 +119,7 @@
           <% for (let i = 0; i < CU.length; i++) { %>
           <div class="menu">
             <img
-              src="/static/image/product/CU/<%= CU[i].imagePath %>"
+              src="/static/image/product/<%= CU[i].imagePath %>"
               alt="CU상품"
             />
             <p><%= CU[i].pName %></p>
@@ -129,9 +133,39 @@
 
     <div class="section6">
       <h1>GS25</h1>
+      <div class="container">
+        <div class="product">
+          <% for (let i = 0; i < GS25.length; i++) { %>
+          <div class="menu">
+            <img
+              src="/static/image/product/<%= GS25[i].imagePath %>"
+              alt="GS25상품"
+            />
+            <p><%= GS25[i].pName %></p>
+            <p><%= GS25[i].price %>원</p>
+            <p class="event"><%= GS25[i].event %></p>
+          </div>
+          <% } %>
+        </div>
+      </div>
     </div>
     <div class="section7">
       <h1>7ELEVEN</h1>
+      <div class="container">
+        <div class="product">
+          <% for (let i = 0; i < ELEVEN.length; i++) { %>
+          <div class="menu">
+            <img
+              src="/static/image/product/<%= ELEVEN[i].imagePath %>"
+              alt="7ELEVEN상품"
+            />
+            <p><%= ELEVEN[i].pName %></p>
+            <p><%= ELEVEN[i].price %>원</p>
+            <p class="event"><%= ELEVEN[i].event %></p>
+          </div>
+          <% } %>
+        </div>
+      </div>
     </div>
 
     <div class="section8">
