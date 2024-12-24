@@ -19,5 +19,5 @@ const production = {
   dialect: "mysql",
 };
 
-module.exports = { development };
+module.exports = { development, production };
 // 내보내기 한 이후에 models/index.js 에서 사용
