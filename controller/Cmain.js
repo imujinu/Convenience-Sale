@@ -35,7 +35,7 @@ exports.get_login = (req, res) => {
 
 exports.get_register = (req, res) => {
   if (req.session.user) {
-    res.render("register", {
+    res.render("home", {
       user: req.session.user,
       isLogin: true,
     });
@@ -71,11 +71,13 @@ exports.userview = (req, res) => {
       nickname: user.nickname,
       userPw: user.userPw,
       profilePath: user.profilePath,
+      isLogin: true,
     });
     console.log("userID:::", user.userPw);
   } else {
     res.send(
-      '<script>alert("먼저 로그인 해주세요"); location.href="/login";</script>',
+      `<script>alert("먼저 로그인 해주세요"); location.href="/login";</script>`,
+      { isLogin: false },
     );
   }
 };
