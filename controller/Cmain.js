@@ -22,7 +22,7 @@ exports.home = async (req, res) => {
   }
 };
 
-exports.get_login = (req, res) => {
+exports.getLogin = (req, res) => {
   if (req.session.user) {
     res.render("login", {
       user: req.session.user,
@@ -33,7 +33,7 @@ exports.get_login = (req, res) => {
   }
 };
 
-exports.get_register = (req, res) => {
+exports.getRegister = (req, res) => {
   if (req.session.user) {
     res.render("register", {
       user: req.session.user,
@@ -43,7 +43,21 @@ exports.get_register = (req, res) => {
     res.render("register", { isLogin: false });
   }
 };
-
+exports.getLogout = (req, res) => {
+  if (req.session.user) {
+    req.session.destroy((err) => {
+      if (err) throw err;
+      res.redirect("/");
+    });
+  } else {
+    res.send(`
+      <script>
+      alert("이미 세션이 만료되었다");
+      document.location.href="/";
+      </script>
+      `);
+  }
+};
 exports.mypage = (req, res) => {
   const user = req.session.user;
   if (user) {

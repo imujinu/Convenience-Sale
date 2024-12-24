@@ -40,3 +40,17 @@ p {
   font-size: 17px;
   color: #3498db;
 }
+button {
+  background-color: #ed4b5e;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #ff6678;
+}
