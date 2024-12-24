@@ -90,15 +90,30 @@ for (let i = 1; i < 5; i++) {
 }
 
 // section5
+// cu배너
 const product = document.querySelector(".section5 > .container > .product");
 const container = document.querySelector(".section5 > .container");
 const clone = product.cloneNode(true);
 product.classList.add("rolling1");
 clone.classList.add("rolling2");
 container.appendChild(clone);
+// gs배너
+const product2 = document.querySelector(".section6 > .container > .product");
+const container2 = document.querySelector(".section6 > .container");
+const clone2 = product2.cloneNode(true);
+product2.classList.add("rolling1");
+clone2.classList.add("rolling2");
+container2.appendChild(clone2);
+// 세븐배너
+const product3 = document.querySelector(".section7 > .container > .product");
+const container3 = document.querySelector(".section7 > .container");
+const clone3 = product3.cloneNode(true);
+product3.classList.add("rolling1");
+clone3.classList.add("rolling2");
+container3.appendChild(clone3);
 
 // section4
-const allBtn = document.querySelector(".section4 > .part2 >ul > .all ");
+const allBtn = document.querySelector(".section4 > .part2 >ul >.all ");
 const oneBtn = document.querySelector(".section4 >.part2 >ul >.one ");
 const twoBtn = document.querySelector(".section4 >.part2 >ul >.two ");
 
@@ -108,12 +123,32 @@ const menu = document.querySelectorAll(
 const menu2 = document.querySelectorAll(
   ".section5 > .container > .rolling2 >.menu",
 );
+const menu3 = document.querySelectorAll(
+  ".section6 > .container > .product >.menu",
+);
+const menu4 = document.querySelectorAll(
+  ".section6 > .container > .rolling2 >.menu",
+);
+const menu5 = document.querySelectorAll(
+  ".section7 > .container > .product >.menu",
+);
+const menu6 = document.querySelectorAll(
+  ".section7 > .container > .rolling2 >.menu",
+);
 
 allBtn.addEventListener("click", () => {
   product.classList.remove("rolling3");
   product.classList.add("rolling1");
   clone.classList.remove("rolling4");
   clone.classList.add("rolling2");
+  product2.classList.remove("rolling3");
+  product2.classList.add("rolling1");
+  clone2.classList.remove("rolling4");
+  clone2.classList.add("rolling2");
+  product3.classList.remove("rolling3");
+  product3.classList.add("rolling1");
+  clone3.classList.remove("rolling4");
+  clone3.classList.add("rolling2");
 
   menu.forEach((el) => {
     el.style.display = "block";
@@ -121,8 +156,18 @@ allBtn.addEventListener("click", () => {
   menu2.forEach((el) => {
     el.style.display = "block";
   });
-  product.style.animation = "rolling1 200s linear infinite;";
-  clone.style.animation = "rolling2 200s linear infinite;";
+  menu3.forEach((el) => {
+    el.style.display = "block";
+  });
+  menu4.forEach((el) => {
+    el.style.display = "block";
+  });
+  menu5.forEach((el) => {
+    el.style.display = "block";
+  });
+  menu6.forEach((el) => {
+    el.style.display = "block";
+  });
 });
 
 oneBtn.addEventListener("click", () => {
@@ -130,6 +175,14 @@ oneBtn.addEventListener("click", () => {
   product.classList.add("rolling3");
   clone.classList.remove("rolling2");
   clone.classList.add("rolling4");
+  product2.classList.remove("rolling1");
+  product2.classList.add("rolling3");
+  clone2.classList.remove("rolling2");
+  clone2.classList.add("rolling4");
+  product3.classList.remove("rolling1");
+  product3.classList.add("rolling3");
+  clone3.classList.remove("rolling2");
+  clone3.classList.add("rolling4");
 
   menu.forEach((el) => {
     const sale = el.querySelector(".event").textContent.trim();
@@ -147,7 +200,38 @@ oneBtn.addEventListener("click", () => {
       el.style.display = "none";
     }
   });
-  console.log(product);
+  menu3.forEach((el) => {
+    const sale = el.querySelector(".event").textContent.trim();
+    if (sale == "1+1") {
+      el.style.display = "block";
+    } else {
+      el.style.display = "none";
+    }
+  });
+  menu4.forEach((el) => {
+    const sale = el.querySelector(".event").textContent.trim();
+    if (sale == "1+1") {
+      el.style.display = "block";
+    } else {
+      el.style.display = "none";
+    }
+  });
+  menu5.forEach((el) => {
+    const sale = el.querySelector(".event").textContent.trim();
+    if (sale == "1+1") {
+      el.style.display = "block";
+    } else {
+      el.style.display = "none";
+    }
+  });
+  menu6.forEach((el) => {
+    const sale = el.querySelector(".event").textContent.trim();
+    if (sale == "1+1") {
+      el.style.display = "block";
+    } else {
+      el.style.display = "none";
+    }
+  });
 });
 
 twoBtn.addEventListener("click", () => {
@@ -155,6 +239,14 @@ twoBtn.addEventListener("click", () => {
   product.classList.add("rolling3");
   clone.classList.remove("rolling2");
   clone.classList.add("rolling4");
+  product2.classList.remove("rolling1");
+  product2.classList.add("rolling3");
+  clone2.classList.remove("rolling2");
+  clone2.classList.add("rolling4");
+  product3.classList.remove("rolling1");
+  product3.classList.add("rolling3");
+  clone3.classList.remove("rolling2");
+  clone3.classList.add("rolling4");
 
   menu.forEach((el) => {
     const sale = el.querySelector(".event").textContent.trim();
@@ -172,8 +264,38 @@ twoBtn.addEventListener("click", () => {
       el.style.display = "none";
     }
   });
-  product.style.animation = "rolling1 100s linear infinite;";
-  clone.style.animation = "rolling2 100s linear infinite;";
+  menu3.forEach((el) => {
+    const sale = el.querySelector(".event").textContent.trim();
+    if (sale == "2+1") {
+      el.style.display = "block";
+    } else {
+      el.style.display = "none";
+    }
+  });
+  menu4.forEach((el) => {
+    const sale = el.querySelector(".event").textContent.trim();
+    if (sale == "2+1") {
+      el.style.display = "block";
+    } else {
+      el.style.display = "none";
+    }
+  });
+  menu5.forEach((el) => {
+    const sale = el.querySelector(".event").textContent.trim();
+    if (sale == "2+1") {
+      el.style.display = "block";
+    } else {
+      el.style.display = "none";
+    }
+  });
+  menu6.forEach((el) => {
+    const sale = el.querySelector(".event").textContent.trim();
+    if (sale == "2+1") {
+      el.style.display = "block";
+    } else {
+      el.style.display = "none";
+    }
+  });
 });
 
 // section8
@@ -205,29 +327,6 @@ search.addEventListener("click", async () => {
     console.error(err);
   }
 });
-searchText.addEventListener("keydown", async (event) => {
-  if (event.key === "Enter") {
-    try {
-      if (searchText.value.trim() === "") {
-        alert("검색어를 입력해주세요!");
-      } else {
-        console.log("검색어 입력됨");
-        console.log(searchText.value);
-        const productName = searchText.value;
-        const result = await axios({
-          url: "/search",
-          method: "get",
-          params: {
-            productName,
-          },
-        });
-        document.location.href = `/search?productName=${productName}`;
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  }
-});
 
 searchText.addEventListener("keydown", async (event) => {
   if (event.key === "Enter") {
@@ -254,7 +353,8 @@ searchText.addEventListener("keydown", async (event) => {
 });
 
 window.addEventListener("scroll", () => {
-  scroll = window.scrollY;
+  let scroll = window.scrollY;
+  console.log(scroll);
   const menu1 = document.querySelector(
     ".section8 > .container > .part2 > .menu1",
   );
@@ -267,7 +367,7 @@ window.addEventListener("scroll", () => {
   const menu4 = document.querySelector(
     ".section8 > .container > .part2 > .menu4",
   );
-  if (scroll > 1088) {
+  if (scroll > 1495) {
     menu1.style.animation = "opacity1 0.5s forwards";
     menu2.style.animation = "opacity1 0.5s 0.5s forwards";
     menu3.style.animation = "opacity1 0.5s 1s forwards";
@@ -314,6 +414,44 @@ async function emailVerify() {
   }
 }
 
+const emailInput = document.querySelector(
+  ".section9 > .container > .inner >.email",
+);
+emailInput.addEventListener("keydown", async (event) => {
+  if ((event.key = "Enter")) {
+    try {
+      const email = document
+        .querySelector(".section9 > .container> .inner> .email")
+        .value.trim();
+      const email2 = document.querySelector(
+        ".section9 > .container> .inner> .email",
+      );
+
+      if (!email2.checkValidity()) {
+        alert("example@naver.com 형식에 맞게 이메일을 작성해주세요");
+        return;
+      }
+
+      if (email2 === "" || email2.length > 50) {
+        alert("형식에 맞게 이메일을 작성해주세요");
+        return;
+      }
+      const result = await axios({
+        url: "/email",
+        method: "post",
+        data: {
+          email,
+        },
+      });
+      console.log("result.data::>>>", result.data);
+      const { message } = result.data;
+      alert(message);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+});
+
 const git = document.querySelectorAll(".footer > .container > ul > li");
 git.forEach((el) => {
   el.addEventListener("mouseenter", () => {
@@ -335,7 +473,7 @@ window.addEventListener("scroll", () => {
   const scroll = window.scrollY;
   const section9 = document.querySelector(".section9 > .container ");
 
-  if (scroll > 1560) {
+  if (scroll > 1910) {
     section9.style.opacity = "1";
   } else {
     section9.style.opacity = "0";
@@ -346,7 +484,7 @@ window.addEventListener("scroll", () => {
   const scroll = window.scrollY;
 
   const emailInput = document.querySelector(".section9 > .container > .inner ");
-  if (scroll > 1764) {
+  if (scroll > 2214) {
     emailInput.style.bottom = "17%";
     emailInput.style.opacity = "1";
   } else {

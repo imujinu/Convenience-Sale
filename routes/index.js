@@ -33,7 +33,8 @@ router.post("/upload", upload.single("user"), user.upload);
 router.get("/upload", (req, res) => {
   res.json({ message: "test" });
 });
-
+// 로그아웃
+router.get("/logout", user.logout);
 // 파일 업로드
 router.post("/upload", user.upload);
 

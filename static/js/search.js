@@ -37,3 +37,15 @@ search.addEventListener("keydown", async (event) => {
     }
   }
 });
+
+const menu = document.querySelector(".section5 > .container > .product");
+for (let i = 1; i < 7; i++) {
+  menu.forEach((el) => {
+    el.addEventListener("mouseenter", () => {
+      el.querySelector("img").style.height = "70%";
+    });
+    el.addEventListener("mouseleave", () => {
+      el.querySelector("img").style.height = "60%";
+    });
+  });
+}

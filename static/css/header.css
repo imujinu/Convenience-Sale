@@ -24,14 +24,14 @@
   display: flex;
   position: absolute;
   top: 10%;
-  right: -10%;
+  right: 0%;
 }
 
 .section1 .part1 ul {
-  width: 65%;
+  width: 100%;
   height: auto;
   display: flex;
-  text-align: right;
+  text-align: center;
 }
 
 .section1 .part1 li {

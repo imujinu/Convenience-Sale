@@ -17,3 +17,15 @@ for (let i = 1; i < 6; i++) {
     menu.style.height = "0px";
   });
 }
+
+const logout = document.querySelector(".part1 .logout");
+logout.addEventListener("click", async () => {
+  try {
+    const result = await axios({
+      url: "/logout",
+      method: "get",
+    });
+  } catch (err) {
+    console.error("err", err);
+  }
+});

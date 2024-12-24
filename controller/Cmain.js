@@ -10,15 +10,29 @@ exports.home = async (req, res) => {
       cName: "CU",
     },
   });
+  const GS25 = await Products.findAll({
+    where: {
+      cName: "GS25",
+    },
+  });
+  const ELEVEN = await Products.findAll({
+    where: {
+      cName: "7ELEVEN",
+    },
+  });
 
-  if (req.session.user) {
+  const user = req.session.user;
+
+  if (user) {
     res.render("home", {
-      user: req.session.user,
+      user: user.nickname,
       isLogin: true,
       CU,
+      GS25,
+      ELEVEN,
     });
   } else {
-    res.render("home", { isLogin: false, CU });
+    res.render("home", { isLogin: false, CU, GS25, ELEVEN });
   }
 };
 
@@ -51,13 +65,11 @@ exports.mypage = (req, res) => {
       userId: user.userId,
       nickname: user.nickname,
       profilePath: user.profilePath,
-      isLogin: true,
     });
     console.log("userID:::", user.userId);
   } else {
     res.send(
-      `<script>alert("먼저 로그인 해주세요"); location.href="/login";</script>`,
-      { isLogin: false },
+      '<script>alert("먼저 로그인 해주세요"); location.href="/login";</script>',
     );
   }
 };
