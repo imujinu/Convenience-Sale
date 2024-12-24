@@ -1,8 +1,8 @@
 "use strict";
 
 const Sequelize = require("sequelize");
-// const env = process.env.NODE_ENV || "development";
-const config = require(__dirname + "/../config/config.js")["development"];
+const env = process.env.NODE_ENV || "development";
+const config = require(__dirname + "/../config/config.js")[env];
 const db = {};
 //(1) Sequelize 클래스를 통해서 sequelize 객체를 생성
 const sequelize = new Sequelize(
@@ -14,6 +14,7 @@ const sequelize = new Sequelize(
 //(2) 모델을 불러오면서 인자로 정보 전달
 const UserModel = require("./User")(sequelize, Sequelize);
 const ProductsModel = require("./Products")(sequelize, Sequelize);
+const aProductsModel = require("./aProducts")(sequelize, Sequelize);
 const PCommentModel = require("./PComment")(sequelize, Sequelize);
 const UserFavsModel = require("./UserFavs")(sequelize, Sequelize);
 const BCommentModel = require("./BComment")(sequelize, Sequelize);
@@ -60,6 +61,7 @@ BoardModel.belongsTo(UserModel, {
 //(4) db 객체에 모델 추가
 db.User = UserModel;
 db.Products = ProductsModel;
+db.aProducts = aProductsModel;
 db.Board = BoardModel;
 db.PComment = PCommentModel;
 db.UserFavs = UserFavsModel;

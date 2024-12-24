@@ -1,25 +1,24 @@
-.container {
+.mypage-container {
   max-width: 1200px;
-  /* border: 1px solid brown; */
-  margin: 120px auto 0;
+  margin: 0 auto;
   text-align: center;
-  padding-top: 50px;
+  padding-top: 150px;
   padding-bottom: 50px;
 }
-.container > .profile {
-  width: 180px;
+.mypage-container > .profile {
+  width: 200px;
   height: 200px;
   margin: 0 auto;
   border-radius: 999px;
   border: 1px solid salmon;
 }
 
-.container > .profile > img {
+.mypage-container > .profile > img {
   border-radius: 999px;
   width: 100%;
   height: 100%;
 }
-.container > .infoBox {
+.mypage-container > .infoBox {
   font-size: 14px;
   color: #8a8a8a;
   width: 200px;
@@ -27,119 +26,143 @@
   margin-top: 16px;
 }
 
-.container > .infoBox > li {
+.mypage-container > .infoBox > li {
   display: flex;
   justify-content: space-between;
   text-align: center;
   margin-top: 4px;
 }
 
-.container > .infoBox > li > span:nth-child(1) {
+.mypage-container > .infoBox > li > span:nth-child(1) {
   flex-basis: 80px;
 }
-.container > .infoBox > li > span:nth-child(2) {
+.mypage-container > .infoBox > li > span:nth-child(2) {
   flex-basis: 120px;
 }
 
 /* welcom */
-.container > .welcome {
+.mypage-container > .welcome {
   margin-top: 30px;
   font-size: 40px;
   color: #303030;
 }
 
-.container > .welcome > span {
+.mypage-container > .welcome > span {
   color: #ff3636;
 }
 
-.container > .reviewsBox {
+.mypage-container > .reviewsBox {
   /* border: 1px solid palevioletred; */
   margin-top: 60px;
   font-weight: 400;
 }
-.container > .reviewsBox > li {
+.mypage-container > .reviewsBox > li {
   width: 100%;
   box-shadow: 0px 0px 5px #bebebe91;
   border-radius: 10px;
   padding: 16px 0;
   margin: 16px 0;
 }
-.container > .reviewsBox > li > .tit {
+.mypage-container > .reviewsBox > li > .tit {
 }
 
-.container > .reviewsBox > li > .len > span {
+.mypage-container > .reviewsBox > li > .len > span {
   font-size: 18px;
   color: #ff3636;
   font-weight: 700;
 }
 
-.container > .reviewsBox > li > .arrow {
+.mypage-container > .reviewsBox > li > .arrow {
   transition: 0.4s;
 }
 
-.container > .reviewsBox > li > .arrow.on {
+.mypage-container > .reviewsBox > li > .arrow.on {
   transform: rotate(90deg);
 }
 
-.container > .reviewsBox > .content-container {
+.mypage-container > .reviewsBox > .content-container {
   display: block;
 }
 
-.container > .reviewsBox > .content-container.hide {
+.mypage-container > .reviewsBox > .content-container.hide {
   display: none;
 }
-.container > .reviewsBox > .content-container > .list {
+.mypage-container > .reviewsBox > .content-container > .list {
 }
-.container > .reviewsBox > .content-container > .list li {
+.mypage-container > .reviewsBox > .content-container > .list li {
   border-top: 1px solid #ffcaca78;
   display: flex;
   color: #333232;
   font-size: 14px;
 }
-.container > .reviewsBox > .content-container > .list li.list-head {
+.mypage-container > .reviewsBox > .content-container > .list li.list-head {
   background-color: #ffcaca;
   color: white;
   font-size: 15px;
 }
-.container > .reviewsBox > .content-container > .list li > span {
+.mypage-container > .reviewsBox > .content-container > .list li > span {
   padding: 10px;
 }
-.container > .reviewsBox > .content-container > .list li > span:nth-child(1) {
+.mypage-container
+  > .reviewsBox
+  > .content-container
+  > .list
+  li
+  > span:nth-child(1) {
   flex-basis: 5%;
 }
-.container > .reviewsBox > .content-container > .list li > span:nth-child(2) {
+.mypage-container
+  > .reviewsBox
+  > .content-container
+  > .list
+  li
+  > span:nth-child(2) {
   flex-basis: 60%;
 }
-.container > .reviewsBox > .content-container > .list li > span:nth-child(3) {
+.mypage-container
+  > .reviewsBox
+  > .content-container
+  > .list
+  li
+  > span:nth-child(3) {
   flex-basis: 20%;
 }
-.container > .reviewsBox > .content-container > .list li > span:nth-child(4) {
+.mypage-container
+  > .reviewsBox
+  > .content-container
+  > .list
+  li
+  > span:nth-child(4) {
   flex-basis: 15%;
 }
 
-.container > .reviewsBox > .content-container > .pagination {
+.mypage-container > .reviewsBox > .content-container > .pagination {
   padding-top: 30px;
   padding-bottom: 30px;
 }
-.container > .reviewsBox > .content-container > .pagination > span {
+.mypage-container > .reviewsBox > .content-container > .pagination > span {
   margin: 0 8px;
   cursor: pointer;
 }
-.container > .reviewsBox > .content-container > .pagination > span.selected {
+.mypage-container
+  > .reviewsBox
+  > .content-container
+  > .pagination
+  > span.selected {
   font-weight: bold;
   color: #ff3636;
 }
-.container > .buttonBox {
+.mypage-container > .buttonBox {
   margin-top: 100px;
 }
-.container > .buttonBox button {
+.mypage-container > .buttonBox button {
   color: #fff;
   padding: 8px;
   border-radius: 8px;
 }
-.container > .buttonBox .updateBtn {
+.mypage-container > .buttonBox .updateBtn {
   background-color: #ff6b73;
 }
-.container > .buttonBox .deleteBtn {
+.mypage-container > .buttonBox .deleteBtn {
   background-color: #bbb;
 }

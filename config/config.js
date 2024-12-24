@@ -11,5 +11,13 @@ const development = {
   dialect: process.env.DB_DIALECT,
 };
 
-module.exports = { development };
+const production = {
+  username: process.env.DB_PROD_USERNAME,
+  password: process.env.DB_PROD_PASSWORD,
+  database: process.env.DB_PROD_DATABASE,
+  host: process.env.DB_PROD_HOST,
+  dialect: "mysql",
+};
+
+module.exports = { development, production };
 // 내보내기 한 이후에 models/index.js 에서 사용

@@ -12,7 +12,11 @@ exports.search = async (req, res) => {
         },
       },
     });
-    res.send({ searchProducts, pName });
+    if (searchProducts && searchProducts > 0) {
+      res.send({ searchProducts, pName, isSearch: true });
+    } else {
+      res.send({ isSearch: false });
+    }
   } catch (err) {
     console.error("err", err);
   }

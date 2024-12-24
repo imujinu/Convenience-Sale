@@ -65,11 +65,13 @@ exports.mypage = (req, res) => {
       userId: user.userId,
       nickname: user.nickname,
       profilePath: user.profilePath,
+      isLogin: true,
     });
     console.log("userID:::", user.userId);
   } else {
     res.send(
-      '<script>alert("먼저 로그인 해주세요"); location.href="/login";</script>',
+      `<script>alert("먼저 로그인 해주세요"); location.href="/login";</script>`,
+      { isLogin: false },
     );
   }
 };
@@ -113,7 +115,7 @@ exports.search = async (req, res) => {
   try {
     console.log("req.query>>>>", req.query.productName);
     const searchValue = req.query.productName;
-    const hasQuery = searchValue.length > 0;
+
     const product = await Products.findAll({
       where: {
         pName: {
@@ -122,17 +124,29 @@ exports.search = async (req, res) => {
       },
     });
     const user = req.session.user;
-    if (hasQuery) {
+
+    if (product.length > 0) {
       if (user) {
-        res.render("search", { isLogin: true, user, product, searchValue });
+        res.render("search", {
+          isLogin: true,
+          user,
+          product,
+          searchValue,
+          isSearch: true,
+        });
       } else {
-        res.render("search", { isLogin: false, product, searchValue });
+        res.render("search", {
+          isLogin: false,
+          product,
+          searchValue,
+          isSearch: true,
+        });
       }
     } else {
       if (user) {
-        res.render("search", { isLogin: true, user });
+        res.render("search", { isLogin: true, user, isSearch: false });
       } else {
-        res.render("search", { isLogin: false });
+        res.render("search", { isLogin: false, isSearch: false });
       }
     }
   } catch (err) {

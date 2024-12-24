@@ -2,12 +2,12 @@
   <div class="container">
     <div class="title">
       <a href="/">
-        <img src="../../static/image/logo1.png" alt="" />
+        <img src="/static/image/logo1.png" alt="" />
       </a>
     </div>
     <div class="part1">
       <ul>
-        <%if (isLogin) { %>
+        <% if (isLogin) { %>
         <li>
           <a href="/logout">Logout</a>
         </li>
@@ -22,39 +22,56 @@
     </div>
     <div class="part2">
       <ul class="navbar">
+        <!-- Home -->
         <div class="store1 store">
           <li><a href="/">Home</a></li>
         </div>
+
+        <!-- CU -->
         <div class="store2 store">
-          <li><a href="">Cu</a></li>
+          <li><a href="/about?convini=cu">CU</a></li>
           <ul class="menu2 menu">
-            <li>전체상품</li>
-            <li>김밥</li>
-            <li>도시락</li>
-            <li>샌드위치</li>
-            <li>샐러드</li>
+            <li><a href="/about?convini=cu">전체</a></li>
+            <li><a href="/about?convini=cu&category=삼각김밥">삼각김밥</a></li>
+            <li><a href="/about?convini=cu&category=도시락">도시락</a></li>
+            <li><a href="/about?convini=cu&category=샌드위치">샌드위치</a></li>
+            <li><a href="/about?convini=cu&category=샐러드">샐러드</a></li>
           </ul>
         </div>
+
+        <!-- GS25 -->
         <div class="store3 store">
-          <li><a href="">GS25</a></li>
+          <li><a href="/about?convini=gs25">GS25</a></li>
           <ul class="menu3 menu">
-            <li>전체상품</li>
-            <li>김밥</li>
-            <li>도시락</li>
-            <li>샌드위치</li>
-            <li>샐러드</li>
+            <li><a href="/about?convini=gs25">전체</a></li>
+            <li>
+              <a href="/about?convini=gs25&category=삼각김밥">삼각김밥</a>
+            </li>
+            <li><a href="/about?convini=gs25&category=도시락">도시락</a></li>
+            <li>
+              <a href="/about?convini=gs25&category=샌드위치">샌드위치</a>
+            </li>
+            <li><a href="/about?convini=gs25&category=샐러드">샐러드</a></li>
           </ul>
         </div>
+
+        <!-- 7ELEVEN -->
         <div class="store4 store">
-          <li><a href="">7ELEVEN</a></li>
+          <li><a href="/about?convini=seven">7ELEVEN</a></li>
           <ul class="menu4 menu">
-            <li>전체상품</li>
-            <li>김밥</li>
-            <li>도시락</li>
-            <li>샌드위치</li>
-            <li>샐러드</li>
+            <li><a href="/about?convini=seven">전체</a></li>
+            <li>
+              <a href="/about?convini=seven&category=삼각김밥">삼각김밥</a>
+            </li>
+            <li><a href="/about?convini=seven&category=도시락">도시락</a></li>
+            <li>
+              <a href="/about?convini=seven&category=샌드위치">샌드위치</a>
+            </li>
+            <li><a href="/about?convini=seven&category=샐러드">샐러드</a></li>
           </ul>
         </div>
+
+        <!-- 자유게시판 -->
         <div class="store5 store">
           <li><a href="/board">자유게시판</a></li>
         </div>

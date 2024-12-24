@@ -88,6 +88,15 @@ for (let i = 1; i < 5; i++) {
     document.body.style.removeProperty("overflow");
   });
 }
+
+// section5
+const product = document.querySelector(".section5 > .container > .product");
+const container = document.querySelector(".section5 > .container");
+const clone = product.cloneNode(true);
+product.classList.add("rolling1");
+clone.classList.add("rolling2");
+container.appendChild(clone);
+
 // section4
 const allBtn = document.querySelector(".section4 > .part2 >ul > .all ");
 const oneBtn = document.querySelector(".section4 >.part2 >ul >.one ");
@@ -100,18 +109,28 @@ const menu2 = document.querySelectorAll(
   ".section5 > .container > .rolling2 >.menu",
 );
 
-console.log(menu2);
-console.log(menu);
-
 allBtn.addEventListener("click", () => {
+  product.classList.remove("rolling3");
+  product.classList.add("rolling1");
+  clone.classList.remove("rolling4");
+  clone.classList.add("rolling2");
+
   menu.forEach((el) => {
     el.style.display = "block";
   });
-  // menu2.forEach((el) => {
-  //   el.style.display = "block";
-  // });
+  menu2.forEach((el) => {
+    el.style.display = "block";
+  });
+  product.style.animation = "rolling1 200s linear infinite;";
+  clone.style.animation = "rolling2 200s linear infinite;";
 });
+
 oneBtn.addEventListener("click", () => {
+  product.classList.remove("rolling1");
+  product.classList.add("rolling3");
+  clone.classList.remove("rolling2");
+  clone.classList.add("rolling4");
+
   menu.forEach((el) => {
     const sale = el.querySelector(".event").textContent.trim();
     if (sale == "1+1") {
@@ -120,16 +139,23 @@ oneBtn.addEventListener("click", () => {
       el.style.display = "none";
     }
   });
-  // menu2.forEach((el) => {
-  //   const sale = el.querySelector(".event").textContent.trim();
-  //   if (sale == "1+1") {
-  //     el.style.display = "block";
-  //   } else {
-  //     el.style.display = "none";
-  //   }
-  // });
+  menu2.forEach((el) => {
+    const sale = el.querySelector(".event").textContent.trim();
+    if (sale == "1+1") {
+      el.style.display = "block";
+    } else {
+      el.style.display = "none";
+    }
+  });
+  console.log(product);
 });
+
 twoBtn.addEventListener("click", () => {
+  product.classList.remove("rolling1");
+  product.classList.add("rolling3");
+  clone.classList.remove("rolling2");
+  clone.classList.add("rolling4");
+
   menu.forEach((el) => {
     const sale = el.querySelector(".event").textContent.trim();
     if (sale == "2+1") {
@@ -138,23 +164,17 @@ twoBtn.addEventListener("click", () => {
       el.style.display = "none";
     }
   });
-  // menu2.forEach((el) => {
-  //   const sale = el.querySelector(".event").textContent.trim();
-  //   if (sale == "2+1") {
-  //     el.style.display = "block";
-  //   } else {
-  //     el.style.display = "none";
-  //   }
-  // });
+  menu2.forEach((el) => {
+    const sale = el.querySelector(".event").textContent.trim();
+    if (sale == "2+1") {
+      el.style.display = "block";
+    } else {
+      el.style.display = "none";
+    }
+  });
+  product.style.animation = "rolling1 100s linear infinite;";
+  clone.style.animation = "rolling2 100s linear infinite;";
 });
-
-// section5
-const product = document.querySelector(".section5 > .container > .product");
-const container = document.querySelector(".section5 > .container");
-const clone = product.cloneNode(true);
-product.classList.add("rolling1");
-clone.classList.add("rolling2");
-container.appendChild(clone);
 
 // section8
 
@@ -183,6 +203,29 @@ search.addEventListener("click", async () => {
     }
   } catch (err) {
     console.error(err);
+  }
+});
+searchText.addEventListener("keydown", async (event) => {
+  if (event.key === "Enter") {
+    try {
+      if (searchText.value.trim() === "") {
+        alert("검색어를 입력해주세요!");
+      } else {
+        console.log("검색어 입력됨");
+        console.log(searchText.value);
+        const productName = searchText.value;
+        const result = await axios({
+          url: "/search",
+          method: "get",
+          params: {
+            productName,
+          },
+        });
+        document.location.href = `/search?productName=${productName}`;
+      }
+    } catch (err) {
+      console.error(err);
+    }
   }
 });
 
