@@ -1,33 +1,3 @@
-function registerBtn() {
-  const registerForm = document.forms["registerForm"];
-  const idDuplication = document.getElementById("idDuplication").value;
-  if (!registerForm.checkValidity()) {
-    registerForm.reportValidity();
-    return;
-  }
-  if (idDuplication !== "idChecked") {
-    alert("아이디 중복확인을 진행하세요. ");
-    return;
-  }
-  const formData = new FormData(registerForm);
-  axios({
-    url: "/register",
-    method: "POST",
-    data: {
-      userId: registerForm.userId.value,
-      userPw: registerForm.userPw.value,
-      nickname: registerForm.nickname.value,
-    },
-  })
-    .then(() => {
-      alert("회원가입 성공");
-      document.location.href = "/login";
-    })
-    .catch((error) => {
-      console.error("error: ", error);
-      alert("회원가입중 오류가 발생했습니다.");
-    });
-}
 async function checkDuplication() {
   const userIdInput = document.getElementById("userId");
   const idDuplicationInput = document.getElementById("idDuplication");
@@ -53,5 +23,36 @@ async function checkDuplication() {
   } catch (error) {
     console.error("Error during duplication check:", error);
     alert("중복확인 중 오류가 발생했습니다.");
+  }
+}
+async function registerBtn() {
+  const registerForm = document.forms["registerForm"];
+  const idDuplication = document.getElementById("idDuplication").value;
+
+  if (!registerForm.checkValidity()) {
+    registerForm.reportValidity();
+    return;
+  }
+
+  if (idDuplication !== "idChecked") {
+    alert("아이디 중복확인을 진행하세요.");
+    return;
+  }
+
+  try {
+    const response = await axios({
+      url: "/register",
+      method: "POST",
+      data: {
+        userId: registerForm.userId.value,
+        userPw: registerForm.userPw.value,
+        nickname: registerForm.nickname.value,
+      },
+    });
+    alert("회원가입 성공");
+    window.location.href = "/login"; // 페이지 이동
+  } catch (error) {
+    console.error("error: ", error);
+    alert("회원가입 중 오류가 발생했습니다.");
   }
 }
