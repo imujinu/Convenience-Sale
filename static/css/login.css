@@ -2,7 +2,6 @@ h2 {
   text-align: center;
   font-weight: 200;
   font-size: 2em;
-  margin-top: 10px;
   color: #34495e;
 }
 #loginForm {
@@ -39,4 +38,18 @@ p {
   text-align: center;
   font-size: 17px;
   color: #3498db;
+}
+button {
+  background-color: #ed4b5e;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #ff6678;
 }
