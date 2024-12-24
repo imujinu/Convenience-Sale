@@ -34,15 +34,10 @@ function submitPassword() {
   }
 
   // 서버에 탈퇴 요청
-  fetch("/delete-account", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ password }),
-  })
+  axios
+    .post("/deleteAccount", { password })
     .then((response) => {
-      if (response.ok) {
+      if (response.status === 200) {
         alert("탈퇴가 완료되었습니다.");
         window.location.href = "/"; // 탈퇴 후 메인 페이지로 이동
       } else {
@@ -51,7 +46,11 @@ function submitPassword() {
     })
     .catch((error) => {
       console.error("Error:", error);
-      alert("오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+      if (error.response && error.response.status === 401) {
+        alert("비밀번호가 일치하지 않습니다. 다시 시도해주세요.");
+      } else {
+        alert("오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+      }
     });
 }
 

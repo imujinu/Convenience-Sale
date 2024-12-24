@@ -153,6 +153,65 @@ exports.postUpdateUser = async (req, res) => {
   }
 };
 
+// userController.js
+exports.deleteAccount = async (req, res) => {
+  try {
+    // 현재 로그인한 사용자 정보 확인
+    const userId = req.session.user?.userId;
+
+    if (!userId) {
+      return res
+        .status(401)
+        .json({ success: false, message: "로그인이 필요합니다." });
+    }
+
+    // 사용자 정보 가져오기
+    const user = await models.User.findOne({ where: { userId } });
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "사용자를 찾을 수 없습니다." });
+    }
+
+    // 비밀번호 검증
+    const { password } = req.body; // 요청 본문에서 비밀번호 추출
+    if (user.userPw !== password) {
+      return res
+        .status(401)
+        .json({ success: false, message: "비밀번호가 일치하지 않습니다." });
+    }
+
+    // 사용자 삭제
+    const result = await models.User.destroy({ where: { userId } });
+
+    if (result) {
+      // 세션 정리
+      req.session.destroy((err) => {
+        if (err) {
+          console.error("세션 삭제 중 오류:", err);
+          return res
+            .status(500)
+            .json({ success: false, message: "세션 삭제 실패" });
+        }
+        res.clearCookie("connect.sid"); // 세션 쿠키 제거
+        return res
+          .status(200)
+          .json({ success: true, message: "회원탈퇴가 완료되었습니다." });
+      });
+    } else {
+      return res
+        .status(500)
+        .json({ success: false, message: "회원탈퇴 중 오류가 발생했습니다." });
+    }
+  } catch (error) {
+    console.error("회원탈퇴 중 오류:", error);
+    res
+      .status(500)
+      .json({ success: false, message: "서버 오류가 발생했습니다." });
+  }
+};
+
 exports.upload = (req, res) => {
   res.send({ ...req.body, ...req.file });
 };
