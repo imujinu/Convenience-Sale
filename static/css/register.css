@@ -39,7 +39,13 @@ input[type="password"] {
   border-radius: 5px;
   outline: 0;
 }
-#checkDuplicationBtn {
+button[type="button"] {
+  padding: 16px 75px;
+  background-color: #ed4b5e;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  color: white;
 }
 p {
   text-align: center;

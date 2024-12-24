@@ -1,8 +1,9 @@
 const models = require("../models");
 const { emailAuth } = require("../config/email");
-
+const crypto = require("crypto");
 const multer = require("multer");
 const path = require("path");
+const { measureMemory } = require("vm");
 
 const upload = multer({
   storage: multer.diskStorage({
@@ -20,17 +21,41 @@ const upload = multer({
   }),
   limits: { fieldSize: 5 * 1024 * 1024 },
 });
+//userPw 암호화
+function hashPw(hashedPassword) {
+  const salt = crypto.randomBytes(16).toString("base64");
+  const iterations = 100;
+  const keylen = 64;
+  const algorithm = "sha512";
+  const hash = crypto
+    .pbkdf2Sync(hashedPassword, salt, iterations, keylen, algorithm)
+    .toString("base64");
+  return { salt: salt, hash: hash };
+}
+//userPw 비교
+function checkPw(inputPw, savedSalt, savedHash) {
+  const iterations = 100;
+  const keylen = 64;
+  const algorithm = "sha512";
+  const hash = crypto
+    .pbkdf2Sync(inputPw, savedSalt, iterations, keylen, algorithm)
+    .toString("base64");
+  console.log("", hash);
+  console.log("saved", savedHash);
+  return hash === savedHash;
+}
 
 //회원 생성
 exports.postRegister = async (req, res) => {
+  const hashedPw = hashPw(req.body.userPw);
   try {
     const newUser = await models.User.create({
       userId: req.body.userId,
-      userPw: req.body.userPw,
+      hashedPassword: hashedPw.hash,
       nickname: req.body.nickname,
+      salt: hashedPw.salt,
     });
     res.send(newUser);
-    // res.render("login", { newUser });
   } catch (err) {
     console.log("err", err);
     res.status(500).send("server error");
@@ -43,20 +68,28 @@ exports.postLogin = async (req, res) => {
     const user = await models.User.findOne({
       where: {
         userId: req.body.userId,
-        userPw: req.body.userPw,
+        // userPw: req.body.userPw,
       },
     });
     console.log("postLogin: ", user);
     if (user) {
-      req.session.user = {
-        userId: user.userId,
-        userPw: user.userPw,
-        nickname: user.nickname,
-        profilePath: user.profilePath,
-      };
-      res.send(true);
+      const { salt: savedSalt, hashedPassword: savedPw } = user;
+      console.log(checkPw(req.body.userPw, savedSalt, savedPw));
+      if (checkPw(req.body.userPw, savedSalt, savedPw)) {
+        req.session.user = {
+          userId: user.userId,
+          userPw: user.userPw,
+          nickname: user.nickname,
+          profilePath: user.profilePath,
+        };
+        console.log("비밀번호 일치");
+        res.send(true);
+      } else {
+        console.log("비밀번호 틀림");
+        res.status(401).send("비밀번호가 틀렸습니다");
+      }
     } else {
-      res.send(false);
+      res.status(401).send("아이디를 확인해주세요");
     }
   } catch (err) {
     console.log("Error during login:", err);
@@ -120,7 +153,73 @@ exports.postUpdateUser = async (req, res) => {
   }
 };
 
+// userController.js
+exports.deleteAccount = async (req, res) => {
+  try {
+    // 현재 로그인한 사용자 정보 확인
+    const userId = req.session.user?.userId;
+
+    if (!userId) {
+      return res
+        .status(401)
+        .json({ success: false, message: "로그인이 필요합니다." });
+    }
+
+    // 사용자 정보 가져오기
+    const user = await models.User.findOne({ where: { userId } });
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "사용자를 찾을 수 없습니다." });
+    }
+
+    // 비밀번호 검증
+    const { password } = req.body; // 요청 본문에서 비밀번호 추출
+    if (user.userPw !== password) {
+      return res
+        .status(401)
+        .json({ success: false, message: "비밀번호가 일치하지 않습니다." });
+    }
+
+    // 사용자 삭제
+    const result = await models.User.destroy({ where: { userId } });
+
+    if (result) {
+      // 세션 정리
+      req.session.destroy((err) => {
+        if (err) {
+          console.error("세션 삭제 중 오류:", err);
+          return res
+            .status(500)
+            .json({ success: false, message: "세션 삭제 실패" });
+        }
+        res.clearCookie("connect.sid"); // 세션 쿠키 제거
+        return res
+          .status(200)
+          .json({ success: true, message: "회원탈퇴가 완료되었습니다." });
+      });
+    } else {
+      return res
+        .status(500)
+        .json({ success: false, message: "회원탈퇴 중 오류가 발생했습니다." });
+    }
+  } catch (error) {
+    console.error("회원탈퇴 중 오류:", error);
+    res
+      .status(500)
+      .json({ success: false, message: "서버 오류가 발생했습니다." });
+  }
+};
+
 exports.upload = (req, res) => {
   res.send({ ...req.body, ...req.file });
 };
 exports.emailSend = emailAuth;
+
+exports.logout = (req, res) => {
+  req.session.destroy((err) => {
+    if (err) throw err;
+    res.redirect("/");
+  });
+};

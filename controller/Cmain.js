@@ -10,19 +10,33 @@ exports.home = async (req, res) => {
       cName: "CU",
     },
   });
+  const GS25 = await Products.findAll({
+    where: {
+      cName: "GS25",
+    },
+  });
+  const ELEVEN = await Products.findAll({
+    where: {
+      cName: "7ELEVEN",
+    },
+  });
 
-  if (req.session.user) {
+  const user = req.session.user;
+
+  if (user) {
     res.render("home", {
-      user: req.session.user,
+      user: user.nickname,
       isLogin: true,
       CU,
+      GS25,
+      ELEVEN,
     });
   } else {
-    res.render("home", { isLogin: false, CU });
+    res.render("home", { isLogin: false, CU, GS25, ELEVEN });
   }
 };
 
-exports.get_login = (req, res) => {
+exports.getLogin = (req, res) => {
   if (req.session.user) {
     res.render("login", {
       user: req.session.user,
@@ -33,9 +47,9 @@ exports.get_login = (req, res) => {
   }
 };
 
-exports.get_register = (req, res) => {
+exports.getRegister = (req, res) => {
   if (req.session.user) {
-    res.render("register", {
+    res.render("home", {
       user: req.session.user,
       isLogin: true,
     });
@@ -43,7 +57,21 @@ exports.get_register = (req, res) => {
     res.render("register", { isLogin: false });
   }
 };
-
+exports.getLogout = (req, res) => {
+  if (req.session.user) {
+    req.session.destroy((err) => {
+      if (err) throw err;
+      res.redirect("/");
+    });
+  } else {
+    res.send(`
+      <script>
+      alert("이미 세션이 만료되었다");
+      document.location.href="/";
+      </script>
+      `);
+  }
+};
 exports.mypage = (req, res) => {
   const user = req.session.user;
   if (user) {
@@ -51,13 +79,11 @@ exports.mypage = (req, res) => {
       userId: user.userId,
       nickname: user.nickname,
       profilePath: user.profilePath,
-      isLogin: true,
     });
     console.log("userID:::", user.userId);
   } else {
     res.send(
-      `<script>alert("먼저 로그인 해주세요"); location.href="/login";</script>`,
-      { isLogin: false },
+      '<script>alert("먼저 로그인 해주세요"); location.href="/login";</script>',
     );
   }
 };
@@ -71,11 +97,13 @@ exports.userview = (req, res) => {
       nickname: user.nickname,
       userPw: user.userPw,
       profilePath: user.profilePath,
+      isLogin: true,
     });
     console.log("userID:::", user.userPw);
   } else {
     res.send(
-      '<script>alert("먼저 로그인 해주세요"); location.href="/login";</script>',
+      `<script>alert("먼저 로그인 해주세요"); location.href="/login";</script>`,
+      { isLogin: false },
     );
   }
 };

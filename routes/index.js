@@ -11,8 +11,9 @@ const boardController = require("../controller/Cboard");
 
 // 메인 라우트
 router.get("/", main.home);
-router.get("/login", main.get_login);
-router.get("/register", main.get_register);
+router.get("/login", main.getLogin);
+router.get("/register", main.getRegister);
+router.get("/logout", main.getLogout);
 // 마이페이지
 router.get("/mypage", main.mypage);
 // 회원정보 수정
@@ -33,6 +34,14 @@ router.post("/upload", upload.single("user"), user.upload);
 router.get("/upload", (req, res) => {
   res.json({ message: "test" });
 });
+
+// 로그아웃
+router.get("/logout", user.logout);
+
+
+//회원탈퇴
+router.post("/deleteAccount", user.deleteAccount);
+
 
 // 파일 업로드
 router.post("/upload", user.upload);

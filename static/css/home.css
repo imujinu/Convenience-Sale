@@ -141,8 +141,7 @@ a {
   height: 100%;
 }
 
-.section3 .swiper img {
-  border: 1px solid white;
+.section3 .swiper-slide img {
   border-radius: 20px;
 }
 
@@ -173,6 +172,15 @@ a {
   height: 10%;
 }
 
+/* .swiper-button-prev,
+.swiper-button-next {
+  opacity: 0.5;
+  padding: 15px 5px;
+  border-radius: 50px;
+  border: 1px solid black;
+  color: black !important;
+} */
+
 .section3 > .swiper > .swiper-wrapper > .swiper-slide > .viewBox > .view {
   align-items: center;
   justify-content: center;
@@ -188,6 +196,41 @@ a {
   transition: 0.5s;
   background: aquamarine;
   text-decoration: underline;
+}
+
+.section3 .next {
+  position: absolute;
+  right: 10%;
+  height: auto;
+  padding: 5px;
+  width: 60px;
+  border: 1px solid black;
+  transition: 0.5s;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+.section3 .prev {
+  position: absolute;
+  left: 10%;
+  height: auto;
+  padding: 5px;
+  width: 60px;
+  border: 1px solid black;
+  transition: 0.5s;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.section3 .next:hover,
+.section3 .prev:hover {
+  background: palevioletred;
+  opacity: 1;
+  transform: scale(1.1);
+  transition: 0.5s;
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  display: none;
 }
 
 /* section3 모달달 */
@@ -272,14 +315,19 @@ a {
   cursor: pointer;
 }
 
-.section5 {
+.section5,
+.section6,
+.section7 {
   width: 100%;
-  height: 400px;
+  height: 250px;
   display: flex;
   justify-content: center;
+  margin-bottom: 20px;
 }
 
-.section5 > .container {
+.section5 > .container,
+.section6 > .container,
+.section7 > .container {
   width: 1200px;
   height: 100%;
   display: flex;
@@ -287,23 +335,57 @@ a {
 }
 
 .section5 > .container > .product,
-.section5 > .container > .clone {
+.section5 > .container > .clone,
+.section6 > .container > .product,
+.section6 > .container > .clone,
+.section7 > .container > .product,
+.section7 > .container > .clone {
   display: flex;
+  align-items: center;
 }
 
 .section5 > .container > .product > .menu,
-.section5 > .container > .clone > .menu {
-  width: 250px;
-  height: 50%;
+.section5 > .container > .clone > .menu,
+.section6 > .container > .product > .menu,
+.section6 > .container > .clone > .menu,
+.section7 > .container > .product > .menu,
+.section7 > .container > .clone > .menu {
+  padding: 40px 0;
+  margin-right: 15px;
+  width: 230px;
+  height: 90%;
+  border-radius: 20px;
+  text-align: center;
+  grid-template-rows: 5fr 1fr 1fr 1fr;
   align-items: center;
-  flex-shrink: 0;
-}
-.section5 > .container > .product > .menu > img {
-  width: 100%;
-  height: 100%;
+  justify-items: center;
+  border: 1px solid #8080805e;
+  align-content: center;
 }
 
-.section5 > .container > .product > .text {
+.section5 > .container > .product > .menu:hover,
+.section5 > .container > .clone > .menu:hover,
+.section6 > .container > .product > .menu:hover,
+.section6 > .container > .clone > .menu:hover,
+.section7 > .container > .product > .menu:hover,
+.section7 > .container > .clone > .menu:hover {
+  border-radius: 20px;
+  border: 5px solid aqua;
+  transition: 0.5s;
+  transform: scale(1.1);
+}
+
+.section5 > .container > .product > .menu > img,
+.section6 > .container > .product > .menu > img,
+.section7 > .container > .product > .menu > img {
+  height: 80%;
+  width: 100%;
+  transition: 0.5s;
+}
+
+.section5 > .container > .product > .text,
+.section6 > .container > .product > .text,
+.section7 > .container > .product > .text {
   width: 100%;
   height: auto;
   text-align: center;
@@ -353,6 +435,7 @@ a {
   height: 400px;
   display: flex;
   justify-content: center;
+  margin-top: 200px;
 }
 
 .section8 .part1 {
