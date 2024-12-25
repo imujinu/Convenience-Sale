@@ -13,6 +13,7 @@ const boardController = require("../controller/Cboard");
 router.get("/", main.home);
 router.get("/login", main.getLogin);
 router.get("/register", main.getRegister);
+// 로그아웃
 router.get("/logout", main.getLogout);
 // 마이페이지
 router.get("/mypage", main.mypage);
@@ -35,13 +36,8 @@ router.get("/upload", (req, res) => {
   res.json({ message: "test" });
 });
 
-// 로그아웃
-router.get("/logout", user.logout);
-
-
 //회원탈퇴
 router.post("/deleteAccount", user.deleteAccount);
-
 
 // 파일 업로드
 router.post("/upload", user.upload);

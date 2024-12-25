@@ -216,10 +216,3 @@ exports.upload = (req, res) => {
   res.send({ ...req.body, ...req.file });
 };
 exports.emailSend = emailAuth;
-
-exports.logout = (req, res) => {
-  req.session.destroy((err) => {
-    if (err) throw err;
-    res.redirect("/");
-  });
-};

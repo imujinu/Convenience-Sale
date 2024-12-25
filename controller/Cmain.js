@@ -126,44 +126,48 @@ exports.store = (req, res) => {
 //   });
 // }
 exports.search = async (req, res) => {
-  try {
-    console.log("req.query>>>>", req.query.productName);
-    const searchValue = req.query.productName;
+  const query = req.query.productName;
+  if (query) {
+    try {
+      console.log("req.query>>>>", req.query.productName);
 
-    const product = await Products.findAll({
-      where: {
-        pName: {
-          [Op.like]: `%${searchValue}%`,
+      const product = await Products.findAll({
+        where: {
+          pName: {
+            [Op.like]: `%${query}%`,
+          },
         },
-      },
-    });
-    const user = req.session.user;
+      });
+      const user = req.session.user;
 
-    if (product.length > 0) {
-      if (user) {
-        res.render("search", {
-          isLogin: true,
-          user,
-          product,
-          searchValue,
-          isSearch: true,
-        });
+      if (product.length > 0) {
+        if (user) {
+          res.render("search", {
+            isLogin: true,
+            user,
+            product,
+            query,
+            isSearch: true,
+          });
+        } else {
+          res.render("search", {
+            isLogin: false,
+            product,
+            query,
+            isSearch: true,
+          });
+        }
       } else {
-        res.render("search", {
-          isLogin: false,
-          product,
-          searchValue,
-          isSearch: true,
-        });
+        if (user) {
+          res.render("search", { isLogin: true, user, isSearch: false });
+        } else {
+          res.render("search", { isLogin: false, isSearch: false });
+        }
       }
-    } else {
-      if (user) {
-        res.render("search", { isLogin: true, user, isSearch: false });
-      } else {
-        res.render("search", { isLogin: false, isSearch: false });
-      }
+    } catch (err) {
+      console.error("err", err);
     }
-  } catch (err) {
-    console.error("err", err);
+  } else {
+    res.redirect("/");
   }
 };

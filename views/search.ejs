@@ -31,15 +31,15 @@
 
     <div class="section4">
       <div class="container">
-        <div><p>"<%= searchValue %>" 검색결과</p></div>
+        <div><p>"<%= query %>" 검색결과</p></div>
         <div>
           <input type="text" class="search" />
           <img src="/static/image/search.png" alt="" class="searchBtn" />
         </div>
         <br />
         <div>
-          "<%= searchValue %>" 검색결과 총 <u>'<%= product.length %>'개</u>의
-          상품이 검색되었습니다.
+          "<%= query %>" 검색결과 총 <u>'<%= product.length %>'개</u>의 상품이
+          검색되었습니다.
         </div>
       </div>
     </div>
@@ -47,6 +47,7 @@
       <div class="container">
         <% for (let i = 0; i < product.length; i++) { %>
         <div class="product">
+          <!-- <span><p><%= product[i].Name %></p></span> -->
           <img
             src="/static/image/product/<%= product[i].imagePath %>"
             alt="편의점상품"
