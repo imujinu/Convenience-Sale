@@ -19,13 +19,27 @@ for (let i = 1; i < 6; i++) {
 }
 
 const logout = document.querySelector(".part1 .logout");
-logout.addEventListener("click", async () => {
-  try {
-    const result = await axios({
-      url: "/logout",
-      method: "get",
-    });
-  } catch (err) {
-    console.error("err", err);
-  }
+if (logout) {
+  logout.addEventListener("click", async () => {
+    try {
+      const result = await axios({
+        url: "/logout",
+        method: "get",
+      });
+    } catch (err) {
+      console.error("err", err);
+    }
+  });
+}
+
+const burger = document.querySelector(
+  ".section1 > .container > .part1 .burger",
+);
+const navbar = document.querySelector(".section1 > .container > .part2");
+const section2 = document.querySelector(".section2 ");
+burger.addEventListener("click", () => {
+  navbar.classList.toggle("navbarHidden");
+  navbar.classList.toggle("navbarVisible");
+  section2.classList.toggle("top1");
+  section2.classList.toggle("top2");
 });

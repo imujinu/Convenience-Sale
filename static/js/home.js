@@ -24,10 +24,13 @@ const swiper = new Swiper(".swiper", {
     clickable: true,
     bulletActiveClass: "on",
   },
-
-  slidesPerView: 2,
-  centeredSlides: true,
-
+  breakfoints: {
+    0: {
+      slidesPerView: 1,
+    },
+    768: {},
+    1024: { slidesPerView: 2, centeredSlides: true },
+  },
   navigation: {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
@@ -472,23 +475,45 @@ git.forEach((el) => {
 window.addEventListener("scroll", () => {
   const scroll = window.scrollY;
   const section9 = document.querySelector(".section9 > .container ");
+  const width = window.innerWidth;
 
-  if (scroll > 1910) {
-    section9.style.opacity = "1";
-  } else {
-    section9.style.opacity = "0";
+  if (width < 768) {
+    if (scroll > 2535) {
+      section9.style.opacity = "1";
+    } else {
+      section9.style.opacity = "0";
+    }
+  } else if (768 <= width && width < 1024) {
+  } else if (1024 < width) {
+    if (scroll > 1910) {
+      section9.style.opacity = "1";
+    } else {
+      section9.style.opacity = "0";
+    }
   }
 });
 
 window.addEventListener("scroll", () => {
   const scroll = window.scrollY;
-
+  const width = window.innerWidth;
   const emailInput = document.querySelector(".section9 > .container > .inner ");
-  if (scroll > 2214) {
-    emailInput.style.bottom = "17%";
-    emailInput.style.opacity = "1";
-  } else {
-    emailInput.style.bottom = "0%";
-    emailInput.style.opacity = "0";
+
+  if (width < 768) {
+    if (scroll > 2730) {
+      emailInput.style.bottom = "1%";
+      emailInput.style.opacity = "1";
+    } else {
+      emailInput.style.bottom = "-10%";
+      emailInput.style.opacity = "0";
+    }
+  } else if (768 <= width && width < 1024) {
+  } else if (1024 < width) {
+    if (scroll > 2214) {
+      emailInput.style.bottom = "17%";
+      emailInput.style.opacity = "1";
+    } else {
+      emailInput.style.bottom = "0%";
+      emailInput.style.opacity = "0";
+    }
   }
 });
