@@ -49,7 +49,7 @@ exports.getLogin = (req, res) => {
 
 exports.getRegister = (req, res) => {
   if (req.session.user) {
-    res.render("home", {
+    res.render("register", {
       user: req.session.user,
       isLogin: true,
     });
@@ -66,7 +66,7 @@ exports.getLogout = (req, res) => {
   } else {
     res.send(`
       <script>
-      alert("이미 세션이 만료되었다");
+      alert("세션이 만료되었습니다");
       document.location.href="/";
       </script>
       `);
