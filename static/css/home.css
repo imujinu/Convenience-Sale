@@ -10,12 +10,18 @@ a {
   color: inherit !important;
 }
 
+.sectionContainer {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
 .section2 {
   width: 100%;
   height: 600px;
   display: flex;
   position: relative;
   transition: 0.5s;
+  z-index: 10;
 }
 
 .section2 > .part1 {
@@ -32,28 +38,31 @@ a {
 .section2 .title {
   left: -100%;
   position: absolute;
-  font-size: 2rem;
-  top: 15%;
+  font-size: 2.5vw;
+  top: 30%;
+  text-align: center;
   animation: ani1 1s forwards;
 }
 
 .section2 .contents {
-  left: -100%;
-  top: 35%;
+  left: -160%;
+  top: 50%;
   position: absolute;
   line-height: 30px;
+  text-align: center;
+  font-size: 1.2vw;
   animation: ani2 1.5s forwards;
 }
 
 @keyframes ani1 {
   100% {
-    left: 30%;
+    left: 14%;
   }
 }
 
 @keyframes ani2 {
   100% {
-    left: 20%;
+    left: 0%;
   }
 }
 
@@ -75,7 +84,7 @@ a {
   width: 30%;
   text-align: center;
   top: 70%;
-  left: 40%;
+  left: 34%;
   border: 2px solid #ffcdd4;
   color: black;
   padding: 3% 0;
@@ -90,7 +99,7 @@ a {
 }
 
 .section2 > .part2 > .arrow {
-  width: 3%;
+  width: 5%;
   height: auto;
   padding: 5px;
   position: fixed;
@@ -248,24 +257,23 @@ a {
 
 .section3 .modalContent {
   width: 40%;
-  height: 90%;
+  height: 100%;
   position: absolute;
-
   overflow-y: scroll;
 }
 
 .section3 .modalContent img {
-  margin-top: 10%;
   width: 100%;
   height: auto;
-  position: absolute;
+  position: relative;
+  top: 12%;
 }
 .section3 .modalCloseBtn {
   position: fixed;
   right: 31%;
-  top: 16.5%;
+  top: 13%;
   border: 1px solid white;
-  width: 1.5%;
+  width: 4.5%;
   height: auto;
 }
 .section3 .modalCloseBtn img {
@@ -282,11 +290,11 @@ a {
 }
 
 .section3 .stop {
-  width: 1.5%;
+  width: 1%;
   height: 3%;
   position: absolute;
-  bottom: 3.5%;
-  left: 46%;
+  bottom: 4%;
+  left: 45%;
   cursor: pointer;
   z-index: 11;
 }
@@ -448,12 +456,24 @@ a {
 
 .section8 .part1 {
   width: 30%;
+  height: 60%;
+  display: grid;
+}
+.section8 > .container > .part1 > .searchBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section8 > .container > .part1 > .searchBox > .searchText {
+  width: 100%;
   height: 100%;
 }
-.section8 > .container > .part1 > .search {
+
+.section8 > .container > .part1 > .searchBox > .search {
   width: 10%;
-  height: 20px;
-  background: url(/static/image/search.png) no-repeat;
+  height: 25px;
+  background: url(/static/image/search.png) center/cover no-repeat;
   background-size: contain;
   cursor: pointer;
 }
@@ -575,14 +595,14 @@ a {
 
 .section9 {
   width: 100%;
-  height: 500px;
+  height: 333px;
   display: flex;
   justify-content: center;
 }
 .section9 > .container {
   width: 1200px;
   height: 100%;
-  background: url(/static/image/emailbg.png) center / contain no-repeat;
+  background: url(/static/image/emailbg.png) center / cover no-repeat;
   position: relative;
   display: flex;
   justify-content: center;
@@ -590,8 +610,8 @@ a {
 }
 
 .section9 > .container > .inner {
-  width: 50%;
-  height: 10%;
+  width: 55%;
+  height: 21%;
   position: absolute;
   display: flex;
   justify-content: center;
@@ -615,7 +635,7 @@ a {
 }
 .footer {
   width: 100%;
-  height: 80px;
+  height: 150px;
   background: ivory;
   display: flex;
   justify-content: center;
@@ -623,8 +643,8 @@ a {
 }
 
 .footer > .container {
-  width: 30%;
-  height: 100%;
+  width: 50%;
+  height: 50%;
   display: grid;
   grid-template-rows: repeat(2, 1fr);
   justify-items: center;
@@ -634,6 +654,7 @@ a {
 .footer > .container > ul {
   display: flex;
   justify-content: center;
+  font-size: 1.5vw;
 }
 
 .footer > .container > ul > li {
@@ -663,9 +684,124 @@ a {
 }
 
 .footer > .container > .text {
-  font-size: 12px;
+  font-size: 1vw;
 }
 
+.tablet {
+  display: none;
+}
+.desktop {
+  display: block;
+}
+@media (max-width: 1024px) {
+  .section1 > .container > .part2 > ul {
+    width: 75%;
+  }
+
+  .section2 .title {
+    width: 100%;
+    position: absolute;
+    font-size: 2.5vw;
+    top: 35%;
+    animation: ani3 1s forwards;
+    text-align: center;
+  }
+  .section2 .part1 .contents p:nth-child(1) {
+    font-size: 2vw;
+  }
+
+  .section2 .contents {
+    top: 50%;
+    position: absolute;
+    font-size: 2vw;
+    line-height: 30px;
+    animation: ani4 1.5s forwards;
+    text-align: center;
+  }
+  @keyframes ani3 {
+    100% {
+      left: 0%;
+    }
+  }
+
+  @keyframes ani4 {
+    100% {
+      left: 7%;
+    }
+  }
+
+  .section2 .detail {
+    top: 75%;
+    left: 35%;
+  }
+  .section3 .stop {
+    bottom: 4%;
+    left: 44%;
+  }
+  .section8 .part1 {
+    width: 30%;
+    height: 58%;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .section2 > .part2 > .arrow {
+    width: 6%;
+  }
+
+  .section3 > .swiper > .swiper-wrapper > .swiper-slide > .viewBox > .view {
+    width: 30%;
+  }
+  .section5 > .container > .product > .menu,
+  .section5 > .container > .clone > .menu,
+  .section6 > .container > .product > .menu,
+  .section6 > .container > .clone > .menu,
+  .section7 > .container > .product > .menu,
+  .section7 > .container > .clone > .menu {
+    width: 235px;
+    font-size: 1.5vw;
+  }
+  .section5 > .container > .product > .menu > img,
+  .section6 > .container > .product > .menu > img,
+  .section7 > .container > .product > .menu > img {
+    height: 70%;
+  }
+
+  .section8 > .container > .part2 > .menu {
+    font-size: 20px;
+  }
+  .section9 > .container > .inner > .email {
+    height: 37px;
+    width: 30%;
+    margin-right: 10px;
+    font-size: 11px;
+  }
+  .section9 > .container > .inner > button {
+    width: 10%;
+    height: 38px;
+  }
+  .footer {
+    height: 100px;
+  }
+
+  .footer > .container {
+    width: 50%;
+    height: 50%;
+  }
+
+  .section9 {
+    height: 260px;
+  }
+  .tablet {
+    display: block;
+  }
+  .desktop {
+    display: none;
+  }
+}
+
+/* 767------------ */
 @media (max-width: 767px) {
   .section2 {
     display: grid;
@@ -676,7 +812,7 @@ a {
     width: 100%;
     height: 100%;
     background: #fff3f4;
-    text-align: right;
+    text-align: center;
     position: relative;
     display: grid;
     align-items: center;
@@ -688,6 +824,7 @@ a {
     position: relative;
     align-self: center;
     animation: left 1s forwards;
+    font-size: 25px;
   }
 
   .section2 .contents {
@@ -700,7 +837,12 @@ a {
   .section2 > .part2 {
     width: 100%;
   }
-
+  .section1 > .container > .part2 > ul {
+    width: 100%;
+  }
+  .section2 > .part2 > .arrow {
+    width: 7%;
+  }
   .section2 .detail {
     width: 50%;
     text-align: center;
@@ -714,6 +856,7 @@ a {
     left: -160%;
     top: 0;
     animation: left2 2s forwards;
+    justify-self: center;
   }
   @keyframes left {
     100% {
@@ -722,11 +865,11 @@ a {
   }
   @keyframes left2 {
     100% {
-      left: 70px;
+      left: 0;
     }
   }
   .section3 {
-    margin-top: 15%;
+    margin-top: 20%;
   }
 
   .section3 .next,
@@ -744,7 +887,20 @@ a {
   }
 
   .section2 > .part2 > .arrow {
-    width: 8%;
+    width: 7%;
+  }
+
+  .section3 .modalContent img {
+    top: 7.5%;
+  }
+  .section3 .modalCloseBtn {
+    position: fixed;
+    right: 25.5%;
+    top: 8%;
+    border: 1px solid black;
+    padding: 5px;
+    width: 4.5%;
+    height: auto;
   }
   .section4 {
     margin-top: 40px;
@@ -763,7 +919,23 @@ a {
     margin-bottom: 20px;
     justify-content: unset;
   }
-
+  .section5 > .container > .product > .menu,
+  .section5 > .container > .clone > .menu,
+  .section6 > .container > .product > .menu,
+  .section6 > .container > .clone > .menu,
+  .section7 > .container > .product > .menu,
+  .section7 > .container > .clone > .menu {
+    width: 181px;
+    height: 80%;
+    font-size: 16px;
+  }
+  .section5 > .container > .product > .menu > img,
+  .section6 > .container > .product > .menu > img,
+  .section7 > .container > .product > .menu > img {
+    height: 50%;
+    width: 100%;
+    transition: 0.5s;
+  }
   .section8 {
     margin-top: 100px;
   }
@@ -777,29 +949,44 @@ a {
   .section8 .part1 {
     width: 100%;
     height: 100%;
+    display: grid;
+    justify-content: center;
+    margin-bottom: 21px;
   }
 
+  .section8 > .container > .part1 > .searchBox {
+    width: 100%;
+    height: 100%;
+  }
+
+  .section8 > .container > .part1 > .searchBox > .search {
+    width: 30px;
+    height: 31px;
+  }
   .section8 > .container > .part2 {
     width: 100%;
+    margin-top: 15%;
   }
-
+  .section8 > .container > .part2 > .menu {
+    font-size: 20px;
+  }
   .section8 > .container > .part2 > .menu1 {
-    width: 30%;
+    width: 160px;
     left: 5%;
   }
   .section8 > .container > .part2 > .menu2 {
-    width: 25%;
+    width: 180px;
     height: 90px;
     right: 1%;
   }
   .section8 > .container > .part2 > .menu3 {
-    width: 25%;
+    width: 180px;
     height: 100px;
     left: 40%;
     bottom: 62%;
   }
   .section8 > .container > .part2 > .menu4 {
-    width: 27%;
+    width: 180px;
     height: 100px;
     left: 20%;
     top: 77%;
@@ -807,7 +994,7 @@ a {
   .section9 {
     width: 100%;
     height: 341px;
-    margin-top: 135px;
+    margin-top: 260px;
   }
   .section9 > .container {
     background: url(/static/image/emailbg2.png) center / cover no-repeat;
@@ -820,17 +1007,18 @@ a {
     display: flex;
     justify-content: center;
     transition: 1s;
+    left: 6%;
   }
 
   .section9 > .container > .inner > button {
     width: 75px;
-    height: 20px;
+    height: 35px;
     border: 1px solid black;
     transition: 0.5s;
   }
 
   .section9 > .container > .inner > .email {
-    height: 20px;
+    height: 35px;
     width: 150px;
     margin-right: 10px;
   }
@@ -839,7 +1027,82 @@ a {
   }
 
   .footer > .container {
-    width: 60%;
+    width: 70%;
     height: 40%;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    justify-content: center;
+  }
+  .footer > .container > .text {
+    font-size: 2vw;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .section2 > .part2 > .arrow {
+    width: 9%;
+  }
+  .section3 {
+    margin-top: 26%;
+  }
+  .section3 .stop {
+    width: 2%;
+    height: 3%;
+    bottom: 15px;
+    left: 38%;
+  }
+  .section3 > .swiper > .swiper-wrapper > .swiper-slide > .viewBox > .view {
+    width: 100px;
+  }
+  .section5 > .container > .product > .menu,
+  .section5 > .container > .clone > .menu,
+  .section6 > .container > .product > .menu,
+  .section6 > .container > .clone > .menu,
+  .section7 > .container > .product > .menu,
+  .section7 > .container > .clone > .menu {
+    font-size: 3vw;
+  }
+  .section8 > .container > .part2 {
+    width: 100%;
+    margin-top: 25%;
+  }
+  .section8 > .container > .part2 > .menu {
+    font-size: 19px;
+  }
+  .section8 > .container > .part2 > .menu1 {
+    height: 80px;
+    width: 120px;
+  }
+  .section8 > .container > .part2 > .menu2 {
+    width: 110px;
+  }
+  .section8 > .container > .part2 > .menu3 {
+    width: 110px;
+  }
+  .section8 > .container > .part2 > .menu4 {
+    width: 125px;
+  }
+  .section9 {
+    margin-top: 250px;
+  }
+  .section9 > .container > .inner {
+    width: 47%;
+    left: 24%;
+  }
+  .section9 > .container > .inner {
+    width: 40%;
+    height: 12%;
+    left: 24%;
+  }
+  .section9 > .container > .inner > .email {
+    width: 120px;
+    height: 37px;
+    font-size: 2.5vw;
+  }
+  .section9 > .container > .inner > button {
+    width: 75px;
+    height: 36px;
+    font-size: 3vw;
   }
 }
