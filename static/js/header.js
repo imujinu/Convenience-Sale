@@ -35,11 +35,16 @@ if (logout) {
 const burger = document.querySelector(
   ".section1 > .container > .part1 .burger",
 );
+const body = document.querySelector("body");
 const navbar = document.querySelector(".section1 > .container > .part2");
-const section2 = document.querySelector(".section2 ");
+// const section2 = document.querySelector(".section2 ");
+const section2 = document.querySelector(".sectionContainer ");
 burger.addEventListener("click", () => {
   navbar.classList.toggle("navbarHidden");
   navbar.classList.toggle("navbarVisible");
+  // section2.classList.toggle("top1");
+  // section2.classList.toggle("top2");
+
   section2.classList.toggle("top1");
   section2.classList.toggle("top2");
 });
