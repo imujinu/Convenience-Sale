@@ -25,7 +25,8 @@ async function checkDuplication() {
     alert("중복확인 중 오류가 발생했습니다.");
   }
 }
-async function registerBtn() {
+async function registerBtn(event) {
+  event.preventDefault();
   const registerForm = document.forms["registerForm"];
   const idDuplication = document.getElementById("idDuplication").value;
 
@@ -47,8 +48,10 @@ async function registerBtn() {
         userId: registerForm.userId.value,
         userPw: registerForm.userPw.value,
         nickname: registerForm.nickname.value,
+        userEmail: registerForm.userEmail.value,
       },
     });
+    console.log("성공 or 실패: ", response);
     alert("회원가입 성공");
     window.location.href = "/login"; // 페이지 이동
   } catch (error) {

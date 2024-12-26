@@ -53,9 +53,12 @@ exports.postRegister = async (req, res) => {
       userId: req.body.userId,
       hashedPassword: hashedPw.hash,
       nickname: req.body.nickname,
+      userEmail: req.body.userEmail,
       salt: hashedPw.salt,
     });
+    console.log("new user: ", newUser);
     res.send(newUser);
+    console.log("new user을 보냄? ", newUser.userId);
   } catch (err) {
     console.log("err", err);
     res.status(500).send("server error");
@@ -216,10 +219,3 @@ exports.upload = (req, res) => {
   res.send({ ...req.body, ...req.file });
 };
 exports.emailSend = emailAuth;
-
-exports.logout = (req, res) => {
-  req.session.destroy((err) => {
-    if (err) throw err;
-    res.redirect("/");
-  });
-};

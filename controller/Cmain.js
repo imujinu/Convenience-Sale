@@ -25,7 +25,7 @@ exports.home = async (req, res) => {
 
   if (user) {
     res.render("home", {
-      user: user.nickname,
+      name: user.nickname,
       isLogin: true,
       CU,
       GS25,
@@ -38,7 +38,7 @@ exports.home = async (req, res) => {
 
 exports.getLogin = (req, res) => {
   if (req.session.user) {
-    res.render("login", {
+    res.render("home", {
       user: req.session.user,
       isLogin: true,
     });
@@ -49,7 +49,7 @@ exports.getLogin = (req, res) => {
 
 exports.getRegister = (req, res) => {
   if (req.session.user) {
-    res.render("register", {
+    res.render("home", {
       user: req.session.user,
       isLogin: true,
     });
@@ -76,9 +76,11 @@ exports.mypage = (req, res) => {
   const user = req.session.user;
   if (user) {
     res.render("mypage", {
+      name: user.nickname,
       userId: user.userId,
       nickname: user.nickname,
       profilePath: user.profilePath,
+      isLogin: true,
     });
     console.log("userID:::", user.userId);
   } else {
@@ -93,6 +95,7 @@ exports.userview = (req, res) => {
   const user = req.session.user;
   if (user) {
     res.render("userview", {
+      name: user.nickname,
       userId: user.userId,
       nickname: user.nickname,
       userPw: user.userPw,
@@ -126,44 +129,48 @@ exports.store = (req, res) => {
 //   });
 // }
 exports.search = async (req, res) => {
-  try {
-    console.log("req.query>>>>", req.query.productName);
-    const searchValue = req.query.productName;
+  const query = req.query.productName;
+  if (query) {
+    try {
+      console.log("req.query>>>>", req.query.productName);
 
-    const product = await Products.findAll({
-      where: {
-        pName: {
-          [Op.like]: `%${searchValue}%`,
+      const product = await Products.findAll({
+        where: {
+          pName: {
+            [Op.like]: `%${query}%`,
+          },
         },
-      },
-    });
-    const user = req.session.user;
+      });
+      const user = req.session.user;
 
-    if (product.length > 0) {
-      if (user) {
-        res.render("search", {
-          isLogin: true,
-          user,
-          product,
-          searchValue,
-          isSearch: true,
-        });
+      if (product.length > 0) {
+        if (user) {
+          res.render("search", {
+            isLogin: true,
+            user,
+            product,
+            query,
+            isSearch: true,
+          });
+        } else {
+          res.render("search", {
+            isLogin: false,
+            product,
+            query,
+            isSearch: true,
+          });
+        }
       } else {
-        res.render("search", {
-          isLogin: false,
-          product,
-          searchValue,
-          isSearch: true,
-        });
+        if (user) {
+          res.render("search", { isLogin: true, user, isSearch: false });
+        } else {
+          res.render("search", { isLogin: false, isSearch: false });
+        }
       }
-    } else {
-      if (user) {
-        res.render("search", { isLogin: true, user, isSearch: false });
-      } else {
-        res.render("search", { isLogin: false, isSearch: false });
-      }
+    } catch (err) {
+      console.error("err", err);
     }
-  } catch (err) {
-    console.error("err", err);
+  } else {
+    res.redirect("/");
   }
 };

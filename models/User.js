@@ -16,6 +16,10 @@ const User = function (sequelize, DataTypes) {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      userEmail: {
+        type: DataTypes.STRING(60),
+        allowNull: false,
+      },
       // nickname VARCHAR(20) NOT NULL,
       nickname: {
         type: DataTypes.STRING(20),
