@@ -1,3 +1,4 @@
+-- Active: 1732688613389@@127.0.0.1@3306@sesac
 use sesac;
 show tables;
 
@@ -13,7 +14,7 @@ drop table user;
 SELECT * FROM user;
 SELECT * FROM email;
 SELECT * FROM products;
-DELETE FROM user WHERE `userId= qwe`;
+DELETE FROM user WHERE userId = "qwpl";
 DESC products;
 
 INSERT INTO products (pName, price, event, cName, imagePath)
@@ -57,6 +58,10 @@ VALUES
 ("CJ)맛밤42g", 2400, "2+1", "CU", "8801007073453.png"),
 ("CJ)맛밤80g", 3900, "2+1", "CU", "8801007022635.png"),
 ("CJ)맥스봉꼬치바청양90g", 2500, "2+1", "CU", "8801007880303.png"),
+
+("CJ)맥스봉스팸콕콕80g", 3900, "2+1", "CU", "8801392105630.png");
+
+=======
 ("CJ)맥스봉스팸콕콕80g", 3900, "2+1", "CU", "8801392105630.png"),
 ("CJ)갈비만두300G", 6900, "1+1", "GS25", "GD_8801007508740_003.jpg"),
 ("CJ)계산대용소시지25G", 1200, "1+1", "GS25", "GD_8801392059636_002.jpg"),
@@ -127,3 +132,4 @@ VALUES
 ("롯데)의성마늘직꾸닭매콤100g", 3000, "1+1", "7ELEVEN", "410392.1.jpg"),
 ("대림)숯불구이맛후랑크70g", 1900, "1+1", "7ELEVEN", "019447.1.jpg"),
 ("롯데)키스틱55g", 2200, "1+1", "7ELEVEN", "203918.1.jpg");
+

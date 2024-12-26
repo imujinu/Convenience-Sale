@@ -25,7 +25,7 @@ exports.home = async (req, res) => {
 
   if (user) {
     res.render("home", {
-      user: user.nickname,
+      name: user.nickname,
       isLogin: true,
       CU,
       GS25,
@@ -38,7 +38,7 @@ exports.home = async (req, res) => {
 
 exports.getLogin = (req, res) => {
   if (req.session.user) {
-    res.render("login", {
+    res.render("home", {
       user: req.session.user,
       isLogin: true,
     });
@@ -66,7 +66,7 @@ exports.getLogout = (req, res) => {
   } else {
     res.send(`
       <script>
-      alert("이미 세션이 만료되었다");
+      alert("세션이 만료되었습니다");
       document.location.href="/";
       </script>
       `);
@@ -76,9 +76,11 @@ exports.mypage = (req, res) => {
   const user = req.session.user;
   if (user) {
     res.render("mypage", {
+      name: user.nickname,
       userId: user.userId,
       nickname: user.nickname,
       profilePath: user.profilePath,
+      isLogin: true,
     });
     console.log("userID:::", user.userId);
   } else {
@@ -93,6 +95,7 @@ exports.userview = (req, res) => {
   const user = req.session.user;
   if (user) {
     res.render("userview", {
+      name: user.nickname,
       userId: user.userId,
       nickname: user.nickname,
       userPw: user.userPw,
