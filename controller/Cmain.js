@@ -25,7 +25,7 @@ exports.home = async (req, res) => {
 
   if (user) {
     res.render("home", {
-      user: user.nickname,
+      name: user.nickname,
       isLogin: true,
       CU,
       GS25,
@@ -140,12 +140,13 @@ exports.search = async (req, res) => {
         },
       });
       const user = req.session.user;
+      const name = user.nickname;
 
       if (product.length > 0) {
         if (user) {
           res.render("search", {
             isLogin: true,
-            user,
+            name,
             product,
             insertQuery,
             isSearch: true,
@@ -162,7 +163,7 @@ exports.search = async (req, res) => {
         if (user) {
           res.render("search", {
             isLogin: true,
-            user,
+            name,
             isSearch: false,
             product,
             insertQuery,
