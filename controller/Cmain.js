@@ -90,19 +90,34 @@ exports.mypage = (req, res) => {
   }
 };
 
-exports.userview = (req, res) => {
+exports.userview = async (req, res) => {
   // res.render("userview", { title: "회원 수정 페이지" });
-  const user = req.session.user;
+  let user = req.session.user;
+
   if (user) {
+    const updatedUser = await models.User.findOne({
+      userId: user.userId,
+    });
+
+    // console.log(updatedUser);
+
+    if (updatedUser)
+      user = {
+        userId: updatedUser.userId,
+        userPw: updatedUser.hashedPassword,
+        nickname: updatedUser.nickname,
+        profilePath: updatedUser.profilePath,
+      };
+    req.session.user = user;
     res.render("userview", {
       name: user.nickname,
       userId: user.userId,
       nickname: user.nickname,
-      userPw: user.userPw,
+      // userPw: user.userPw,
       profilePath: user.profilePath,
       isLogin: true,
     });
-    console.log("userID:::", user.userPw);
+    console.log("userID:::", user.userId);
   } else {
     res.send(
       `<script>alert("먼저 로그인 해주세요"); location.href="/login";</script>`,

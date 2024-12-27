@@ -1,12 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap");
 * {
+  font-family: "Gowun Dodum", serif;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
-
+body {
+  background-color: #f9f9f9;
+  font-size: 14px;
+  color: #333;
+}
 a {
   text-decoration: none;
   color: #303030;
+}
+a:hover {
+  text-decoration: underline;
 }
 
 li {
