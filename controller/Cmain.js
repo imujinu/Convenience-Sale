@@ -1,5 +1,5 @@
 const models = require("../models");
-const { Products } = require("../models");
+const { Products, Board } = require("../models");
 const { Op } = require("sequelize");
 
 // 로그인이 안된 유저 > {isLogin:false}
@@ -72,15 +72,31 @@ exports.getLogout = (req, res) => {
       `);
   }
 };
-exports.mypage = (req, res) => {
+exports.mypage = async (req, res) => {
   const user = req.session.user;
   if (user) {
+    let boards = await Board.findAll({
+      where: { userId: user.userId },
+      order: [["boardDate", "DESC"]],
+      attributes: ["boardId", "boardTitle", "boardDate"],
+    });
+
+    for (let i = 0; i < boards.length; i++) {
+      console.log(boards[i].boardDate);
+      boards[i] = {
+        boardId: boards[i].boardId,
+        boardTitle: boards[i].boardTitle,
+        boardDate: boards[i].boardDate.toISOString().split("T")[0],
+      };
+    }
+
     res.render("mypage", {
       name: user.nickname,
       userId: user.userId,
       nickname: user.nickname,
       profilePath: user.profilePath,
       isLogin: true,
+      boards: boards,
     });
     console.log("userID:::", user.userId);
   } else {
@@ -112,8 +128,8 @@ exports.userview = async (req, res) => {
     res.render("userview", {
       name: user.nickname,
       userId: user.userId,
+      userPw: user.hashedPassword,
       nickname: user.nickname,
-      // userPw: user.userPw,
       profilePath: user.profilePath,
       isLogin: true,
     });

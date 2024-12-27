@@ -51,6 +51,7 @@
 
 .mypage-container > .welcome > span {
   color: #ff3636;
+  color: var(--color-600);
 }
 
 .mypage-container > .reviewsBox {
@@ -70,7 +71,7 @@
 
 .mypage-container > .reviewsBox > li > .len > span {
   font-size: 18px;
-  color: #ff3636;
+  color: var(--color-500);
   font-weight: 700;
 }
 
@@ -98,7 +99,7 @@
   font-size: 14px;
 }
 .mypage-container > .reviewsBox > .content-container > .list li.list-head {
-  background-color: #ffcaca;
+  background-color: var(--color-200);
   color: white;
   font-size: 15px;
 }
@@ -163,7 +164,7 @@
   border-radius: 8px;
 }
 .mypage-container > .buttonBox .updateBtn {
-  background-color: #ff6b73;
+  background-color: var(--color-600);
 }
 .mypage-container > .buttonBox .deleteBtn {
   background-color: #bbb;

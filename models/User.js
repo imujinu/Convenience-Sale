@@ -29,7 +29,7 @@ const User = function (sequelize, DataTypes) {
       profilePath: {
         type: DataTypes.STRING(70),
         allowNull: true,
-        defaultValue: "static/image/default.jpg",
+        defaultValue: "static/image/default-profile.jpg",
       },
     },
     {
