@@ -1,136 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
+  <meta charset="UTF-8">
   <title><%= title %></title>
-  <link rel="stylesheet" href="/static/css/about.css">
+  <link rel="stylesheet" href="/static/css/about.css?v=1.1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <style>
-    /* Popup 스타일 */
-    .product-popup {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: white;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-      z-index: 100;
-      width: 80%;
-      max-width: 600px;
-      max-height: 80%;
-      overflow-y: auto;
-    }
-
-    .product-popup.active {
-      display: block;
-    }
-
-    .popup-close {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      font-size: 1.2em;
-    }
-
-    /* 댓글 섹션 스타일 */
-    .comments-section {
-      margin-top: 20px;
-    }
-
-    .comments-section h2 {
-      margin-bottom: 10px;
-    }
-
-    .comment {
-      border-bottom: 1px solid #ddd;
-      padding: 10px 0;
-    }
-
-    .comment:last-child {
-      border-bottom: none;
-    }
-
-    .comment-author {
-      font-weight: bold;
-    }
-
-    .comment-content {
-      margin: 5px 0;
-    }
-
-    .comment-actions {
-      font-size: 0.9em;
-      color: #555;
-    }
-
-    .comment-actions .edit-comment,
-    .comment-actions .delete-comment {
-      cursor: pointer;
-      margin-right: 10px;
-    }
-
-    .add-comment-form {
-      margin-top: 20px;
-    }
-
-    .add-comment-form textarea {
-      width: 100%;
-      height: 80px;
-      padding: 10px;
-      margin-bottom: 10px;
-      resize: vertical;
-    }
-
-    .add-comment-form button {
-      padding: 10px 20px;
-    }
-
-    /* 간단한 댓글 표시를 위한 스타일 */
-    .product-item {
-      position: relative;
-    }
-
-    .show-comments-button {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      background-color: #007BFF;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      cursor: pointer;
-      border-radius: 3px;
-    }
-
-    .show-comments-button:hover {
-      background-color: #0056b3;
-    }
-
-    /* 로딩 스피너 */
-    .loading-spinner {
-      display: none;
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    .loading-spinner.active {
-      display: block;
-    }
-  </style>
 </head>
 <body>
-  <!-- 홈 버튼 -->
-  <a href="/" class="home-button">홈</a>
+  <!-- 헤더 섹션 -->
+  <header class="header">
+    <a href="/" class="home-button">홈</a>
+  </header>
 
   <!-- 메인 섹션 -->
   <main class="main">
-    <h1><%= title %></h1>
+    <h1 class="main-title"><%= title %></h1>
 
+    <!-- 필터 섹션 -->
     <div class="filters">
       <!-- 편의점별 필터 -->
       <div class="filter">
@@ -165,33 +51,35 @@
       </div>
     </div>
 
+    <!-- 오류 메시지 -->
     <% if (errorMessage) { %>
       <div class="error-message"><%= errorMessage %></div>
     <% } %>
 
+    <!-- 상품 목록 -->
     <div class="product-list">
       <% products.forEach(function(product) { %>
-      <div class="product-item" data-product-id="<%= product.id %>" data-tags="<%= product.tags.join(',') %>" data-price="<%= product.price %>">
-        <img src="<%= product.imageUrl %>" alt="<%= product.name %>">
-        <h3><%= product.name %></h3>
-        <p><%= product.price %>원</p>
-        <% if (userId) { %>
-          <button class="show-comments-button" onclick="openCommentsPopup('<%= product.id %>')">댓글 보기</button>
-        <% } else { %>
-          <button class="show-comments-button" onclick="alert('로그인이 필요합니다.')">댓글 보기</button>
-        <% } %>
-      </div>
+        <div class="product-item" data-product-id="<%= product.id %>" data-tags="<%= product.tags.join(',') %>" data-price="<%= product.price %>">
+          <img src="<%= product.imageUrl %>" alt="<%= product.name %>" class="product-image">
+          <h3 class="product-name"><%= product.name %></h3>
+          <p class="product-price"><%= product.price %>원</p>
+          <% if (userId) { %>
+            <button class="btn show-comments-button" onclick="openCommentsPopup('<%= product.id %>')">댓글 보기</button>
+          <% } else { %>
+            <button class="btn show-comments-button" onclick="alert('로그인이 필요합니다.')">댓글 보기</button>
+          <% } %>
+        </div>
       <% }); %>
     </div>
   </main>
 
   <!-- 댓글 팝업 -->
   <div class="product-popup" id="comments-popup">
-    <button class="popup-close" onclick="closeCommentsPopup()">&times;</button>
     <div class="popup-content">
+      <button class="popup-close" onclick="closeCommentsPopup()">&times;</button>
       <h2 id="popup-product-name"></h2>
-      <img id="popup-product-image" src="" alt="" style="max-width: 100%; height: auto;">
-      <p id="popup-product-price"></p>
+      <img id="popup-product-image" src="" alt="" class="popup-product-image">
+      <p id="popup-product-price" class="popup-product-price"></p>
 
       <div class="comments-section">
         <h3>댓글</h3>
@@ -203,7 +91,7 @@
           <div class="add-comment-form">
             <h4>댓글 작성</h4>
             <textarea id="new-comment-content" placeholder="댓글을 입력하세요"></textarea>
-            <button onclick="submitComment()">작성</button>
+            <button class="btn submit-comment-button" onclick="submitComment()">작성</button>
           </div>
         <% } else { %>
           <p>댓글을 작성하려면 <a href="/login">로그인</a>하세요.</p>
@@ -215,39 +103,13 @@
     </div>
   </div>
 
-  <script src="/static/js/about.js"></script>
+  <!-- 사용자 ID 전달 -->
   <script>
     // 사용자 ID를 클라이언트 사이드에 전달 (if authenticated)
-    const userId = "<%= userId ? userId : '' %>";
+    window.userId = "<%= userId ? userId : '' %>";
   </script>
-  <script>
-    function applyFilters() {
-      const conviniFilter = document.getElementById('convini-filter').value;
-      const categoryFilter = document.getElementById('category-filter').value;
-      const sortFilter = document.getElementById('sort-filter').value;
 
-      const params = new URLSearchParams();
-
-      if (conviniFilter) params.append('convini', conviniFilter);
-      if (categoryFilter) params.append('category', categoryFilter);
-      if (sortFilter) params.append('sortBy', sortFilter);
-
-      window.location.search = params.toString();
-    }
-
-    // 팝업 열기 함수
-    function openCommentsPopup(productId) {
-      loadComments(productId);
-    }
-
-    // 팝업 닫기 함수
-    function closeCommentsPopup() {
-      document.getElementById('comments-popup').classList.remove('active');
-      document.getElementById('comments-list').innerHTML = '';
-      if (document.getElementById('new-comment-content')) {
-        document.getElementById('new-comment-content').value = '';
-      }
-    }
-  </script>
+  <!-- JavaScript 파일 로드 -->
+  <script src="/static/js/about.js?v=1.1"></script>
 </body>
 </html>

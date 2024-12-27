@@ -1,7 +1,10 @@
-// public/static/js/about.js
+// about.js
+
+// 사용자 ID가 전역 객체에 정의되어 있다고 가정합니다.
+// window.userId = "<%= userId ? userId : '' %>";
 
 // 댓글 팝업 열기 함수
-async function loadComments(productId) {
+window.openCommentsPopup = async function (productId) {
   const popup = document.getElementById("comments-popup");
   const productName = document.getElementById("popup-product-name");
   const productImage = document.getElementById("popup-product-image");
@@ -23,12 +26,13 @@ async function loadComments(productId) {
     const productItem = document.querySelector(
       `.product-item[data-product-id="${productId}"]`,
     );
-    const name = productItem.querySelector("h3").innerText;
+    const name = productItem.querySelector(".product-name").innerText;
     const imageUrl = productItem.querySelector("img").src;
-    const price = productItem.querySelector("p").innerText;
+    const price = productItem.querySelector(".product-price").innerText;
 
     productName.innerText = name;
     productImage.src = imageUrl;
+    productImage.alt = name;
     productPrice.innerText = price;
 
     // 댓글 가져오기
@@ -55,7 +59,7 @@ async function loadComments(productId) {
           contentDiv.innerText = comment.commentDetail;
 
           // 댓글 작성자와 현재 사용자가 동일한 경우에만 수정/삭제 버튼 표시
-          if (userId === comment.user.userId) {
+          if (window.userId === comment.user.userId) {
             const actionsDiv = document.createElement("div");
             actionsDiv.classList.add("comment-actions");
 
@@ -89,10 +93,10 @@ async function loadComments(productId) {
     // 로딩 스피너 숨기기
     loadingSpinner.classList.remove("active");
   }
-}
+};
 
 // 댓글 제출 함수
-async function submitComment() {
+window.submitComment = async function () {
   const popup = document.getElementById("comments-popup");
   const productId = popup.getAttribute("data-product-id");
   const commentContent = document
@@ -113,7 +117,7 @@ async function submitComment() {
       body: JSON.stringify({
         pId: productId,
         commentDetail: commentContent,
-        userId: userId, // 클라이언트 사이드에 전달된 userId 사용
+        userId: window.userId, // 전역 userId 사용
       }),
     });
 
@@ -134,7 +138,7 @@ async function submitComment() {
       contentDiv.innerText = data.commentDetail;
 
       // 댓글 작성자와 현재 사용자가 동일한 경우에만 수정/삭제 버튼 표시
-      if (userId === data.user.userId) {
+      if (window.userId === data.user.userId) {
         const actionsDiv = document.createElement("div");
         actionsDiv.classList.add("comment-actions");
 
@@ -165,10 +169,10 @@ async function submitComment() {
   } catch (error) {
     alert(`Error: ${error.message}`);
   }
-}
+};
 
 // 댓글 수정 함수
-async function editComment(commentId, contentDiv) {
+window.editComment = async function (commentId, contentDiv) {
   const newContent = prompt("수정할 댓글을 입력하세요:", contentDiv.innerText);
   if (newContent === null) return; // 취소 버튼 클릭 시 종료
 
@@ -198,10 +202,10 @@ async function editComment(commentId, contentDiv) {
   } catch (error) {
     alert(`Error: ${error.message}`);
   }
-}
+};
 
 // 댓글 삭제 함수
-async function deleteComment(commentId, commentDiv) {
+window.deleteComment = async function (commentId, commentDiv) {
   if (!confirm("댓글을 삭제하시겠습니까?")) return;
 
   try {
@@ -219,13 +223,33 @@ async function deleteComment(commentId, commentDiv) {
   } catch (error) {
     alert(`Error: ${error.message}`);
   }
-}
+};
 
-// 팝업 닫기 시 댓글 목록 초기화
-function closeCommentsPopup() {
-  document.getElementById("comments-popup").classList.remove("active");
-  document.getElementById("comments-list").innerHTML = "";
-  if (document.getElementById("new-comment-content")) {
-    document.getElementById("new-comment-content").value = "";
+// 댓글 팝업 닫기 함수
+window.closeCommentsPopup = function () {
+  const popup = document.getElementById("comments-popup");
+  const commentsList = document.getElementById("comments-list");
+
+  popup.classList.remove("active");
+  commentsList.innerHTML = "";
+
+  const newCommentContent = document.getElementById("new-comment-content");
+  if (newCommentContent) {
+    newCommentContent.value = "";
   }
-}
+};
+
+// 필터 적용 함수
+window.applyFilters = function () {
+  const conviniFilter = document.getElementById("convini-filter").value;
+  const categoryFilter = document.getElementById("category-filter").value;
+  const sortFilter = document.getElementById("sort-filter").value;
+
+  const params = new URLSearchParams();
+
+  if (conviniFilter) params.append("convini", conviniFilter);
+  if (categoryFilter) params.append("category", categoryFilter);
+  if (sortFilter) params.append("sortBy", sortFilter);
+
+  window.location.search = params.toString();
+};

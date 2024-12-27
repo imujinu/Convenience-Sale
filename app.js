@@ -1,3 +1,5 @@
+//app.js
+
 const express = require("express");
 const app = express();
 const db = require("./models");
@@ -58,7 +60,7 @@ app.post("/delete-account", async (req, res) => {
   });
 });
 
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync({ force: false }).then(() => {
   console.log("DB 연결 성공");
   app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`);
