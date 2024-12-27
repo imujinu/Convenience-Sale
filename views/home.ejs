@@ -34,7 +34,7 @@
         </div>
         <div class="part2">
           <div class="arrow">
-            <img src="/static/image/up.png" alt="" class="up" />
+            <img src="/static/image/up.png" alt="arrowUp" class="up" />
           </div>
         </div>
       </div>
@@ -43,76 +43,90 @@
         <div class="swiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide slide1">
-              <img src="/static/image/img1.jpg" alt="" />
+              <img src="/static/image/img1.jpg" alt="슬라이드1" />
               <div class="viewBox"><span class="view">자세히보기</span></div>
             </div>
             <div class="swiper-slide slide2">
-              <img src="/static/image/img2.jpg" alt="" />
+              <img src="/static/image/img2.jpg" alt="슬라이드2" />
               <div class="viewBox"><span class="view">자세히보기</span></div>
             </div>
             <div class="swiper-slide slide3">
-              <img src="/static/image/img3.jpg" alt="" />
+              <img src="/static/image/img3.jpg" alt="슬라이드3" />
               <div class="viewBox"><span class="view">자세히보기</span></div>
             </div>
 
             <div class="swiper-slide slide4">
-              <img src="./static/image/img4.jpg" alt="" />
+              <img src="./static/image/img4.jpg" alt="슬라이드4" />
               <div class="viewBox"><span class="view">자세히보기</span></div>
             </div>
           </div>
           <div class="swiper-pagination"></div>
           <div class="stop">
-            <img src="/static/image/stopbtn2.png" alt="" class="stopBtn" />
+            <img
+              src="/static/image/stopbtn2.png"
+              alt="스탑버튼튼"
+              class="stopBtn"
+            />
           </div>
           <div class="swiper-button-prev">
-            <img src="static/image/arrowleft.png" alt="" class="prev" />
+            <img
+              src="static/image/arrowleft.png"
+              alt="이전버튼튼"
+              class="prev"
+            />
           </div>
           <div class="swiper-button-next">
-            <img src="static/image/arrowright.png" alt="" class="next" />
+            <img
+              src="static/image/arrowright.png"
+              alt="다음버튼튼"
+              class="next"
+            />
           </div>
         </div>
         <div class="modal modal1 hidden">
           <div class="modalContent">
-            <img src="/static/image/modalimg1.jpg" alt="" />
+            <img src="/static/image/modalimg1.jpg" alt="배너1" />
           </div>
           <button class="modalCloseBtn modalCloseBtn1">
-            <img src="/static//image/modalbtn.png" alt="" />
+            <img src="/static//image/modalbtn.png" alt="모달닫기버튼" />
           </button>
         </div>
         <div class="modal modal2 hidden">
           <div class="modalContent">
-            <img src="/static/image/modalimg2.jpg" alt="" />
+            <img src="/static/image/modalimg2.jpg" alt="배너2" />
           </div>
           <button class="modalCloseBtn modalCloseBtn2">
-            <img src="/static/image/modalbtn.png" alt="" />
+            <img src="/static/image/modalbtn.png" alt="모달닫기버튼" />
           </button>
         </div>
         <div class="modal modal3 hidden">
           <div class="modalContent">
-            <img src="/static/image/modalimg3.jpg" alt="" />
+            <img src="/static/image/modalimg3.jpg" alt="모달3" />
           </div>
           <button class="modalCloseBtn modalCloseBtn3">
-            <img src="/static/image/modalbtn.png" alt="" />
+            <img src="/static/image/modalbtn.png" alt="모달닫기버튼" />
           </button>
         </div>
         <div class="modal modal4 hidden">
           <div class="modalContent">
-            <img src="/static/image/modalimg4.jpg" alt="" />
+            <img src="/static/image/modalimg4.jpg" alt="모달4" />
           </div>
           <button class="modalCloseBtn modalCloseBtn4">
-            <img src="/static/image/modalbtn.png" alt="" />
+            <img src="/static/image/modalbtn.png" alt="모달닫기버튼튼" />
           </button>
         </div>
       </div>
 
       <div class="section4">
-        <div class="part1">편의점 행사상품</div>
-        <div class="part2">
-          <ul>
-            <li class="all">전체</li>
-            <li class="one">1+1</li>
-            <li class="two">2+1</li>
-          </ul>
+        <div class="container">
+          <div class="part1">편의점 행사상품</div>
+          <div class="part2">
+            <ul>
+              <li class="all">전체</li>
+              <li class="one">1+1</li>
+              <li class="two">2+1</li>
+            </ul>
+          </div>
         </div>
       </div>
       <div class="section5">
@@ -179,27 +193,31 @@
             <div class="searchBox">
               <input
                 type="text"
-                placeholder="김치제육을 검색해보세요!"
+                placeholder="김치를 검색해보세요!"
                 class="searchText"
+                required
+                pattern="^[가-힣]+$"
               />
-              <div class="search"></div>
+              <div class="search">
+                <img src="/static/image/search.png" alt="검색버튼튼" />
+              </div>
             </div>
           </div>
           <div class="part2">
             <div class="menu menu1">
-              <img src="/static/image/menu1.png" alt="" />
+              <img src="/static/image/menu1.png" alt="샐러드" />
               샐러드
             </div>
             <div class="menu menu2">
-              <img src="/static/image/menu2.png" alt="" />
+              <img src="/static/image/menu2.png" alt="샌드위치" />
               샌드위치
             </div>
             <div class="menu menu3">
-              <img src="/static/image/menu3.png" alt="" />
+              <img src="/static/image/menu3.png" alt="삼각김밥" />
               삼각김밥
             </div>
             <div class="menu menu4">
-              <img src="/static/image/menu4.png" alt="" />
+              <img src="/static/image/menu4.png" alt="도시락" />
               도시락
             </div>
           </div>

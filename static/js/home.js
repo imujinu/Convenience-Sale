@@ -1,10 +1,28 @@
 // section2
 const detail = document.querySelector(".section2 .detail");
 detail.addEventListener("click", () => {
-  window.scrollTo({
-    top: 1030,
-    behavior: "smooth",
-  });
+  const width = window.innerWidth;
+  if (width < 468) {
+    window.scrollTo({
+      top: 1280,
+      behavior: "smooth",
+    });
+  } else if (468 <= width && width < 768) {
+    window.scrollTo({
+      top: 1280,
+      behavior: "smooth",
+    });
+  } else if (768 <= width && width < 1024) {
+    window.scrollTo({
+      top: 952,
+      behavior: "smooth",
+    });
+  } else if (1024 < width) {
+    window.scrollTo({
+      top: 977,
+      behavior: "smooth",
+    });
+  }
 });
 
 const arrow = document.querySelector(".section2 > .part2 > .arrow");
@@ -116,9 +134,15 @@ clone3.classList.add("rolling2");
 container3.appendChild(clone3);
 
 // section4
-const allBtn = document.querySelector(".section4 > .part2 >ul >.all ");
-const oneBtn = document.querySelector(".section4 >.part2 >ul >.one ");
-const twoBtn = document.querySelector(".section4 >.part2 >ul >.two ");
+const allBtn = document.querySelector(
+  ".section4 >.container > .part2 >ul >.all ",
+);
+const oneBtn = document.querySelector(
+  ".section4 >.container  >.part2 >ul >.one ",
+);
+const twoBtn = document.querySelector(
+  ".section4 >.container  >.part2 >ul >.two ",
+);
 
 const menu = document.querySelectorAll(
   ".section5 > .container > .product >.menu",
@@ -311,8 +335,15 @@ const searchText = document.querySelector(
 );
 search.addEventListener("click", async () => {
   try {
-    if (searchText.value.trim() === "") {
+    if (!searchText.checkValidity()) {
+      alert("제품의 한글명을 입력해주세요");
+
+      return;
+    }
+    if (searchText.value.trim() === "" || searchText.value.trim().length > 10) {
       alert("검색어를 입력해주세요!");
+
+      return;
     } else {
       console.log("검색어 입력됨");
       console.log(searchText.value);
@@ -334,8 +365,16 @@ search.addEventListener("click", async () => {
 searchText.addEventListener("keydown", async (event) => {
   if (event.key === "Enter") {
     try {
-      if (searchText.value.trim() === "") {
+      if (!searchText.checkValidity()) {
+        alert("제품의 한글명을 입력해주세요");
+        return;
+      }
+      if (
+        searchText.value.trim() === "" ||
+        searchText.value.trim().length > 10
+      ) {
         alert("검색어를 입력해주세요!");
+        return;
       } else {
         console.log("검색어 입력됨");
         console.log(searchText.value);
@@ -430,14 +469,14 @@ emailInput.addEventListener("keydown", async (event) => {
 const git = document.querySelectorAll(".footer > .container > ul > li");
 git.forEach((el) => {
   el.addEventListener("mouseenter", () => {
-    el.style.backgroundColor = "red";
+    el.style.textDecoration = "underline";
     const Img = el.querySelector("img");
     Img.style.opacity = "1";
     Img.style.bottom = "100%";
   });
 
   el.addEventListener("mouseleave", () => {
-    el.style.backgroundColor = "ivory";
+    el.style.textDecoration = "none";
     const Img = el.querySelector("img");
     Img.style.opacity = "0";
     Img.style.bottom = "0%";
@@ -462,7 +501,7 @@ window.addEventListener("scroll", () => {
   );
 
   if (width < 480) {
-    if (scroll > 2000) {
+    if (scroll > 1750) {
       menu1.style.animation = "opacity1 0.5s forwards";
       menu2.style.animation = "opacity1 0.5s 0.5s forwards";
       menu3.style.animation = "opacity1 0.5s 1s forwards";
@@ -474,7 +513,7 @@ window.addEventListener("scroll", () => {
       menu4.style.animation = "unOpacity 0.5s 1.5s forwards";
     }
   } else if (480 <= width && width < 768) {
-    if (scroll > 2080) {
+    if (scroll > 1770) {
       menu1.style.animation = "opacity1 0.5s forwards";
       menu2.style.animation = "opacity1 0.5s 0.5s forwards";
       menu3.style.animation = "opacity1 0.5s 1s forwards";
@@ -486,7 +525,7 @@ window.addEventListener("scroll", () => {
       menu4.style.animation = "unOpacity 0.5s 1.5s forwards";
     }
   } else if (768 <= width && width < 1024) {
-    if (scroll > 1400) {
+    if (scroll > 1450) {
       menu1.style.animation = "opacity1 0.5s forwards";
       menu2.style.animation = "opacity1 0.5s 0.5s forwards";
       menu3.style.animation = "opacity1 0.5s 1s forwards";
@@ -498,7 +537,7 @@ window.addEventListener("scroll", () => {
       menu4.style.animation = "unOpacity 0.5s 1.5s forwards";
     }
   } else if (1024 < width) {
-    if (scroll > 1335) {
+    if (scroll > 1425) {
       menu1.style.animation = "opacity1 0.5s forwards";
       menu2.style.animation = "opacity1 0.5s 0.5s forwards";
       menu3.style.animation = "opacity1 0.5s 1s forwards";
@@ -516,25 +555,25 @@ window.addEventListener("scroll", () => {
   const section9 = document.querySelector(".section9 > .container ");
   const width = window.innerWidth;
   if (width < 480) {
-    if (scroll > 2400) {
+    if (scroll > 2120) {
       section9.style.opacity = "1";
     } else {
       section9.style.opacity = "0";
     }
   } else if (480 <= width && width < 768) {
-    if (scroll > 2445) {
+    if (scroll > 2045) {
       section9.style.opacity = "1";
     } else {
       section9.style.opacity = "0";
     }
   } else if (768 <= width && width < 1024) {
-    if (scroll > 1780) {
+    if (scroll > 1710) {
       section9.style.opacity = "1";
     } else {
       section9.style.opacity = "0";
     }
   } else if (1024 < width) {
-    if (scroll > 1730) {
+    if (scroll > 1737) {
       section9.style.opacity = "1";
     } else {
       section9.style.opacity = "0";
@@ -547,35 +586,35 @@ window.addEventListener("scroll", () => {
   const width = window.innerWidth;
   const emailInput = document.querySelector(".section9 > .container > .inner ");
   if (width < 480) {
-    if (scroll > 2530) {
+    if (scroll > 2280) {
       emailInput.style.bottom = "36px";
       emailInput.style.opacity = "1";
     } else {
-      emailInput.style.bottom = "-10%";
+      emailInput.style.bottom = "-20%";
       emailInput.style.opacity = "0";
     }
   } else if (480 <= width && width < 768) {
-    if (scroll > 2540) {
+    if (scroll > 2400) {
       emailInput.style.bottom = "24px";
       emailInput.style.opacity = "1";
     } else {
-      emailInput.style.bottom = "-10%";
+      emailInput.style.bottom = "-20%";
       emailInput.style.opacity = "0";
     }
   } else if (768 <= width && width < 1024) {
-    if (scroll > 1850) {
+    if (scroll > 1930) {
       emailInput.style.bottom = "7px";
       emailInput.style.opacity = "1";
     } else {
-      emailInput.style.bottom = "0%";
+      emailInput.style.bottom = "-20%";
       emailInput.style.opacity = "0";
     }
   } else if (1024 < width) {
-    if (scroll > 1914) {
+    if (scroll > 1974) {
       emailInput.style.bottom = "7px";
       emailInput.style.opacity = "1";
     } else {
-      emailInput.style.bottom = "0%";
+      emailInput.style.bottom = "-20%";
       emailInput.style.opacity = "0";
     }
   }

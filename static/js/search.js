@@ -7,6 +7,15 @@ const searchBtn = document.querySelector(
 searchBtn.addEventListener("click", async () => {
   const productName = search.value.trim();
   try {
+    if (!search.checkValidity()) {
+      alert("제품의 한글명을 입력해주세요");
+      return;
+    }
+    if (search.value.trim() === "" || search.value.trim().length > 10) {
+      alert("검색어를 입력해주세요!");
+      return;
+    }
+
     const product = await axios({
       url: "/search",
       method: "get",
@@ -23,7 +32,16 @@ searchBtn.addEventListener("click", async () => {
 search.addEventListener("keydown", async (event) => {
   if (event.key === "Enter") {
     const productName = search.value.trim();
+
     try {
+      if (!search.checkValidity()) {
+        alert("제품의 한글명을 입력해주세요");
+        return;
+      }
+      if (search.value.trim() === "" || search.value.trim().length > 10) {
+        alert("검색어를 입력해주세요!");
+        return;
+      }
       const product = await axios({
         url: "/search",
         method: "get",
