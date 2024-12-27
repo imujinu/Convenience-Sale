@@ -57,7 +57,9 @@ const isAuthenticated = (req, res, next) => {
     res.status(401).json({ message: "로그인이 필요합니다." });
   }
 };
-
+router.get("/crawlstart", (req, res) => {
+  res.render("crawlstart"); // EJS 템플릿 렌더링
+});
 // 크롤링 및 렌더링
 router.get("/products/crawl", productController.crawlProducts);
 
