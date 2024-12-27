@@ -179,7 +179,7 @@ exports.deleteAccount = async (req, res) => {
 
     // 비밀번호 검증
     const { password } = req.body; // 요청 본문에서 비밀번호 추출
-    if (user.userPw !== password) {
+    if (checkPw("password", user.salt, user.hashedPassword)) {
       return res
         .status(401)
         .json({ success: false, message: "비밀번호가 일치하지 않습니다." });
