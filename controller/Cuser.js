@@ -134,15 +134,23 @@ exports.postCheckNickname = async (req, res) => {
 };
 exports.postUpdateUser = async (req, res) => {
   try {
-    const { userId, newNickname } = req.body; // userId와 newNickname 추출
+    const { userId, newNickname, src } = req.body; // userId와 newNickname 추출
 
-    const result = await models.User.update(
-      { nickname: newNickname }, // 닉네임 업데이트
+    const user = await models.User.findOne({
+      where: { userId },
+    });
+
+    const [result] = await models.User.update(
+      {
+        nickname: newNickname ? newNickname : user.nickname,
+        profilePath: src ? src : user.profilePath,
+      }, // 닉네임 업데이트
       { where: { userId } }, // 조건: userId
     );
-    console.log("넘어온 id: ", req.body.userId);
-    console.log("넘어온 새 닉네임: ", req.body.newNickname);
-    if (result[0] > 0) {
+    // console.log("넘어온 id: ", req.body.userId);
+    // console.log("넘어온 새 닉네임: ", req.body.newNickname);
+    // console.log("result", result);
+    if (result > 0) {
       res.send({ success: true, nickname: newNickname });
     } else {
       res.send({
