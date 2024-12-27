@@ -1,4 +1,5 @@
--- Active: 1732688612707@@127.0.0.1@3306@sesac
+
+-- Active: 1732688613389@@127.0.0.1@3306@sesac
 use sesac;
 show tables;
 
@@ -15,7 +16,7 @@ SELECT * FROM user;
 SELECT * FROM email;
 DROP TABLE email;
 SELECT * FROM products;
-DELETE FROM user WHERE `userId= qwe`;
+DELETE FROM user WHERE userId = "qwpl";
 DESC products;
 
 DELETE FROM email WHERE userEmail="wlsdnrhdwkd@naver.com";
@@ -130,3 +131,4 @@ VALUES
 ("롯데)의성마늘직꾸닭매콤100g", 3000, "1+1", "7ELEVEN", "410392.1.jpg"),
 ("대림)숯불구이맛후랑크70g", 1900, "1+1", "7ELEVEN", "019447.1.jpg"),
 ("롯데)키스틱55g", 2200, "1+1", "7ELEVEN", "203918.1.jpg");
+
