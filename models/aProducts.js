@@ -1,6 +1,8 @@
-const Products = function (sequelize, DataTypes) {
-  return sequelize.define(
-    "Aproducts", // 새로운 테이블 이름
+// models/aProducts.js 기
+
+const aProducts = (sequelize, DataTypes) => {
+  const Aproducts = sequelize.define(
+    "aProducts", // 테이블 이름
     {
       id: {
         type: DataTypes.STRING,
@@ -38,6 +40,17 @@ const Products = function (sequelize, DataTypes) {
       timestamps: false,
     },
   );
+
+  Aproducts.associate = (models) => {
+    // aProducts hasMany Pcomments is already handled in index.js
+    Aproducts.hasMany(models.PComment, {
+      foreignKey: "pId",
+      as: "comments",
+      onDelete: "CASCADE",
+    });
+  };
+
+  return Aproducts;
 };
 
-module.exports = Products;
+module.exports = aProducts;

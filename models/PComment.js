@@ -1,46 +1,68 @@
 // models/PComment.js
-const PComment = function (sequelize, DataTypes) {
-  return sequelize.define(
-    "Pcomments", // Changed table name to match your original
+
+const PComment = (sequelize, DataTypes) => {
+  const Pcomments = sequelize.define(
+    "Pcomments", // 테이블 이름 (복수형 권장)
     {
       commentId: {
-        // Changed field name to match your original
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true, // Assuming you want auto-increment
+        autoIncrement: true, // 자동 증가
       },
       commentDetail: {
-        // Changed field name to match your original
         type: DataTypes.STRING(200),
         allowNull: false,
       },
       pId: {
-        // Foreign key for Product
         type: DataTypes.STRING,
         allowNull: false,
+        references: {
+          model: "aProducts", // 참조할 모델 이름 (대소문자 정확히)
+          key: "id",
+        },
+        onDelete: "CASCADE", // 제품 삭제 시 관련 댓글도 삭제
       },
       userId: {
-        // Foreign key for User
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(20), // User 모델의 userId 타입과 일치
         allowNull: false,
+        references: {
+          model: "user", // 참조할 모델 이름 (대소문자 정확히)
+          key: "userId",
+        },
+        onDelete: "CASCADE", // 사용자 삭제 시 관련 댓글도 삭제
       },
       createdAt: {
-        // Add createdAt timestamp
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW,
       },
       updatedAt: {
-        // Add updatedAt timestamp
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW,
       },
     },
     {
-      freezeTableName: true, // Changed to freezeTableName (correct spelling)
-      timestamps: true, // Enable timestamps
+      freezeTableName: true, // 테이블 이름 고정
+      timestamps: true, // createdAt, updatedAt 자동 관리
     },
   );
+
+  Pcomments.associate = (models) => {
+    // 댓글은 하나의 상품에 속함
+    Pcomments.belongsTo(models.aProducts, {
+      foreignKey: "pId",
+      as: "product",
+    });
+
+    // 댓글은 하나의 사용자에 속함
+    Pcomments.belongsTo(models.User, {
+      foreignKey: "userId",
+      as: "user",
+    });
+  };
+
+  return Pcomments;
 };
+
 module.exports = PComment;
