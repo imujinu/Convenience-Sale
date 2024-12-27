@@ -102,7 +102,7 @@ exports.userview = (req, res) => {
       profilePath: user.profilePath,
       isLogin: true,
     });
-    console.log("userID:::", user.userPw);
+    console.log("userID:::", user.userId);
   } else {
     res.send(
       `<script>alert("먼저 로그인 해주세요"); location.href="/login";</script>`,
