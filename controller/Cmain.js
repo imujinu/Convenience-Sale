@@ -144,7 +144,8 @@ exports.store = (req, res) => {
 //   });
 // }
 exports.search = async (req, res) => {
-  const query = req.query.productName;
+  const insertQuery = req.query.productName.replaceAll(" ", "");
+  const query = insertQuery.split("").join(".*");
   if (query) {
     try {
       console.log("req.query>>>>", req.query.productName);
@@ -152,34 +153,46 @@ exports.search = async (req, res) => {
       const product = await Products.findAll({
         where: {
           pName: {
-            [Op.like]: `%${query}%`,
+            [Op.regexp]: query,
           },
         },
       });
       const user = req.session.user;
+      const name = user.nickname;
 
       if (product.length > 0) {
         if (user) {
           res.render("search", {
             isLogin: true,
-            user,
+            name,
             product,
-            query,
+            insertQuery,
             isSearch: true,
           });
         } else {
           res.render("search", {
             isLogin: false,
             product,
-            query,
+            insertQuery,
             isSearch: true,
           });
         }
       } else {
         if (user) {
-          res.render("search", { isLogin: true, user, isSearch: false });
+          res.render("search", {
+            isLogin: true,
+            name,
+            isSearch: false,
+            product,
+            insertQuery,
+          });
         } else {
-          res.render("search", { isLogin: false, isSearch: false });
+          res.render("search", {
+            isLogin: false,
+            isSearch: false,
+            product,
+            insertQuery,
+          });
         }
       }
     } catch (err) {
