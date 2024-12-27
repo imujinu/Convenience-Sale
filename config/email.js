@@ -46,7 +46,7 @@ const emailAuth = async (req, res) => {
     from: "wlsdnrhdwkd@naver.com",
     to: email,
     subject: "Fun pick 구독을 환영합니다",
-    html: `<h1>매월 초 편의점 할인 소식을 정기적으로 보내드립니다.</h1>
+    html: `<img src="https://i.imgur.com/03RyIN1.png">
            <p>자세한 사항은 <u>http://FunPick.com </u>에서 확인해보세요!</p>
            `,
   };

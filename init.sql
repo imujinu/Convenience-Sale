@@ -1,3 +1,4 @@
+-- Active: 1732688612707@@127.0.0.1@3306@sesac
 use sesac;
 show tables;
 
@@ -12,10 +13,12 @@ drop table user;
 
 SELECT * FROM user;
 SELECT * FROM email;
+DROP TABLE email;
 SELECT * FROM products;
 DELETE FROM user WHERE `userId= qwe`;
 DESC products;
 
+DELETE FROM email WHERE userEmail="wlsdnrhdwkd@naver.com";
 INSERT INTO products (pName, price, event, cName, imagePath)
 VALUES
 ("2080)센서티브미세모", 3200, "1+1", "CU", "8801046860458.png"),

@@ -91,11 +91,13 @@ a {
   cursor: pointer;
   border-radius: 10px;
   transition: 0.5s;
+  background-color: #ff5252;
+  color: #fff;
 }
 
 .detail:hover {
   transition: 0.5s;
-  background-color: red;
+  background-color: #e04848;
 }
 
 .section2 > .part2 > .arrow {
@@ -147,8 +149,9 @@ a {
 .section3 .swiper {
   position: relative;
   margin-top: 5%;
-  width: 90%;
+  width: 1200px;
   height: 100%;
+  overflow: hidden;
 }
 
 .section3 .swiper-slide img {
@@ -198,8 +201,11 @@ a {
   border: 2px solid black;
   width: 20%;
   min-height: 40px;
+  border-radius: 5px;
   justify-self: center;
   transition: 0.5s;
+  background-color: #ff5252;
+  color: #fff;
 }
 
 .section3 > .swiper > .swiper-wrapper > .swiper-slide > .viewBox > .view:hover {
@@ -307,6 +313,14 @@ a {
 .section4 {
   width: 100%;
   height: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.section4 > .container {
+  width: 1200px;
+  height: 100%;
+  display: grid;
 }
 
 .section4 .part1 {
@@ -326,7 +340,7 @@ a {
   transition: 0.5s;
 }
 
-.section4 .part2 ul li :hover {
+.section4 > .container > .part2 > ul :hover {
   background: darkgreen;
   transition: 0.5s;
 }
@@ -394,7 +408,7 @@ a {
 .section5 > .container > .product > .menu > img,
 .section6 > .container > .product > .menu > img,
 .section7 > .container > .product > .menu > img {
-  height: 80%;
+  height: 65%;
   width: 100%;
   transition: 0.5s;
 }
@@ -463,19 +477,22 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .section8 > .container > .part1 > .searchBox > .searchText {
+  height: 50px;
   width: 100%;
-  height: 100%;
 }
 
 .section8 > .container > .part1 > .searchBox > .search {
-  width: 10%;
-  height: 25px;
-  background: url(/static/image/search.png) center/cover no-repeat;
-  background-size: contain;
+  margin-right: 10px;
+  width: 35px;
+  height: auto;
   cursor: pointer;
+  object-fit: contain;
+  position: absolute;
+  right: 0;
 }
 .section8 img {
   cursor: pointer;
@@ -602,7 +619,7 @@ a {
 .section9 > .container {
   width: 1200px;
   height: 100%;
-  background: url(/static/image/emailbg.png) center / cover no-repeat;
+  background: url(/static/image/emailbg1.png) center / cover no-repeat;
   position: relative;
   display: flex;
   justify-content: center;
@@ -654,7 +671,7 @@ a {
 .footer > .container > ul {
   display: flex;
   justify-content: center;
-  font-size: 1.5vw;
+  font-size: 18px;
 }
 
 .footer > .container > ul > li {
@@ -667,13 +684,6 @@ a {
   position: relative;
   transition: 1s;
 }
-.footer > .container > ul > li::after {
-  content: "";
-  width: 3px;
-  height: 3px;
-  border-radius: 50px;
-  background: black;
-}
 .footer img {
   width: 50%;
   bottom: 0%;
@@ -684,7 +694,7 @@ a {
 }
 
 .footer > .container > .text {
-  font-size: 1vw;
+  font-size: 16px;
 }
 
 .tablet {
@@ -749,9 +759,23 @@ a {
   .section2 > .part2 > .arrow {
     width: 6%;
   }
-
+  .section3 .swiper {
+    position: relative;
+    margin-top: 5%;
+    width: 700px;
+    height: 100%;
+  }
   .section3 > .swiper > .swiper-wrapper > .swiper-slide > .viewBox > .view {
     width: 30%;
+  }
+
+  .section5 > .container,
+  .section6 > .container,
+  .section7 > .container {
+    width: 1000px;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
   }
   .section5 > .container > .product > .menu,
   .section5 > .container > .clone > .menu,
@@ -768,6 +792,17 @@ a {
     height: 70%;
   }
 
+  .section8 > .container {
+    display: flex;
+    width: 630px;
+    font-size: 14px;
+  }
+  .section8 > .container > .part2 {
+    width: 70%;
+    height: 100%;
+    position: relative;
+    left: 60px;
+  }
   .section8 > .container > .part2 > .menu {
     font-size: 20px;
   }
@@ -789,7 +824,14 @@ a {
     width: 50%;
     height: 50%;
   }
-
+  .footer > .container > ul {
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+  }
+  .footer > .container > .text {
+    font-size: 12px;
+  }
   .section9 {
     height: 260px;
   }
@@ -830,16 +872,19 @@ a {
   .section2 .contents {
     position: relative;
     left: -200%;
+    width: 80%;
     top: 0;
     animation: left 1.5s forwards;
+    justify-self: center;
+    font-size: 15px;
   }
-
+  .section2 .part1 .contents p:nth-child(1) {
+    font-size: 20px;
+  }
   .section2 > .part2 {
     width: 100%;
   }
-  .section1 > .container > .part2 > ul {
-    width: 100%;
-  }
+
   .section2 > .part2 > .arrow {
     width: 7%;
   }
@@ -869,6 +914,9 @@ a {
     }
   }
   .section3 {
+    width: 100%;
+    display: grid;
+    justify-content: center;
     margin-top: 20%;
   }
 
@@ -880,16 +928,21 @@ a {
   }
 
   .section3 .stop {
-    width: 1.5%;
-    height: 3%;
-    bottom: 17px;
-    left: 41%;
+    width: 8px;
+    height: auto;
+    bottom: 8px;
+    left: 38%;
   }
 
   .section2 > .part2 > .arrow {
     width: 7%;
   }
-
+  .section3 .swiper {
+    position: relative;
+    margin-top: 5%;
+    width: 600px;
+    height: 100%;
+  }
   .section3 .modalContent img {
     top: 7.5%;
   }
@@ -909,15 +962,14 @@ a {
     height: 30px;
     width: 125px;
   }
-  .section5,
-  .section6,
-  .section7 {
-    width: 100%;
-    height: 300px;
-    display: grid;
-    grid-template-rows: 1fr 5fr;
-    margin-bottom: 20px;
-    justify-content: unset;
+
+  .section5 > .container,
+  .section6 > .container,
+  .section7 > .container {
+    height: 100%;
+    display: flex;
+    width: 700px;
+    overflow: hidden;
   }
   .section5 > .container > .product > .menu,
   .section5 > .container > .clone > .menu,
@@ -925,14 +977,14 @@ a {
   .section6 > .container > .clone > .menu,
   .section7 > .container > .product > .menu,
   .section7 > .container > .clone > .menu {
-    width: 181px;
-    height: 80%;
-    font-size: 16px;
+    width: 190px;
+    height: 230px;
+    font-size: 14px;
   }
   .section5 > .container > .product > .menu > img,
   .section6 > .container > .product > .menu > img,
   .section7 > .container > .product > .menu > img {
-    height: 50%;
+    height: 75%;
     width: 100%;
     transition: 0.5s;
   }
@@ -943,7 +995,7 @@ a {
     height: 100%;
     display: grid;
     grid-template-rows: 1fr 1fr;
-    width: 1200px;
+    width: 600px;
   }
 
   .section8 .part1 {
@@ -966,6 +1018,7 @@ a {
   .section8 > .container > .part2 {
     width: 100%;
     margin-top: 15%;
+    left: -8px;
   }
   .section8 > .container > .part2 > .menu {
     font-size: 20px;
@@ -997,6 +1050,7 @@ a {
     margin-top: 260px;
   }
   .section9 > .container {
+    width: 100%;
     background: url(/static/image/emailbg2.png) center / cover no-repeat;
   }
 
@@ -1037,6 +1091,17 @@ a {
     font-size: 2vw;
     width: 100%;
   }
+  .footer > .container > ul {
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+  }
+  .footer > .container > .text {
+    font-weight: bold;
+    margin-top: 7px;
+    font-size: 12px;
+    width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1055,6 +1120,21 @@ a {
   .section3 > .swiper > .swiper-wrapper > .swiper-slide > .viewBox > .view {
     width: 100px;
   }
+
+  .section3 .swiper {
+    position: relative;
+    margin-top: 5%;
+    width: 400px;
+    height: 100%;
+  }
+  .section5 > .container,
+  .section6 > .container,
+  .section7 > .container {
+    height: 100%;
+    display: flex;
+    width: 400px;
+    overflow: hidden;
+  }
   .section5 > .container > .product > .menu,
   .section5 > .container > .clone > .menu,
   .section6 > .container > .product > .menu,
@@ -1066,6 +1146,9 @@ a {
   .section8 > .container > .part2 {
     width: 100%;
     margin-top: 25%;
+    height: 100%;
+    position: relative;
+    left: -5px;
   }
   .section8 > .container > .part2 > .menu {
     font-size: 19px;
@@ -1084,11 +1167,13 @@ a {
     width: 125px;
   }
   .section9 {
-    margin-top: 250px;
+    width: 100%;
+    height: 265px;
+    margin-top: 260px;
   }
-  .section9 > .container > .inner {
-    width: 47%;
-    left: 24%;
+
+  .section9 > .container {
+    background: url(/static/image/emailbg2.png) center / contain no-repeat;
   }
   .section9 > .container > .inner {
     width: 40%;
@@ -1104,5 +1189,17 @@ a {
     width: 75px;
     height: 36px;
     font-size: 3vw;
+  }
+
+  .footer > .container > ul {
+    display: flex;
+    justify-content: center;
+    font-size: 12px;
+  }
+  .footer > .container > .text {
+    font-weight: bold;
+    margin-top: 7px;
+    font-size: 10px;
+    width: 100%;
   }
 }
