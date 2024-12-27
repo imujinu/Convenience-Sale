@@ -24,12 +24,12 @@ const swiper = new Swiper(".swiper", {
     clickable: true,
     bulletActiveClass: "on",
   },
-  breakfoints: {
+  breakpoints: {
     0: {
       slidesPerView: 1,
     },
-    768: {},
-    1024: { slidesPerView: 2, centeredSlides: true },
+
+    768: { slidesPerView: 2, centeredSlides: true },
   },
   navigation: {
     nextEl: ".swiper-button-next",
@@ -304,10 +304,10 @@ twoBtn.addEventListener("click", () => {
 // section8
 
 const search = document.querySelector(
-  ".section8 > .container > .part1 > .search",
+  ".section8 > .container > .part1 > .searchBox> .search",
 );
 const searchText = document.querySelector(
-  ".section8 > .container > .part1 > .searchText",
+  ".section8 > .container > .part1 > .searchBox> .searchText",
 );
 search.addEventListener("click", async () => {
   try {
@@ -355,34 +355,6 @@ searchText.addEventListener("keydown", async (event) => {
   }
 });
 
-window.addEventListener("scroll", () => {
-  let scroll = window.scrollY;
-  console.log(scroll);
-  const menu1 = document.querySelector(
-    ".section8 > .container > .part2 > .menu1",
-  );
-  const menu2 = document.querySelector(
-    ".section8 > .container > .part2 > .menu2",
-  );
-  const menu3 = document.querySelector(
-    ".section8 > .container > .part2 > .menu3",
-  );
-  const menu4 = document.querySelector(
-    ".section8 > .container > .part2 > .menu4",
-  );
-  if (scroll > 1495) {
-    menu1.style.animation = "opacity1 0.5s forwards";
-    menu2.style.animation = "opacity1 0.5s 0.5s forwards";
-    menu3.style.animation = "opacity1 0.5s 1s forwards";
-    menu4.style.animation = "opacity1 0.5s 1.5s forwards";
-  } else {
-    menu1.style.animation = "unOpacity 0.5s forwards";
-    menu2.style.animation = "unOpacity 0.5s 0.5s forwards";
-    menu3.style.animation = "unOpacity 0.5s 1s forwards";
-    menu4.style.animation = "unOpacity 0.5s 1.5s forwards";
-  }
-});
-
 // section9
 async function emailVerify() {
   try {
@@ -421,7 +393,7 @@ const emailInput = document.querySelector(
   ".section9 > .container > .inner >.email",
 );
 emailInput.addEventListener("keydown", async (event) => {
-  if ((event.key = "Enter")) {
+  if (event.key === "Enter") {
     try {
       const email = document
         .querySelector(".section9 > .container> .inner> .email")
@@ -473,19 +445,96 @@ git.forEach((el) => {
 });
 
 window.addEventListener("scroll", () => {
+  let scroll = window.scrollY;
+  const width = window.innerWidth;
+  console.log(scroll);
+  const menu1 = document.querySelector(
+    ".section8 > .container > .part2 > .menu1",
+  );
+  const menu2 = document.querySelector(
+    ".section8 > .container > .part2 > .menu2",
+  );
+  const menu3 = document.querySelector(
+    ".section8 > .container > .part2 > .menu3",
+  );
+  const menu4 = document.querySelector(
+    ".section8 > .container > .part2 > .menu4",
+  );
+
+  if (width < 480) {
+    if (scroll > 2000) {
+      menu1.style.animation = "opacity1 0.5s forwards";
+      menu2.style.animation = "opacity1 0.5s 0.5s forwards";
+      menu3.style.animation = "opacity1 0.5s 1s forwards";
+      menu4.style.animation = "opacity1 0.5s 1.5s forwards";
+    } else {
+      menu1.style.animation = "unOpacity 0.5s forwards";
+      menu2.style.animation = "unOpacity 0.5s 0.5s forwards";
+      menu3.style.animation = "unOpacity 0.5s 1s forwards";
+      menu4.style.animation = "unOpacity 0.5s 1.5s forwards";
+    }
+  } else if (480 <= width && width < 768) {
+    if (scroll > 2080) {
+      menu1.style.animation = "opacity1 0.5s forwards";
+      menu2.style.animation = "opacity1 0.5s 0.5s forwards";
+      menu3.style.animation = "opacity1 0.5s 1s forwards";
+      menu4.style.animation = "opacity1 0.5s 1.5s forwards";
+    } else {
+      menu1.style.animation = "unOpacity 0.5s forwards";
+      menu2.style.animation = "unOpacity 0.5s 0.5s forwards";
+      menu3.style.animation = "unOpacity 0.5s 1s forwards";
+      menu4.style.animation = "unOpacity 0.5s 1.5s forwards";
+    }
+  } else if (768 <= width && width < 1024) {
+    if (scroll > 1400) {
+      menu1.style.animation = "opacity1 0.5s forwards";
+      menu2.style.animation = "opacity1 0.5s 0.5s forwards";
+      menu3.style.animation = "opacity1 0.5s 1s forwards";
+      menu4.style.animation = "opacity1 0.5s 1.5s forwards";
+    } else {
+      menu1.style.animation = "unOpacity 0.5s forwards";
+      menu2.style.animation = "unOpacity 0.5s 0.5s forwards";
+      menu3.style.animation = "unOpacity 0.5s 1s forwards";
+      menu4.style.animation = "unOpacity 0.5s 1.5s forwards";
+    }
+  } else if (1024 < width) {
+    if (scroll > 1335) {
+      menu1.style.animation = "opacity1 0.5s forwards";
+      menu2.style.animation = "opacity1 0.5s 0.5s forwards";
+      menu3.style.animation = "opacity1 0.5s 1s forwards";
+      menu4.style.animation = "opacity1 0.5s 1.5s forwards";
+    } else {
+      menu1.style.animation = "unOpacity 0.5s forwards";
+      menu2.style.animation = "unOpacity 0.5s 0.5s forwards";
+      menu3.style.animation = "unOpacity 0.5s 1s forwards";
+      menu4.style.animation = "unOpacity 0.5s 1.5s forwards";
+    }
+  }
+});
+window.addEventListener("scroll", () => {
   const scroll = window.scrollY;
   const section9 = document.querySelector(".section9 > .container ");
   const width = window.innerWidth;
-
-  if (width < 768) {
-    if (scroll > 2535) {
+  if (width < 480) {
+    if (scroll > 2400) {
+      section9.style.opacity = "1";
+    } else {
+      section9.style.opacity = "0";
+    }
+  } else if (480 <= width && width < 768) {
+    if (scroll > 2445) {
       section9.style.opacity = "1";
     } else {
       section9.style.opacity = "0";
     }
   } else if (768 <= width && width < 1024) {
+    if (scroll > 1780) {
+      section9.style.opacity = "1";
+    } else {
+      section9.style.opacity = "0";
+    }
   } else if (1024 < width) {
-    if (scroll > 1910) {
+    if (scroll > 1730) {
       section9.style.opacity = "1";
     } else {
       section9.style.opacity = "0";
@@ -497,19 +546,33 @@ window.addEventListener("scroll", () => {
   const scroll = window.scrollY;
   const width = window.innerWidth;
   const emailInput = document.querySelector(".section9 > .container > .inner ");
-
-  if (width < 768) {
-    if (scroll > 2730) {
-      emailInput.style.bottom = "1%";
+  if (width < 480) {
+    if (scroll > 2530) {
+      emailInput.style.bottom = "36px";
+      emailInput.style.opacity = "1";
+    } else {
+      emailInput.style.bottom = "-10%";
+      emailInput.style.opacity = "0";
+    }
+  } else if (480 <= width && width < 768) {
+    if (scroll > 2540) {
+      emailInput.style.bottom = "24px";
       emailInput.style.opacity = "1";
     } else {
       emailInput.style.bottom = "-10%";
       emailInput.style.opacity = "0";
     }
   } else if (768 <= width && width < 1024) {
+    if (scroll > 1850) {
+      emailInput.style.bottom = "7px";
+      emailInput.style.opacity = "1";
+    } else {
+      emailInput.style.bottom = "0%";
+      emailInput.style.opacity = "0";
+    }
   } else if (1024 < width) {
-    if (scroll > 2214) {
-      emailInput.style.bottom = "17%";
+    if (scroll > 1914) {
+      emailInput.style.bottom = "7px";
       emailInput.style.opacity = "1";
     } else {
       emailInput.style.bottom = "0%";
