@@ -1105,4 +1105,113 @@ a {
     height: 36px;
     font-size: 3vw;
   }
+  /* Comments Popup Styles */
+  /* 팝업 전체를 감싸는 레이어 */
+  .comments-popup {
+    position: fixed; /* 화면 고정 */
+    top: 0;
+    left: 0;
+    width: 100vw; /* 뷰포트 전체 너비 */
+    height: 100vh; /* 뷰포트 전체 높이 */
+    display: none; /* 처음에는 보이지 않도록 */
+    justify-content: center; /* 가로 중앙 정렬 (display:flex일 때만 적용) */
+    align-items: center; /* 세로 중앙 정렬 (display:flex일 때만 적용) */
+    background-color: rgba(0, 0, 0, 0.5); /* 배경 반투명 처리 */
+    z-index: 9999; /* 최상단에 표시 */
+  }
+
+  /* 팝업이 활성화되면 표시되도록 */
+  .comments-popup.active {
+    display: flex; /* 팝업 열릴 때 flex 컨테이너로 설정 */
+  }
+
+  /* 팝업 내용 컨테이너 */
+  .popup-content {
+    background: #fff; /* 하얀색 배경 */
+    width: 80%; /* 너비 지정 (상황에 맞게 조정) */
+    max-width: 600px; /* 최대 너비 설정 */
+    padding: 20px; /* 내부 여백 */
+    border-radius: 8px; /* 모서리 둥글게 */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* 그림자 효과 */
+    position: relative; /* 내부 요소(닫기 버튼 등) 절대 위치 시 필요 */
+  }
+
+  /* 팝업 내 닫기 버튼 */
+  .popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .comments-section {
+    margin-top: 20px;
+  }
+
+  .comment {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+
+  .comment-author {
+    font-weight: bold;
+  }
+
+  .comment-content {
+    margin: 5px 0;
+  }
+
+  .comment-actions {
+    margin-top: 5px;
+  }
+
+  .comment-actions span {
+    margin-right: 10px;
+    color: #007bff;
+    cursor: pointer;
+  }
+
+  .add-comment-form {
+    margin-top: 20px;
+  }
+
+  .add-comment-form textarea {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+  }
+
+  .submit-comment-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .submit-comment-button:hover {
+    background-color: #0056b3;
+  }
+
+  .loading-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .loading-spinner.active {
+    display: flex;
+  }
 }

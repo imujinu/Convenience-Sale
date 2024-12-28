@@ -1,6 +1,6 @@
 // controllers/pcommentsController.js
 
-const { PComment, aProducts, User } = require("../models");
+const { PComment, Products, User } = require("../models");
 
 // 댓글 조회
 exports.getComments = async (req, res) => {
@@ -35,7 +35,7 @@ exports.createComment = async (req, res) => {
 
   try {
     // 제품 존재 여부 확인
-    const product = await aProducts.findByPk(pId);
+    const product = await Products.findByPk(pId);
     if (!product) {
       return res.status(404).json({ message: "제품을 찾을 수 없습니다." });
     }

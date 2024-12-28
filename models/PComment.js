@@ -14,10 +14,10 @@ const PComment = (sequelize, DataTypes) => {
         allowNull: false,
       },
       pId: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING, // 변경: INTEGER
         allowNull: false,
         references: {
-          model: "aProducts", // 참조할 모델 이름 (대소문자 정확히)
+          model: "Products", // 변경: 참조 모델 이름
           key: "id",
         },
         onDelete: "CASCADE", // 제품 삭제 시 관련 댓글도 삭제
@@ -26,7 +26,7 @@ const PComment = (sequelize, DataTypes) => {
         type: DataTypes.STRING(20), // User 모델의 userId 타입과 일치
         allowNull: false,
         references: {
-          model: "user", // 참조할 모델 이름 (대소문자 정확히)
+          model: "User", // 참조할 모델 이름 (대소문자 정확히)
           key: "userId",
         },
         onDelete: "CASCADE", // 사용자 삭제 시 관련 댓글도 삭제
@@ -49,8 +49,9 @@ const PComment = (sequelize, DataTypes) => {
   );
 
   Pcomments.associate = (models) => {
-    // 댓글은 하나의 상품에 속함
-    Pcomments.belongsTo(models.aProducts, {
+    // 댓글은 하나의 제품에 속함
+    Pcomments.belongsTo(models.Products, {
+      // 변경: Products로 변경
       foreignKey: "pId",
       as: "product",
     });

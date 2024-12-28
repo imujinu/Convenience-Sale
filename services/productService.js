@@ -24,7 +24,7 @@ async function crawlProducts() {
   ]);
 
   // DB에서 제품 정보 조회
-  dbProducts = await db.aProducts.findAll();
+  dbProducts = await db.Products.findAll();
 
   // 크롤링 + DB 데이터 확인
   productsData = [...cuProducts, ...sevenElevenProducts, ...gs25Products].map(
@@ -59,7 +59,7 @@ async function crawlProducts() {
  * 특정 제품의 태그를 업데이트
  */
 async function updateProductTags(productId, tags) {
-  const product = await db.aProducts.findByPk(productId);
+  const product = await db.Products.findByPk(productId);
 
   if (!product) {
     throw new Error("해당 ID의 제품을 찾을 수 없습니다.");
@@ -75,7 +75,7 @@ async function updateProductTags(productId, tags) {
  * DB에 제품을 추가(또는 업데이트)하고, 메모리에 저장된 데이터도 동기화
  */
 async function sendProductToDB(productId, productData) {
-  const existingProduct = await db.aProducts.findOne({
+  const existingProduct = await db.Products.findOne({
     where: { id: productId },
   });
 
@@ -99,12 +99,12 @@ async function sendProductToDB(productId, productData) {
     return existingProduct;
   } else {
     // 새 제품인 경우 삽입
-    const newProduct = await db.aProducts.create({
+    const newProduct = await db.Products.create({
       id: productData.id, // 크롤링된 ID 사용
       name: productData.name,
       price: productData.price,
       imageUrl: productData.imageUrl,
-      convini: productData.convini,
+      convenienceName: productData.convini,
       tags: productData.tags,
     });
 
@@ -133,7 +133,7 @@ async function deleteProduct(productId) {
     productsData.splice(productIndex, 1);
   }
 
-  const product = await db.aProducts.findByPk(productId);
+  const product = await db.Products.findByPk(productId);
   if (!product) {
     throw new Error("해당 ID의 제품을 찾을 수 없습니다.");
   }
@@ -153,7 +153,7 @@ async function deleteProduct(productId) {
  * 모든 제품을 조회
  */
 async function getAllProducts() {
-  const products = await db.aProducts.findAll();
+  const products = await db.Products.findAll();
   return products;
 }
 

@@ -1,3 +1,4 @@
+<!-- views/about.ejs -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -20,22 +21,26 @@
     <div class="filters">
       <!-- 편의점별 필터 -->
       <div class="filter">
-        <label for="convini-filter">편의점:</label>
-        <select id="convini-filter" onchange="applyFilters()">
+        <label for="convenience-filter">편의점:</label>
+        <select id="convenience-filter" onchange="CommentsModule.applyFilters()">
           <option value="">전체</option>
-          <% availableConvinis.forEach(function(convini) { %>
-            <option value="<%= convini %>" <%= selectedConvini === convini ? 'selected' : '' %>><%= convini.toUpperCase() %></option>
+          <% availableConvinces.forEach(function(convenience) { %>
+            <option value="<%= convenience %>" <%= selectedConvenience === convenience ? 'selected' : '' %>>
+              <%= convenience.toUpperCase() %>
+            </option>
           <% }); %>
         </select>
       </div>
 
-      <!-- 카테고리별 필터 -->
+      <!-- 이벤트별 필터 -->
       <div class="filter">
-        <label for="category-filter">카테고리:</label>
-        <select id="category-filter" onchange="applyFilters()">
+        <label for="event-filter">이벤트:</label>
+        <select id="event-filter" onchange="CommentsModule.applyFilters()">
           <option value="">전체</option>
-          <% availableCategories.forEach(function(category) { %>
-            <option value="<%= category %>" <%= selectedCategory === category ? 'selected' : '' %>><%= category %></option>
+          <% availableEvents.forEach(function(event) { %>
+            <option value="<%= event %>" <%= selectedEvent === event ? 'selected' : '' %>>
+              <%= event %>
+            </option>
           <% }); %>
         </select>
       </div>
@@ -43,7 +48,7 @@
       <!-- 가격별 정렬 -->
       <div class="filter">
         <label for="sort-filter">가격순:</label>
-        <select id="sort-filter" onchange="applyFilters()">
+        <select id="sort-filter" onchange="CommentsModule.applyFilters()">
           <option value="">기본</option>
           <option value="priceAsc" <%= sortBy === 'priceAsc' ? 'selected' : '' %>>낮은 가격순</option>
           <option value="priceDesc" <%= sortBy === 'priceDesc' ? 'selected' : '' %>>높은 가격순</option>
@@ -59,12 +64,17 @@
     <!-- 상품 목록 -->
     <div class="product-list">
       <% products.forEach(function(product) { %>
-        <div class="product-item" data-product-id="<%= product.id %>" data-tags="<%= product.tags.join(',') %>" data-price="<%= product.price %>">
+        <div class="product-item" 
+             data-product-id="<%= product.id %>" 
+             data-tags="<%= JSON.stringify(product.tags) %>" 
+             data-price="<%= product.price %>" 
+             data-convenience="<%= product.convenienceName %>" 
+             data-event="<%= product.event %>">
           <img src="<%= product.imageUrl %>" alt="<%= product.name %>" class="product-image">
           <h3 class="product-name"><%= product.name %></h3>
           <p class="product-price"><%= product.price %>원</p>
           <% if (userId) { %>
-            <button class="btn show-comments-button" onclick="openCommentsPopup('<%= product.id %>')">댓글 보기</button>
+            <button class="btn show-comments-button" onclick="CommentsModule.openCommentsPopup('<%= product.id %>')">댓글 보기</button>
           <% } else { %>
             <button class="btn show-comments-button" onclick="alert('로그인이 필요합니다.')">댓글 보기</button>
           <% } %>
@@ -76,10 +86,12 @@
   <!-- 댓글 팝업 -->
   <div class="product-popup" id="comments-popup">
     <div class="popup-content">
-      <button class="popup-close" onclick="closeCommentsPopup()">&times;</button>
+      <button class="popup-close" onclick="CommentsModule.closeCommentsPopup()">&times;</button>
       <h2 id="popup-product-name"></h2>
       <img id="popup-product-image" src="" alt="" class="popup-product-image">
       <p id="popup-product-price" class="popup-product-price"></p>
+      <p id="popup-product-convenience" class="popup-product-convenience"></p>
+      <p id="popup-product-event" class="popup-product-event"></p>
 
       <div class="comments-section">
         <h3>댓글</h3>
@@ -91,7 +103,7 @@
           <div class="add-comment-form">
             <h4>댓글 작성</h4>
             <textarea id="new-comment-content" placeholder="댓글을 입력하세요"></textarea>
-            <button class="btn submit-comment-button" onclick="submitComment()">작성</button>
+            <button class="btn submit-comment-button">작성</button>
           </div>
         <% } else { %>
           <p>댓글을 작성하려면 <a href="/login">로그인</a>하세요.</p>

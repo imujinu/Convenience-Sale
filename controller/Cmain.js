@@ -5,34 +5,46 @@ const { Op } = require("sequelize");
 // 로그인이 안된 유저 > {isLogin:false}
 // 로그인이 된 유저 > {isLogin:true, user:유저}
 exports.home = async (req, res) => {
-  const CU = await Products.findAll({
-    where: {
-      cName: "CU",
-    },
-  });
-  const GS25 = await Products.findAll({
-    where: {
-      cName: "GS25",
-    },
-  });
-  const ELEVEN = await Products.findAll({
-    where: {
-      cName: "7ELEVEN",
-    },
-  });
-
-  const user = req.session.user;
-
-  if (user) {
-    res.render("home", {
-      name: user.nickname,
-      isLogin: true,
-      CU,
-      GS25,
-      ELEVEN,
+  try {
+    const CU = await Products.findAll({
+      where: {
+        convenienceName: "CU",
+      },
     });
-  } else {
-    res.render("home", { isLogin: false, CU, GS25, ELEVEN });
+    const GS25 = await Products.findAll({
+      where: {
+        convenienceName: "GS25",
+      },
+    });
+    const ELEVEN = await Products.findAll({
+      where: {
+        convenienceName: "7ELEVEN",
+      },
+    });
+
+    const user = req.session.user;
+
+    if (user) {
+      res.render("home", {
+        name: user.nickname,
+        isLogin: true,
+        userId: user.userId, // userId 추가
+        CU,
+        GS25,
+        ELEVEN,
+      });
+    } else {
+      res.render("home", {
+        isLogin: false,
+        CU,
+        GS25,
+        ELEVEN,
+        userId: null, // userId를 null로 전달
+      });
+    }
+  } catch (error) {
+    console.error("홈 페이지 로딩 중 오류 발생:", error);
+    res.status(500).send("서버 오류가 발생했습니다.");
   }
 };
 
@@ -41,6 +53,7 @@ exports.getLogin = (req, res) => {
     res.render("home", {
       user: req.session.user,
       isLogin: true,
+      userId: req.session.user.userId, // userId 추가
     });
   } else {
     res.render("login", { isLogin: false });
@@ -52,11 +65,13 @@ exports.getRegister = (req, res) => {
     res.render("home", {
       user: req.session.user,
       isLogin: true,
+      userId: req.session.user.userId, // userId 추가
     });
   } else {
     res.render("register", { isLogin: false });
   }
 };
+
 exports.getLogout = (req, res) => {
   if (req.session.user) {
     req.session.destroy((err) => {
@@ -72,6 +87,7 @@ exports.getLogout = (req, res) => {
       `);
   }
 };
+
 exports.mypage = (req, res) => {
   const user = req.session.user;
   if (user) {
@@ -91,29 +107,27 @@ exports.mypage = (req, res) => {
 };
 
 exports.userview = async (req, res) => {
-  // res.render("userview", { title: "회원 수정 페이지" });
   let user = req.session.user;
 
   if (user) {
     const updatedUser = await models.User.findOne({
-      userId: user.userId,
+      where: { userId: user.userId }, // where 절 수정
     });
 
-    // console.log(updatedUser);
-
-    if (updatedUser)
+    if (updatedUser) {
       user = {
         userId: updatedUser.userId,
         userPw: updatedUser.hashedPassword,
         nickname: updatedUser.nickname,
         profilePath: updatedUser.profilePath,
       };
-    req.session.user = user;
+      req.session.user = user;
+    }
+
     res.render("userview", {
       name: user.nickname,
       userId: user.userId,
       nickname: user.nickname,
-      // userPw: user.userPw,
       profilePath: user.profilePath,
       isLogin: true,
     });
@@ -132,17 +146,6 @@ exports.store = (req, res) => {
   res.render("store");
 };
 
-// const result = req.query;
-// if (result) {
-//   const products = await Products.findAll({
-//     attributes: ["name", "price", "imageUrl", "convini"], // 필요한 속성 선택
-//     where: {
-//       name: {
-//         [Op.like]: `%${productName}%`, // 부분 일치 검색
-//       },
-//     },
-//   });
-// }
 exports.search = async (req, res) => {
   const insertQuery = req.query.productName.replaceAll(" ", "");
   const query = insertQuery.split("").join(".*");
@@ -152,19 +155,20 @@ exports.search = async (req, res) => {
 
       const product = await Products.findAll({
         where: {
-          pName: {
+          name: {
             [Op.regexp]: query,
           },
         },
       });
       const user = req.session.user;
-      const name = user.nickname;
+      const name = user ? user.nickname : null;
 
       if (product.length > 0) {
         if (user) {
           res.render("search", {
             isLogin: true,
             name,
+            userId: user.userId, // userId 추가
             product,
             insertQuery,
             isSearch: true,
@@ -175,6 +179,7 @@ exports.search = async (req, res) => {
             product,
             insertQuery,
             isSearch: true,
+            userId: null, // userId 추가
           });
         }
       } else {
@@ -182,6 +187,7 @@ exports.search = async (req, res) => {
           res.render("search", {
             isLogin: true,
             name,
+            userId: user.userId, // userId 추가
             isSearch: false,
             product,
             insertQuery,
@@ -192,11 +198,13 @@ exports.search = async (req, res) => {
             isSearch: false,
             product,
             insertQuery,
+            userId: null, // userId 추가
           });
         }
       }
     } catch (err) {
       console.error("err", err);
+      res.status(500).send("서버 오류가 발생했습니다.");
     }
   } else {
     res.redirect("/");
