@@ -1,54 +1,60 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
+    <meta charset="UTF-8" />
+    <title>자유게시판</title>
+    <!-- 공통 include -->
+    <%- include("./include/include", { title: "자유게시판" }) %>
+    <!-- 헤더 등 -->
     <link rel="stylesheet" href="/static/css/board.css" />
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
-    <h1>자유 게시판</h1>
-    <table>
-      <tr>
-        <th>분류</th>
-        <th>작성일</th>
-        <th>작성자</th>
-        <th>제목</th>
-      </tr>
-      <% posts.forEach((post) => { %>
-      <tr>
-        <td><%= post.category %></td>
-        <td><%= post.date %></td>
-        <td><%= post.userId %></td>
-        <td><a href="/board/view/<%= post.id %>"><%= post.title %></a></td>
-      </tr>
-      <% }) %>
-    </table>
+    <div class="header"><%- include("./include/header") %></div>
 
-    <!-- 글 작성 버튼 -->
-    <button id="writeBtn">글 작성</button>
+    <h1>자유게시판</h1>
 
-    <script>
-      // 로그인 여부 체크 및 팝업 처리
-      document
-        .getElementById("writeBtn")
-        .addEventListener("click", async () => {
-          try {
-            const response = await axios.get("/board/write");
-            // 로그인 상태일 경우 글 작성 페이지로 이동
-            if (response.status === 200) {
-              window.location.href = "/board/write";
-            }
-          } catch (err) {
-            // 로그인 상태가 아닐 경우 팝업 창 처리
-            if (err.response.status === 401) {
-              const confirmLogin = confirm(
-                "로그인을 해야 글 작성이 가능합니다.",
-              );
-              if (confirmLogin) {
-                window.location.href = "/login";
-              }
-            }
-          }
-        });
-    </script>
+    <div class="board-list">
+      <table>
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성일</th>
+            <th>작성자</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (boardList && boardList.length > 0) { %> <%
+          boardList.forEach(function (item) { %>
+          <tr>
+            <td><%= item.boardId %></td>
+            <td>
+              <a href="/board/view/<%= item.boardId %>"
+                ><%= item.boardTitle %></a
+              >
+            </td>
+            <td>
+              <%= item.boardDate ? item.boardDate.toLocaleString() : "" %>
+            </td>
+            <td><%= item.userId ? item.userId : "" %></td>
+          </tr>
+          <% }) %> <% } else { %>
+          <tr>
+            <td colspan="4">게시글이 없습니다.</td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+
+    <% if (isLogin) { %>
+    <div class="write-btn">
+      <a href="/board/write">글 작성</a>
+    </div>
+    <% } else { %>
+    <p>글을 작성하려면 <a href="/login">로그인</a> 하세요.</p>
+    <% } %>
+
+    <script src="/static/js/board.js"></script>
   </body>
 </html>

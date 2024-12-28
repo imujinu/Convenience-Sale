@@ -3,30 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <title>글 작성</title>
+    <%- include("./include/include", { title: "자유게시판 - 글 작성" }) %>
     <link rel="stylesheet" href="/static/css/board.css" />
-    <script src="/static/js/write.js"></script>
   </head>
   <body>
-    <form action="/board/write" method="post" enctype="multipart/form-data">
-      <label>제목: <input type="text" name="title" required /></label><br />
-      <label
-        >분류:
-        <select name="category">
-          <option>전체</option>
-          <option>제품후기</option>
-          <option>레시피 공유</option>
-          <option>할인 정보</option>
-          <option>잡수다</option>
-        </select>
-      </label>
-      <br />
-      <label>내용:<textarea name="content" required></textarea></label><br />
-      <label>사진 업로드: <input type="file" name="file" /></label><br />
-      <label
-        >암호(숫자 4자리):
-        <input type="text" name="password" pattern="\d{4}" required /></label
-      ><br />
+    <div class="header"><%- include("./include/header") %></div>
+
+    <h1>글 작성</h1>
+
+    <form action="/board/write" method="POST" enctype="multipart/form-data">
+      <div>
+        <label for="boardTitle">제목</label>
+        <input type="text" name="boardTitle" id="boardTitle" required />
+      </div>
+      <div>
+        <label for="boardDetail">내용</label>
+        <textarea
+          name="boardDetail"
+          id="boardDetail"
+          rows="5"
+          required
+        ></textarea>
+      </div>
+      <div>
+        <label for="boardPic">이미지 첨부</label>
+        <input type="file" name="boardPic" id="boardPic" />
+      </div>
+
       <button type="submit">등록</button>
     </form>
+
+    <script src="/static/js/board.js"></script>
   </body>
 </html>

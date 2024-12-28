@@ -1,113 +1,128 @@
-// 자유게시판 컨트롤러
-const multer = require("multer");
-const path = require("path");
-const models = require("../models");
+const { Board, BComment, User } = require("../models");
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
-// Multer 설정 (첨부 파일 저장)
-const upload = multer({
-  storage: multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, "static/uploads/board/");
-    },
-    filename: (req, file, cb) => {
-      const ext = path.extname(file.originalname);
-      cb(null, `${Date.now()}-${file.originalname}`);
-    },
-  }),
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB 제한
-});
+/**
+ * 자유게시판 목록 페이지
+ */
+exports.showBoard = async (req, res) => {
+  try {
+    // 전체 게시글 찾기 (최신 순)
+    const boardList = await Board.findAll({
+      order: [["boardId", "DESC"]],
+    });
 
-// 게시글 및 댓글 저장소
-const posts = [];
-const comments = {};
-
-// 자유게시판 목록 화면
-exports.showBoard = (req, res) => {
-  res.render("board", { posts, user: req.session.user }); // 로그인 상태 전달
+    return res.render("board", {
+      isLogin: !!req.session.user, // 로그인 여부
+      name: req.session.user ? req.session.user.userId : null,
+      boardList,
+    });
+  } catch (error) {
+    console.error("showBoard Error:", error);
+    return res.status(500).send("서버 에러");
+  }
 };
 
-// 글 작성 화면
+/**
+ * 글 작성 페이지
+ */
 exports.showWriteForm = (req, res) => {
   if (!req.session.user) {
-    return res.status(401).send("로그인이 필요합니다.");
+    return res.redirect("/login");
   }
-  res.render("write");
+  return res.render("boardWrite", {
+    isLogin: true,
+    name: req.session.user ? req.session.user.userId : null,
+  });
 };
 
-// 글 작성 처리
-exports.createPost = [
-  upload.single("file"),
-  (req, res) => {
-    const { title, category, content, password } = req.body;
-
-    // 데이터 검증
-    if (!title || !content || !password || !/^\d{4}$/.test(password)) {
-      return res.status(400).send("입력 정보를 확인하세요.");
+/**
+ * 글 작성 요청 처리
+ */
+exports.createPost = async (req, res) => {
+  try {
+    if (!req.session.user) {
+      return res.status(401).send("로그인이 필요합니다.");
     }
 
-    // 새 글 객체 생성
-    const newPost = {
-      id: posts.length + 1,
-      title,
-      category,
-      content,
-      password,
-      date: new Date().toLocaleString(),
-      userId: req.session.user ? req.session.user.id : "익명",
-      file: req.file?.filename || null,
-    };
+    const { boardTitle, boardDetail } = req.body;
+    const userId = req.session.user.userId;
 
-    posts.push(newPost);
-    res.redirect("/board");
-  },
-];
+    // 게시글 생성
+    await Board.create({
+      boardTitle,
+      boardDetail,
+      userId, // 세션에서 가져온 userId
+      // boardDate, boardPicPath 등이 필요하면 추가
+    });
 
-// 글 삭제 처리
-exports.deletePost = (req, res) => {
-  const postId = parseInt(req.params.id);
-  const { password } = req.body;
-
-  const postIndex = posts.findIndex((p) => p.id === postId);
-  if (postIndex === -1) {
-    return res.status(404).send("게시글을 찾을 수 없습니다.");
+    return res.redirect("/board");
+  } catch (error) {
+    console.error("createPost Error:", error);
+    return res.status(500).send("서버 에러");
   }
-
-  if (posts[postIndex].password !== password) {
-    return res.status(400).send("비밀번호가 일치하지 않습니다.");
-  }
-
-  posts.splice(postIndex, 1);
-  res.redirect("/board");
 };
 
-// 글 확인 화면
-exports.showPost = (req, res) => {
-  const post = posts.find((p) => p.id === parseInt(req.params.id));
-  if (!post) {
-    return res.status(404).send("게시글을 찾을 수 없습니다.");
-  }
+/**
+ * 게시글 상세보기
+ */
+exports.showPost = async (req, res) => {
+  try {
+    const boardId = req.params.id;
 
-  res.render("view", {
-    post,
-    comments: comments[post.id] || [],
-    user: req.session.user,
-  });
+    // 게시글 정보
+    const post = await Board.findOne({
+      where: { boardId },
+      // User 모델과 1:N 관계 (만약 작성자 이름/정보를 가져오고 싶다면 include)
+      include: [{ model: User }],
+    });
+
+    if (!post) {
+      return res.status(404).send("게시글을 찾을 수 없습니다.");
+    }
+
+    // 해당 게시글의 댓글
+    const comments = await BComment.findAll({
+      where: { boardId },
+      order: [["bcId", "ASC"]],
+      // 댓글 작성자 정보 가져오려면 include
+      // include: [{ model: User }]
+    });
+
+    return res.render("boardView", {
+      isLogin: !!req.session.user,
+      name: req.session.user ? req.session.user.userId : null,
+      post,
+      comments,
+    });
+  } catch (error) {
+    console.error("showPost Error:", error);
+    return res.status(500).send("서버 에러");
+  }
 };
 
-// 댓글 작성 처리
-exports.createComment = (req, res) => {
-  if (!req.session.user) {
-    return res.status(401).send("로그인 후 댓글을 작성할 수 있습니다.");
+/**
+ * 댓글 작성 처리
+ */
+exports.createComment = async (req, res) => {
+  try {
+    if (!req.session.user) {
+      return res.status(401).send("로그인이 필요합니다.");
+    }
+
+    const boardId = req.params.id;
+    const { bcDetail } = req.body;
+    const userId = req.session.user.userId;
+
+    await BComment.create({
+      boardId,
+      bcDetail,
+      userId,
+    });
+
+    return res.redirect(`/board/view/${boardId}`);
+  } catch (error) {
+    console.error("createComment Error:", error);
+    return res.status(500).send("서버 에러");
   }
-
-  const { comment } = req.body;
-  const postId = parseInt(req.params.id);
-
-  if (!comments[postId]) comments[postId] = [];
-  comments[postId].push({
-    userId: req.session.user.id || "익명",
-    text: comment,
-  });
-
-  res.redirect(`/board/view/${postId}`);
 };

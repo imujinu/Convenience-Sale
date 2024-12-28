@@ -42,7 +42,7 @@ router.post("/deleteAccount", user.deleteAccount);
 // 파일 업로드
 router.post("/upload", user.upload);
 
-// 로그인 체크 미들웨어 추가
+// 로그인 체크 미들웨어 (예시)
 const isAuthenticated = (req, res, next) => {
   if (req.session.user) {
     // 로그인 상태일 때만 다음 단계로 진행
@@ -52,6 +52,7 @@ const isAuthenticated = (req, res, next) => {
     res.status(401).json({ message: "로그인이 필요합니다." });
   }
 };
+
 // 크롤링 및 렌더링
 router.get("/products/crawl", productController.crawlProducts);
 
@@ -72,13 +73,14 @@ router.put(
 
 // 기타 페이지
 router.get("/about", pageController.renderAboutPage);
-// 자유게시판 라우트
 
+// 자유게시판 목록
 router.get("/board", boardController.showBoard);
+// 글 작성 페이지
 router.get("/board/write", boardController.showWriteForm);
 router.post("/board/write", boardController.createPost);
+// 글 상세/댓글
 router.get("/board/view/:id", boardController.showPost);
 router.post("/board/view/:id/comment", boardController.createComment);
-router.post("/board/view/:id/delete", boardController.deletePost);
 
 module.exports = router;
