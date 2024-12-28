@@ -8,7 +8,6 @@ const productController = require("../controller/productController");
 const upload = require("../utils/multer.js");
 const pcommentsController = require("../controller/pcommentsController"); // 중복 제거
 const boardController = require("../controller/Cboard");
-const upload = require("../utils/multer");
 
 // 메인 라우트
 router.get("/", main.home);
