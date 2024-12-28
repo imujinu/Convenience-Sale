@@ -1,44 +1,41 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
+/* 상세 페이지 컨테이너 */
+.board-view {
+  width: 80%;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
+/* 게시글 내용 */
+.detail-content {
+  margin-top: 10px;
+  line-height: 1.4;
 }
 
-p {
-  margin: 10px 0;
-}
-
-h3 {
-  margin-top: 30px;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  padding: 5px 0;
-}
-
-form {
+/* 첨부 이미지 */
+.detail-image {
   margin-top: 20px;
+  text-align: center;
 }
 
-button {
-  padding: 10px 20px;
-  margin: 10px;
-  border: 1px solid #007bff;
-  background-color: #007bff;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
+.detail-image img {
+  max-width: 500px;
+  border: 1px solid #ccc;
 }
 
-button:hover {
-  background-color: #0056b3;
+/* 댓글 목록 */
+.comment-list {
+  width: 80%;
+  margin: 10px auto 20px;
+  background-color: #fff;
+  padding: 20px;
+}
+
+.comment-item {
+  margin-bottom: 15px;
+}
+
+.comment-item p {
+  margin: 5px 0;
+  word-break: break-all;
 }

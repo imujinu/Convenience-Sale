@@ -1,94 +1,67 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
+    <meta charset="UTF-8" />
+    <title>게시글 상세보기</title>
+    <%- include("./include/include", { title: "자유게시판 - 상세보기" }) %>
+    <!-- 공통 CSS -->
+    <link rel="stylesheet" href="/static/css/board.css" />
+    <!-- 상세보기 전용 CSS -->
     <link rel="stylesheet" href="/static/css/view.css" />
-    <script src="/static/js/view.js"></script>
   </head>
   <body>
-    <!-- 게시글 정보 표시 -->
-    <h1><%= post.title %></h1>
-    <p>분류: <%= post.category %></p>
-    <p>작성일: <%= post.date %></p>
-    <p>작성자: <%= post.userId %></p>
-    <p><%= post.content %></p>
+    <div class="header"><%- include("./include/header") %></div>
 
-    <!-- 첨부 이미지 표시 -->
-    <% if (post.file) { %>
-    <h3>첨부 이미지</h3>
-    <img
-      src="/static/uploads/board/<%= post.file %>"
-      alt="첨부 이미지"
-      style="max-width: 500px"
-    />
-    <% } %>
+    <h1>게시글 상세보기</h1>
 
-    <!-- 댓글 표시 -->
-    <h3>댓글</h3>
-    <ul>
-      <% (comments || []).forEach((comment) => { %>
-      <li><%= comment.userId %>: <%= comment.text %></li>
-      <% }) %>
-    </ul>
+    <div class="board-view">
+      <h2><%= post.boardTitle %></h2>
+      <p>작성자: <%= post.userId %></p>
+      <p>
+        작성일: <%= post.boardDate ? post.boardDate.toLocaleString() : "" %>
+      </p>
+      <hr />
+      <div class="detail-content"><%= post.boardDetail %></div>
 
-    <!-- 댓글 작성 폼 -->
-    <% if (user) { %>
-    <form action="/board/view/<%= post.id %>/comment" method="post">
-      <label>댓글: <input type="text" name="comment" required /></label>
-      <button type="submit">작성</button>
-    </form>
-    <% } else { %>
-    <p>댓글 작성은 <a href="/login">로그인</a> 후 가능합니다.</p>
-    <% } %>
-
-    <!-- 추가 버튼 -->
-    <button onclick="window.location.href='/board'">나가기</button>
-    <button id="deleteBtn">글 삭제</button>
-
-    <!-- 글 삭제 팝업 -->
-    <div id="deleteModal" style="display: none">
-      <p>삭제를 위해 암호를 입력해주세요.</p>
-      <label>암호키: <input type="password" id="deletePassword" /></label>
-      <button id="confirmDelete">글 삭제</button>
-      <button id="cancelDelete">삭제 취소</button>
+      <% if (post.boardPicPath) { %>
+      <div class="detail-image">
+        <img src="<%= post.boardPicPath %>" alt="첨부 이미지" />
+      </div>
+      <% } %>
     </div>
 
-    <script>
-      const deleteBtn = document.getElementById("deleteBtn");
-      const deleteModal = document.getElementById("deleteModal");
-      const confirmDelete = document.getElementById("confirmDelete");
-      const cancelDelete = document.getElementById("cancelDelete");
+    <hr />
 
-      // 글 삭제 버튼 클릭 시 팝업 표시
-      deleteBtn.addEventListener("click", () => {
-        deleteModal.style.display = "block";
-      });
+    <!-- 댓글 목록 -->
+    <h3>댓글</h3>
+    <div class="comment-list">
+      <% if (comments && comments.length > 0) { %> <%
+      comments.forEach(function(comment) { %>
+      <div class="comment-item">
+        <p>
+          <strong><%= comment.userId %></strong> | <%= comment.bcDate ?
+          comment.bcDate.toLocaleString() : "" %>
+        </p>
+        <p><%= comment.bcDetail %></p>
+        <hr />
+      </div>
+      <% }) %> <% } else { %>
+      <p>댓글이 없습니다.</p>
+      <% } %>
+    </div>
 
-      // 삭제 취소 버튼 클릭 시 팝업 숨김
-      cancelDelete.addEventListener("click", () => {
-        deleteModal.style.display = "none";
-      });
+    <!-- 댓글 작성 -->
+    <% if (isLogin) { %>
+    <h4>댓글 작성</h4>
+    <form action="/board/view/<%= post.boardId %>/comment" method="POST">
+      <textarea name="bcDetail" rows="3" required></textarea><br />
+      <button type="submit">등록</button>
+    </form>
+    <% } else { %>
+    <p>댓글을 작성하려면 <a href="/login">로그인</a> 하세요.</p>
+    <% } %>
 
-      // 삭제 확인 버튼 클릭 시 서버에 요청 전송
-      confirmDelete.addEventListener("click", () => {
-        const password = document.getElementById("deletePassword").value;
-        fetch("/board/delete/<%= post.id %>", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ password }),
-        })
-          .then((response) => {
-            if (response.ok) {
-              window.location.href = "/board";
-            } else {
-              alert("삭제 실패: 비밀번호가 일치하지 않습니다.");
-            }
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      });
-    </script>
+    <!-- 상세 페이지 전용 JS -->
+    <script src="/static/js/view.js"></script>
   </body>
 </html>
