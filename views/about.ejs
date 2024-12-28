@@ -1,4 +1,3 @@
-<!-- views/about.ejs -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -70,9 +69,17 @@
              data-price="<%= product.price %>" 
              data-convenience="<%= product.convenienceName %>" 
              data-event="<%= product.event %>">
-          <img src="<%= product.imageUrl %>" alt="<%= product.name %>" class="product-image">
+          
+          <% 
+            // 정규 표현식: 파일명이 숫자로 시작하고, 지원하는 확장자로 끝나는지 확인
+            var regex = /^\d+\.(png|jpg|jpeg|gif|bmp|svg)$/i;
+            var imageSrc = regex.test(product.imageUrl) ? '/static/image/product/' + product.imageUrl : product.imageUrl;
+          %>
+          
+          <img src="<%= imageSrc %>" alt="<%= product.name %>" class="product-image" onerror="this.src='/static/image/product/default.png'">
           <h3 class="product-name"><%= product.name %></h3>
           <p class="product-price"><%= product.price %>원</p>
+          
           <% if (userId) { %>
             <button class="btn show-comments-button" onclick="CommentsModule.openCommentsPopup('<%= product.id %>')">댓글 보기</button>
           <% } else { %>
@@ -83,7 +90,7 @@
     </div>
   </main>
 
-  <!-- 댓글 팝업 -->
+  <!-- 댓글 팝업 (단일 팝업 유지) -->
   <div class="product-popup" id="comments-popup">
     <div class="popup-content">
       <button class="popup-close" onclick="CommentsModule.closeCommentsPopup()">&times;</button>
@@ -103,7 +110,8 @@
           <div class="add-comment-form">
             <h4>댓글 작성</h4>
             <textarea id="new-comment-content" placeholder="댓글을 입력하세요"></textarea>
-            <button class="btn submit-comment-button">작성</button>
+            <!-- product.id를 직접 전달하지 않도록 수정 -->
+            <button class="btn submit-comment-button" onclick="CommentsModule.submitComment()">작성</button>
           </div>
         <% } else { %>
           <p>댓글을 작성하려면 <a href="/login">로그인</a>하세요.</p>

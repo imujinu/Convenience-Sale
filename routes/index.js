@@ -1,3 +1,4 @@
+//routes\index.js
 const express = require("express");
 const router = express.Router();
 const main = require("../controller/Cmain.js");
@@ -57,6 +58,7 @@ const isAuthenticated = (req, res, next) => {
     res.status(401).json({ message: "로그인이 필요합니다." });
   }
 };
+
 router.get("/crawlstart", (req, res) => {
   res.render("crawlstart"); // EJS 템플릿 렌더링
 });
@@ -87,6 +89,12 @@ router.post(
   "/api/pcomments",
   isAuthenticated,
   pcommentsController.createComment,
+);
+
+router.get(
+  "/api/mycomments",
+  isAuthenticated, // Ensure the user is authenticated
+  pcommentsController.getMyComments,
 );
 
 // 댓글 수정: 인증된 사용자만 접근 가능

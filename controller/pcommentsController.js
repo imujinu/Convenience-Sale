@@ -29,6 +29,29 @@ exports.getComments = async (req, res) => {
   }
 };
 
+exports.getMyComments = async (req, res) => {
+  // Assuming userId is stored in req.session.user.userId
+  const userId = req.session.user.userId;
+
+  try {
+    const myComments = await PComment.findAll({
+      where: { userId },
+      include: [
+        {
+          model: Products,
+          as: "product",
+          attributes: ["id", "name"], // <-- Corrected here
+        },
+      ],
+      order: [["createdAt", "DESC"]],
+    });
+
+    res.status(200).json({ comments: myComments });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // 댓글 생성
 exports.createComment = async (req, res) => {
   const { pId, commentDetail, userId } = req.body;
