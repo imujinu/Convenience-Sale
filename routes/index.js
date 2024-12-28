@@ -8,6 +8,7 @@ const productController = require("../controller/productController");
 const upload = require("../utils/multer.js");
 
 const boardController = require("../controller/Cboard");
+const upload = require("../utils/multer");
 
 // 메인 라우트
 router.get("/", main.home);
@@ -73,12 +74,15 @@ router.put(
 // 기타 페이지
 router.get("/about", pageController.renderAboutPage);
 // 자유게시판 라우트
-
 router.get("/board", boardController.showBoard);
 router.get("/board/write", boardController.showWriteForm);
+router.post(
+  "/board/write",
+  upload.single("boardPic"),
+  boardController.createPost,
+);
 router.post("/board/write", boardController.createPost);
 router.get("/board/view/:id", boardController.showPost);
 router.post("/board/view/:id/comment", boardController.createComment);
-router.post("/board/view/:id/delete", boardController.deletePost);
 
 module.exports = router;
