@@ -1,24 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const deleteBtn = document.getElementById("deleteBtn");
+  console.log("view.js loaded.");
 
-  deleteBtn.addEventListener("click", () => {
-    const password = prompt("삭제를 위해 암호를 입력해주세요.");
+  // 예: 댓글 수정/삭제 기능이 필요하다면 이곳에 로직을 추가할 수 있습니다.
 
-    if (password) {
-      fetch(window.location.href + "/delete", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password }),
-      })
-        .then((res) => {
-          if (res.ok) {
-            alert("게시글이 삭제되었습니다.");
-            window.location.href = "/board";
-          } else {
-            alert("비밀번호가 일치하지 않습니다.");
-          }
-        })
-        .catch(() => alert("오류가 발생했습니다."));
-    }
-  });
+  // const deleteButtons = document.querySelectorAll(".btn-delete-comment");
+  // deleteButtons.forEach(btn => {
+  //   btn.addEventListener("click", function(e) {
+  //     const commentId = e.target.dataset.commentId;
+  //     // 댓글 삭제 요청 로직...
+  //   });
+  // });
 });

@@ -50,13 +50,14 @@
         <li><span>닉네임</span> <span><%=nickname%></span></li>
       </ul>
       <h3 class="welcome">
-        <span><%=nickname%></span>님, 오늘 당신의 픽은??😎
+        <span><%=nickname%></span>님, 오늘 당신의
+        <span id="pick">Pick</span>은??😎
       </h3>
       <ul class="reviewsBox">
         <!-- <a href="li"> -->
         <li>
           <span class="tit">게시글</span>
-          <span class="len"><span>5</span>개</span>
+          <span class="len"><span><%= boards.length %></span>개</span>
           <button
             class="fa-solid fa-chevron-right arrow"
             onclick="showList(this)"
@@ -70,13 +71,13 @@
               <span>작성자</span>
               <span>날짜</span>
             </li>
-            <%for(let i=1;i<=5;i++){%>
-            <a href="#">
+          <%for(let i=0;i<boards.length;i++){%>
+            <a href="/board/view/<%=boards[i].boardId%>">
               <li>
-                <span><%= i %></span>
-                <span>편의점 꿀맛 조합 아시는 분 추천좀여!!!</span>
-                <span>편죽이이</span>
-                <span>2024-12-18</span>
+                <span><%= i+1 %></span>
+                <span><%=boards[i].boardTitle%></span>
+                <span><%=nickname%></span>
+                <span><%=boards[i].boardDate%></span>
               </li>
             </a>
             <%}%>
@@ -129,40 +130,6 @@
           <button
             class="fa-solid fa-chevron-right arrow"
             onclick="showList(this)"
-          ></button>
-        </li>
-        <div class="content-container hide">
-          <ul class="list">
-            <li class="list-head">
-              <span>순번</span>
-              <span>제목</span>
-              <span>작성자</span>
-              <span>날짜</span>
-            </li>
-            <%for(let i=1;i<=5;i++){%>
-            <a href="#">
-              <li>
-                <span><%= i %></span>
-                <span>편의점 꿀맛 조합 아시는 분 추천좀여!!!</span>
-                <span>편죽이이</span>
-                <span>2024-12-18</span>
-              </li>
-            </a>
-            <%}%>
-          </ul>
-          <div class="pagination">
-            <span class="selected">1</span>
-            <span>2</span>
-            <span>3</span>
-          </div>
-        </div>
-
-        <li>
-          <span class="tit">좋아요</span>
-          <span class="len"><span>5</span>개</span>
-          <button
-            onclick="showList(this)"
-            class="fa-solid fa-chevron-right arrow"
           ></button>
         </li>
         <div class="content-container hide">

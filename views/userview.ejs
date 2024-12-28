@@ -28,7 +28,7 @@
           <li>
             <span>아이디 </span>
             <span><%=userId%> </span>
-            <input type="hidden" id="userId" value="<%= userId %>" />
+            <input type="hidden" id="userId" value="<%=userId%>" />
           </li>
           <li>
             <span>닉네임: </span>
@@ -115,10 +115,12 @@
       async function updateUserBtn() {
         const userId = document.querySelector("#userId").value; // userId 가져오기
         const newNickname = document.querySelector("#newNickname").value.trim(); // 새로운 닉네임 가져오기
+        const userPw = document.querySelector("#userPw").value.trim();
         try {
           const response = await axios.post("/updateUser", {
             userId,
             newNickname,
+            userPw: userPw,
             src: changeImgPath,
           });
           console.log("response", userId);

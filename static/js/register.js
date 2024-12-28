@@ -25,37 +25,36 @@ async function checkDuplication() {
     alert("중복확인 중 오류가 발생했습니다.");
   }
 }
-async function registerBtn(event) {
-  event.preventDefault();
-  const registerForm = document.forms["registerForm"];
-  const idDuplication = document.getElementById("idDuplication").value;
+document
+  .getElementById("registerForm")
+  .addEventListener("submit", async (event) => {
+    event.preventDefault(); // 기본 폼 제출 동작 방지
 
-  if (!registerForm.checkValidity()) {
-    registerForm.reportValidity();
-    return;
-  }
+    const registerForm = event.target;
+    const idDuplication = document.getElementById("idDuplication").value;
 
-  if (idDuplication !== "idChecked") {
-    alert("아이디 중복확인을 진행하세요.");
-    return;
-  }
+    if (!registerForm.checkValidity()) {
+      registerForm.reportValidity();
+      return;
+    }
 
-  try {
-    const response = await axios({
-      url: "/register",
-      method: "POST",
-      data: {
+    if (idDuplication !== "idChecked") {
+      alert("아이디 중복확인을 진행하세요.");
+      return;
+    }
+
+    try {
+      const response = await axios.post("/register", {
         userId: registerForm.userId.value,
         userPw: registerForm.userPw.value,
         nickname: registerForm.nickname.value,
         userEmail: registerForm.userEmail.value,
-      },
-    });
-    console.log("성공 or 실패: ", response);
-    alert("회원가입 성공");
-    window.location.href = "/login"; // 페이지 이동
-  } catch (error) {
-    console.error("error: ", error);
-    alert("회원가입 중 오류가 발생했습니다.");
-  }
-}
+      });
+      console.log("성공 or 실패: ", response);
+      alert("회원가입 성공");
+      window.location.href = "/login"; // 페이지 이동
+    } catch (error) {
+      console.error("error: ", error);
+      alert("회원가입 중 오류가 발생했습니다.");
+    }
+  });

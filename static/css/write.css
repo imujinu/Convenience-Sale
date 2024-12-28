@@ -1,47 +1,56 @@
-/* cys2/241219/자유게시판 */
-body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
+/* write.css */
+
+/* 글 작성 메인 컨테이너 */
+.write-container {
+  width: 80%;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+/* 폼 그룹(라벨+입력란) */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+/* 이미지 미리보기 컨테이너 */
+.preview-container {
+  border: 1px solid #eee;
+  padding: 10px;
+  margin-bottom: 20px;
   text-align: center;
 }
 
-form {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-}
-
-label {
-  display: block;
-  margin-bottom: 10px;
-}
-
-input[type="text"],
-textarea,
-select {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
+#previewImage {
+  max-width: 400px;
+  max-height: 300px;
   border: 1px solid #ccc;
-  border-radius: 5px;
 }
 
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
+/* 등록 버튼 */
+.btn-submit {
+  padding: 10px 15px;
+  background-color: #e04848;
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #0056b3;
+.btn-submit:hover {
+  background-color: #c53737;
 }
