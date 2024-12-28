@@ -1,3 +1,4 @@
+//controller\Cmain.js
 const models = require("../models");
 const { Products, Board } = require("../models");
 const { Op } = require("sequelize");
@@ -113,12 +114,48 @@ exports.mypage = async (req, res) => {
       profilePath: user.profilePath,
       isLogin: true,
       boards: boards,
+      productReviews: [], // 초기 빈 배열로 전달
     });
     console.log("userID:::", user.userId);
   } else {
     res.send(
       '<script>alert("먼저 로그인 해주세요"); location.href="/login";</script>',
     );
+  }
+};
+
+exports.getMyComments = async (req, res) => {
+  const user = req.session.user;
+  if (user) {
+    try {
+      const comments = await Comment.findAll({
+        where: { userId: user.userId },
+        include: [
+          { model: Products, as: "product", attributes: ["id", "name"] },
+        ],
+        order: [["createdAt", "DESC"]],
+      });
+
+      const formattedComments = comments.map((comment) => ({
+        commentId: comment.commentId,
+        commentDetail: comment.commentDetail,
+        pId: comment.pId,
+        userId: comment.userId,
+        createdAt: comment.createdAt,
+        updatedAt: comment.updatedAt,
+        product: {
+          id: comment.product.id,
+          name: comment.product.name,
+        },
+      }));
+
+      res.json({ comments: formattedComments });
+    } catch (error) {
+      console.error("Error fetching user comments:", error);
+      res.status(500).json({ message: "Error fetching comments" });
+    }
+  } else {
+    res.status(401).json({ message: "로그인이 필요합니다." });
   }
 };
 
