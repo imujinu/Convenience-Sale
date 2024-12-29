@@ -97,7 +97,7 @@
       <div class="container">
         <% for (let i = 0; i < product.length; i++) { %>
         <div
-          class="menu product-item"
+          class="menu product-item product"
           data-product-id="<%= product[i].id %>"
           data-tags="<%= JSON.stringify(product[i].tags) %>"
           data-price="<%= product[i].price %>"
@@ -109,9 +109,9 @@
             alt="편의점상품"
             class="product-image"
           />
-          <p class="product-name"><%= product[i].name %></p>
-          <p class="product-price"><%= product[i].price %>원</p>
-          <p class="product-event"><%= product[i].event %></p>
+          <span><p class="product-name"><%= product[i].name %></p></span>
+          <span><p class="product-price"><%= product[i].price %>원</p></span>
+          <span><p class="product-event"><%= product[i].event %></p></span>
           <% if (typeof userId !== 'undefined' && userId) { %>
           <button
             class="btn show-comments-button"
@@ -201,7 +201,7 @@
         <i class="fas fa-spinner fa-spin"></i> 로딩 중...
       </div>
     </div>
-
+    <%- include("./include/footer") %>
     <!-- 사용자 ID 전달 -->
     <script>
       // 사용자 ID를 클라이언트 사이드에 전달 (if authenticated)
