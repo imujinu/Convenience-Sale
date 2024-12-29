@@ -2,7 +2,7 @@
   width: 100%;
   height: 120px;
   position: fixed;
-  background: #ffcdd4;
+  background: var(--color-200);
   z-index: 99;
 }
 
@@ -174,7 +174,7 @@
     overflow: hidden;
     height: 0;
     top: 0%;
-    background: aliceblue;
+    background: var(--color-300);
     z-index: 1;
   }
 

@@ -466,22 +466,22 @@ emailInput.addEventListener("keydown", async (event) => {
   }
 });
 
-const git = document.querySelectorAll(".footer > .container > ul > li");
-git.forEach((el) => {
-  el.addEventListener("mouseenter", () => {
-    el.style.textDecoration = "underline";
-    const Img = el.querySelector("img");
-    Img.style.opacity = "1";
-    Img.style.bottom = "100%";
-  });
+// const git = document.querySelectorAll(".footer > .container > ul > li");
+// git.forEach((el) => {
+//   el.addEventListener("mouseenter", () => {
+//     el.style.textDecoration = "underline";
+//     const Img = el.querySelector("img");
+//     Img.style.opacity = "1";
+//     Img.style.bottom = "100%";
+//   });
 
-  el.addEventListener("mouseleave", () => {
-    el.style.textDecoration = "none";
-    const Img = el.querySelector("img");
-    Img.style.opacity = "0";
-    Img.style.bottom = "0%";
-  });
-});
+//   el.addEventListener("mouseleave", () => {
+//     el.style.textDecoration = "none";
+//     const Img = el.querySelector("img");
+//     Img.style.opacity = "0";
+//     Img.style.bottom = "0%";
+//   });
+// });
 
 window.addEventListener("scroll", () => {
   let scroll = window.scrollY;
@@ -586,32 +586,32 @@ window.addEventListener("scroll", () => {
   const width = window.innerWidth;
   const emailInput = document.querySelector(".section9 > .container > .inner ");
   if (width < 480) {
-    if (scroll > 2280) {
-      emailInput.style.bottom = "36px";
+    if (scroll > 2540) {
+      emailInput.style.bottom = "-200px";
       emailInput.style.opacity = "1";
     } else {
       emailInput.style.bottom = "-20%";
       emailInput.style.opacity = "0";
     }
   } else if (480 <= width && width < 768) {
-    if (scroll > 2400) {
-      emailInput.style.bottom = "24px";
+    if (scroll > 2620) {
+      emailInput.style.bottom = "-266x";
       emailInput.style.opacity = "1";
     } else {
       emailInput.style.bottom = "-20%";
       emailInput.style.opacity = "0";
     }
   } else if (768 <= width && width < 1024) {
-    if (scroll > 1930) {
-      emailInput.style.bottom = "7px";
+    if (scroll > 2090) {
+      emailInput.style.bottom = "-200px";
       emailInput.style.opacity = "1";
     } else {
       emailInput.style.bottom = "-20%";
       emailInput.style.opacity = "0";
     }
   } else if (1024 < width) {
-    if (scroll > 1974) {
-      emailInput.style.bottom = "7px";
+    if (scroll > 2274) {
+      emailInput.style.bottom = "-250px";
       emailInput.style.opacity = "1";
     } else {
       emailInput.style.bottom = "-20%";

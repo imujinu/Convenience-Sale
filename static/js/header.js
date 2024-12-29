@@ -5,9 +5,9 @@ for (let i = 1; i < 6; i++) {
     `.section1 > .container > .part2 > .navbar > .store${i} > li:nth-of-type(1)`,
   );
   store.addEventListener("mouseover", () => {
-    store.style.backgroundColor = "#fdfcdc";
+    store.style.backgroundColor = "var(--color-600)";
     storeDetail.style.textDecoration = "underline";
-    menu.style.backgroundColor = "#fdfcdc";
+    menu.style.backgroundColor = "var(--color-600)";
     menu.style.height = "150px";
   });
   store.addEventListener("mouseleave", () => {

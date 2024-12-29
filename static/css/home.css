@@ -1,4 +1,4 @@
-* {
+@import () * {
   padding: 0;
   margin: 0;
   box-sizing: content-box;
@@ -27,36 +27,41 @@ a {
 .section2 > .part1 {
   width: 30%;
   height: 100%;
-  background: #fff3f4;
+  background: var(--color-100);
   text-align: right;
   position: relative;
+  display: grid;
 }
 
 .section2 .part1 .contents p:nth-child(1) {
-  font-size: 1.5rem;
+  font-size: 16px;
 }
 .section2 .title {
+  align-self: center;
   left: -100%;
-  position: absolute;
-  font-size: 2.5vw;
+  position: relative;
+  justify-self: center;
+  font-size: 25px;
   top: 30%;
   text-align: center;
   animation: ani1 1s forwards;
+  width: 100%;
 }
 
 .section2 .contents {
-  left: -160%;
-  top: 50%;
-  position: absolute;
-  line-height: 30px;
+  width: 50%;
+  width: 100%;
+  justify-self: center;
+  position: relative;
   text-align: center;
-  font-size: 1.2vw;
+  font-size: 18px;
+  left: -100%;
   animation: ani2 1.5s forwards;
 }
 
 @keyframes ani1 {
   100% {
-    left: 14%;
+    left: 0%;
   }
 }
 
@@ -95,7 +100,7 @@ a {
 
 .detail:hover {
   transition: 0.5s;
-  background-color: red;
+  background-color: var(--color-900);
 }
 
 .section2 > .part2 > .arrow {
@@ -147,8 +152,9 @@ a {
 .section3 .swiper {
   position: relative;
   margin-top: 5%;
-  width: 90%;
+  width: 1200px;
   height: 100%;
+  overflow: hidden;
 }
 
 .section3 .swiper-slide img {
@@ -174,7 +180,7 @@ a {
 .swiper-pagination-bullet.on {
   width: 12px;
   height: 12px;
-  background: #ffcdd4;
+  background: var(--color-600);
   opacity: 1;
 }
 .section3 > .swiper > .swiper-wrapper > .swiper-slide > .viewBox {
@@ -200,11 +206,14 @@ a {
   min-height: 40px;
   justify-self: center;
   transition: 0.5s;
+  border-radius: 5px;
+  background-color: #ff5252;
+  color: #fff;
 }
 
 .section3 > .swiper > .swiper-wrapper > .swiper-slide > .viewBox > .view:hover {
   transition: 0.5s;
-  background: aquamarine;
+  background: var(--color-200);
   text-decoration: underline;
 }
 
@@ -233,7 +242,7 @@ a {
 
 .section3 .next:hover,
 .section3 .prev:hover {
-  background: palevioletred;
+  background: var(--color-700);
   opacity: 1;
   transform: scale(1.1);
   transition: 0.5s;
@@ -271,7 +280,7 @@ a {
 .section3 .modalCloseBtn {
   position: fixed;
   right: 31%;
-  top: 13%;
+  top: 15.5%;
   border: 1px solid white;
   width: 4.5%;
   height: auto;
@@ -307,8 +316,15 @@ a {
 .section4 {
   width: 100%;
   height: 100px;
+  display: flex;
+  justify-content: center;
 }
 
+.section4 > .container {
+  width: 1200px;
+  height: 100%;
+  display: grid;
+}
 .section4 .part1 {
   font-size: 30px;
 }
@@ -326,8 +342,8 @@ a {
   transition: 0.5s;
 }
 
-.section4 .part2 ul li :hover {
-  background: darkgreen;
+.section4 li:hover {
+  background: var(--color-500);
   transition: 0.5s;
 }
 
@@ -386,7 +402,7 @@ a {
 .section7 > .container > .product > .menu:hover,
 .section7 > .container > .clone > .menu:hover {
   border-radius: 20px;
-  border: 5px solid aqua;
+  border: 5px solid var(--color-400);
   transition: 0.5s;
   transform: scale(1.1);
 }
@@ -394,7 +410,7 @@ a {
 .section5 > .container > .product > .menu > img,
 .section6 > .container > .product > .menu > img,
 .section7 > .container > .product > .menu > img {
-  height: 80%;
+  height: 65%;
   width: 100%;
   transition: 0.5s;
 }
@@ -463,19 +479,22 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .section8 > .container > .part1 > .searchBox > .searchText {
+  height: 50px;
   width: 100%;
-  height: 100%;
 }
 
 .section8 > .container > .part1 > .searchBox > .search {
-  width: 10%;
-  height: 25px;
-  background: url(/static/image/search.png) center/cover no-repeat;
-  background-size: contain;
+  margin-right: 10px;
+  width: 35px;
+  height: auto;
   cursor: pointer;
+  object-fit: contain;
+  position: absolute;
+  right: 0;
 }
 .section8 img {
   cursor: pointer;
@@ -498,7 +517,7 @@ a {
   position: relative;
   border-radius: 42px 42px 0 42px;
   top: 20%;
-  background: white;
+  background: var(--color-200);
   box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.16);
   text-align: center;
   font-size: 2rem;
@@ -524,7 +543,7 @@ a {
   position: absolute;
   right: 0;
   border-radius: 42px 42px 0 42px;
-  background: white;
+  background: var(--color-200);
   box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.16);
   font-size: 1.5rem;
   font-weight: bold;
@@ -546,7 +565,7 @@ a {
   left: 40%;
   bottom: 30%;
   border-radius: 42px 42px 0 42px;
-  background: white;
+  background: var(--color-200);
   box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.16);
   font-size: 1.5rem;
   font-weight: bold;
@@ -567,7 +586,7 @@ a {
   left: 20%;
   top: 0%;
   border-radius: 42px 42px 0 42px;
-  background: white;
+  background: var(--color-200);
   box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.16);
   font-size: 1.5rem;
   font-weight: bold;
@@ -602,7 +621,7 @@ a {
 .section9 > .container {
   width: 1200px;
   height: 100%;
-  background: url(/static/image/emailbg.png) center / cover no-repeat;
+  background: url(/static/image/emailbg1.png) center / cover no-repeat;
   position: relative;
   display: flex;
   justify-content: center;
@@ -612,7 +631,7 @@ a {
 .section9 > .container > .inner {
   width: 55%;
   height: 21%;
-  position: absolute;
+  position: relative;
   display: flex;
   justify-content: center;
   transition: 1s;
@@ -631,60 +650,7 @@ a {
 
 .section9 > .container > button:hover {
   transition: 0.5s;
-  background: palevioletred;
-}
-.footer {
-  width: 100%;
-  height: 150px;
-  background: ivory;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.footer > .container {
-  width: 50%;
-  height: 50%;
-  display: grid;
-  grid-template-rows: repeat(2, 1fr);
-  justify-items: center;
-  align-items: center;
-}
-
-.footer > .container > ul {
-  display: flex;
-  justify-content: center;
-  font-size: 1.5vw;
-}
-
-.footer > .container > ul > li {
-  margin-right: 10px;
-  transition: 0.5s;
-}
-.footer > .container > ul > li > a {
-  display: flex;
-  justify-content: center;
-  position: relative;
-  transition: 1s;
-}
-.footer > .container > ul > li::after {
-  content: "";
-  width: 3px;
-  height: 3px;
-  border-radius: 50px;
-  background: black;
-}
-.footer img {
-  width: 50%;
-  bottom: 0%;
-  height: auto;
-  position: absolute;
-  opacity: 0;
-  transition: 1s;
-}
-
-.footer > .container > .text {
-  font-size: 1vw;
+  background: var(--color-700);
 }
 
 .tablet {
@@ -726,7 +692,7 @@ a {
 
   @keyframes ani4 {
     100% {
-      left: 7%;
+      left: 0%;
     }
   }
 
@@ -749,9 +715,23 @@ a {
   .section2 > .part2 > .arrow {
     width: 6%;
   }
-
+  .section3 .swiper {
+    position: relative;
+    margin-top: 5%;
+    width: 700px;
+    height: 100%;
+  }
   .section3 > .swiper > .swiper-wrapper > .swiper-slide > .viewBox > .view {
     width: 30%;
+  }
+
+  .section5 > .container,
+  .section6 > .container,
+  .section7 > .container {
+    width: 1000px;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
   }
   .section5 > .container > .product > .menu,
   .section5 > .container > .clone > .menu,
@@ -767,7 +747,17 @@ a {
   .section7 > .container > .product > .menu > img {
     height: 70%;
   }
-
+  .section8 > .container {
+    display: flex;
+    width: 630px;
+    font-size: 14px;
+  }
+  .section8 > .container > .part2 {
+    width: 70%;
+    height: 100%;
+    position: relative;
+    left: 60px;
+  }
   .section8 > .container > .part2 > .menu {
     font-size: 20px;
   }
@@ -780,14 +770,6 @@ a {
   .section9 > .container > .inner > button {
     width: 10%;
     height: 38px;
-  }
-  .footer {
-    height: 100px;
-  }
-
-  .footer > .container {
-    width: 50%;
-    height: 50%;
   }
 
   .section9 {
@@ -830,16 +812,19 @@ a {
   .section2 .contents {
     position: relative;
     left: -200%;
+    width: 80%;
     top: 0;
     animation: left 1.5s forwards;
+    justify-self: center;
+    font-size: 15px;
   }
-
+  .section2 .part1 .contents p:nth-child(1) {
+    font-size: 20px;
+  }
   .section2 > .part2 {
     width: 100%;
   }
-  .section1 > .container > .part2 > ul {
-    width: 100%;
-  }
+
   .section2 > .part2 > .arrow {
     width: 7%;
   }
@@ -869,6 +854,9 @@ a {
     }
   }
   .section3 {
+    width: 100%;
+    display: grid;
+    justify-content: center;
     margin-top: 20%;
   }
 
@@ -883,13 +871,18 @@ a {
     width: 1.5%;
     height: 3%;
     bottom: 17px;
-    left: 41%;
+    left: 41;
   }
 
   .section2 > .part2 > .arrow {
     width: 7%;
   }
-
+  .section3 .swiper {
+    position: relative;
+    margin-top: 5%;
+    width: 600px;
+    height: 100%;
+  }
   .section3 .modalContent img {
     top: 7.5%;
   }
@@ -909,30 +902,29 @@ a {
     height: 30px;
     width: 125px;
   }
-  .section5,
-  .section6,
-  .section7 {
-    width: 100%;
-    height: 300px;
-    display: grid;
-    grid-template-rows: 1fr 5fr;
-    margin-bottom: 20px;
-    justify-content: unset;
+  .section5 > .container,
+  .section6 > .container,
+  .section7 > .container {
+    height: 100%;
+    display: flex;
+    width: 700px;
+    overflow: hidden;
   }
+
   .section5 > .container > .product > .menu,
   .section5 > .container > .clone > .menu,
   .section6 > .container > .product > .menu,
   .section6 > .container > .clone > .menu,
   .section7 > .container > .product > .menu,
   .section7 > .container > .clone > .menu {
-    width: 181px;
-    height: 80%;
-    font-size: 16px;
+    width: 190px;
+    height: 230px;
+    font-size: 13px;
   }
   .section5 > .container > .product > .menu > img,
   .section6 > .container > .product > .menu > img,
   .section7 > .container > .product > .menu > img {
-    height: 50%;
+    height: 70%;
     width: 100%;
     transition: 0.5s;
   }
@@ -943,7 +935,7 @@ a {
     height: 100%;
     display: grid;
     grid-template-rows: 1fr 1fr;
-    width: 1200px;
+    width: 600px;
   }
 
   .section8 .part1 {
@@ -966,6 +958,7 @@ a {
   .section8 > .container > .part2 {
     width: 100%;
     margin-top: 15%;
+    left: -8px;
   }
   .section8 > .container > .part2 > .menu {
     font-size: 20px;
@@ -997,17 +990,15 @@ a {
     margin-top: 260px;
   }
   .section9 > .container {
+    width: 100%;
     background: url(/static/image/emailbg2.png) center / cover no-repeat;
   }
 
   .section9 > .container > .inner {
     width: 90%;
     height: 10%;
-    position: absolute;
     display: flex;
     justify-content: center;
-    transition: 1s;
-    left: 6%;
   }
 
   .section9 > .container > .inner > button {
@@ -1021,21 +1012,6 @@ a {
     height: 35px;
     width: 150px;
     margin-right: 10px;
-  }
-  .section9 > .container > .inner {
-    left: 3%;
-  }
-
-  .footer > .container {
-    width: 70%;
-    height: 40%;
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    justify-content: center;
-  }
-  .footer > .container > .text {
-    font-size: 2vw;
-    width: 100%;
   }
 }
 
@@ -1055,6 +1031,21 @@ a {
   .section3 > .swiper > .swiper-wrapper > .swiper-slide > .viewBox > .view {
     width: 100px;
   }
+
+  .section3 .swiper {
+    position: relative;
+    margin-top: 5%;
+    width: 400px;
+    height: 100%;
+  }
+  .section5 > .container,
+  .section6 > .container,
+  .section7 > .container {
+    height: 100%;
+    display: flex;
+    width: 400px;
+    overflow: hidden;
+  }
   .section5 > .container > .product > .menu,
   .section5 > .container > .clone > .menu,
   .section6 > .container > .product > .menu,
@@ -1066,6 +1057,9 @@ a {
   .section8 > .container > .part2 {
     width: 100%;
     margin-top: 25%;
+    height: 100%;
+    position: relative;
+    left: -5px;
   }
   .section8 > .container > .part2 > .menu {
     font-size: 19px;
@@ -1084,16 +1078,18 @@ a {
     width: 125px;
   }
   .section9 {
-    margin-top: 250px;
+    width: 100%;
+    height: 265px;
+    margin-top: 260px;
   }
-  .section9 > .container > .inner {
-    width: 47%;
-    left: 24%;
+
+  .section9 > .container {
+    background: url(/static/image/emailbg2.png) center / contain no-repeat;
   }
+
   .section9 > .container > .inner {
     width: 40%;
     height: 12%;
-    left: 24%;
   }
   .section9 > .container > .inner > .email {
     width: 120px;
@@ -1105,6 +1101,7 @@ a {
     height: 36px;
     font-size: 3vw;
   }
+
   /* Comments Popup Styles */
   /* 팝업 전체를 감싸는 레이어 */
   .comments-popup {
