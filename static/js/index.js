@@ -1,4 +1,4 @@
-// index.js
+// public/static/js/index.js
 
 // 태그 토글 함수 (클라이언트 측에서만 동작)
 function toggleTag(button, productId, tag) {

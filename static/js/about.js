@@ -1,8 +1,6 @@
 // about.js
 
 const CommentsModule = (function () {
-  // 내부 변수 및 함수
-
   // 댓글 팝업 열기
   const openCommentsPopup = async function (productId) {
     const popup = document.getElementById("comments-popup");
@@ -15,6 +13,7 @@ const CommentsModule = (function () {
     const productEvent = document.getElementById("popup-product-event");
     const commentsList = document.getElementById("comments-list");
     const loadingSpinner = document.getElementById("loading-spinner");
+    const newCommentForm = document.getElementById("new-comment-form"); // 댓글 작성 폼
 
     // 팝업에 현재 제품 ID 설정
     popup.setAttribute("data-product-id", productId);
@@ -62,6 +61,13 @@ const CommentsModule = (function () {
       } else {
         commentsList.innerHTML = `<p>Error: ${data.message}</p>`;
       }
+
+      // 댓글 작성 폼 표시 여부 설정
+      if (window.userId) {
+        newCommentForm.classList.add("active");
+      } else {
+        newCommentForm.classList.remove("active");
+      }
     } catch (error) {
       commentsList.innerHTML = `<p>Error: ${error.message}</p>`;
     } finally {
@@ -84,7 +90,7 @@ const CommentsModule = (function () {
     contentDiv.innerText = comment.commentDetail;
 
     // 댓글 작성자와 현재 사용자가 동일한 경우에만 수정/삭제 버튼 표시
-    if (window.userId === comment.user.userId) {
+    if (window.userId && window.userId === comment.user.userId) {
       const actionsDiv = document.createElement("div");
       actionsDiv.classList.add("comment-actions");
 
@@ -110,6 +116,11 @@ const CommentsModule = (function () {
 
   // 댓글 제출
   const submitComment = async function () {
+    if (!window.userId) {
+      alert("로그인이 필요합니다.");
+      return;
+    }
+
     const popup = document.getElementById("comments-popup");
     const productId = popup.getAttribute("data-product-id");
     const commentContent = document
@@ -191,6 +202,11 @@ const CommentsModule = (function () {
 
   // 댓글 삭제
   const deleteComment = async function (commentId, commentDiv) {
+    if (!window.userId) {
+      alert("로그인이 필요합니다.");
+      return;
+    }
+
     if (!confirm("댓글을 삭제하시겠습니까?")) return;
 
     try {
@@ -224,17 +240,19 @@ const CommentsModule = (function () {
     }
   };
 
-  // 필터 적용 함수
+  // 필터 적용 함수 (카테고리 포함)
   const applyFilters = function () {
     const convenienceFilter =
       document.getElementById("convenience-filter").value;
     const eventFilter = document.getElementById("event-filter").value;
+    const categoryFilter = document.getElementById("category-filter").value; // 카테고리 필터
     const sortFilter = document.getElementById("sort-filter").value;
 
     const params = new URLSearchParams();
 
     if (convenienceFilter) params.append("convenience", convenienceFilter);
     if (eventFilter) params.append("event", eventFilter);
+    if (categoryFilter) params.append("category", categoryFilter); // 카테고리 파라미터 추가
     if (sortFilter) params.append("sortBy", sortFilter);
 
     window.location.search = params.toString();
@@ -259,10 +277,19 @@ const CommentsModule = (function () {
       productDiv.setAttribute("data-convenience", product.convenienceName);
       productDiv.setAttribute("data-event", product.event);
 
+      // 이미지 경로 처리 (정규 표현식 사용)
+      const regex = /^(GD_\d+_\d+|\d+(\.\d+)?)\.(png|jpg|jpeg|gif|bmp|svg)$/i;
+      const imageSrc = regex.test(product.imageUrl)
+        ? "/static/image/product/" + product.imageUrl
+        : product.imageUrl;
+
       const img = document.createElement("img");
-      img.src = product.imageUrl;
+      img.src = imageSrc;
       img.alt = product.name;
       img.classList.add("product-image");
+      img.onerror = function () {
+        this.src = "/static/image/product/default.png";
+      };
 
       const name = document.createElement("h3");
       name.classList.add("product-name");
@@ -274,13 +301,8 @@ const CommentsModule = (function () {
 
       const button = document.createElement("button");
       button.classList.add("btn", "show-comments-button");
-      if (window.userId) {
-        button.innerText = "댓글 보기";
-        button.onclick = () => openCommentsPopup(product.id);
-      } else {
-        button.innerText = "댓글 보기";
-        button.onclick = () => alert("로그인이 필요합니다.");
-      }
+      button.innerText = "댓글 보기";
+      button.onclick = () => openCommentsPopup(product.id); // 항상 팝업 열기
 
       productDiv.appendChild(img);
       productDiv.appendChild(name);
@@ -311,5 +333,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const submitButton = document.querySelector(".submit-comment-button");
   if (submitButton) {
     submitButton.addEventListener("click", CommentsModule.submitComment);
+  }
+
+  const closeButton = document.querySelector(".popup-close");
+  if (closeButton) {
+    closeButton.addEventListener("click", CommentsModule.closeCommentsPopup);
   }
 });

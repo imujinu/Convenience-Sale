@@ -1,7 +1,7 @@
 /* CSS Variables for Pink Theme */
 :root {
-  --primary-pink: #ff6bcb;
-  --secondary-pink: #ff8de1;
+  --primary-pink: palevioletred;
+  --secondary-pink: palevioletred;
   --accent-pink: #ffb6e1;
   --dark-pink: #d63384;
   --light-gray: #f4f4f4;
