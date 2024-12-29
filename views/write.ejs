@@ -19,6 +19,16 @@
           <input type="text" name="boardTitle" id="boardTitle" required />
         </div>
         <div>
+          <label for="boardCategory">분류</label>
+          <select name="boardCategory" id="boardCategory" required>
+            <option value="전체">전체</option>
+            <option value="제품후기">제품후기</option>
+            <option value="레시피 공유">레시피 공유</option>
+            <option value="할인 정보">할인 정보</option>
+            <option value="잡수다">잡수다</option>
+          </select>
+        </div>
+        <div>
           <label for="boardDetail">내용</label>
           <textarea
             name="boardDetail"

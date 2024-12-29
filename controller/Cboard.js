@@ -1,10 +1,9 @@
-// Cboard.js
 const { Board, BComment, User } = require("../models");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
 // 자유게시판 목록 페이지
-exports.showBoard = async (req, res) => {
+const showBoard = async (req, res) => {
   try {
     const boardList = await Board.findAll({
       order: [["boardId", "DESC"]],
@@ -21,8 +20,39 @@ exports.showBoard = async (req, res) => {
   }
 };
 
-// 글 작성 페이지
-exports.showWriteForm = (req, res) => {
+// 1. 글 작성 기능
+const createPost = async (req, res) => {
+  try {
+    const { boardTitle, boardDetail, boardCategory } = req.body;
+
+    if (!boardCategory) {
+      return res.status(400).send("분류가 선택되지 않았습니다.");
+    }
+
+    const userId = req.session.user.userId;
+    let boardPicPath = null;
+
+    if (req.file) {
+      boardPicPath = `/static/uploads/board/${req.file.filename}`;
+    }
+
+    await Board.create({
+      boardTitle,
+      boardDetail,
+      boardCategory,
+      userId,
+      boardPicPath,
+    });
+
+    return res.redirect("/board");
+  } catch (error) {
+    console.error("createPost Error:", error);
+    return res.status(500).send("서버 에러");
+  }
+};
+
+// 글 작성 페이지 렌더링
+const showWriteForm = (req, res) => {
   if (!req.session.user) {
     return res.redirect("/login");
   }
@@ -32,55 +62,20 @@ exports.showWriteForm = (req, res) => {
   });
 };
 
-// 글 작성 요청 처리
-exports.createPost = async (req, res) => {
-  try {
-    if (!req.session.user) {
-      return res.status(401).send("로그인이 필요합니다.");
-    }
-
-    const { boardTitle, boardDetail } = req.body;
-    const userId = req.session.user.userId;
-
-    // 만약 파일 업로드가 있다면, multer로부터 req.file이 넘어옴
-    let boardPicPath = null;
-    if (req.file) {
-      // 업로드된 이미지가 있을 경우 경로를 DB에 저장
-      // 예: /static/uploads/board/파일명
-      boardPicPath = `/static/uploads/board/${req.file.filename}`;
-    }
-
-    // DB에 새 글 생성
-    await Board.create({
-      boardTitle,
-      boardDetail,
-      userId,
-      boardPicPath, // 업로드 이미지 경로 (NULL 가능)
-      // boardDate 자동(defaultValue: NOW) or 원하는 값으로
-    });
-
-    // 글 작성 후 /board 목록 페이지로 이동
-    return res.redirect("/board");
-  } catch (error) {
-    console.error("createPost Error:", error);
-    return res.status(500).send("서버 에러");
-  }
-};
-
-// 게시글 상세보기
-exports.showPost = async (req, res) => {
+// 2. 글 상세보기 기능
+const showPost = async (req, res) => {
   try {
     const boardId = req.params.id;
+
     const post = await Board.findOne({
       where: { boardId },
-      include: [{ model: User }], // 작성자 정보
+      include: [{ model: User }],
     });
 
     if (!post) {
       return res.status(404).send("게시글을 찾을 수 없습니다.");
     }
 
-    // 게시글에 달린 댓글
     const comments = await BComment.findAll({
       where: { boardId },
       order: [["bcId", "ASC"]],
@@ -98,12 +93,13 @@ exports.showPost = async (req, res) => {
   }
 };
 
-// 댓글 작성 처리
-exports.createComment = async (req, res) => {
+// 3. 댓글 기능
+const createComment = async (req, res) => {
   try {
     if (!req.session.user) {
       return res.status(401).send("로그인이 필요합니다.");
     }
+
     const boardId = req.params.id;
     const { bcDetail } = req.body;
     const userId = req.session.user.userId;
@@ -119,4 +115,93 @@ exports.createComment = async (req, res) => {
     console.error("createComment Error:", error);
     return res.status(500).send("서버 에러");
   }
+};
+
+// 댓글 수정 처리
+const editComment = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { bcDetail } = req.body;
+
+    await BComment.update({ bcDetail }, { where: { bcId: id } });
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error("editComment Error:", error);
+    res.json({ success: false });
+  }
+};
+
+// 댓글 삭제 처리
+const deleteComment = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await BComment.destroy({
+      where: { bcId: id },
+    });
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error("deleteComment Error:", error);
+    res.json({ success: false });
+  }
+};
+
+const bcrypt = require("bcrypt"); // 비밀번호 검증 라이브러리
+
+// 글 삭제 처리
+const deletePost = async (req, res) => {
+  try {
+    const { id } = req.params; // 글 ID
+    const { password } = req.body; // 입력된 비밀번호
+
+    // 로그인 여부 및 세션 정보 확인
+    if (!req.session.user) {
+      return res
+        .status(401)
+        .json({ success: false, message: "로그인이 필요합니다." });
+    }
+
+    // 게시글 조회
+    const post = await Board.findOne({ where: { boardId: id } });
+    if (!post) {
+      return res
+        .status(404)
+        .json({ success: false, message: "글을 찾을 수 없습니다." });
+    }
+
+    // 작성자 ID 검증 (세션 ID와 비교)
+    if (req.session.user.userId !== post.userId) {
+      return res
+        .status(403)
+        .json({ success: false, message: "권한이 없습니다." });
+    }
+
+    // 글 및 관련 댓글 삭제
+    await BComment.destroy({ where: { boardId: id } });
+    await Board.destroy({ where: { boardId: id } });
+
+    // 성공 응답 반환
+    return res
+      .status(200)
+      .json({ success: true, message: "글이 성공적으로 삭제되었습니다." });
+  } catch (error) {
+    console.error("deletePost Error:", error);
+    return res
+      .status(500)
+      .json({ success: false, message: "서버 오류가 발생했습니다." });
+  }
+};
+
+// 4. 내보내기 (Export)
+module.exports = {
+  createPost,
+  showWriteForm,
+  showPost,
+  createComment,
+  editComment,
+  deleteComment,
+  showBoard,
+  deletePost,
 };

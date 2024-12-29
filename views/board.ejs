@@ -9,8 +9,10 @@
   <body>
     <div class="header"><%- include("./include/header") %></div>
     <br /><br />
-    <h1>자유게시판</h1>
+    <br /><br />
+    <br /><br />
     <div class="board-list">
+      <h1>자유게시판</h1>
       <table>
         <thead>
           <tr>
@@ -24,21 +26,18 @@
           <% if (boardList && boardList.length > 0) { %> <%
           boardList.forEach(function (item) { %>
           <tr>
-            // 분류 부분은 필요한 항목으로 수정 가능 현재 boardId
-            <td><%= item.boardId %></td>
+            <td><%= item.boardCategory ? item.boardCategory : "전체" %></td>
+            <td>
+              <%= item.boardDate ? item.boardDate.toLocaleString() : "" %>
+            </td>
+            <td><%= item.userId ? item.userId : "" %></td>
             <td>
               <a href="/board/view/<%= item.boardId %>">
                 <%= item.boardTitle %>
               </a>
             </td>
-            <td>
-              <%= item.boardDate ? item.boardDate.toLocaleString() : "" %>
-            </td>
-            <td><%= item.userId ? item.userId : "" %></td>
           </tr>
           <% }) %> <% } else { %>
-
-          <h1>자유게시판</h1>
           <tr>
             <td colspan="4">게시글이 없습니다.</td>
           </tr>

@@ -1,9 +1,7 @@
-// 자유게시판 모델
 const Board = function (sequelize, DataTypes) {
   return sequelize.define(
     "board",
     {
-      //board_id INTEGER, PK
       boardId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -25,10 +23,13 @@ const Board = function (sequelize, DataTypes) {
         type: DataTypes.STRING(100),
         allowNull: true,
       },
-      // userId가 필요하다면 추가 (User와 1:N 관계)
       userId: {
         type: DataTypes.STRING(20),
         allowNull: true,
+      },
+      boardCategory: {
+        type: DataTypes.STRING(20), // 분류 추가
+        allowNull: false,
       },
     },
     {

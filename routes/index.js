@@ -8,7 +8,6 @@ const productController = require("../controller/productController");
 const upload = require("../utils/multer.js");
 
 const boardController = require("../controller/Cboard");
-const upload = require("../utils/multer");
 
 // 메인 라우트
 router.get("/", main.home);
@@ -84,5 +83,8 @@ router.post(
 router.post("/board/write", boardController.createPost);
 router.get("/board/view/:id", boardController.showPost);
 router.post("/board/view/:id/comment", boardController.createComment);
+router.put("/board/comment/:id/edit", boardController.editComment);
+router.delete("/board/comment/:id", boardController.deleteComment);
+router.delete("/board/view/:id/delete", boardController.deletePost);
 
 module.exports = router;
