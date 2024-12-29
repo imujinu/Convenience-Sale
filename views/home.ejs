@@ -214,21 +214,12 @@
               <p><%= CU[i].name %></p>
               <p><%= CU[i].price %>원</p>
               <p class="event"><%= CU[i].event %></p>
-              <% if (isLogin) { %>
               <button
                 class="btn show-comments-button"
                 onclick="CommentsModule.openCommentsPopup('<%= CU[i].id %>')"
               >
                 댓글 보기
               </button>
-              <% } else { %>
-              <button
-                class="btn show-comments-button"
-                onclick="alert('로그인이 필요합니다.')"
-              >
-                댓글 보기
-              </button>
-              <% } %>
             </div>
             <% } %>
           </div>
@@ -257,21 +248,12 @@
               <p><%= GS25[i].name %></p>
               <p><%= GS25[i].price %>원</p>
               <p class="event"><%= GS25[i].event %></p>
-              <% if (isLogin) { %>
               <button
                 class="btn show-comments-button"
                 onclick="CommentsModule.openCommentsPopup('<%= GS25[i].id %>')"
               >
                 댓글 보기
               </button>
-              <% } else { %>
-              <button
-                class="btn show-comments-button"
-                onclick="alert('로그인이 필요합니다.')"
-              >
-                댓글 보기
-              </button>
-              <% } %>
             </div>
             <% } %>
           </div>
@@ -300,21 +282,12 @@
               <p><%= ELEVEN[i].name %></p>
               <p><%= ELEVEN[i].price %>원</p>
               <p class="event"><%= ELEVEN[i].event %></p>
-              <% if (isLogin) { %>
               <button
                 class="btn show-comments-button"
                 onclick="CommentsModule.openCommentsPopup('<%= ELEVEN[i].id %>')"
               >
                 댓글 보기
               </button>
-              <% } else { %>
-              <button
-                class="btn show-comments-button"
-                onclick="alert('로그인이 필요합니다.')"
-              >
-                댓글 보기
-              </button>
-              <% } %>
             </div>
             <% } %>
           </div>
@@ -428,7 +401,6 @@
         <i class="fas fa-spinner fa-spin"></i> 로딩 중...
       </div>
     </div>
-
     <script>
       window.userId = "<%= isLogin && userId ? userId : '' %>";
     </script>
@@ -549,7 +521,7 @@
             contentDiv.innerText = comment.commentDetail;
 
             // 현재 로그인 사용자의 userId와 댓글 작성자의 userId가 같으면 수정/삭제 가능
-            if (window.userId === comment.user.userId) {
+            if (window.userId && window.userId === comment.user.userId) {
               const actionsDiv = document.createElement("div");
               actionsDiv.classList.add("comment-actions");
 
@@ -577,6 +549,11 @@
 
           // 댓글 제출
           const submitComment = async function () {
+            if (!window.userId) {
+              alert("로그인이 필요합니다.");
+              return;
+            }
+
             const popup = document.getElementById("comments-popup");
             const productId = popup.getAttribute("data-product-id");
             const commentContent = document
@@ -697,6 +674,14 @@
             submitButton.addEventListener(
               "click",
               CommentsModule.submitComment,
+            );
+          }
+
+          const closeButton = document.querySelector(".popup-close");
+          if (closeButton) {
+            closeButton.addEventListener(
+              "click",
+              CommentsModule.closeCommentsPopup,
             );
           }
         });

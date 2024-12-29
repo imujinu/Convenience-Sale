@@ -2,21 +2,62 @@
 const productService = require("../services/productService");
 
 /**
- * 크롤링 및 뷰 렌더링
+ * 비밀번호 입력 폼 렌더링
  */
-const crawlProducts = async (req, res) => {
+const renderCrawlForm = (req, res) => {
+  res.render("crawlForm", { error: null });
+};
+
+/**
+ * 크롤링 시작
+ */
+const startCrawl = async (req, res) => {
+  const { password } = req.body;
+
+  // 비밀번호 검증 (예시: '123456'으로 설정)
+  const VALID_PASSWORD = "123456"; // 실제 애플리케이션에서는 환경 변수이나 안전한 저장소 사용 권장
+
+  if (password !== VALID_PASSWORD) {
+    return res
+      .status(401)
+      .render("crawlForm", { error: "비밀번호가 올바르지 않습니다." });
+  }
+
   try {
     console.log("크롤링 작업 시작...");
 
+    // 크롤링 작업 시작
     const products = await productService.crawlProducts();
 
     console.log(`\n총 수집된 제품 수: ${products.length}`);
+
+    // 크롤링 완료 후 상품 페이지 렌더링
     res.render("index", { products });
   } catch (error) {
     console.error("크롤링 작업 중 오류 발생:", error);
-    res.status(500).json({ error: "크롤링 작업 중 오류가 발생했습니다." });
+    res
+      .status(500)
+      .render("crawlForm", { error: "크롤링 작업 중 오류가 발생했습니다." });
   }
 };
+
+/**
+ * 기존 크롤링 함수 (필요 시 유지 또는 제거)
+ * 현재는 사용되지 않으므로 주석 처리할 수 있습니다.
+ */
+// const crawlProducts = async (req, res) => {
+//   try {
+//     console.log("크롤링 작업 시작...");
+
+//     const products = await productService.crawlProducts();
+
+//     console.log(`\n총 수집된 제품 수: ${products.length}`);
+//     res.render("index", { products });
+//   } catch (error) {
+//     console.error("크롤링 작업 중 오류 발생:", error);
+//     res.status(500).json({ error: "크롤링 작업 중 오류가 발생했습니다." });
+//   }
+// };
 
 /**
  * 태그 업데이트
@@ -171,7 +212,10 @@ const deleteComment = async (req, res) => {
 };
 
 module.exports = {
-  crawlProducts,
+  renderCrawlForm, // 새로 추가된 함수
+  startCrawl, // 새로 추가된 함수
+  // 기존 함수들...
+  // crawlProducts, // 기존에 있던 함수는 이제 사용되지 않을 수 있음
   updateProductTags,
   sendProductToDB,
   deleteProduct,

@@ -40,6 +40,19 @@ router.get("/upload", (req, res) => {
 // 회원탈퇴
 router.post("/deleteAccount", user.deleteAccount);
 
+// setUserId 미들웨어 정의
+const setUserId = (req, res, next) => {
+  if (req.session.user) {
+    const userId = req.session.user.userId;
+    res.locals.userId = userId;
+    console.log(`로그인한 사용자 ID: ${userId}`);
+  } else {
+    res.locals.userId = null;
+    console.log("로그인하지 않은 사용자");
+  }
+  next();
+};
+
 // 로그인 체크 미들웨어 추가
 const isAuthenticated = (req, res, next) => {
   if (req.session.user) {
@@ -59,11 +72,10 @@ const isAuthenticated = (req, res, next) => {
   }
 };
 
-router.get("/crawlstart", (req, res) => {
-  res.render("crawlstart"); // EJS 템플릿 렌더링
-});
-// 크롤링 및 렌더링
-router.get("/products/crawl", productController.crawlProducts);
+router.get("/products/crawl", productController.renderCrawlForm);
+
+// 크롤링을 시작하는 라우터
+router.post("/products/crawl/start", productController.startCrawl);
 
 // 모든 제품 조회
 router.get("/products", productController.getAllProducts);
@@ -112,7 +124,7 @@ router.delete(
 );
 
 // 기타 페이지
-router.get("/about", isAuthenticated, pageController.renderAboutPage);
+router.get("/about", setUserId, pageController.renderAboutPage);
 
 // 자유게시판 라우트
 router.get("/board", boardController.showBoard);
