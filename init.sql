@@ -5,6 +5,38 @@ show tables;
 
 DESC user;
 DESC email;
+DESC board;
+
+ALTER TABLE board
+MODIFY COLUMN boardCategory VARCHAR(20) NULL;
+
+SELECT * FROM board;
+
+INSERT INTO board 
+(boardTitle, boardDate, boardDetail, boardPicPath, userId, boardCategory)
+VALUES
+('자유게시판 예시 1번', NOW(), '안녕하세요. 첫 글을 작성합니다!', '/static/uploads/board/example1.jpg', 'boss3', '잡수다');
+INSERT INTO board 
+(boardTitle, boardDate, boardDetail, boardPicPath, userId, boardCategory)
+VALUES
+('자유게시판 예시 2번', NOW(), '제품 후기를 작성해요', '/static/uploads/board/example1.jpg', 'boss3', '제품후기');
+INSERT INTO board 
+(boardTitle, boardDate, boardDetail, boardPicPath, userId, boardCategory)
+VALUES
+('자유게시판 예시 3번', NOW(), '라면과 깁밥을 먹어요', '/static/uploads/board/example1.jpg', 'boss3', '레시피 공유');
+INSERT INTO board 
+(boardTitle, boardDate, boardDetail, boardPicPath, userId, boardCategory)
+VALUES
+('자유게시판 예시 4번', NOW(), '새싹 카드는 10% 할인과 1% 적립이 있어요', '/static/uploads/board/example1.jpg', 'boss3', '할인 정보');
+INSERT INTO board 
+(boardTitle, boardDate, boardDetail, boardPicPath, userId, boardCategory)
+VALUES
+('자유게시판 예시 5번', NOW(), '웹 페이지가 귀여워요', '/static/uploads/board/example1.jpg', 'boss3', '전체');
+INSERT INTO board 
+(boardTitle, boardDate, boardDetail, boardPicPath, userId, boardCategory)
+VALUES
+('자유게시판 예시 6번', NOW(), '요즘 뉴스 보기 무서워요', '/static/uploads/board/example1.jpg', 'boss3', '잡수다');
+
 INSERT INTO user VALUES("qwe", "Qwe12@www", "qwek", "static/image/logo1.png");
 ALTER TABLE bcomments DROP FOREIGN KEY bcomments_ibfk_1;
 drop table bcomments, board, game, pcomments, player;
