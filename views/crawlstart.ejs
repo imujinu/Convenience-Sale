@@ -47,7 +47,7 @@
     <script>
       document.getElementById("startCrawl").addEventListener("click", () => {
         // 크롤링 시작 버튼 클릭 시 API 호출 (모의)
-        fetch("/api/crawlstart", {
+        fetch("/products/crawl", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
