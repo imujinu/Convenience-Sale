@@ -1,3 +1,4 @@
+//views\mypage.ejs
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -21,6 +22,7 @@
     ></script>
     <link rel="stylesheet" href="/static/css/common.css" />
     <link rel="stylesheet" href="/static/css/mypage.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script defer src="/static/js/mypage.js"></script>
     <%- include("./include/include",{title : "mypage"}) %>
   </head>
@@ -54,7 +56,7 @@
         <span id="pick">Pick</span>은??😎
       </h3>
       <ul class="reviewsBox">
-        <!-- <a href="li"> -->
+        <!-- 게시글 목록 -->
         <li>
           <span class="tit">게시글</span>
           <span class="len"><span><%= boards.length %></span>개</span>
@@ -89,34 +91,24 @@
           </div>
         </div>
 
-        <!-- </a> -->
-        <!-- <a href="li"> -->
+        <!-- 상품 리뷰 목록 (API로 가져올 부분) -->
         <li>
           <span class="tit">상품 리뷰</span>
-          <span class="len"><span>5</span>개</span>
+          <span class="len"><span id="product-review-count">0</span>개</span>
           <button
             class="fa-solid fa-chevron-right arrow"
             onclick="showList(this)"
           ></button>
         </li>
-        <div class="content-container hide">
-          <ul class="list">
+        <div class="content-container hide" id="product-review-container">
+          <ul class="list" id="product-review-list">
             <li class="list-head">
               <span>순번</span>
-              <span>제목</span>
-              <span>작성자</span>
-              <span>날짜</span>
+              <span>내용</span>
+              <span>상품명</span>
+              <span>작성일</span>
             </li>
-            <%for(let i=1;i<=5;i++){%>
-            <a href="#">
-              <li>
-                <span><%= i %></span>
-                <span>편의점 꿀맛 조합 아시는 분 추천좀여!!!</span>
-                <span>편죽이이</span>
-                <span>2024-12-18</span>
-              </li>
-            </a>
-            <%}%>
+            <!-- 상품 리뷰 데이터가 여기에 동적으로 추가됩니다. -->
           </ul>
           <div class="pagination">
             <span class="selected">1</span>
@@ -124,6 +116,7 @@
             <span>3</span>
           </div>
         </div>
+
         <li>
           <span class="tit">게시글 리뷰</span>
           <span class="len"><span>5</span>개</span>

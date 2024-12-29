@@ -1,3 +1,4 @@
+//routes\index.js
 const express = require("express");
 const router = express.Router();
 const main = require("../controller/Cmain.js");
@@ -6,9 +7,8 @@ const user = require("../controller/Cuser.js");
 const pageController = require("../controller/pageController");
 const productController = require("../controller/productController");
 const upload = require("../utils/multer.js");
-
+const pcommentsController = require("../controller/pcommentsController"); // 중복 제거
 const boardController = require("../controller/Cboard");
-const upload = require("../utils/multer");
 
 // 메인 라우트
 router.get("/", main.home);
@@ -20,39 +20,48 @@ router.get("/logout", main.getLogout);
 router.get("/mypage", main.mypage);
 // 회원정보 수정
 router.get("/userview", main.userview);
-//상품검색 페이지
+// 상품검색 페이지
 router.get("/search", main.search);
-//이메일 전송
+// 이메일 전송
 router.post("/email", user.emailSend);
-//회원가입
+// 회원가입
 router.post("/register", user.postRegister);
 router.post("/login", user.postLogin);
 router.post("/checkDuplication", user.postCheck);
-//회원정보 수정
+// 회원정보 수정
 router.post("/checkNickname", user.postCheckNickname);
 router.post("/updateUser", user.postUpdateUser);
-//사진 업로드
+// 사진 업로드
 router.post("/upload", upload.single("user"), user.upload);
 router.get("/upload", (req, res) => {
   res.json({ message: "test" });
 });
 
-//회원탈퇴
+// 회원탈퇴
 router.post("/deleteAccount", user.deleteAccount);
-
-// 파일 업로드
-router.post("/upload", user.upload);
 
 // 로그인 체크 미들웨어 추가
 const isAuthenticated = (req, res, next) => {
   if (req.session.user) {
-    // 로그인 상태일 때만 다음 단계로 진행
+    // 로그인 상태일 때
+    const userId = req.session.user.userId; // 수정: req.session.userId -> req.session.user.userId
+    // res.locals에 사용자 ID 저장
+    res.locals.userId = userId;
+
+    // 콘솔에 사용자 ID 출력
+    console.log(`로그인한 사용자 ID: ${userId}`);
+
+    // 다음 단계로 진행
     next();
   } else {
     // 로그인 상태가 아니면 에러 처리
     res.status(401).json({ message: "로그인이 필요합니다." });
   }
 };
+
+router.get("/crawlstart", (req, res) => {
+  res.render("crawlstart"); // EJS 템플릿 렌더링
+});
 // 크롤링 및 렌더링
 router.get("/products/crawl", productController.crawlProducts);
 
@@ -71,8 +80,40 @@ router.put(
   productController.updateProductTags,
 );
 
+// 댓글 관련 라우트: /api/pcomments 하위로 이동
+// 댓글 조회: 모든 사용자 접근 가능
+router.get("/api/pcomments", pcommentsController.getComments);
+
+// 댓글 생성: 인증된 사용자만 접근 가능
+router.post(
+  "/api/pcomments",
+  isAuthenticated,
+  pcommentsController.createComment,
+);
+
+router.get(
+  "/api/mycomments",
+  isAuthenticated, // Ensure the user is authenticated
+  pcommentsController.getMyComments,
+);
+
+// 댓글 수정: 인증된 사용자만 접근 가능
+router.put(
+  "/api/pcomments/:commentId",
+  isAuthenticated,
+  pcommentsController.updateComment,
+);
+
+// 댓글 삭제: 인증된 사용자만 접근 가능
+router.delete(
+  "/api/pcomments/:commentId",
+  isAuthenticated,
+  pcommentsController.deleteComment,
+);
+
 // 기타 페이지
-router.get("/about", pageController.renderAboutPage);
+router.get("/about", isAuthenticated, pageController.renderAboutPage);
+
 // 자유게시판 라우트
 router.get("/board", boardController.showBoard);
 router.get("/board/write", boardController.showWriteForm);

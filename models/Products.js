@@ -1,42 +1,63 @@
-const Products = function (sequelize, DataTypes) {
+// models/Products.js
+
+const { DataTypes } = require("sequelize");
+
+const Products = (sequelize) => {
   return sequelize.define(
-    "products",
+    "Products",
     {
-      //product_id INTEGER, PK
-      pId: {
-        type: DataTypes.INTEGER,
+      // Primary Key
+      id: {
+        type: DataTypes.STRING,
         primaryKey: true,
-        autoIncrement: true,
       },
-      //product_name VARCHAR(50), NOT NULL
-      pName: {
-        type: DataTypes.STRING(100),
+      // 이름 필드 (기존 pName과 name 통합)
+      name: {
+        type: DataTypes.STRING(255),
         allowNull: false,
       },
-      // price INTEGER NOT NULL,
+      // 가격 필드 (기존 Products의 STRING과 aProducts의 INTEGER 통합)
       price: {
-        type: DataTypes.STRING(20),
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
-      // event? VARCHAR(20) NOT NULL,
+      // 이벤트 필드 (기존 Products에만 존재)
       event: {
         type: DataTypes.STRING(20),
-        allowNull: false,
+        allowNull: true,
       },
-      //convenience_name ENUM('CU', 'GS25', '7ELEVEN') NOT NULL
-      cName: {
-        type: DataTypes.ENUM,
-        values: ["CU", "GS25", "7ELEVEN"],
-        allowNull: false,
+      // 편의점 이름 필드 (기존 Products의 cName과 aProducts의 convini 통합)
+      convenienceName: {
+        type: DataTypes.STRING(50),
+        allowNull: true,
       },
-      imagePath: {
-        type: DataTypes.STRING(200),
+      // 이미지 URL 필드 (기존 Products의 imagePath와 aProducts의 imageUrl 통합)
+      imageUrl: {
+        type: DataTypes.STRING(1000),
+        allowNull: true,
+      },
+      // 태그 필드 (aProducts에서 추가)
+      tags: {
+        type: DataTypes.JSON,
+        allowNull: true,
+        defaultValue: [],
+      },
+      // 생성일 필드 (aProducts에서 추가)
+      createdAt: {
+        type: DataTypes.DATE,
         allowNull: false,
+        defaultValue: DataTypes.NOW,
+      },
+      // 수정일 필드
+      updatedAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW,
       },
     },
     {
       freezeTableName: true,
-      timestamps: false,
+      timestamps: true, // createdAt 및 updatedAt 자동 관리
     },
   );
 };

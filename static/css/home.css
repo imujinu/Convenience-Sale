@@ -91,13 +91,11 @@ a {
   cursor: pointer;
   border-radius: 10px;
   transition: 0.5s;
-  background-color: #ff5252;
-  color: #fff;
 }
 
 .detail:hover {
   transition: 0.5s;
-  background-color: #e04848;
+  background-color: red;
 }
 
 .section2 > .part2 > .arrow {
@@ -149,9 +147,8 @@ a {
 .section3 .swiper {
   position: relative;
   margin-top: 5%;
-  width: 1200px;
+  width: 90%;
   height: 100%;
-  overflow: hidden;
 }
 
 .section3 .swiper-slide img {
@@ -201,11 +198,8 @@ a {
   border: 2px solid black;
   width: 20%;
   min-height: 40px;
-  border-radius: 5px;
   justify-self: center;
   transition: 0.5s;
-  background-color: #ff5252;
-  color: #fff;
 }
 
 .section3 > .swiper > .swiper-wrapper > .swiper-slide > .viewBox > .view:hover {
@@ -313,14 +307,6 @@ a {
 .section4 {
   width: 100%;
   height: 100px;
-  display: flex;
-  justify-content: center;
-}
-
-.section4 > .container {
-  width: 1200px;
-  height: 100%;
-  display: grid;
 }
 
 .section4 .part1 {
@@ -340,7 +326,7 @@ a {
   transition: 0.5s;
 }
 
-.section4 > .container > .part2 > ul :hover {
+.section4 .part2 ul li :hover {
   background: darkgreen;
   transition: 0.5s;
 }
@@ -408,7 +394,7 @@ a {
 .section5 > .container > .product > .menu > img,
 .section6 > .container > .product > .menu > img,
 .section7 > .container > .product > .menu > img {
-  height: 65%;
+  height: 80%;
   width: 100%;
   transition: 0.5s;
 }
@@ -477,22 +463,19 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
 }
 
 .section8 > .container > .part1 > .searchBox > .searchText {
-  height: 50px;
   width: 100%;
+  height: 100%;
 }
 
 .section8 > .container > .part1 > .searchBox > .search {
-  margin-right: 10px;
-  width: 35px;
-  height: auto;
+  width: 10%;
+  height: 25px;
+  background: url(/static/image/search.png) center/cover no-repeat;
+  background-size: contain;
   cursor: pointer;
-  object-fit: contain;
-  position: absolute;
-  right: 0;
 }
 .section8 img {
   cursor: pointer;
@@ -619,7 +602,7 @@ a {
 .section9 > .container {
   width: 1200px;
   height: 100%;
-  background: url(/static/image/emailbg1.png) center / cover no-repeat;
+  background: url(/static/image/emailbg.png) center / cover no-repeat;
   position: relative;
   display: flex;
   justify-content: center;
@@ -671,7 +654,7 @@ a {
 .footer > .container > ul {
   display: flex;
   justify-content: center;
-  font-size: 18px;
+  font-size: 1.5vw;
 }
 
 .footer > .container > ul > li {
@@ -684,6 +667,13 @@ a {
   position: relative;
   transition: 1s;
 }
+.footer > .container > ul > li::after {
+  content: "";
+  width: 3px;
+  height: 3px;
+  border-radius: 50px;
+  background: black;
+}
 .footer img {
   width: 50%;
   bottom: 0%;
@@ -694,7 +684,7 @@ a {
 }
 
 .footer > .container > .text {
-  font-size: 16px;
+  font-size: 1vw;
 }
 
 .tablet {
@@ -759,23 +749,9 @@ a {
   .section2 > .part2 > .arrow {
     width: 6%;
   }
-  .section3 .swiper {
-    position: relative;
-    margin-top: 5%;
-    width: 700px;
-    height: 100%;
-  }
+
   .section3 > .swiper > .swiper-wrapper > .swiper-slide > .viewBox > .view {
     width: 30%;
-  }
-
-  .section5 > .container,
-  .section6 > .container,
-  .section7 > .container {
-    width: 1000px;
-    height: 100%;
-    display: flex;
-    overflow: hidden;
   }
   .section5 > .container > .product > .menu,
   .section5 > .container > .clone > .menu,
@@ -792,17 +768,6 @@ a {
     height: 70%;
   }
 
-  .section8 > .container {
-    display: flex;
-    width: 630px;
-    font-size: 14px;
-  }
-  .section8 > .container > .part2 {
-    width: 70%;
-    height: 100%;
-    position: relative;
-    left: 60px;
-  }
   .section8 > .container > .part2 > .menu {
     font-size: 20px;
   }
@@ -824,14 +789,7 @@ a {
     width: 50%;
     height: 50%;
   }
-  .footer > .container > ul {
-    display: flex;
-    justify-content: center;
-    font-size: 16px;
-  }
-  .footer > .container > .text {
-    font-size: 12px;
-  }
+
   .section9 {
     height: 260px;
   }
@@ -872,19 +830,16 @@ a {
   .section2 .contents {
     position: relative;
     left: -200%;
-    width: 80%;
     top: 0;
     animation: left 1.5s forwards;
-    justify-self: center;
-    font-size: 15px;
   }
-  .section2 .part1 .contents p:nth-child(1) {
-    font-size: 20px;
-  }
+
   .section2 > .part2 {
     width: 100%;
   }
-
+  .section1 > .container > .part2 > ul {
+    width: 100%;
+  }
   .section2 > .part2 > .arrow {
     width: 7%;
   }
@@ -914,9 +869,6 @@ a {
     }
   }
   .section3 {
-    width: 100%;
-    display: grid;
-    justify-content: center;
     margin-top: 20%;
   }
 
@@ -928,21 +880,16 @@ a {
   }
 
   .section3 .stop {
-    width: 8px;
-    height: auto;
-    bottom: 8px;
-    left: 38%;
+    width: 1.5%;
+    height: 3%;
+    bottom: 17px;
+    left: 41%;
   }
 
   .section2 > .part2 > .arrow {
     width: 7%;
   }
-  .section3 .swiper {
-    position: relative;
-    margin-top: 5%;
-    width: 600px;
-    height: 100%;
-  }
+
   .section3 .modalContent img {
     top: 7.5%;
   }
@@ -962,14 +909,15 @@ a {
     height: 30px;
     width: 125px;
   }
-
-  .section5 > .container,
-  .section6 > .container,
-  .section7 > .container {
-    height: 100%;
-    display: flex;
-    width: 700px;
-    overflow: hidden;
+  .section5,
+  .section6,
+  .section7 {
+    width: 100%;
+    height: 300px;
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+    margin-bottom: 20px;
+    justify-content: unset;
   }
   .section5 > .container > .product > .menu,
   .section5 > .container > .clone > .menu,
@@ -977,14 +925,14 @@ a {
   .section6 > .container > .clone > .menu,
   .section7 > .container > .product > .menu,
   .section7 > .container > .clone > .menu {
-    width: 190px;
-    height: 230px;
-    font-size: 14px;
+    width: 181px;
+    height: 80%;
+    font-size: 16px;
   }
   .section5 > .container > .product > .menu > img,
   .section6 > .container > .product > .menu > img,
   .section7 > .container > .product > .menu > img {
-    height: 75%;
+    height: 50%;
     width: 100%;
     transition: 0.5s;
   }
@@ -995,7 +943,7 @@ a {
     height: 100%;
     display: grid;
     grid-template-rows: 1fr 1fr;
-    width: 600px;
+    width: 1200px;
   }
 
   .section8 .part1 {
@@ -1018,7 +966,6 @@ a {
   .section8 > .container > .part2 {
     width: 100%;
     margin-top: 15%;
-    left: -8px;
   }
   .section8 > .container > .part2 > .menu {
     font-size: 20px;
@@ -1050,7 +997,6 @@ a {
     margin-top: 260px;
   }
   .section9 > .container {
-    width: 100%;
     background: url(/static/image/emailbg2.png) center / cover no-repeat;
   }
 
@@ -1091,17 +1037,6 @@ a {
     font-size: 2vw;
     width: 100%;
   }
-  .footer > .container > ul {
-    display: flex;
-    justify-content: center;
-    font-size: 14px;
-  }
-  .footer > .container > .text {
-    font-weight: bold;
-    margin-top: 7px;
-    font-size: 12px;
-    width: 100%;
-  }
 }
 
 @media (max-width: 480px) {
@@ -1120,21 +1055,6 @@ a {
   .section3 > .swiper > .swiper-wrapper > .swiper-slide > .viewBox > .view {
     width: 100px;
   }
-
-  .section3 .swiper {
-    position: relative;
-    margin-top: 5%;
-    width: 400px;
-    height: 100%;
-  }
-  .section5 > .container,
-  .section6 > .container,
-  .section7 > .container {
-    height: 100%;
-    display: flex;
-    width: 400px;
-    overflow: hidden;
-  }
   .section5 > .container > .product > .menu,
   .section5 > .container > .clone > .menu,
   .section6 > .container > .product > .menu,
@@ -1146,9 +1066,6 @@ a {
   .section8 > .container > .part2 {
     width: 100%;
     margin-top: 25%;
-    height: 100%;
-    position: relative;
-    left: -5px;
   }
   .section8 > .container > .part2 > .menu {
     font-size: 19px;
@@ -1167,13 +1084,11 @@ a {
     width: 125px;
   }
   .section9 {
-    width: 100%;
-    height: 265px;
-    margin-top: 260px;
+    margin-top: 250px;
   }
-
-  .section9 > .container {
-    background: url(/static/image/emailbg2.png) center / contain no-repeat;
+  .section9 > .container > .inner {
+    width: 47%;
+    left: 24%;
   }
   .section9 > .container > .inner {
     width: 40%;
@@ -1190,16 +1105,113 @@ a {
     height: 36px;
     font-size: 3vw;
   }
-
-  .footer > .container > ul {
-    display: flex;
-    justify-content: center;
-    font-size: 12px;
+  /* Comments Popup Styles */
+  /* 팝업 전체를 감싸는 레이어 */
+  .comments-popup {
+    position: fixed; /* 화면 고정 */
+    top: 0;
+    left: 0;
+    width: 100vw; /* 뷰포트 전체 너비 */
+    height: 100vh; /* 뷰포트 전체 높이 */
+    display: none; /* 처음에는 보이지 않도록 */
+    justify-content: center; /* 가로 중앙 정렬 (display:flex일 때만 적용) */
+    align-items: center; /* 세로 중앙 정렬 (display:flex일 때만 적용) */
+    background-color: rgba(0, 0, 0, 0.5); /* 배경 반투명 처리 */
+    z-index: 9999; /* 최상단에 표시 */
   }
-  .footer > .container > .text {
+
+  /* 팝업이 활성화되면 표시되도록 */
+  .comments-popup.active {
+    display: flex; /* 팝업 열릴 때 flex 컨테이너로 설정 */
+  }
+
+  /* 팝업 내용 컨테이너 */
+  .popup-content {
+    background: #fff; /* 하얀색 배경 */
+    width: 80%; /* 너비 지정 (상황에 맞게 조정) */
+    max-width: 600px; /* 최대 너비 설정 */
+    padding: 20px; /* 내부 여백 */
+    border-radius: 8px; /* 모서리 둥글게 */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* 그림자 효과 */
+    position: relative; /* 내부 요소(닫기 버튼 등) 절대 위치 시 필요 */
+  }
+
+  /* 팝업 내 닫기 버튼 */
+  .popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .comments-section {
+    margin-top: 20px;
+  }
+
+  .comment {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+
+  .comment-author {
     font-weight: bold;
-    margin-top: 7px;
-    font-size: 10px;
+  }
+
+  .comment-content {
+    margin: 5px 0;
+  }
+
+  .comment-actions {
+    margin-top: 5px;
+  }
+
+  .comment-actions span {
+    margin-right: 10px;
+    color: #007bff;
+    cursor: pointer;
+  }
+
+  .add-comment-form {
+    margin-top: 20px;
+  }
+
+  .add-comment-form textarea {
     width: 100%;
+    height: 80px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+  }
+
+  .submit-comment-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .submit-comment-button:hover {
+    background-color: #0056b3;
+  }
+
+  .loading-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .loading-spinner.active {
+    display: flex;
   }
 }

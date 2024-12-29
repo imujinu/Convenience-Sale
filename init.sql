@@ -1,5 +1,5 @@
 
--- Active: 1732688613389@@127.0.0.1@3306@sesac
+-- Active: 1734666914774@@127.0.0.1@3306@sesac-- Active: 1732688613389@@127.0.0.1@3306@sesac
 use sesac;
 show tables;
 
@@ -18,8 +18,21 @@ DROP TABLE email;
 SELECT * FROM products;
 DELETE FROM user WHERE userId = "qwpl";
 DESC products;
-
+use sesac;
 DELETE FROM email WHERE userEmail="wlsdnrhdwkd@naver.com";
+
+ALTER TABLE Products
+MODIFY createdAt DATETIME DEFAULT CURRENT_TIMESTAMP;
+
+INSERT INTO Products (name, price, event, convenienceName, imageUrl)
+VALUES
+  ("2080)센서티브미세모", 3200, "1+1", "CU", "8801046860458.png"),
+  ("2080)슈퍼클린초극세모", 2000, "1+1", "CU", "8801046356807.png"),
+  ("2080)진지발리스치약", 3900, "1+1", "CU", "8801046996799.png"),
+  ("2080)치약", 4000, "1+1", "CU", "8801046846087.png"),
+  ("2080)칫솔", 2800, "1+1", "CU", "8801046057216.png"),
+  ("46cm)초극세모칫솔", 3500, "1+1", "CU", "8801051009033.png");
+
 INSERT INTO products (pName, price, event, cName, imagePath)
 VALUES
 ("2080)센서티브미세모", 3200, "1+1", "CU", "8801046860458.png"),
@@ -132,3 +145,7 @@ VALUES
 ("대림)숯불구이맛후랑크70g", 1900, "1+1", "7ELEVEN", "019447.1.jpg"),
 ("롯데)키스틱55g", 2200, "1+1", "7ELEVEN", "203918.1.jpg");
 
+
+use sesac
+
+DESCRIBE products
