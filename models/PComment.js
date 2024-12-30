@@ -26,7 +26,7 @@ const PComment = (sequelize, DataTypes) => {
         type: DataTypes.STRING(20), // User 모델의 userId 타입과 일치
         allowNull: false,
         references: {
-          model: "User", // 참조할 모델 이름 (대소문자 정확히)
+          model: "user", // 참조할 모델 이름 (대소문자 정확히)
           key: "userId",
         },
         onDelete: "CASCADE", // 사용자 삭제 시 관련 댓글도 삭제
