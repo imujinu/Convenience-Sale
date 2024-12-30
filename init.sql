@@ -1,12 +1,12 @@
 
--- Active: 1732688612707@@127.0.0.1@3306@sesac-- Active: 1734666914774@@127.0.0.1@3306@sesac-- Active: 1732688613389@@127.0.0.1@3306@sesac
+-- Active: 1733709200225@@127.0.0.1@3306@sesac-- Active: 1732688612707@@127.0.0.1@3306@sesac-- Active: 1734666914774@@127.0.0.1@3306@sesac-- Active: 1732688613389@@127.0.0.1@3306@sesac
 use sesac;
 show tables;
 
 DESC user;
 DESC email;
 DESC board;
-
+ALTER TABLE board ADD COLUMN boardCategory VARCHAR(255);
 ALTER TABLE board
 MODIFY COLUMN boardCategory VARCHAR(20) NULL;
 
