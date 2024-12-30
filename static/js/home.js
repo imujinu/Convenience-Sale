@@ -486,7 +486,6 @@ emailInput.addEventListener("keydown", async (event) => {
 window.addEventListener("scroll", () => {
   let scroll = window.scrollY;
   const width = window.innerWidth;
-  console.log(scroll);
   const menu1 = document.querySelector(
     ".section8 > .container > .part2 > .menu1",
   );
