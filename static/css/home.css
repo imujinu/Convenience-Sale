@@ -49,8 +49,7 @@ a {
 }
 
 .section2 .contents {
-  width: 50%;
-  width: 100%;
+  width: 84%;
   justify-self: center;
   position: relative;
   text-align: center;
@@ -498,8 +497,17 @@ a {
 }
 .section8 img {
   cursor: pointer;
-  width: 100%;
+  width: 50%;
   height: 100%;
+}
+
+.section8 a {
+  height: 100%;
+  width: 100%;
+  color: honeydew;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .section8 > .container {
   display: flex;
@@ -513,7 +521,7 @@ a {
 
 .section8 > .container > .part2 > .menu1 {
   width: 25%;
-  height: 70px;
+  height: 80px;
   position: relative;
   border-radius: 42px 42px 0 42px;
   top: 20%;
@@ -678,7 +686,6 @@ a {
 
   .section2 .contents {
     top: 50%;
-    position: absolute;
     font-size: 2vw;
     line-height: 30px;
     animation: ani4 1.5s forwards;
@@ -871,7 +878,7 @@ a {
     width: 1.5%;
     height: 3%;
     bottom: 17px;
-    left: 41;
+    left: 41%;
   }
 
   .section2 > .part2 > .arrow {

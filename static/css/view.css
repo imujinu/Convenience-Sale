@@ -1,41 +1,133 @@
-/* 상세 페이지 컨테이너 */
-.board-view {
+/* 전체 레이아웃 */
+body {
+  font-family: sans-serif;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+/* 게시글 컨테이너 */
+.content-container {
+  display: flex;
   width: 80%;
-  margin: 0 auto;
-  background-color: #fff;
+  margin: 20px auto;
+  gap: 20px;
   padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* 게시글 내용 */
-.detail-content {
-  margin-top: 10px;
-  line-height: 1.4;
+/* 이미지 컨테이너 */
+.image-container {
+  width: 40%;
 }
 
-/* 첨부 이미지 */
-.detail-image {
-  margin-top: 20px;
-  text-align: center;
+.post-image {
+  width: 100%;
+  border-radius: 8px;
 }
 
-.detail-image img {
-  max-width: 500px;
+/* 세부 정보 컨테이너 */
+.details-container {
+  width: 60%;
+}
+
+.details-box {
+  background-color: #ffe4e1;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.details-content textarea {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
   border: 1px solid #ccc;
-}
-
-/* 댓글 목록 */
-.comment-list {
-  width: 80%;
-  margin: 10px auto 20px;
+  border-radius: 8px;
+  resize: none;
   background-color: #fff;
-  padding: 20px;
 }
 
+/* 댓글 컨테이너 */
+.comment-container {
+  width: 80%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 댓글 아이템 */
 .comment-item {
   margin-bottom: 15px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
 }
 
-.comment-item p {
-  margin: 5px 0;
-  word-break: break-all;
+/* 댓글 입력 */
+.comment-container textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* 버튼 스타일 */
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn-cancel,
+.btn-submit,
+.btn-edit,
+.btn-delete {
+  background-color: #e04848;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-cancel:hover,
+.btn-submit:hover,
+.btn-edit:hover,
+.btn-delete:hover {
+  background-color: #c53737;
+}
+
+/* 버튼 그룹 */
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* 버튼 스타일 */
+.btn-cancel,
+.btn-submit,
+.btn-edit,
+.btn-delete,
+.btn-delete-post {
+  background-color: #e04848;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-cancel:hover,
+.btn-submit:hover,
+.btn-edit:hover,
+.btn-delete:hover,
+.btn-delete-post:hover {
+  background-color: #c53737;
 }

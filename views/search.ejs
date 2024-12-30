@@ -295,6 +295,7 @@
             댓글 보기
           </button>
         </div>
+
         <% } %>
       </div>
     </div>
@@ -321,7 +322,9 @@
               "<%= insertQuery %>" 검색결과 총
               <u>'<%= product.length %>'개</u>의 상품이 검색되었습니다.
             </div>
-            <div class="noSearch"></div>
+            <div class="noSearch">
+              <img src="/static/image/nosearch.png" alt="검색결과없음" />
+            </div>
           </div>
         </div>
       </div>

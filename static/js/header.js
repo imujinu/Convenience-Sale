@@ -9,6 +9,7 @@ for (let i = 1; i < 6; i++) {
     storeDetail.style.textDecoration = "underline";
     menu.style.backgroundColor = "var(--color-600)";
     menu.style.height = "150px";
+    menu.for;
   });
   store.addEventListener("mouseleave", () => {
     store.style.backgroundColor = "";

@@ -137,5 +137,8 @@ router.post(
 router.post("/board/write", boardController.createPost);
 router.get("/board/view/:id", boardController.showPost);
 router.post("/board/view/:id/comment", boardController.createComment);
+router.put("/board/comment/:id/edit", boardController.editComment);
+router.delete("/board/comment/:id", boardController.deleteComment);
+router.delete("/board/view/:id/delete", boardController.deletePost);
 
 module.exports = router;

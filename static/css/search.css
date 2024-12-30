@@ -1,24 +1,11 @@
-.mask {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0);
-  z-index: 9999;
-  opacity: 1;
-  transition: 0.5s ease;
-  background: url(/static/image/loading.gif) center/contain no-repeat;
-}
-
 .section2 {
   width: 100%;
-  height: 340px;
+  height: 100%;
   display: flex;
   justify-content: center;
-  top: 120px;
   position: relative;
   background-color: #fff3f4;
+  overflow: hidden;
 }
 
 .section2 > .container {
@@ -27,7 +14,7 @@
   height: 20%;
   display: grid;
   justify-content: center;
-  margin: 40px 0;
+  margin: 150px 0 20px 0;
 }
 
 .section3 {
@@ -57,7 +44,7 @@
 
 .section4 {
   width: 100%;
-  height: 200px;
+  height: 500px;
   display: flex;
   justify-content: center;
   margin: 20px 0;
@@ -87,8 +74,12 @@
 .section4 > .container > .noSearch {
   width: 100%;
   height: 100%;
-  background: url(/static/image/nosearch.png) center/contain no-repeat;
-  margin-top: 120px;
+  margin-top: 30px;
+}
+
+.section4 > .container > .noSearch > img {
+  width: 100%;
+  height: 50%;
 }
 
 .section5 {
@@ -97,7 +88,6 @@
   display: flex;
   justify-content: center;
   background-color: #fff3f4;
-  top: 120px;
   position: relative;
 }
 
@@ -139,10 +129,6 @@
   width: 100%;
   height: auto;
 }
-
-.footer {
-  margin-top: 120px;
-}
 /* 
 
 
@@ -156,7 +142,7 @@
   }
 
   .section2 > .container {
-    margin-top: 20px;
+    margin: 100px 0 20px 0;
   }
 
   .section4 .container {
@@ -167,9 +153,6 @@
     margin-top: 20px;
   }
 
-  .section5 {
-    top: 75px;
-  }
   .section5 > .container > .product {
     width: 230px;
     height: 280px;
@@ -187,6 +170,10 @@
     justify-self: center;
     width: 140px;
     height: auto;
+  }
+
+  .section4 > .container > .noSearch > img {
+    width: 60%;
   }
 }
 
