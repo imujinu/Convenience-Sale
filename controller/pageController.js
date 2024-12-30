@@ -87,7 +87,7 @@ const renderAboutPage = async (req, res) => {
       }
 
       // 사용자 인증 정보 (예: Passport.js 사용 시)
-      const userId = req.user ? req.user.id : null;
+      const userId = res.locals.userId;
 
       res.render("about", {
         title: "FRESH FOOD",

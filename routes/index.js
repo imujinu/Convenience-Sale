@@ -78,7 +78,7 @@ router.get("/products/crawl", productController.renderCrawlForm);
 router.post("/products/crawl/start", productController.startCrawl);
 
 // 모든 제품 조회
-router.get("/products", productController.getAllProducts);
+router.get("/products", setUserId, productController.getAllProducts);
 
 // DB 전송 API
 router.post("/products/:productId/send-db", productController.sendProductToDB);

@@ -14,6 +14,7 @@ const CommentsModule = (function () {
     const commentsList = document.getElementById("comments-list");
     const loadingSpinner = document.getElementById("loading-spinner");
     const newCommentForm = document.getElementById("new-comment-form"); // 댓글 작성 폼
+    const loginPrompt = document.getElementById("login-prompt"); // 로그인 유도 메시지
 
     // 팝업에 현재 제품 ID 설정
     popup.setAttribute("data-product-id", productId);
@@ -25,7 +26,7 @@ const CommentsModule = (function () {
     loadingSpinner.classList.add("active");
 
     try {
-      // 제품 정보 가져오기 (클라이언트 사이드에서 이미 알고 있으므로 EJS에서 전달)
+      // 제품 정보 가져오기
       const productItem = document.querySelector(
         `.product-item[data-product-id="${productId}"]`,
       );
@@ -62,11 +63,21 @@ const CommentsModule = (function () {
         commentsList.innerHTML = `<p>Error: ${data.message}</p>`;
       }
 
-      // 댓글 작성 폼 표시 여부 설정
+      // 댓글 작성 폼과 로그인 유도 메시지 표시 여부 설정
       if (window.userId) {
-        newCommentForm.classList.add("active");
+        if (newCommentForm) {
+          newCommentForm.classList.add("active");
+        }
+        if (loginPrompt) {
+          loginPrompt.classList.remove("active");
+        }
       } else {
-        newCommentForm.classList.remove("active");
+        if (newCommentForm) {
+          newCommentForm.classList.remove("active");
+        }
+        if (loginPrompt) {
+          loginPrompt.classList.add("active");
+        }
       }
     } catch (error) {
       commentsList.innerHTML = `<p>Error: ${error.message}</p>`;
@@ -338,5 +349,28 @@ document.addEventListener("DOMContentLoaded", function () {
   const closeButton = document.querySelector(".popup-close");
   if (closeButton) {
     closeButton.addEventListener("click", CommentsModule.closeCommentsPopup);
+  }
+
+  // 팝업이 이미 열려있는 경우 로그인 상태에 따라 폼 표시 여부 설정
+  const popup = document.getElementById("comments-popup");
+  if (popup && popup.classList.contains("active")) {
+    const newCommentForm = document.getElementById("new-comment-form");
+    const loginPrompt = document.getElementById("login-prompt");
+
+    if (window.userId) {
+      if (newCommentForm) {
+        newCommentForm.classList.add("active");
+      }
+      if (loginPrompt) {
+        loginPrompt.classList.remove("active");
+      }
+    } else {
+      if (newCommentForm) {
+        newCommentForm.classList.remove("active");
+      }
+      if (loginPrompt) {
+        loginPrompt.classList.add("active");
+      }
+    }
   }
 });
