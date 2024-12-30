@@ -501,7 +501,7 @@ window.addEventListener("scroll", () => {
   );
 
   if (width < 480) {
-    if (scroll > 1750) {
+    if (scroll > 2000) {
       menu1.style.animation = "opacity1 0.5s forwards";
       menu2.style.animation = "opacity1 0.5s 0.5s forwards";
       menu3.style.animation = "opacity1 0.5s 1s forwards";
@@ -513,7 +513,7 @@ window.addEventListener("scroll", () => {
       menu4.style.animation = "unOpacity 0.5s 1.5s forwards";
     }
   } else if (480 <= width && width < 768) {
-    if (scroll > 1770) {
+    if (scroll > 1980) {
       menu1.style.animation = "opacity1 0.5s forwards";
       menu2.style.animation = "opacity1 0.5s 0.5s forwards";
       menu3.style.animation = "opacity1 0.5s 1s forwards";
@@ -525,7 +525,7 @@ window.addEventListener("scroll", () => {
       menu4.style.animation = "unOpacity 0.5s 1.5s forwards";
     }
   } else if (768 <= width && width < 1024) {
-    if (scroll > 1450) {
+    if (scroll > 1620) {
       menu1.style.animation = "opacity1 0.5s forwards";
       menu2.style.animation = "opacity1 0.5s 0.5s forwards";
       menu3.style.animation = "opacity1 0.5s 1s forwards";
@@ -537,7 +537,7 @@ window.addEventListener("scroll", () => {
       menu4.style.animation = "unOpacity 0.5s 1.5s forwards";
     }
   } else if (1024 < width) {
-    if (scroll > 1425) {
+    if (scroll > 1645) {
       menu1.style.animation = "opacity1 0.5s forwards";
       menu2.style.animation = "opacity1 0.5s 0.5s forwards";
       menu3.style.animation = "opacity1 0.5s 1s forwards";
@@ -555,25 +555,25 @@ window.addEventListener("scroll", () => {
   const section9 = document.querySelector(".section9 > .container ");
   const width = window.innerWidth;
   if (width < 480) {
-    if (scroll > 2120) {
+    if (scroll > 2410) {
       section9.style.opacity = "1";
     } else {
       section9.style.opacity = "0";
     }
   } else if (480 <= width && width < 768) {
-    if (scroll > 2045) {
+    if (scroll > 2405) {
       section9.style.opacity = "1";
     } else {
       section9.style.opacity = "0";
     }
   } else if (768 <= width && width < 1024) {
-    if (scroll > 1710) {
+    if (scroll > 1940) {
       section9.style.opacity = "1";
     } else {
       section9.style.opacity = "0";
     }
   } else if (1024 < width) {
-    if (scroll > 1737) {
+    if (scroll > 1967) {
       section9.style.opacity = "1";
     } else {
       section9.style.opacity = "0";
@@ -586,7 +586,7 @@ window.addEventListener("scroll", () => {
   const width = window.innerWidth;
   const emailInput = document.querySelector(".section9 > .container > .inner ");
   if (width < 480) {
-    if (scroll > 2540) {
+    if (scroll > 2480) {
       emailInput.style.bottom = "-200px";
       emailInput.style.opacity = "1";
     } else {
@@ -594,15 +594,15 @@ window.addEventListener("scroll", () => {
       emailInput.style.opacity = "0";
     }
   } else if (480 <= width && width < 768) {
-    if (scroll > 2620) {
-      emailInput.style.bottom = "-266x";
+    if (scroll > 2530) {
+      emailInput.style.bottom = "-266px";
       emailInput.style.opacity = "1";
     } else {
       emailInput.style.bottom = "-20%";
       emailInput.style.opacity = "0";
     }
   } else if (768 <= width && width < 1024) {
-    if (scroll > 2090) {
+    if (scroll > 2060) {
       emailInput.style.bottom = "-200px";
       emailInput.style.opacity = "1";
     } else {
@@ -610,7 +610,7 @@ window.addEventListener("scroll", () => {
       emailInput.style.opacity = "0";
     }
   } else if (1024 < width) {
-    if (scroll > 2274) {
+    if (scroll > 2134) {
       emailInput.style.bottom = "-250px";
       emailInput.style.opacity = "1";
     } else {
