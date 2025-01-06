@@ -1,5 +1,5 @@
 
--- Active: 1733709200225@@127.0.0.1@3306@sesac-- Active: 1732688612707@@127.0.0.1@3306@sesac-- Active: 1734666914774@@127.0.0.1@3306@sesac-- Active: 1732688613389@@127.0.0.1@3306@sesac
+-- Active: 1732688613389@@127.0.0.1@3306@sesac-- Active: 1733709200225@@127.0.0.1@3306@sesac-- Active: 1732688612707@@127.0.0.1@3306@sesac-- Active: 1734666914774@@127.0.0.1@3306@sesac-- Active: 1732688613389@@127.0.0.1@3306@sesac
 use sesac;
 show tables;
 
@@ -45,7 +45,7 @@ drop table user;
 
 SELECT * FROM user;
 SELECT * FROM email;
-DROP TABLE email;
+DROP TABLE products;
 SELECT * FROM products;
 DELETE FROM user WHERE userId = "qwpl";
 DESC products;
