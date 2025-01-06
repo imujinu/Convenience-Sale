@@ -1,8 +1,7 @@
 document
   .getElementById("loginForm")
   .addEventListener("submit", async (event) => {
-    event.preventDefault(); // 기본 폼 제출 동작 방지
-
+    event.preventDefault();
     const loginForm = event.target;
 
     if (!loginForm.checkValidity()) {

@@ -28,7 +28,7 @@ async function checkDuplication() {
 document
   .getElementById("registerForm")
   .addEventListener("submit", async (event) => {
-    event.preventDefault(); // 기본 폼 제출 동작 방지
+    event.preventDefault();
 
     const registerForm = event.target;
     const idDuplication = document.getElementById("idDuplication").value;
@@ -48,11 +48,9 @@ document
         userId: registerForm.userId.value,
         userPw: registerForm.userPw.value,
         nickname: registerForm.nickname.value,
-        userEmail: registerForm.userEmail.value,
       });
-      console.log("성공 or 실패: ", response);
       alert("회원가입 성공");
-      window.location.href = "/login"; // 페이지 이동
+      window.location.href = "/login";
     } catch (error) {
       console.error("error: ", error);
       alert("회원가입 중 오류가 발생했습니다.");

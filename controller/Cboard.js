@@ -139,7 +139,9 @@ const deleteComment = async (req, res) => {
   }
 };
 
+
 const bcrypt = require("bcrypt");
+
 
 const deletePost = async (req, res) => {
   try {
