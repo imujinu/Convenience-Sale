@@ -167,9 +167,6 @@ a {
   height: 80%;
 }
 
-.swiper-pagination {
-  /* padding: 5px; */
-}
 .swiper-pagination-bullet {
   width: 20px;
   height: 20px;
@@ -186,15 +183,6 @@ a {
   width: 100%;
   height: 10%;
 }
-
-/* .swiper-button-prev,
-.swiper-button-next {
-  opacity: 0.5;
-  padding: 15px 5px;
-  border-radius: 50px;
-  border: 1px solid black;
-  color: black !important;
-} */
 
 .section3 > .swiper > .swiper-wrapper > .swiper-slide > .viewBox > .view {
   align-items: center;
@@ -251,7 +239,7 @@ a {
   display: none;
 }
 
-/* section3 모달달 */
+/* section3 모달 */
 .section3 .modal {
   width: 100%;
   height: 100%;

@@ -345,8 +345,6 @@ search.addEventListener("click", async () => {
 
       return;
     } else {
-      console.log("검색어 입력됨");
-      console.log(searchText.value);
       const productName = searchText.value;
       const result = await axios({
         url: "/search",
@@ -376,8 +374,6 @@ searchText.addEventListener("keydown", async (event) => {
         alert("검색어를 입력해주세요!");
         return;
       } else {
-        console.log("검색어 입력됨");
-        console.log(searchText.value);
         const productName = searchText.value;
         const result = await axios({
           url: "/search",
@@ -420,7 +416,6 @@ async function emailVerify() {
         email,
       },
     });
-    console.log("result.data::>>>", result.data);
     const { message } = result.data;
     alert(message);
   } catch (err) {
@@ -457,7 +452,6 @@ emailInput.addEventListener("keydown", async (event) => {
           email,
         },
       });
-      console.log("result.data::>>>", result.data);
       const { message } = result.data;
       alert(message);
     } catch (err) {
@@ -465,23 +459,6 @@ emailInput.addEventListener("keydown", async (event) => {
     }
   }
 });
-
-// const git = document.querySelectorAll(".footer > .container > ul > li");
-// git.forEach((el) => {
-//   el.addEventListener("mouseenter", () => {
-//     el.style.textDecoration = "underline";
-//     const Img = el.querySelector("img");
-//     Img.style.opacity = "1";
-//     Img.style.bottom = "100%";
-//   });
-
-//   el.addEventListener("mouseleave", () => {
-//     el.style.textDecoration = "none";
-//     const Img = el.querySelector("img");
-//     Img.style.opacity = "0";
-//     Img.style.bottom = "0%";
-//   });
-// });
 
 window.addEventListener("scroll", () => {
   let scroll = window.scrollY;
