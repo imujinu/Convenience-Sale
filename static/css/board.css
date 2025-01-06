@@ -33,16 +33,13 @@ h4 {
   text-align: center;
 }
 
-/* 버튼 영역 */
 .write-btn {
-  /* 이미 존재: 아래처럼 유지 */
   width: 80%;
   margin: 0 auto;
   text-align: right;
-  margin-bottom: 20px; /* 아래 여백 추가 */
+  margin-bottom: 20px;
 }
 
-/* 공통 버튼 스타일 (.btn-red) */
 .btn-red {
   display: inline-block;
   margin-top: 10px;
@@ -53,7 +50,6 @@ h4 {
   border-radius: 4px;
 }
 
-/* (1) 폼 안의 label, input, textarea 기본 스타일 */
 .board-list form label {
   display: inline-block;
   margin-bottom: 8px;
@@ -70,7 +66,6 @@ h4 {
   border-radius: 4px;
 }
 
-/* (2) 폼 내부의 submit, cancel 버튼 통일 스타일 */
 .btn-submit,
 .btn-cancel {
   display: inline-block;
@@ -82,14 +77,12 @@ h4 {
   border-radius: 4px;
   border: none;
   cursor: pointer;
-  /* 기존 .btn-red와 거의 동일 */
 }
 .btn-submit:hover,
 .btn-cancel:hover {
-  background-color: #c53737; /* 호버 시 조금 진한 색상 */
+  background-color: #c53737;
 }
 
-/* (3) 게시글 상세 */
 .board-view {
   width: 80%;
   margin: 0 auto;
@@ -97,7 +90,6 @@ h4 {
   padding: 20px;
 }
 
-/* (4) 댓글 */
 .comment-list {
   width: 80%;
   margin: 0 auto;

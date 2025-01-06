@@ -28,7 +28,7 @@ const Board = function (sequelize, DataTypes) {
         allowNull: true,
       },
       boardCategory: {
-        type: DataTypes.STRING(20), // 분류 추가
+        type: DataTypes.STRING(20),
         allowNull: false,
       },
     },

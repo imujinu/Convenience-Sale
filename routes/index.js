@@ -1,4 +1,3 @@
-//routes\index.js
 const express = require("express");
 const router = express.Router();
 const main = require("../controller/Cmain.js");
@@ -7,7 +6,7 @@ const user = require("../controller/Cuser.js");
 const pageController = require("../controller/pageController");
 const productController = require("../controller/productController");
 const upload = require("../utils/multer.js");
-const pcommentsController = require("../controller/pcommentsController"); // 중복 제거
+const pcommentsController = require("../controller/pcommentsController");
 const boardController = require("../controller/Cboard");
 
 // 메인 라우트
@@ -126,7 +125,6 @@ router.delete(
 // 기타 페이지
 router.get("/about", setUserId, pageController.renderAboutPage);
 
-// 자유게시판 라우트
 router.get("/board", boardController.showBoard);
 router.get("/board/write", boardController.showWriteForm);
 router.post(
