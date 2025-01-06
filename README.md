@@ -17,7 +17,7 @@ $ npm run start // production 환경
 
 ## 2. ⏲️ 개발 기간
 - 2024.12.16~2024.12.30(2주)
-- 팀 결셩 및 역할 분담
+- 팀 결성 및 역할 분담
 - 주 3회 애자일 진행
 - 프레젠테이션 발표
 
@@ -98,3 +98,5 @@ $ npm run start // production 환경
 ![project_1__1+(1) (1)](https://github.com/user-attachments/assets/26d06060-584d-4791-9c80-ff90665b4a1c)
 
 ![project_2_+(1)](https://github.com/user-attachments/assets/e754f3ce-e346-4c9d-ba3e-1e40094e3002)
+=======
+
