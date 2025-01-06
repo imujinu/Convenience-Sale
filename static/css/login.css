@@ -2,23 +2,23 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%; /* 화면 전체 너비 */
-  z-index: 1000; /* 다른 요소 위에 표시되도록 설정 */
+  width: 100%;
+  z-index: 1000;
 }
 body {
   margin: 0;
   padding: 0;
-  background-color: #f9f9f9; /* 전체 배경 */
+  background-color: #f9f9f9;
 }
 
 .loginBox {
   width: 350px;
-  margin: 140px auto; /* 페이지 중앙 배치 */
+  margin: 140px auto;
   padding: 20px;
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: relative; /* 중앙 정렬 */
+  position: relative;
   text-align: center;
 }
 
@@ -38,7 +38,7 @@ body {
 
 .loginBox input[type="text"],
 .loginBox input[type="password"] {
-  width: calc(100% - 20px); /* 너비 조정 */
+  width: calc(100% - 20px);
   padding: 10px;
   margin: 10px 0;
   border: 1px solid #ddd;
@@ -78,12 +78,6 @@ body {
   text-decoration: underline;
 }
 
-.loginBox .findPw a {
-  display: block;
-  font-size: 11px;
-  color: #333;
-  text-align: right;
-}
 .loginBox .findPw a:hover {
   text-decoration: underline;
   font-size: 13px;
@@ -103,9 +97,6 @@ body {
 
 /* 태블릿 스타일 768px ~ 1023px*/
 @media (min-width: 768px) and (max-width: 1023px) {
-  .header {
-    padding: 10px 0;
-  }
   .loginBox {
     width: 300px;
     margin: 120px auto;
@@ -125,9 +116,6 @@ body {
 
 /* 모바일 스타일 ~ 768px*/
 @media (max-width: 767px) {
-  .header {
-    padding: 10px 0;
-  }
   .loginBox {
     width: 90%;
     margin: 100px auto;

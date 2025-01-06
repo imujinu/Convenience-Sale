@@ -146,7 +146,7 @@ const deleteComment = async (req, res) => {
   }
 };
 
-const bcrypt = require("bcrypt"); // 비밀번호 검증 라이브러리
+// const bcrypt = require("bcrypt"); // 비밀번호 검증 라이브러리
 
 // 글 삭제 처리
 const deletePost = async (req, res) => {
