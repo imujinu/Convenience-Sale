@@ -57,7 +57,7 @@ app.post("/delete-account", async (req, res) => {
   });
 });
 
-db.sequelize.sync({ force: false }).then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   console.log("DB 연결 성공");
   app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`);

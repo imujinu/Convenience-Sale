@@ -27,16 +27,6 @@
   </head>
   <body>
     <%- include("./include/header") %>
-    <!-- <header
-      style="
-        height: 120px;
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: #ff3636;
-        width: 100%;
-      "
-    ></header> -->
 
     <div class="mypage-container">
       <div class="profile">
@@ -55,7 +45,7 @@
         <span id="pick">Pick</span>은??😎
       </h3>
       <ul class="reviewsBox">
-        <!-- 게시글 목록 -->
+
         <li>
           <span class="tit">게시글</span>
           <span class="len"><span><%= boards.length %></span>개</span>
@@ -89,8 +79,6 @@
             <span>3</span>
           </div>
         </div>
-
-        <!-- 상품 리뷰 목록 (API로 가져올 부분) -->
         <li>
           <span class="tit">상품 리뷰</span>
           <span class="len"><span id="product-review-count">0</span>개</span>
@@ -107,7 +95,6 @@
               <span>상품명</span>
               <span>작성일</span>
             </li>
-            <!-- 상품 리뷰 데이터가 여기에 동적으로 추가됩니다. -->
           </ul>
           <div class="pagination">
             <span class="selected">1</span>
