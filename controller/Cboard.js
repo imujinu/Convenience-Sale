@@ -33,7 +33,7 @@ const createPost = async (req, res) => {
     let boardPicPath = null;
 
     if (req.file) {
-      boardPicPath = `/static/uploads${req.file.filename}`;
+      boardPicPath = `/static/uploads/board/${req.file.filename}`;
     }
 
     await Board.create({
