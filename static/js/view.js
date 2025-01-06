@@ -1,7 +1,6 @@
-// 글 삭제 기능
 function deletePost(postId) {
   if (!confirm("글을 삭제하시겠습니까?")) {
-    return; // 취소 시 삭제 중단
+    return;
   }
 
   fetch(`/board/view/${postId}/delete`, {
@@ -10,11 +9,11 @@ function deletePost(postId) {
       "Content-Type": "application/json",
     },
   })
-    .then((response) => response.json()) // 서버 응답 처리
+    .then((response) => response.json())
     .then((data) => {
       if (data.success) {
         alert("글이 삭제되었습니다.");
-        window.location.href = "/board"; // 게시판으로 이동
+        window.location.href = "/board";
       } else {
         alert(data.message || "글 삭제 실패. 다시 시도하세요.");
       }

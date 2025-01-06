@@ -2,7 +2,6 @@ const { Board, BComment, User } = require("../models");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
-// 자유게시판 목록 페이지
 const showBoard = async (req, res) => {
   try {
     const boardList = await Board.findAll({
@@ -20,7 +19,6 @@ const showBoard = async (req, res) => {
   }
 };
 
-// 1. 글 작성 기능
 const createPost = async (req, res) => {
   try {
     const { boardTitle, boardDetail, boardCategory } = req.body;
@@ -51,7 +49,6 @@ const createPost = async (req, res) => {
   }
 };
 
-// 글 작성 페이지 렌더링
 const showWriteForm = (req, res) => {
   if (!req.session.user) {
     return res.redirect("/login");
@@ -62,7 +59,6 @@ const showWriteForm = (req, res) => {
   });
 };
 
-// 2. 글 상세보기 기능
 const showPost = async (req, res) => {
   try {
     const boardId = req.params.id;
@@ -93,7 +89,6 @@ const showPost = async (req, res) => {
   }
 };
 
-// 3. 댓글 기능
 const createComment = async (req, res) => {
   try {
     if (!req.session.user) {
@@ -115,7 +110,6 @@ const createComment = async (req, res) => {
   }
 };
 
-// 댓글 수정 처리
 const editComment = async (req, res) => {
   try {
     const { id } = req.params;
@@ -130,7 +124,6 @@ const editComment = async (req, res) => {
   }
 };
 
-// 댓글 삭제 처리
 const deleteComment = async (req, res) => {
   try {
     const { id } = req.params;
@@ -146,22 +139,21 @@ const deleteComment = async (req, res) => {
   }
 };
 
-// const bcrypt = require("bcrypt"); // 비밀번호 검증 라이브러리
 
-// 글 삭제 처리
+const bcrypt = require("bcrypt");
+
+
 const deletePost = async (req, res) => {
   try {
-    const { id } = req.params; // 글 ID
-    const { password } = req.body; // 입력된 비밀번호
+    const { id } = req.params;
+    const { password } = req.body;
 
-    // 로그인 여부 및 세션 정보 확인
     if (!req.session.user) {
       return res
         .status(401)
         .json({ success: false, message: "로그인이 필요합니다." });
     }
 
-    // 게시글 조회
     const post = await Board.findOne({ where: { boardId: id } });
     if (!post) {
       return res
@@ -169,18 +161,15 @@ const deletePost = async (req, res) => {
         .json({ success: false, message: "글을 찾을 수 없습니다." });
     }
 
-    // 작성자 ID 검증 (세션 ID와 비교)
     if (req.session.user.userId !== post.userId) {
       return res
         .status(403)
         .json({ success: false, message: "권한이 없습니다." });
     }
 
-    // 글 및 관련 댓글 삭제
     await BComment.destroy({ where: { boardId: id } });
     await Board.destroy({ where: { boardId: id } });
 
-    // 성공 응답 반환
     return res
       .status(200)
       .json({ success: true, message: "글이 성공적으로 삭제되었습니다." });
@@ -192,7 +181,6 @@ const deletePost = async (req, res) => {
   }
 };
 
-// 4. 내보내기 (Export)
 module.exports = {
   createPost,
   showWriteForm,

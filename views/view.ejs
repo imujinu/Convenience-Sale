@@ -6,9 +6,7 @@
     <link rel="stylesheet" href="/static/css/view.css" />
   </head>
   <body>
-    <!-- 게시글 상세 보기 -->
     <div class="content-container">
-      <!-- 이미지 -->
       <div class="image-container">
         <% if (post.boardPicPath) { %>
         <img
@@ -18,7 +16,6 @@
         />
         <% } %>
       </div>
-      <!-- 게시글 상세 정보 -->
       <div class="details-container">
         <div class="details-box">
           <h3>제목</h3>
@@ -34,7 +31,6 @@
       </div>
     </div>
 
-    <!-- 댓글 목록 -->
     <div class="comment-container">
       <h2>댓글</h2>
       <% if (comments && comments.length > 0) { %> <%
@@ -83,8 +79,6 @@
         </div>
       </form>
     </div>
-
-    <!-- JavaScript 추가 -->
     <script src="/static/js/view.js"></script>
   </body>
 </html>
